@@ -1,0 +1,77 @@
+# TourBox Preset for Affinity Studio
+# Mapping of TourBox buttons to Affinity shortcuts
+
+[Buttons]
+A = V  # Move Tool
+B = A  # Node Tool
+C = P  # Pen Tool
+D = U  # Shapes
+E = T  # Text
+F = Z  # Zoom
+G = G  # Fill
+H = I  # Color Picker
+
+[Toggles]
+Toggle1 = W  # Selection Brush
+Toggle2 = B  # Paint Brush
+
+[Dials]
+Dial1_CW = ]  # Increase brush width
+Dial1_CCW = [  # Decrease brush width
+Dial2_CW = 9  # Increase opacity approx
+Dial2_CCW = 8  # Decrease opacity approx
+
+[Wheels]
+Wheel1_Up = CTRL+=  # Zoom in
+Wheel1_Down = CTRL+-  # Zoom out
+Wheel2_Up = CTRL+SHIFT+Z  # Redo
+Wheel2_Down = CTRL+Z  # Undo
+
+[Combinations]
+A+E = C  # Crop
+A+F = M  # Marquee
+A+G = L  # Freehand
+B+E = F  # Point Transform
+B+F = O  # Contour
+B+G = C  # Corner
+C+E = N  # Pencil
+C+F = K  # Knife
+D+E = S  # Shape Builder
+D+F = K  # Picture Frame
+E+G = R  # Color Replacement
+F+H = J  # Healing
+
+# Additional shortcuts for reference:
+# View Tool: H
+# Transparency Tool: Y
+# Crop Tool: C
+# Marquee Selection: M
+# Freehand Selection: L
+# Color Replacement: R
+# Pixel Tool: Y
+# Erase: E
+# Dodge/Burn/Sponge: O
+# Clone: S
+# Healing: J
+# Point Transform: F
+# Contour: O
+# Corner: C
+# Pencil: N
+# Stroke Width: W
+# Knife: K
+# Path Brush: B
+# Vector Flood Fill: R
+# Shape Builder: S
+# Picture Frame: K
+# Save: CTRL+S
+# Open: CTRL+O
+# New: CTRL+N
+# Cut: CTRL+X
+# Copy: CTRL+C
+# Paste: CTRL+V
+# Paste Style: CTRL+SHIFT+V
+# Group: CTRL+G
+# Ungroup: CTRL+SHIFT+G
+# Duplicate: CTRL+J
+# Select All: CTRL+A
+# Invert Selection: CTRL+SHIFT+I

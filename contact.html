@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Contact - Richard Abreu</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#C28E5F", // Warm accent
+              "background-light": "#F5F3EF", // Muted earthy background
+              "background-dark": "#2C2A26", // Dark earthy background
+              "text-light": "#3D3A36",
+              "text-dark": "#DCD9D4",
+              "surface-light": "#FFFFFF",
+              "surface-dark": "#3D3A36",
+              "border-light": "#DCD9D4",
+              "border-dark": "#4E4A46",
+              "muted-light": "#6E6A66",
+              "muted-dark": "#9A9590",
+            },
+            fontFamily: {
+              "display": ["Manrope", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
+      }
+    </style>
+<script defer src="https://cdn.vercel-analytics.com/v1/script.js"></script>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<div class="flex h-full grow flex-col">
+<header class="sticky top-0 z-10 w-full bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm">
+<div class="container mx-auto px-4">
+<div class="flex items-center justify-between whitespace-nowrap border-b border-border-light dark:border-border-dark py-4">
+<div class="flex items-center gap-4 text-text-light dark:text-text-dark">
+<div class="h-8 w-8 text-primary">
+<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M13.8261 17.4264C16.7203 18.1174 20.2244 18.5217 24 18.5217C27.7756 18.5217 31.2797 18.1174 34.1739 17.4264C36.9144 16.7722 39.9967 15.2331 41.3563 14.1648L24.8486 40.6391C24.4571 41.267 23.5429 41.267 23.1514 40.6391L6.64374 14.1648C8.00331 15.2331 11.0856 16.7722 13.8261 17.4264Z" fill="currentColor"></path>
+<path clip-rule="evenodd" d="M39.998 12.236C39.9944 12.2537 39.9875 12.2845 39.9748 12.3294C39.9436 12.4399 39.8949 12.5741 39.8346 12.7175C39.8168 12.7597 39.7989 12.8007 39.7813 12.8398C38.5103 13.7113 35.9788 14.9393 33.7095 15.4811C30.9875 16.131 27.6413 16.5217 24 16.5217C20.3587 16.5217 17.0125 16.131 14.2905 15.4811C12.0012 14.9346 9.44505 13.6897 8.18538 12.8168C8.17384 12.7925 8.16216 12.767 8.15052 12.7408C8.09919 12.6249 8.05721 12.5114 8.02977 12.411C8.00356 12.3152 8.00039 12.2667 8.00004 12.2612C8.00004 12.261 8 12.2607 8.00004 12.2612C8.00004 12.2359 8.0104 11.9233 8.68485 11.3686C9.34546 10.8254 10.4222 10.2469 11.9291 9.72276C14.9242 8.68098 19.1919 8 24 8C28.8081 8 33.0758 8.68098 36.0709 9.72276C37.5778 10.2469 38.6545 10.8254 39.3151 11.3686C39.9006 11.8501 39.9857 12.1489 39.998 12.236ZM4.95178 15.2312L21.4543 41.6973C22.6288 43.5809 25.3712 43.5809 26.5457 41.6973L43.0534 15.223C43.0709 15.1948 43.0878 15.1662 43.104 15.1371L41.3563 14.1648C43.104 15.1371 43.1038 15.1374 43.104 15.1371L43.1051 15.135L43.1065 15.1325L43.1101 15.1261L43.1199 15.1082C43.1276 15.094 43.1377 15.0754 43.1497 15.0527C43.1738 15.0075 43.2062 14.9455 43.244 14.8701C43.319 14.7208 43.4196 14.511 43.5217 14.2683C43.6901 13.8679 44 13.0689 44 12.2609C44 10.5573 43.003 9.22254 41.8558 8.2791C40.6947 7.32427 39.1354 6.55361 37.385 5.94477C33.8654 4.72057 29.133 4 24 4C18.867 4 14.1346 4.72057 10.615 5.94478C8.86463 6.55361 7.30529 7.32428 6.14419 8.27911C4.99695 9.22255 3.99999 10.5573 3.99999 12.2609C3.99999 13.1275 4.29264 13.9078 4.49321 14.3607C4.60375 14.6102 4.71348 14.8196 4.79687 14.9689C4.83898 15.0444 4.87547 15.1065 4.9035 15.1529C4.91754 15.1762 4.92954 15.1957 4.93916 15.2111L4.94662 15.223L4.95178 15.2312ZM35.9868 18.996L24 38.22L12.0131 18.996C12.4661 19.1391 12.9179 19.2658 13.3617 19.3718C16.4281 20.1039 20.0901 20.5217 24 20.5217C27.9099 20.5217 31.5719 20.1039 34.6383 19.3718C35.082 19.2658 35.5339 19.1391 35.9868 18.996Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-text-light dark:text-text-dark text-lg font-bold leading-tight tracking-[-0.015em]">Richard Abreu</h2>
+</div>
+<nav class="flex flex-1 justify-end items-center gap-4">
+<div class="hidden md:flex items-center gap-9">
+<a class="text-muted-light dark:text-muted-dark hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal" href="#">Home</a>
+<a class="text-muted-light dark:text-muted-dark hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal" href="#">Portfolio</a>
+<a class="text-muted-light dark:text-muted-dark hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal" href="#">Shop</a>
+<a class="text-muted-light dark:text-muted-dark hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal" href="#">Blog</a>
+<a class="text-primary dark:text-primary text-sm font-bold leading-normal" href="#">Contact</a>
+</div>
+<button id="darkModeToggle" class="flex items-center justify-center w-10 h-10 rounded-lg hover:bg-border-light dark:hover:bg-border-dark transition-colors" aria-label="Toggle dark mode" onclick="toggleDarkMode()">
+<span class="material-symbols-outlined text-muted-light dark:text-muted-dark hidden dark:block">light_mode</span>
+<span class="material-symbols-outlined text-muted-light dark:text-muted-dark block dark:hidden">dark_mode</span>
+</button>
+</nav>
+</div>
+</div>
+</header>
+<main class="flex-grow">
+<div class="container mx-auto px-4 py-16 sm:py-24">
+<div class="flex flex-col items-center">
+<div class="w-full max-w-4xl text-center mb-12">
+<h1 class="text-text-light dark:text-text-dark text-4xl sm:text-5xl font-black leading-tight tracking-[-0.033em]">Get in Touch</h1>
+<p class="text-muted-light dark:text-muted-dark text-lg font-normal leading-normal mt-4 max-w-2xl mx-auto">
+                                For commissions, collaborations, or any questions about my work, please reach out using the form below. I'd love to hear from you.
+                            </p>
+</div>
+<div class="w-full max-w-4xl rounded-xl bg-surface-light dark:bg-surface-dark/50 border border-border-light dark:border-border-dark shadow-sm p-6 sm:p-10">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+<form class="md:col-span-2 space-y-6">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+<label class="flex flex-col">
+<p class="text-text-light dark:text-text-dark text-sm font-medium leading-normal pb-2">Full Name</p>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-text-light dark:text-text-dark focus:outline-0 focus:ring-2 focus:ring-primary border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark focus:border-primary dark:focus:border-primary h-12 placeholder:text-muted-light dark:placeholder:text-muted-dark px-4 text-sm font-normal" placeholder="Enter your full name" type="text" value=""/>
+</label>
+<label class="flex flex-col">
+<p class="text-text-light dark:text-text-dark text-sm font-medium leading-normal pb-2">Email Address</p>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-text-light dark:text-text-dark focus:outline-0 focus:ring-2 focus:ring-primary border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark focus:border-primary dark:focus:border-primary h-12 placeholder:text-muted-light dark:placeholder:text-muted-dark px-4 text-sm font-normal" placeholder="Enter your email address" type="email" value=""/>
+</label>
+</div>
+<label class="flex flex-col">
+<p class="text-text-light dark:text-text-dark text-sm font-medium leading-normal pb-2">Subject</p>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-text-light dark:text-text-dark focus:outline-0 focus:ring-2 focus:ring-primary border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark focus:border-primary dark:focus:border-primary h-12 placeholder:text-muted-light dark:placeholder:text-muted-dark px-4 text-sm font-normal" placeholder="Enter the subject of your message" type="text" value=""/>
+</label>
+<label class="flex flex-col">
+<p class="text-text-light dark:text-text-dark text-sm font-medium leading-normal pb-2">Your Message</p>
+<textarea class="form-textarea flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-text-light dark:text-text-dark focus:outline-0 focus:ring-2 focus:ring-primary border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark focus:border-primary dark:focus:border-primary min-h-36 placeholder:text-muted-light dark:placeholder:text-muted-dark p-4 text-sm font-normal" placeholder="Type your message here..."></textarea>
+</label>
+<button class="flex items-center justify-center font-semibold text-white bg-primary hover:bg-primary/90 rounded-lg px-6 py-3 text-sm w-full sm:w-auto">
+<span>Send Message</span>
+</button>
+</form>
+<div class="md:col-span-1 space-y-8">
+<div>
+<h3 class="text-lg font-bold text-text-light dark:text-text-dark mb-3">Or Reach Out Directly</h3>
+<a class="flex items-center gap-3 text-muted-light dark:text-muted-dark hover:text-primary dark:hover:text-primary transition-colors" href="mailto:contact@richardabreu.art">
+<span class="material-symbols-outlined text-xl">mail</span>
+<span class="text-sm">contact@richardabreu.art</span>
+</a>
+</div>
+<div>
+<h3 class="text-lg font-bold text-text-light dark:text-text-dark mb-4">Follow My Journey</h3>
+<div class="flex items-center gap-4">
+<a aria-label="Instagram" class="text-muted-light dark:text-muted-dark hover:text-primary dark:hover:text-primary transition-colors" href="#">
+<svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.584.069-4.85c.149-3.225 1.664-4.771 4.919-4.919C8.416 2.175 8.796 2.163 12 2.163zm0 1.442c-3.116 0-3.483.011-4.706.067-2.612.119-3.931 1.44-4.05 4.05-.056 1.222-.067 1.59-.067 4.706s.011 3.483.067 4.706c.119 2.612 1.438 3.931 4.05 4.05 1.222.056 1.59.067 4.706.067s3.483-.011 4.706-.067c2.612-.119 3.931-1.438 4.05-4.05.056-1.222.067-1.59.067-4.706s-.011-3.483-.067-4.706c-.119-2.612-1.438-3.931-4.05-4.05-1.222-.056-1.59-.067-4.706-.067zm0 4.803c-2.457 0-4.441 1.984-4.441 4.441s1.984 4.441 4.441 4.441 4.441-1.984 4.441-4.441-1.984-4.441-4.441-4.441zm0 7.283c-1.571 0-2.842-1.271-2.842-2.842s1.271-2.842 2.842-2.842 2.842 1.271 2.842 2.842-1.271 2.842-2.842 2.842zm6.219-7.39c-.546 0-.989.443-.989.989s.443.989.989.989.989-.443.989-.989-.443-.989-.989-.989z"></path>
+</svg>
+</a>
+<a aria-label="Facebook" class="text-muted-light dark:text-muted-dark hover:text-primary dark:hover:text-primary transition-colors" href="#">
+<svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v7.028C18.343 21.128 22 16.991 22 12z"></path>
+</svg>
+</a>
+<a aria-label="LinkedIn" class="text-muted-light dark:text-muted-dark hover:text-primary dark:hover:text-primary transition-colors" href="#">
+<svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path>
+</svg>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer class="bg-surface-light dark:bg-surface-dark/50 border-t border-border-light dark:border-border-dark">
+<div class="container mx-auto px-4 py-8">
+<div class="flex flex-col sm:flex-row justify-between items-center gap-6">
+<p class="text-sm text-muted-light dark:text-muted-dark order-2 sm:order-1">© 2024 Richard Abreu. All rights reserved.</p>
+<div class="flex items-center gap-4 order-1 sm:order-2">
+<a aria-label="Instagram" class="text-muted-light dark:text-muted-dark hover:text-primary dark:hover:text-primary transition-colors" href="#">
+<svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.584.069-4.85c.149-3.225 1.664-4.771 4.919-4.919C8.416 2.175 8.796 2.163 12 2.163zm0 1.442c-3.116 0-3.483.011-4.706.067-2.612.119-3.931 1.44-4.05 4.05-.056 1.222-.067 1.59-.067 4.706s.011 3.483.067 4.706c.119 2.612 1.438 3.931 4.05 4.05 1.222.056 1.59.067 4.706.067s3.483-.011 4.706-.067c2.612-.119 3.931-1.438 4.05-4.05.056-1.222.067-1.59.067-4.706s-.011-3.483-.067-4.706c-.119-2.612-1.438-3.931-4.05-4.05-1.222-.056-1.59-.067-4.706-.067zm0 4.803c-2.457 0-4.441 1.984-4.441 4.441s1.984 4.441 4.441 4.441 4.441-1.984 4.441-4.441-1.984-4.441-4.441-4.441zm0 7.283c-1.571 0-2.842-1.271-2.842-2.842s1.271-2.842 2.842-2.842 2.842 1.271 2.842 2.842-1.271 2.842-2.842 2.842zm6.219-7.39c-.546 0-.989.443-.989.989s.443.989.989.989.989-.443.989-.989-.443-.989-.989-.989z"></path></svg>
+</a>
+<a aria-label="TikTok" class="text-muted-light dark:text-muted-dark hover:text-primary dark:hover:text-primary transition-colors" href="#">
+<svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.21-2.685.73-5.41 2.76-7.29 1.67-1.53 3.96-2.36 6.25-2.18.01 1.52.02 3.04.01 4.57-.93.01-1.86.01-2.79.01-.03.82-.01 1.64.01 2.46.33.02.66.04 1 .06.33.02.66.05.98.08.02 1.47.01 2.95.02 4.42.01.7-.12 1.39-.39 2.02-.32.71-.82 1.34-1.44 1.76-.64.43-1.4.67-2.18.66a3.89 3.89 0 0 1-3.8-3.8c0-2.07 1.7-3.77 3.77-3.77.25 0 .49.03.73.08v-4.4c-2.31.02-4.61.98-6.28 2.62-1.67 1.64-2.61 3.88-2.61 6.21 0 4.66 3.81 8.47 8.47 8.47 4.66 0 8.47-3.81 8.47-8.47v-7.17c-1.39-.11-2.77-.55-3.9-1.39-1.09-.8-1.78-2.05-1.95-3.41-.01-.02-.01-.02-.02-.03Z"></path></svg>
+</a>
+<a aria-label="Behance" class="text-muted-light dark:text-muted-dark hover:text-primary dark:hover:text-primary transition-colors" href="#">
+<svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.23 6.158H14.15V4.32h8.08V6.158zM20.21 12.33c-1.22-.05-2.22-.6-2.8-1.57l-6.13 11.24h-4.32l6.21-11.39c.22-.4.32-.82.32-1.25 0-1.13-.53-1.7-1.58-1.7H3.97v13.34h11.12c2.58 0 4.16-1.56 4.16-3.8 0-1.59-.8-2.88-2.04-3.48zM15.1 16.6H7.92v-3.17h7.18c.95 0 1.48.56 1.48 1.58.01.94-.53 1.59-1.48 1.59zM0 0v24h24V0H0zm2.71 11.08H10.1c1.3 0 2.08.7 2.08 1.92 0 1.25-.79 2.04-2.21 2.04H2.71V11.08z"></path></svg>
+</a>
+<a aria-label="Shopify" class="text-muted-light dark:text-muted-dark hover:text-primary dark:hover:text-primary transition-colors" href="#">
+<svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.432 8.353a2.433 2.433 0 0 0-1.92-1.298c-1.839-.24-2.825 1.3-4.502 1.3-1.817 0-2.525-1.54-4.502-1.3a2.43 2.43 0 0 0-1.92 1.298c-1.2 2.115-.12 6.046 2.34 8.941.54.66 1.14 1.32 1.86 1.86.6.6 1.26.96 1.86.96h.72c.6 0 1.26-.36 1.86-.96.72-.54 1.32-1.2 1.86-1.86 2.46-2.895 3.54-6.826 2.34-8.941zM12 12.013c.045 2.176-1.17 4.126-2.88 4.696-2.115.6-3.855-1.066-4.38-2.911-.585-2.115 1.005-4.14 2.88-4.695 1.815-.54 3.795.54 4.38 2.91z"></path></svg>
+</a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+</div>
+<script>
+// Dark mode toggle
+function toggleDarkMode() {
+    document.documentElement.classList.toggle('dark');
+    localStorage.setItem('darkMode', document.documentElement.classList.contains('dark'));
+}
+
+// Load dark mode preference
+if (localStorage.getItem('darkMode') === 'false') {
+    document.documentElement.classList.remove('dark');
+} else {
+    document.documentElement.classList.add('dark');
+}
+</script>
+</body></html>

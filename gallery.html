@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Richard Abreu - Gallery</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
+      }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#d97706",
+              "background-light": "#f5f5f4",
+              "background-dark": "#1c1917",
+              "surface-light": "#ffffff",
+              "surface-dark": "#292524",
+              "text-light": "#1c1917",
+              "text-dark": "#e7e5e4",
+              "muted-light": "#57534e",
+              "muted-dark": "#a8a29e",
+              "border-light": "#e7e5e4",
+              "border-dark": "#44403c",
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<script defer src="https://cdn.vercel-analytics.com/v1/script.js"></script>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark">
+<div class="relative flex h-auto min-h-screen w-full flex-col">
+<header class="sticky top-0 z-10 flex items-center justify-between whitespace-nowrap border-b border-border-light dark:border-border-dark bg-background-light/80 dark:bg-background-dark/80 px-4 sm:px-6 lg:px-10 py-3 backdrop-blur-sm">
+<div class="flex items-center gap-4 text-text-light dark:text-text-dark">
+<div class="size-6">
+<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M13.8261 17.4264C16.7203 18.1174 20.2244 18.5217 24 18.5217C27.7756 18.5217 31.2797 18.1174 34.1739 17.4264C36.9144 16.7722 39.9967 15.2331 41.3563 14.1648L24.8486 40.6391C24.4571 41.267 23.5429 41.267 23.1514 40.6391L6.64374 14.1648C8.00331 15.2331 11.0856 16.7722 13.8261 17.4264Z" fill="currentColor"></path>
+<path clip-rule="evenodd" d="M39.998 12.236C39.9944 12.2537 39.9875 12.2845 39.9748 12.3294C39.9436 12.4399 39.8949 12.5741 39.8346 12.7175C39.8168 12.7597 39.7989 12.8007 39.7813 12.8398C38.5103 13.7113 35.9788 14.9393 33.7095 15.4811C30.9875 16.131 27.6413 16.5217 24 16.5217C20.3587 16.5217 17.0125 16.131 14.2905 15.4811C12.0012 14.9346 9.44505 13.6897 8.18538 12.8168C8.17384 12.7925 8.16216 12.767 8.15052 12.7408C8.09919 12.6249 8.05721 12.5114 8.02977 12.411C8.00356 12.3152 8.00039 12.2667 8.00004 12.2612C8.00004 12.261 8 12.2607 8.00004 12.2612C8.00004 12.2359 8.0104 11.9233 8.68485 11.3686C9.34546 10.8254 10.4222 10.2469 11.9291 9.72276C14.9242 8.68098 19.1919 8 24 8C28.8081 8 33.0758 8.68098 36.0709 9.72276C37.5778 10.2469 38.6545 10.8254 39.3151 11.3686C39.9006 11.8501 39.9857 12.1489 39.998 12.236ZM4.95178 15.2312L21.4543 41.6973C22.6288 43.5809 25.3712 43.5809 26.5457 41.6973L43.0534 15.223C43.0709 15.1948 43.0878 15.1662 43.104 15.1371L41.3563 14.1648C43.104 15.1371 43.1038 15.1374 43.104 15.1371L43.1051 15.135L43.1065 15.1325L43.1101 15.1261L43.1199 15.1082C43.1276 15.094 43.1377 15.0754 43.1497 15.0527C43.1738 15.0075 43.2062 14.9455 43.244 14.8701C43.319 14.7208 43.4196 14.511 43.5217 14.2683C43.6901 13.8679 44 13.0689 44 12.2609C44 10.5573 43.003 9.22254 41.8558 8.2791C40.6947 7.32427 39.1354 6.55361 37.385 5.94477C33.8654 4.72057 29.133 4 24 4C18.867 4 14.1346 4.72057 10.615 5.94478C8.86463 6.55361 7.30529 7.32428 6.14419 8.27911C4.99695 9.22255 3.99999 10.5573 3.99999 12.2609C3.99999 13.1275 4.29264 13.9078 4.49321 14.3607C4.60375 14.6102 4.71348 14.8196 4.79687 14.9689C4.83898 15.0444 4.87547 15.1065 4.9035 15.1529C4.91754 15.1762 4.92954 15.1957 4.93916 15.2111L4.94662 15.223L4.95178 15.2312ZM35.9868 18.996L24 38.22L12.0131 18.996C12.4661 19.1391 12.9179 19.2658 13.3617 19.3718C16.4281 20.1039 20.0901 20.5217 24 20.5217C27.9099 20.5217 31.5719 20.1039 34.6383 19.3718C35.082 19.2658 35.5339 19.1391 35.9868 18.996Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-text-light dark:text-text-dark text-lg font-bold leading-tight tracking-[-0.015em]">Richard Abreu</h2>
+</div>
+<div class="flex flex-1 justify-end items-center gap-8">
+<nav class="hidden md:flex items-center gap-9">
+<a class="text-muted-light dark:text-muted-dark hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal transition-colors" href="#">Home</a>
+<a class="text-primary dark:text-primary text-sm font-bold leading-normal" href="#">Gallery</a>
+<a class="text-muted-light dark:text-muted-dark hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal transition-colors" href="#">About</a>
+<a class="text-muted-light dark:text-muted-dark hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal transition-colors" href="#">Blog</a>
+<a class="text-muted-light dark:text-muted-dark hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal transition-colors" href="https://www.cumquatvibes.com">Shop</a>
+</nav>
+<div class="flex gap-2">
+<button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 w-10 bg-stone-200 dark:bg-stone-800 text-text-light dark:text-text-dark hover:bg-stone-300 dark:hover:bg-stone-700 transition-colors">
+<span class="material-symbols-outlined text-xl">search</span>
+</button>
+<button id="darkModeToggle" class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 w-10 bg-stone-200 dark:bg-stone-800 text-text-light dark:text-text-dark hover:bg-stone-300 dark:hover:bg-stone-700 transition-colors" aria-label="Toggle dark mode" onclick="toggleDarkMode()">
+<span class="material-symbols-outlined text-xl hidden dark:block">light_mode</span>
+<span class="material-symbols-outlined text-xl block dark:hidden">dark_mode</span>
+</button>
+<button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 w-10 bg-stone-200 dark:bg-stone-800 text-text-light dark:text-text-dark hover:bg-stone-300 dark:hover:bg-stone-700 transition-colors">
+<span class="material-symbols-outlined text-xl">shopping_cart</span>
+</button>
+<button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 w-10 bg-stone-200 dark:bg-stone-800 text-text-light dark:text-text-dark hover:bg-stone-300 dark:hover:bg-stone-700 transition-colors">
+<span class="material-symbols-outlined text-xl">person</span>
+</button>
+</div>
+</div>
+</header>
+<div class="flex flex-1">
+<aside class="w-72 flex-shrink-0 border-r border-border-light dark:border-border-dark p-6 sticky top-[61px] h-[calc(100vh-61px)] overflow-y-auto">
+<div class="flex h-full flex-col justify-between">
+<div class="flex flex-col gap-8">
+<div>
+<h3 class="text-sm font-semibold uppercase tracking-wider text-muted-light dark:text-muted-dark mb-4">Collection</h3>
+<div class="flex flex-col gap-2">
+<label class="flex items-center gap-3 cursor-pointer">
+<input checked="" class="h-4 w-4 rounded border-border-light dark:border-border-dark bg-transparent text-primary focus:ring-primary focus:ring-offset-background-dark" type="checkbox"/>
+<span class="text-text-light dark:text-text-dark text-sm">Abstract Forms</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer">
+<input class="h-4 w-4 rounded border-border-light dark:border-border-dark bg-transparent text-primary focus:ring-primary focus:ring-offset-background-dark" type="checkbox"/>
+<span class="text-text-light dark:text-text-dark text-sm">Cityscapes</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer">
+<input class="h-4 w-4 rounded border-border-light dark:border-border-dark bg-transparent text-primary focus:ring-primary focus:ring-offset-background-dark" type="checkbox"/>
+<span class="text-text-light dark:text-text-dark text-sm">Portraits</span>
+</label>
+</div>
+</div>
+<div>
+<h3 class="text-sm font-semibold uppercase tracking-wider text-muted-light dark:text-muted-dark mb-4">Medium</h3>
+<div class="flex flex-col gap-2">
+<label class="flex items-center gap-3 cursor-pointer">
+<input class="h-4 w-4 rounded border-border-light dark:border-border-dark bg-transparent text-primary focus:ring-primary focus:ring-offset-background-dark" type="checkbox"/>
+<span class="text-text-light dark:text-text-dark text-sm">Oil on Canvas</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer">
+<input checked="" class="h-4 w-4 rounded border-border-light dark:border-border-dark bg-transparent text-primary focus:ring-primary focus:ring-offset-background-dark" type="checkbox"/>
+<span class="text-text-light dark:text-text-dark text-sm">Watercolor</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer">
+<input class="h-4 w-4 rounded border-border-light dark:border-border-dark bg-transparent text-primary focus:ring-primary focus:ring-offset-background-dark" type="checkbox"/>
+<span class="text-text-light dark:text-text-dark text-sm">Digital Art</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer">
+<input class="h-4 w-4 rounded border-border-light dark:border-border-dark bg-transparent text-primary focus:ring-primary focus:ring-offset-background-dark" type="checkbox"/>
+<span class="text-text-light dark:text-text-dark text-sm">Sculpture</span>
+</label>
+</div>
+</div>
+<div>
+<h3 class="text-sm font-semibold uppercase tracking-wider text-muted-light dark:text-muted-dark mb-4">Year</h3>
+<div class="flex flex-col gap-2">
+<label class="flex items-center gap-3 cursor-pointer">
+<input class="h-4 w-4 rounded border-border-light dark:border-border-dark bg-transparent text-primary focus:ring-primary focus:ring-offset-background-dark" type="checkbox"/>
+<span class="text-text-light dark:text-text-dark text-sm">2024</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer">
+<input class="h-4 w-4 rounded border-border-light dark:border-border-dark bg-transparent text-primary focus:ring-primary focus:ring-offset-background-dark" type="checkbox"/>
+<span class="text-text-light dark:text-text-dark text-sm">2023</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer">
+<input class="h-4 w-4 rounded border-border-light dark:border-border-dark bg-transparent text-primary focus:ring-primary focus:ring-offset-background-dark" type="checkbox"/>
+<span class="text-text-light dark:text-text-dark text-sm">2022</span>
+</label>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-colors">
+<span class="truncate">Apply Filters</span>
+</button>
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-transparent text-muted-light dark:text-muted-dark text-sm font-bold leading-normal tracking-[0.015em] hover:bg-stone-200 dark:hover:bg-stone-800 transition-colors">
+<span class="truncate">Clear All Filters</span>
+</button>
+</div>
+</div>
+</aside>
+<main class="flex-1 p-6 lg:p-10">
+<div class="max-w-7xl mx-auto">
+<div class="flex flex-wrap justify-between items-center gap-4 mb-6">
+<h1 class="text-text-light dark:text-text-dark text-4xl font-black leading-tight tracking-[-0.033em] min-w-72">Gallery</h1>
+<div class="relative">
+<select class="w-48 appearance-none rounded-lg border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark py-2 pl-4 pr-10 text-sm text-text-light dark:text-text-dark focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary">
+<option>Sort by Newest</option>
+<option>Sort by Oldest</option>
+<option>Sort by Title (A-Z)</option>
+<option>Sort by Title (Z-A)</option>
+</select>
+<span class="material-symbols-outlined pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-muted-dark">expand_more</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-3 mb-8">
+<div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-primary/20 text-primary pl-4 pr-2">
+<p class="text-sm font-medium leading-normal">Abstract Forms</p>
+<button class="rounded-full hover:bg-primary/20 p-0.5">
+<span class="material-symbols-outlined text-base">close</span>
+</button>
+</div>
+<div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-primary/20 text-primary pl-4 pr-2">
+<p class="text-sm font-medium leading-normal">Watercolor</p>
+<button class="rounded-full hover:bg-primary/20 p-0.5">
+<span class="material-symbols-outlined text-base">close</span>
+</button>
+</div>
+</div>
+<div class="space-y-16">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
+<div class="aspect-video bg-surface-light dark:bg-surface-dark rounded-xl flex items-center justify-center p-4">
+<div class="w-full h-full border-2 border-dashed border-border-light dark:border-border-dark rounded-lg flex flex-col items-center justify-center text-center text-muted-light dark:text-muted-dark">
+<span class="material-symbols-outlined text-4xl mb-2">image</span>
+<p class="text-sm font-medium">BUGTECH Brand Identity</p>
+</div>
+</div>
+<div>
+<h3 class="text-2xl font-bold text-text-light dark:text-text-dark mb-2">BUGTECH Brand Identity</h3>
+<p class="text-muted-light dark:text-muted-dark text-base">Created a comprehensive brand identity for BUGTECH, a startup focused on sustainable insect-based protein. The project included logo design, packaging, and marketing materials that reflect the company's innovative and eco-friendly ethos.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
+<div>
+<h3 class="text-2xl font-bold text-text-light dark:text-text-dark mb-2">Cumquat Vibes Summer Collection</h3>
+<p class="text-muted-light dark:text-muted-dark text-base">Designed a series of vibrant, summer-themed illustrations for the 'Cumquat Vibes' collection. This work was featured on a range of products, including apparel, accessories, and prints, capturing the essence of a sun-soaked, joyful summer.</p>
+</div>
+<div class="aspect-video bg-surface-light dark:bg-surface-dark rounded-xl flex items-center justify-center p-4">
+<div class="w-full h-full border-2 border-dashed border-border-light dark:border-border-dark rounded-lg flex flex-col items-center justify-center text-center text-muted-light dark:text-muted-dark">
+<span class="material-symbols-outlined text-4xl mb-2">image</span>
+<p class="text-sm font-medium">Cumquat Vibes Summer Collection</p>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
+<div class="aspect-video bg-surface-light dark:bg-surface-dark rounded-xl flex items-center justify-center p-4">
+<div class="w-full h-full border-2 border-dashed border-border-light dark:border-border-dark rounded-lg flex flex-col items-center justify-center text-center text-muted-light dark:text-muted-dark">
+<span class="material-symbols-outlined text-4xl mb-2">image</span>
+<p class="text-sm font-medium">Happy Holidays Collection</p>
+</div>
+</div>
+<div>
+<h3 class="text-2xl font-bold text-text-light dark:text-text-dark mb-2">Happy Holidays Collection</h3>
+<p class="text-muted-light dark:text-muted-dark text-base">Developed a festive collection of digital illustrations for the 'Happy Holidays' campaign. The artwork was used across various media, including greeting cards, social media content, and promotional items, to spread holiday cheer.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
+<div>
+<h3 class="text-2xl font-bold text-text-light dark:text-text-dark mb-2">2020 Calendar Design</h3>
+<p class="text-muted-light dark:text-muted-dark text-base">Designed and illustrated a 12-month calendar for 2020, with each month featuring a unique, thematic piece of art. The project combined graphic design with illustration to create a functional and aesthetically pleasing product for art lovers.</p>
+</div>
+<div class="aspect-video bg-surface-light dark:bg-surface-dark rounded-xl flex items-center justify-center p-4">
+<div class="w-full h-full border-2 border-dashed border-border-light dark:border-border-dark rounded-lg flex flex-col items-center justify-center text-center text-muted-light dark:text-muted-dark">
+<span class="material-symbols-outlined text-4xl mb-2">image</span>
+<p class="text-sm font-medium">2020 Calendar Design</p>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-12 pt-12 border-t border-border-light dark:border-border-dark">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+<div class="group relative cursor-pointer overflow-hidden rounded-xl">
+<div class="bg-cover bg-center flex flex-col gap-3 rounded-xl justify-end aspect-[3/4] transition-transform duration-300 group-hover:scale-105" data-alt="Abstract painting with vibrant red and blue hues swirling together" style='background-image: url("assets/portfolio1.jpg");'>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+<div class="relative p-4">
+<p class="text-white text-base font-bold leading-tight line-clamp-2">Chromatic Echo</p>
+</div>
+</div>
+</div>
+<div class="group relative cursor-pointer overflow-hidden rounded-xl">
+<div class="bg-cover bg-center flex flex-col gap-3 rounded-xl justify-end aspect-[3/4] transition-transform duration-300 group-hover:scale-105" data-alt="Black and white photograph of a bustling city street at night with light trails" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBd85Js8J3M6nRJMAtX-rBvqRg5JzMakA2ylZVQIhu_tiL50fuXTr0bl-5xZa4Zk9_Qtdrf1VqzxMXr2qkHg_htH5GvRQhAJhC09hDraEkXVxlq3mTmWBjxpAGHB62juy5BKtAnvsYwwtWAUqlpmLgGc-RVo3mVM5NwCp9pQ2TrNcCidoygRoG577-muX6GbvIDGAM7BLCgGzCFAMFokwg5bQCsHofG7FHGEl1Mbus8WtPQwG7T2SiL6scofUfTOF6BHWa5y9cyiUXZ");'>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+<div class="relative p-4">
+<p class="text-white text-base font-bold leading-tight line-clamp-2">Urban Pulse</p>
+</div>
+</div>
+</div>
+<div class="group relative cursor-pointer overflow-hidden rounded-xl">
+<div class="bg-cover bg-center flex flex-col gap-3 rounded-xl justify-end aspect-[3/4] transition-transform duration-300 group-hover:scale-105" data-alt="A portrait of a person with a thoughtful expression, painted with soft watercolors" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDhwMU046pouXJ3OSfphjbMjwZorfteAfZOufWzjdyCIOmqsWzbYphWZoErSPsCZ-MVDd4kDsZWKpJt0v0uU0cmfxL_0Rd5Y94kG_TsZvAFqbUns_EwPxi0YFTB7hEQQhqapQIuihdJ6wxkyUf7CF9a4mcWT9jrheoz8LJlwFTxx1dROHVgLAH-XjNbtC4ChB04_h-Fx4QNttlnkuliZiumsUfyC2bIi44XRNGFBfDhJpg6lQMYUAj-kBDlx0tedDfinZRN3NUJHFqQ");'>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+<div class="relative p-4">
+<p class="text-white text-base font-bold leading-tight line-clamp-2">Silent Observer</p>
+</div>
+</div>
+</div>
+<div class="group relative cursor-pointer overflow-hidden rounded-xl">
+<div class="bg-cover bg-center flex flex-col gap-3 rounded-xl justify-end aspect-[3/4] transition-transform duration-300 group-hover:scale-105" data-alt="Digital art showing a futuristic cityscape with neon lights" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBgR7Y50PIhP7UIknb8odXwc9gxakveNTThYLV8HTt9RCG2H38EZ74iKtxv8bno1xZG6mpso2byGfIsxhRD8ni4EczTWsSzn7lSswA80pbu2eYgKVBLbujXayl9F0HjnfBQSf7feXJkII7CA55s_N_TY464XEayMqLVeo23Cu_oPsGN5W0k3YmUTMspW4xywH7RP87ng3_dEmqfwok1GRYyzEPaVCnki2Lxxad0PH5rw3Nzi2P2hNBLJEqPr4zVEjptWVIJWyhIE_gY");'>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+<div class="relative p-4">
+<p class="text-white text-base font-bold leading-tight line-clamp-2">Metropolis Dream</p>
+</div>
+</div>
+</div>
+<div class="group relative cursor-pointer overflow-hidden rounded-xl">
+<div class="bg-cover bg-center flex flex-col gap-3 rounded-xl justify-end aspect-[3/4] transition-transform duration-300 group-hover:scale-105" data-alt="An abstract sculpture with flowing, organic shapes made of bronze" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB03c1Eb-_W3uKOuHaiWccXDJDpyn_fgLC6lNYFzGydFZ9Ngy__IFuIpFA_hB2h_jmIIWLJ68CXCye-ea32cAb6ATWgx4Nyhx7E4ghb0O-a5SNne6bUwbiuEtmLuC8PS2uuxQXUAo_Fa9M_85HdId264Qw3KyPHXQnt5rAb6daAs-lq1kXxnU0Em4B05zfrgIEcvNEVK6UQNUObNgJX9E8snCGecMtMpRnbYVjk7-Ld0ATa4vwZDyNA_O8tHpdmsVHe0Ea2fBrLoNqo");'>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+<div class="relative p-4">
+<p class="text-white text-base font-bold leading-tight line-clamp-2">Fleeting Form</p>
+</div>
+</div>
+</div>
+<div class="group relative cursor-pointer overflow-hidden rounded-xl">
+<div class="bg-cover bg-center flex flex-col gap-3 rounded-xl justify-end aspect-[3/4] transition-transform duration-300 group-hover:scale-105" data-alt="Oil painting of a dense forest with tall trees and dappled sunlight" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC8bb1vUzbEmdsHximpM4ZxThgjIAyJfoIH_tW5fsn-dcgRbp8TucITREfxzF8xb5tRH5wiEMOQTOwhqNdYQE_zFxlxhKoCjfqXTrBgSkK_IDlFxS9m2U2vIzcC_jtBFHfs1d3m46_lomqRN8s7lW8bWpYZ1PRCKTwwp-JjUQ_FCgxcxjWI87VFMGBAZV6j1rUnuWW0NR-BJk4euO_mz_ynp1UbSiO5-tK2cVR6RE3pHWuWUdEvLfxlA_P9UVhMYBeRa5GkruWkTPrG");'>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+<div class="relative p-4">
+<p class="text-white text-base font-bold leading-tight line-clamp-2">Concrete Jungle</p>
+</div>
+</div>
+</div>
+<div class="group relative cursor-pointer overflow-hidden rounded-xl">
+<div class="bg-cover bg-center flex flex-col gap-3 rounded-xl justify-end aspect-[3/4] transition-transform duration-300 group-hover:scale-105" data-alt="Close-up portrait of a woman with golden paint on her face" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCAxgj4HjiTiTzPDn5igJ6gJ3bejocQ0TYltG26tXg6HLvE41m3j_cBY4sBR4hAGBsA3ZQsftniSZPN82sz7elODrSO76pa6nxIQcrBJ93ZSVJYJZ2GHMhJ0ltXk3zmZbuHmbjSb4XhBIZIuGaFlTqljEYG0X-7GZHChlyxtszbNpCTT28sY8Q3xTTonnpkAmQ7V3G1sP3rXNKi_MDWnhNbCUbmKg3-uD5a0f12u8aTpuTXVIyQLBDmixqi0lJhHdhMVkJmZn9afHMU");'>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+<div class="relative p-4">
+<p class="text-white text-base font-bold leading-tight line-clamp-2">Gilded Reflection</p>
+</div>
+</div>
+</div>
+<div class="group relative cursor-pointer overflow-hidden rounded-xl">
+<div class="bg-cover bg-center flex flex-col gap-3 rounded-xl justify-end aspect-[3/4] transition-transform duration-300 group-hover:scale-105" data-alt="Dark abstract watercolor painting with shades of blue and black" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBRnELfkP4a7v5mhpVAsv9TM37ZEXhukAMiDXr3Vbk85ULLAWfC3nGIDwoXK8WdK0LVOuh6J3cEty_s7Qeplw0NWT05YXde2CtCEt3bYi1nppsJInHw9_qZH7Dr5UlIxUuG5nAWJkvJoOQEWrODUSnQXy5oEuBwuD1FEK3SqHlGGBiCsp88vHBgn8DMG5R0g6ElLJs_m1GAiTwyt1KjJBPModv7_zdUy1D3zs5g3mbtQqhCC5FAcgfL2nOZJgTe-UwkxxNlWZYoOj5n");'>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+<div class="relative p-4">
+<p class="text-white text-base font-bold leading-tight line-clamp-2">Midnight Hues</p>
+</div>
+</div>
+</div>
+<div class="group relative cursor-pointer overflow-hidden rounded-xl">
+<div class="bg-cover bg-center flex flex-col gap-3 rounded-xl justify-end aspect-[3/4] transition-transform duration-300 group-hover:scale-105" data-alt="Minimalist abstract painting with pastel colors and gentle brushstrokes" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC8zseZYb1kkZ9k12ZLLUe78hyS7iYCI8-g7WZVR3GRGoJhevQWN0djum4gzWY7oCmUL-bnoGO2iah_IUeOJyNeK2faJiISbVInvAAZFQ_P59UZemZIejNISap9LwdbrtNDkgoByyocAGEdcJv4D277AM3hpHy981Ppqy9diMnEsmv6kpSdrohvZL3_9EjaCkfvylmPPR5759iyf10nMSSSA9ybwUYT2lmRLLCWWfVGcJAhSqGQ9OYA6alven4L-_FXXiRmtK7UTKkV");'>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+<div class="relative p-4">
+<p class="text-white text-base font-bold leading-tight line-clamp-2">Serene Abstraction</p>
+</div>
+</div>
+</div>
+<div class="group relative cursor-pointer overflow-hidden rounded-xl">
+<div class="bg-cover bg-center flex flex-col gap-3 rounded-xl justify-end aspect-[3/4] transition-transform duration-300 group-hover:scale-105" data-alt="Colorful street art mural on a brick wall in a city" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDXCfJkrvDEAkpcyPIhj7YOlg3QoDzwoJKVYMidt5XvdhS2y_CXyzfNo9so0LVydK2oQ9tF5tMv3uJbTujSWv0W0BuSJPoF5p0vr1EN09oUUlrkgMCXOf5JOo1hTn2a8eADNxbb_vKe6jVUpmLjjeL5l3G-2_qBLVkqBMcO7ryBiewpOTf-OwGDLnJrykzd57fVxHpkuhdwBdxA17V-l4MStF05_df7SXOLG0i7Rn0-chhSSFonCXp3hYW6XQZzMmys1dajlZ0DwnSL");'>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+<div class="relative p-4">
+<p class="text-white text-base font-bold leading-tight line-clamp-2">Urban Canvas</p>
+</div>
+</div>
+</div>
+<div class="group relative cursor-pointer overflow-hidden rounded-xl">
+<div class="bg-cover bg-center flex flex-col gap-3 rounded-xl justify-end aspect-[3/4] transition-transform duration-300 group-hover:scale-105" data-alt="Monochromatic portrait with high contrast and dramatic lighting" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBskz-M2xVNQpIljW4njZB6gJkU7V0X669TV_CAB_zKDRCYR4RjhW7xydGiibt7sBrOZox3YgJXWS9Beb4Ean6zbHtTQ18l4NiNf3U95yzBySH6DIP219SvSLOER97HlTUTE_-QwubtjfbW5OCGWw9EjJTxBV80j7p55VZaNZyv7iSqPwAOsGQGkISUdzzxyM8_x-zNKLligGJIMD0bzPTOBL1yfghcLm9s9Qw0qtwyP9TFj9J8jP-AVM-WXvCIHjhYdBcq-TiUGe3C");'>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+<div class="relative p-4">
+<p class="text-white text-base font-bold leading-tight line-clamp-2">Shadowed Gaze</p>
+</div>
+</div>
+</div>
+<div class="group relative cursor-pointer overflow-hidden rounded-xl">
+<div class="bg-cover bg-center flex flex-col gap-3 rounded-xl justify-end aspect-[3/4] transition-transform duration-300 group-hover:scale-105" data-alt="Abstract digital rendering of colorful, geometric shapes" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCXCmL445OMO0M0j2EbePCdvZCEf6AAd2krtpp4lCPqk8PcdpACaytyFZ16h5h8Yu9NB3PfokLTC2vSRCXdK7ehmYdgfSnwHBXRrXp_8EtllNNCD58_HbkX2huFBGMHbBmrevfVbkSJC7YIGNwc-WUkU47ZPN-hmAtw4lWBGsdr_FNj6jke6tNE1bUDdKMm6jCFTo2GOx-Edc5eGQDdDWbjuXJpNgkARvQczK8N8Yi_3LdVEmohsNFaV2ajuT8hQf3nfhsz-yQ6imn");'>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+<div class="relative p-4">
+<p class="text-white text-base font-bold leading-tight line-clamp-2">Digital Bloom</p>
+</div>
+</div>
+</div>
+</div>
+<div class="flex justify-center mt-12">
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-6 bg-stone-200 dark:bg-stone-800 text-text-light dark:text-text-dark text-sm font-bold leading-normal tracking-[0.015em] hover:bg-stone-300 dark:hover:bg-stone-700 transition-colors">
+<span class="truncate">Load More</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+<footer class="border-t border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark">
+<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10 py-8">
+<div class="flex flex-col items-center justify-between gap-6 sm:flex-row">
+<div class="flex items-center gap-2">
+<p class="text-sm text-muted-light dark:text-muted-dark">© 2024 Richard Abreu. All rights reserved.</p>
+</div>
+<div class="flex items-center gap-4">
+<a class="text-muted-light dark:text-muted-dark hover:text-primary dark:hover:text-primary transition-colors" href="#">
+<svg aria-hidden="true" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+<path clip-rule="evenodd" d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153a4.902 4.902 0 0 1 1.153 1.772c.247.636.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122s-.013 3.056-.06 4.122c-.05 1.065-.218 1.79-.465 2.428a4.902 4.902 0 0 1-1.153 1.772 4.902 4.902 0 0 1-1.772 1.153c-.636.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06s-3.056-.013-4.122-.06c-1.065-.05-1.79-.218-2.428-.465a4.902 4.902 0 0 1-1.772-1.153 4.902 4.902 0 0 1-1.153-1.772c-.247-.636-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12s.013-3.056.06-4.122c.05-1.065.218-1.79.465-2.428a4.902 4.902 0 0 1 1.153-1.772A4.902 4.902 0 0 1 5.45 2.525c.636-.247 1.363-.415 2.428-.465C8.944 2.013 9.283 2 12 2Zm0 1.802c-2.67 0-2.987.01-4.042.059-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.048 1.054-.058 1.37-.058 4.041s.01 2.987.058 4.042c.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.055.048 1.37.058 4.042.058s2.987-.01 4.042-.058c.975-.045 1.504-.207 1.857-.344.467-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.042s-.01-2.987-.058-4.042c-.045-.975-.207-1.504-.344-1.857a3.097 3.097 0 0 0-.748-1.15 3.098 3.098 0 0 0-1.15-.748c-.353-.137-.882-.3-1.857-.344C14.987 3.81 14.67 3.802 12 3.802ZM12 6.865a5.135 5.135 0 1 0 0 10.27 5.135 5.135 0 0 0 0-10.27Zm0 1.802a3.333 3.333 0 1 1 0 6.666 3.333 3.333 0 0 1 0-6.666Zm5.338-3.205a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4Z" fill-rule
+="evenodd"/>
+</svg>
+</a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<script>
+// Dark mode toggle
+function toggleDarkMode() {
+    document.documentElement.classList.toggle('dark');
+    localStorage.setItem('darkMode', document.documentElement.classList.contains('dark'));
+}
+
+// Load dark mode preference
+if (localStorage.getItem('darkMode') === 'false') {
+    document.documentElement.classList.remove('dark');
+} else {
+    document.documentElement.classList.add('dark');
+}
+</script>
+</body>
+</html>
