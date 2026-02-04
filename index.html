@@ -1,371 +1,873 @@
 <!DOCTYPE html>
-<html class="dark" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Richard Abreu | Artist Portfolio - Contemporary Abstract Art</title>
-<meta name="description" content="Explore the contemporary abstract art portfolio of Richard Abreu. Featuring original paintings, commission work, and insights into the creative process. Shop exclusive artworks."/>
-<meta name="keywords" content="Richard Abreu, artist, abstract art, contemporary art, paintings, art portfolio, art gallery, original artwork"/>
-<meta name="author" content="Richard Abreu"/>
-<meta property="og:title" content="Richard Abreu | Artist Portfolio"/>
-<meta property="og:description" content="Contemporary abstract artist exploring the boundaries between color and form. View my latest works and shop exclusive pieces."/>
-<meta property="og:type" content="website"/>
-<meta property="og:url" content="https://richardabreu.com"/>
-<meta property="og:image" content="portfolio1.jpg"/>
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="Richard Abreu | Artist Portfolio"/>
-<meta name="twitter:description" content="Contemporary abstract artist exploring the boundaries between color and form."/>
-<meta name="twitter:image" content="portfolio1.jpg"/>
-<link rel="canonical" href="https://richardabreu.com"/>
-<!-- Google Analytics - Replace G-XXXXXXXXXX with your actual tracking ID -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX');
-</script>
-<!-- End Google Analytics -->
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800;900&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
-<style>
-        .material-symbols-outlined {
-            font-variation-settings:
-            'FILL' 0,
-            'wght' 400,
-            'GRAD' 0,
-            'opsz' 24
+<html lang="en" class="dark">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Richard Abreu | Product Designer, Illustrator & Creative Director</title>
+    <meta name="description" content="Richard Abreu - Product Designer, Illustrator & Creative Director. Explore original artwork, shop exclusive designs, and watch creative content."/>
+    <meta name="keywords" content="Richard Abreu, product design, illustration, creative director, artist, shop, portfolio"/>
+    <meta name="author" content="Richard Abreu"/>
+    <meta property="og:title" content="Richard Abreu | Designer & Illustrator"/>
+    <meta property="og:description" content="Product Designer, Illustrator & Creative Director. Explore work, shop designs, and watch creative content."/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https://richardabreu.studio"/>
+    <meta property="og:image" content="images/hero-portrait.png"/>
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:title" content="Richard Abreu | Designer & Illustrator"/>
+    <meta name="twitter:description" content="Product Designer, Illustrator & Creative Director."/>
+    <meta name="twitter:image" content="images/hero-portrait.png"/>
+    <link rel="canonical" href="https://richardabreu.studio"/>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Richard Abreu",
+        "jobTitle": "Product Designer & Illustrator",
+        "description": "Product Designer, Illustrator & Creative Director",
+        "url": "https://richardabreu.studio",
+        "image": "images/about-headshot.jpg",
+        "sameAs": [
+            "https://www.instagram.com/cumquat_vibes/",
+            "https://www.youtube.com/@Cumquat-Vibez",
+            "https://www.pinterest.com/CumquatVibes/"
+        ]
+    }
+    </script>
+
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "accent": "#c8ff00",
+                        "surface": "#111111",
+                        "surface-light": "#1a1a1a",
+                        "surface-lighter": "#222222",
+                    },
+                    fontFamily: {
+                        "sans": ["Inter", "system-ui", "sans-serif"],
+                        "display": ["Playfair Display", "Georgia", "serif"],
+                    },
+                },
+            },
+        }
+    </script>
+
+    <script defer src="https://cdn.vercel-analytics.com/v1/script.js"></script>
+
+    <style>
+        * { scroll-behavior: smooth; }
+
+        ::selection {
+            background: #c8ff00;
+            color: #000;
+        }
+
+        .scroll-container {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .scroll-container::-webkit-scrollbar { display: none; }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .animate-fade-up {
+            animation: fadeUp 0.8s ease-out forwards;
+        }
+
+        .animate-slide-in {
+            animation: slideIn 0.6s ease-out forwards;
+        }
+
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .img-hover {
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), filter 0.6s ease;
+        }
+
+        .img-hover:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #c8ff00;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .mobile-menu.open {
+            transform: translateX(0);
         }
     </style>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Richard Abreu",
-  "jobTitle": "Artist",
-  "description": "Contemporary abstract artist exploring the boundaries between color and form",
-  "url": "https://richardabreu.com",
-  "image": "portfolio1.jpg",
-  "sameAs": [
-    "https://instagram.com/richardabreu",
-    "https://tiktok.com/@richardabreu",
-    "https://behance.net/richardabreu"
-  ]
-}
-</script>
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              "primary": "#2b8cee",
-              "background-light": "#f6f7f8",
-              "background-dark": "#101922",
-            },
-            fontFamily: {
-              "display": ["Manrope", "sans-serif"]
-            },
-            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
-          },
-        },
-      }
-    </script>
-<script defer src="https://cdn.vercel-analytics.com/v1/script.js"></script>
 </head>
-<body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200">
-<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
-<div class="layout-container flex h-full grow flex-col">
-<div class="px-4 sm:px-8 md:px-16 lg:px-24 xl:px-40 flex flex-1 justify-center py-5">
-<div class="layout-content-container flex flex-col max-w-[960px] flex-1">
-<header role="banner" class="flex items-center justify-between whitespace-nowrap border-b border-solid border-gray-200 dark:border-b-[#283039] px-4 sm:px-6 md:px-10 py-3">
-<div class="flex items-center gap-4 text-gray-900 dark:text-white">
-<div class="size-6 text-primary" aria-label="Richard Abreu Logo">
-<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-<path d="M13.8261 17.4264C16.7203 18.1174 20.2244 18.5217 24 18.5217C27.7756 18.5217 31.2797 18.1174 34.1739 17.4264C36.9144 16.7722 39.9967 15.2331 41.3563 14.1648L24.8486 40.6391C24.4571 41.267 23.5429 41.267 23.1514 40.6391L6.64374 14.1648C8.00331 15.2331 11.0856 16.7722 13.8261 17.4264Z" fill="currentColor"></path>
-<path clip-rule="evenodd" d="M39.998 12.236C39.9944 12.2537 39.9875 12.2845 39.9748 12.3294C39.9436 12.4399 39.8949 12.5741 39.8346 12.7175C39.8168 12.7597 39.7989 12.8007 39.7813 12.8398C38.5103 13.7113 35.9788 14.9393 33.7095 15.4811C30.9875 16.131 27.6413 16.5217 24 16.5217C20.3587 16.5217 17.0125 16.131 14.2905 15.4811C12.0012 14.9346 9.44505 13.6897 8.18538 12.8168C8.17384 12.7925 8.16216 12.767 8.15052 12.7408C8.09919 12.6249 8.05721 12.5114 8.02977 12.411C8.00356 12.3152 8.00039 12.2667 8.00004 12.2612C8.00004 12.261 8 12.2607 8.00004 12.2612C8.00004 12.2359 8.0104 11.9233 8.68485 11.3686C9.34546 10.8254 10.4222 10.2469 11.9291 9.72276C14.9242 8.68098 19.1919 8 24 8C28.8081 8 33.0758 8.68098 36.0709 9.72276C37.5778 10.2469 38.6545 10.8254 39.3151 11.3686C39.9006 11.8501 39.9857 12.1489 39.998 12.236ZM4.95178 15.2312L21.4543 41.6973C22.6288 43.5809 25.3712 43.5809 26.5457 41.6973L43.0534 15.223C43.0709 15.1948 43.0878 15.1662 43.104 15.1371L41.3563 14.1648C43.104 15.1371 43.1038 15.1374 43.104 15.1371L43.1051 15.135L43.1065 15.1325L43.1101 15.1261L43.1199 15.1082C43.1276 15.094 43.1377 15.0754 43.1497 15.0527C43.1738 15.0075 43.2062 14.9455 43.244 14.8701C43.319 14.7208 43.4196 14.511 43.5217 14.2683C43.6901 13.8679 44 13.0689 44 12.2609C44 10.5573 43.003 9.22254 41.8558 8.2791C40.6947 7.32427 39.1354 6.55361 37.385 5.94477C33.8654 4.72057 29.133 4 24 4C18.867 4 14.1346 4.72057 10.615 5.94478C8.86463 6.55361 7.30529 7.32428 6.14419 8.27911C4.99695 9.22255 3.99999 10.5573 3.99999 12.2609C3.99999 13.1275 4.29264 13.9078 4.49321 14.3607C4.60375 14.6102 4.71348 14.8196 4.79687 14.9689C4.83898 15.0444 4.87547 15.1065 4.9035 15.1529C4.91754 15.1762 4.92954 15.1957 4.93916 15.2111L4.94662 15.223L4.95178 15.2312ZM35.9868 18.996L24 38.22L12.0131 18.996C12.4661 19.1391 12.9179 19.2658 13.3617 19.3718C16.4281 20.1039 20.0901 20.5217 24 20.5217C27.9099 20.5217 31.5719 20.1039 34.6383 19.3718C35.082 19.2658 35.5339 19.1391 35.9868 18.996Z" fill="currentColor" fill-rule="evenodd"></path>
-</svg>
-</div>
-<h2 class="text-gray-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">Richard Abreu</h2>
-</div>
-<div class="flex flex-1 justify-end gap-8">
-<nav aria-label="Main navigation" class="hidden md:flex items-center gap-9">
-<a class="text-gray-600 dark:text-gray-300 text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary transition-colors" href="pages/gallery.html" aria-label="View art gallery">Gallery</a>
-<a class="text-gray-600 dark:text-gray-300 text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary transition-colors" href="about.html" aria-label="Read artist blog">Blog</a>
-<a class="text-gray-600 dark:text-gray-300 text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary transition-colors" href="about.html" aria-label="Learn about the artist">About</a>
-<a class="text-gray-600 dark:text-gray-300 text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary transition-colors" href="pages/contact.html" aria-label="Contact Richard Abreu">Contact</a>
-</nav>
-<div class="flex items-center gap-3">
-<button id="darkModeToggle" class="flex items-center justify-center w-10 h-10 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors" aria-label="Toggle dark mode" onclick="toggleDarkMode()">
-<span class="material-symbols-outlined text-gray-600 dark:text-gray-300 hidden dark:block">light_mode</span>
-<span class="material-symbols-outlined text-gray-600 dark:text-gray-300 block dark:hidden">dark_mode</span>
-</button>
-<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:opacity-90 transition-opacity" aria-label="Shop artwork">
-<span class="truncate">Shop</span>
-</button>
-</div>
-</div>
-</header>
-<main role="main" class="flex flex-col gap-12 md:gap-16 lg:gap-20 mt-8">
-<div class="relative w-full h-[60vh] min-h-[400px] max-h-[600px] rounded-xl overflow-hidden">
-<div class="absolute inset-0 bg-cover bg-center" data-alt="Richard Abreu artwork" style='background-image: url("portfolio1.jpg")'></div>
-<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent"></div>
-<div class="relative h-full flex flex-col justify-end items-start p-8 md:p-12">
-<div class="max-w-xl text-left">
-<h1 class="text-white text-4xl md:text-5xl font-black leading-tight tracking-[-0.033em]">Art by Richard Abreu</h1>
-<p class="text-gray-200 text-base md:text-lg font-normal leading-normal mt-2">Exploring the boundaries between color and form</p>
-<button class="mt-6 flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:opacity-90 transition-opacity" aria-label="View complete portfolio">
-<span class="truncate">View Portfolio</span>
-</button>
-</div>
-</div>
-</div>
-<section aria-labelledby="featured-works">
-<h2 id="featured-works" class="text-gray-900 dark:text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Featured Works</h2>
-<div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4">
-<div class="bg-cover bg-center flex flex-col gap-3 rounded-lg justify-end p-4 aspect-[3/4] group cursor-pointer overflow-hidden" data-alt="Richard Abreu artwork 1" style='background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%), url("portfolio1.jpg");'>
-<p class="text-white text-base font-bold leading-tight w-4/5 line-clamp-3 transform transition-transform duration-300 group-hover:-translate-y-2">Portfolio I</p>
-</div>
-<div class="bg-cover bg-center flex flex-col gap-3 rounded-lg justify-end p-4 aspect-[3/4] group cursor-pointer overflow-hidden" data-alt="Richard Abreu artwork 2" style='background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%), url("portfolio2.jpg");'>
-<p class="text-white text-base font-bold leading-tight w-4/5 line-clamp-3 transform transition-transform duration-300 group-hover:-translate-y-2">Portfolio II</p>
-</div>
-<div class="bg-cover bg-center flex flex-col gap-3 rounded-lg justify-end p-4 aspect-[3/4] group cursor-pointer overflow-hidden" data-alt="Richard Abreu artwork 3" style='background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%), url("portfolio3.jpg");'>
-<p class="text-white text-base font-bold leading-tight w-4/5 line-clamp-3 transform transition-transform duration-300 group-hover:-translate-y-2">Portfolio III</p>
-</div>
-<div class="bg-cover bg-center flex flex-col gap-3 rounded-lg justify-end p-4 aspect-[3/4] group cursor-pointer overflow-hidden" data-alt="Richard Abreu artwork 4" style='background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%), url("portfolio4.jpg");'>
-<p class="text-white text-base font-bold leading-tight w-4/5 line-clamp-3 transform transition-transform duration-300 group-hover:-translate-y-2">Portfolio IV</p>
-</div>
-<div class="bg-cover bg-center flex flex-col gap-3 rounded-lg justify-end p-4 aspect-[3/4] group cursor-pointer overflow-hidden" data-alt="Richard Abreu artwork 5" style='background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%), url("portfolio5.jpg");'>
-<p class="text-white text-base font-bold leading-tight w-4/5 line-clamp-3 transform transition-transform duration-300 group-hover:-translate-y-2">Portfolio V</p>
-</div>
-<div class="bg-cover bg-center flex flex-col gap-3 rounded-lg justify-end p-4 aspect-[3/4] group cursor-pointer overflow-hidden" data-alt="Richard Abreu artwork 6" style='background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%), url("portfolio6.jpg");'>
-<p class="text-white text-base font-bold leading-tight w-4/5 line-clamp-3 transform transition-transform duration-300 group-hover:-translate-y-2">Portfolio VI</p>
-</div>
-</div>
-</section>
-<section>
-<div class="flex p-4 @container">
-<div class="flex w-full flex-col gap-6 @[520px]:flex-row @[520px]:justify-between @[520px]:items-center bg-gray-100 dark:bg-gray-800/20 rounded-xl p-6 md:p-8">
-<div class="flex flex-col @[520px]:flex-row gap-6">
-<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-lg min-h-32 w-32 shrink-0" data-alt="Richard Abreu, artist" style='background-image: url("https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop"); background-color: #2b8cee;'></div>
-<div class="flex flex-col justify-center">
-<p class="text-gray-900 dark:text-white text-[22px] font-bold leading-tight tracking-[-0.015em]">A Message from the Artist</p>
-<p class="text-gray-600 dark:text-gray-400 text-base font-normal leading-normal mt-2">Welcome to my digital studio. Here, I share my passion for creating art that speaks to the soul. Each piece is a journey, and I invite you to explore the stories woven into every canvas.</p>
-</div>
-</div>
-<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-gray-200 dark:bg-[#283039] text-gray-800 dark:text-white text-sm font-bold leading-normal tracking-[0.015em] w-full max-w-[480px] @[480px]:w-auto shrink-0 hover:bg-gray-300 dark:hover:bg-[#343e4a] transition-colors">
-<span class="truncate">Learn More About Me</span>
-</button>
-</div>
-</div>
-</section>
-<section>
-<h2 class="text-gray-900 dark:text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Latest from the Blog</h2>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6 p-4">
-<div class="flex flex-col gap-4 group cursor-pointer">
-<div class="overflow-hidden rounded-lg">
-<div class="bg-cover bg-center aspect-video w-full transition-transform duration-300 group-hover:scale-105" data-alt="Artist studio with canvases and brushes" style='background-image: url("https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600&h=400&fit=crop")'></div>
-</div>
-<div class="flex flex-col gap-1">
-<h3 class="text-lg font-bold text-gray-900 dark:text-white group-hover:text-primary dark:group-hover:text-primary transition-colors">Inside the Studio: My Creative Process</h3>
-<p class="text-sm text-gray-500 dark:text-gray-400">A behind-the-scenes look at how I bring my ideas to life, from initial sketch to final stroke.</p>
-</div>
-</div>
-<div class="flex flex-col gap-4 group cursor-pointer">
-<div class="overflow-hidden rounded-lg">
-<div class="bg-cover bg-center aspect-video w-full transition-transform duration-300 group-hover:scale-105" data-alt="Vibrant paint textures and creative process" style='background-image: url("https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=600&h=400&fit=crop")'></div>
-</div>
-<div class="flex flex-col gap-1">
-<h3 class="text-lg font-bold text-gray-900 dark:text-white group-hover:text-primary dark:group-hover:text-primary transition-colors">Finding Inspiration in the Everyday</h3>
-<p class="text-sm text-gray-500 dark:text-gray-400">Exploring the unexpected sources of creativity that fuel my work and keep my passion alive.</p>
-</div>
-</div>
-<div class="flex flex-col gap-4 group cursor-pointer">
-<div class="overflow-hidden rounded-lg">
-<div class="bg-cover bg-center aspect-video w-full transition-transform duration-300 group-hover:scale-105" data-alt="Art gallery exhibition wall" style='background-image: url("https://images.unsplash.com/photo-1577720643272-265f09367456?w=600&h=400&fit=crop")'></div>
-</div>
-<div class="flex flex-col gap-1">
-<h3 class="text-lg font-bold text-gray-900 dark:text-white group-hover:text-primary dark:group-hover:text-primary transition-colors">New Collection Launch: 'Horizons'</h3>
-<p class="text-sm text-gray-500 dark:text-gray-400">Announcing my latest series of works, available now in the shop. Discover the story behind 'Horizons'.</p>
-</div>
-</div>
-</div>
-</section>
-</main>
-<footer role="contentinfo" class="mt-20 border-t border-gray-200 dark:border-gray-800 pt-10 pb-8">
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
-<div class="flex flex-col gap-4">
-<h3 class="text-base font-bold text-gray-900 dark:text-white">Join the Studio List</h3>
-<p class="text-sm text-gray-500 dark:text-gray-400">Get exclusive updates on new art, exhibitions, and studio news.</p>
-<form class="flex gap-2" aria-label="Newsletter signup form">
-<input class="w-full rounded-md border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-800/50 text-sm focus:border-primary focus:ring-primary" placeholder="Enter your email" type="email" required aria-label="Email address" name="email"/>
-<button type="submit" class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-md h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:opacity-90 transition-opacity" aria-label="Sign up for newsletter">
-<span class="truncate">Sign Up</span>
-</button>
-</form>
-</div>
-<div class="flex flex-col gap-4 md:items-center">
-<h3 class="text-base font-bold text-gray-900 dark:text-white">Navigate</h3>
-<ul class="space-y-2">
-<li><a class="text-sm text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors" href="#">Gallery</a></li>
-<li><a class="text-sm text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors" href="#">Shop</a></li>
-<li><a class="text-sm text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors" href="#">Blog</a></li>
-<li><a class="text-sm text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors" href="#">About</a></li>
-<li><a class="text-sm text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors" href="#">Contact</a></li>
-</ul>
-</div>
-<div class="flex flex-col gap-4 md:items-end">
-<h3 class="text-base font-bold text-gray-900 dark:text-white">Follow Me</h3>
-<div class="flex gap-4">
-<a aria-label="Instagram" class="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors" href="#">
-<svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-<line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
-</svg>
-</a>
-<a aria-label="TikTok" class="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors" href="#">
-<svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-2.43.03-4.83-1.15-6.42-3.01-1.28-1.5-1.84-3.48-1.8-5.45-.02-1.92.53-3.84 1.6-5.46.99-1.49 2.37-2.61 4.02-3.19.01-.05.02-.11.02-.16.03-2.26.02-4.51.02-6.77.01-1.42.52-2.82 1.32-4.02.93-1.37 2.33-2.34 3.86-2.63.15-.02.3-.04.44-.05z"></path>
-</svg>
-</a>
-<a aria-label="Behance" class="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors" href="#">
-<svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M14.12 10.46H18.77V8.51H14.12V10.46M19.22 13.91C18.44 14.54 17.5 14.88 16.33 14.88C14.47 14.88 13.56 13.68 13.56 12.06C13.56 10.42 14.5 9.24 16.29 9.24C17.29 9.24 18.11 9.69 18.72 10.38L20 9.28C19.11 8.16 17.88 7.5 16.29 7.5C13.59 7.5 11.5 9.3 11.5 12.06C11.5 14.82 13.53 16.62 16.33 16.62C17.75 16.62 19.04 15.96 19.93 14.94L19.22 13.91M4.73 16.5H9.68V14.63H6.55V13.37H9.42V11.5H6.55V10.25H9.55V8.38H4.73V16.5M17.5 5.5H6.5V4H17.5V5.5Z"></path>
-</svg>
-</a>
-<a aria-label="Shopify" class="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors" href="#">
-<svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M18.5,7.55H14.85C14.73,6.05,13.5,5,12,5S9.27,6.05,9.15,7.55H5.5A1.5,1.5,0,0,0,4,9.05V17.5A1.5,1.5,0,0,0,5.5,19H18.5A1.5,1.5,0,0,0,20,17.5V9.05A1.5,1.5,0,0,0,18.5,7.55ZM12,6.5A1.5,1.5,0,0,1,13.5,8H10.5A1.5,1.5,0,0,1,12,6.5ZM18.5,17.5H5.5V9.05h13Z"></path>
-</svg>
-</a>
-</div>
-</div>
-</div>
-<div class="text-center text-xs text-gray-400 dark:text-gray-500 mt-10 px-4">
-                            © 2024 Richard Abreu. All Rights Reserved.
+<body class="bg-black text-white font-sans antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-xl border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="flex justify-between items-center h-20">
+                <a href="#" class="text-2xl font-display font-bold tracking-tight">
+                    R<span class="text-accent">.</span>Abreu
+                </a>
+
+                <!-- Desktop Nav -->
+                <div class="hidden md:flex items-center gap-10">
+                    <a href="#work" class="nav-link text-sm font-medium text-gray-400 hover:text-white transition-colors tracking-wide uppercase">Work</a>
+                    <a href="#services" class="nav-link text-sm font-medium text-gray-400 hover:text-white transition-colors tracking-wide uppercase">Services</a>
+                    <a href="#youtube" class="nav-link text-sm font-medium text-gray-400 hover:text-white transition-colors tracking-wide uppercase">YouTube</a>
+                    <a href="#newsletter" class="nav-link text-sm font-medium text-gray-400 hover:text-white transition-colors tracking-wide uppercase">Newsletter</a>
+                    <a href="#about" class="nav-link text-sm font-medium text-gray-400 hover:text-white transition-colors tracking-wide uppercase">About</a>
+                    <a href="#support" class="border border-accent/30 text-accent px-5 py-2.5 text-sm font-bold tracking-wide uppercase hover:bg-accent hover:text-black transition-all">
+                        Support
+                    </a>
+                    <a href="https://www.cumquatvibes.com" target="_blank" class="bg-accent text-black px-6 py-2.5 text-sm font-bold tracking-wide uppercase hover:bg-accent/90 transition-all">
+                        Shop
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="menuBtn" class="md:hidden flex flex-col gap-1.5 p-2" aria-label="Toggle menu">
+                    <span class="block w-6 h-0.5 bg-white transition-all" id="bar1"></span>
+                    <span class="block w-6 h-0.5 bg-white transition-all" id="bar2"></span>
+                    <span class="block w-4 h-0.5 bg-white transition-all" id="bar3"></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="mobile-menu fixed inset-0 z-40 bg-black flex flex-col justify-center items-center gap-8">
+        <a href="#work" class="text-3xl font-display font-bold text-white hover:text-accent transition-colors" onclick="closeMenu()">Work</a>
+        <a href="#services" class="text-3xl font-display font-bold text-white hover:text-accent transition-colors" onclick="closeMenu()">Services</a>
+        <a href="#youtube" class="text-3xl font-display font-bold text-white hover:text-accent transition-colors" onclick="closeMenu()">YouTube</a>
+        <a href="#newsletter" class="text-3xl font-display font-bold text-white hover:text-accent transition-colors" onclick="closeMenu()">Newsletter</a>
+        <a href="#about" class="text-3xl font-display font-bold text-white hover:text-accent transition-colors" onclick="closeMenu()">About</a>
+        <a href="#support" class="text-3xl font-display font-bold text-white hover:text-accent transition-colors" onclick="closeMenu()">Support</a>
+        <a href="https://www.cumquatvibes.com" target="_blank" class="mt-4 bg-accent text-black px-10 py-4 text-lg font-bold tracking-wide uppercase">Shop</a>
+    </div>
+
+    <!-- Hero -->
+    <section class="min-h-screen flex items-center pt-20">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 w-full">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <div>
+                    <p class="text-accent text-sm font-bold tracking-[0.3em] uppercase mb-6 animate-fade-up">Product Designer & Illustrator</p>
+                    <h1 class="text-5xl md:text-7xl lg:text-8xl font-display font-black leading-[0.9] tracking-tight animate-fade-up stagger-1">
+                        Design<br/>
+                        <span class="text-accent">that</span><br/>
+                        speaks<span class="text-accent">.</span>
+                    </h1>
+                    <p class="text-gray-400 text-lg md:text-xl mt-8 max-w-md leading-relaxed animate-fade-up stagger-2">
+                        I create products, illustrations, and visual experiences that connect with people on a deeper level.
+                    </p>
+                    <div class="flex flex-wrap gap-4 mt-10 animate-fade-up stagger-3">
+                        <a href="#work" class="bg-white text-black px-8 py-4 font-bold text-sm tracking-wide uppercase hover:bg-accent transition-colors">
+                            View Work
+                        </a>
+                        <a href="https://www.cumquatvibes.com" target="_blank" class="border border-white/20 text-white px-8 py-4 font-bold text-sm tracking-wide uppercase hover:border-accent hover:text-accent transition-all">
+                            Visit Shop
+                        </a>
+                    </div>
+                </div>
+                <div class="relative animate-fade-up stagger-4">
+                    <div class="aspect-[4/5] overflow-hidden">
+                        <img src="images/hero-portrait.png" alt="Richard Abreu - Creative Director" class="w-full h-full object-cover img-hover">
+                    </div>
+                    <div class="absolute -bottom-4 -left-4 bg-accent text-black px-6 py-3 font-bold text-sm">
+                        Available for commissions
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work / Portfolio -->
+    <section id="work" class="py-32">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="flex justify-between items-end mb-16 reveal">
+                <div>
+                    <p class="text-accent text-sm font-bold tracking-[0.3em] uppercase mb-3">Portfolio</p>
+                    <h2 class="text-4xl md:text-6xl font-display font-bold">Selected Work</h2>
+                </div>
+                <a href="pages/gallery.html" class="hidden md:flex items-center gap-2 text-sm font-medium text-gray-400 hover:text-accent transition-colors group">
+                    View All
+                    <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                </a>
+            </div>
+
+            <!-- Portfolio Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 reveal">
+                <!-- Large Feature -->
+                <div class="md:row-span-2 group cursor-pointer relative overflow-hidden">
+                    <div class="aspect-[3/4] overflow-hidden bg-surface">
+                        <img src="images/work-1.jpg" alt="Workin on Good Vibes - Cumquat Vibes t-shirt design" class="w-full h-full object-cover img-hover">
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        <p class="text-accent text-xs font-bold tracking-widest uppercase">Product Design</p>
+                        <p class="text-white text-xl font-bold mt-1">Workin' on Good Vibes Collection</p>
+                    </div>
+                </div>
+
+                <!-- Top Right -->
+                <div class="group cursor-pointer relative overflow-hidden">
+                    <div class="aspect-[4/3] overflow-hidden bg-surface">
+                        <img src="images/work-2.jpg" alt="CUMQUAT drip typography illustration" class="w-full h-full object-cover img-hover">
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        <p class="text-accent text-xs font-bold tracking-widest uppercase">Illustration</p>
+                        <p class="text-white text-xl font-bold mt-1">CUMQUAT Typography Art</p>
+                    </div>
+                </div>
+
+                <!-- Bottom Right -->
+                <div class="group cursor-pointer relative overflow-hidden">
+                    <div class="aspect-[4/3] overflow-hidden bg-surface">
+                        <img src="images/work-3.jpg" alt="Cumquat Vibes mascot hoodie collection" class="w-full h-full object-cover img-hover">
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        <p class="text-accent text-xs font-bold tracking-widest uppercase">Brand Design</p>
+                        <p class="text-white text-xl font-bold mt-1">CV Mascot Hoodie Line</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Second Row -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 reveal">
+                <div class="group cursor-pointer relative overflow-hidden">
+                    <div class="aspect-square overflow-hidden bg-surface">
+                        <img src="images/work-4.jpg" alt="Veteran Small Business sweatshirt collection" class="w-full h-full object-cover img-hover">
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        <p class="text-accent text-xs font-bold tracking-widest uppercase">Product Design</p>
+                        <p class="text-white text-lg font-bold mt-1">Veteran Small Business Collection</p>
+                    </div>
+                </div>
+                <div class="group cursor-pointer relative overflow-hidden">
+                    <div class="aspect-square overflow-hidden bg-surface">
+                        <img src="images/work-5.jpg" alt="Boat Boo illustration blanket mockup" class="w-full h-full object-cover img-hover">
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        <p class="text-accent text-xs font-bold tracking-widest uppercase">Illustration</p>
+                        <p class="text-white text-lg font-bold mt-1">Boat Boo Home Collection</p>
+                    </div>
+                </div>
+                <div class="group cursor-pointer relative overflow-hidden">
+                    <div class="aspect-square overflow-hidden bg-surface">
+                        <img src="images/work-6.jpg" alt="Cumquat Vibes tote bag collection" class="w-full h-full object-cover img-hover">
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        <p class="text-accent text-xs font-bold tracking-widest uppercase">Lifestyle</p>
+                        <p class="text-white text-lg font-bold mt-1">CV Tote Bag Collection</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="py-32 bg-surface">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="mb-16 reveal">
+                <p class="text-accent text-sm font-bold tracking-[0.3em] uppercase mb-3">What I Do</p>
+                <h2 class="text-4xl md:text-6xl font-display font-bold">Services</h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-px bg-white/5 reveal">
+                <div class="bg-surface p-10 md:p-12 group hover:bg-surface-light transition-colors">
+                    <span class="text-accent text-6xl font-display font-bold block mb-6">01</span>
+                    <h3 class="text-2xl font-bold mb-4">Product Design</h3>
+                    <p class="text-gray-400 leading-relaxed mb-6">End-to-end product design from concept to production. Packaging, branding, and physical product aesthetics that stand out on shelves and screens.</p>
+                    <span class="text-accent text-sm font-bold tracking-widest uppercase group-hover:tracking-[0.4em] transition-all">Learn More</span>
+                </div>
+                <div class="bg-surface p-10 md:p-12 group hover:bg-surface-light transition-colors">
+                    <span class="text-accent text-6xl font-display font-bold block mb-6">02</span>
+                    <h3 class="text-2xl font-bold mb-4">Illustration</h3>
+                    <p class="text-gray-400 leading-relaxed mb-6">Custom illustrations for editorial, commercial, and personal projects. From detailed hand-drawn work to polished digital pieces that tell your story.</p>
+                    <span class="text-accent text-sm font-bold tracking-widest uppercase group-hover:tracking-[0.4em] transition-all">Learn More</span>
+                </div>
+                <div class="bg-surface p-10 md:p-12 group hover:bg-surface-light transition-colors">
+                    <span class="text-accent text-6xl font-display font-bold block mb-6">03</span>
+                    <h3 class="text-2xl font-bold mb-4">Creative Direction</h3>
+                    <p class="text-gray-400 leading-relaxed mb-6">Strategic creative vision for brands and campaigns. I help translate your message into visual language that resonates with your audience.</p>
+                    <span class="text-accent text-sm font-bold tracking-widest uppercase group-hover:tracking-[0.4em] transition-all">Learn More</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shop Preview -->
+    <section class="py-32">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="flex justify-between items-end mb-16 reveal">
+                <div>
+                    <p class="text-accent text-sm font-bold tracking-[0.3em] uppercase mb-3">Shop</p>
+                    <h2 class="text-4xl md:text-6xl font-display font-bold">From the Store</h2>
+                </div>
+                <a href="https://www.cumquatvibes.com" target="_blank" class="hidden md:flex items-center gap-2 text-sm font-medium text-gray-400 hover:text-accent transition-colors group">
+                    Visit Shopify Store
+                    <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 reveal">
+                <a href="https://www.cumquatvibes.com" target="_blank" class="group cursor-pointer">
+                    <div class="aspect-square overflow-hidden bg-surface-light mb-4">
+                        <img src="images/shop-1.jpg" alt="Home is Where the Anchor Drops t-shirt" class="w-full h-full object-cover img-hover">
+                    </div>
+                    <p class="text-white font-semibold group-hover:text-accent transition-colors">Anchor Drops Tee</p>
+                    <p class="text-gray-500 text-sm mt-1">Shop Now</p>
+                </a>
+                <a href="https://www.cumquatvibes.com" target="_blank" class="group cursor-pointer">
+                    <div class="aspect-square overflow-hidden bg-surface-light mb-4">
+                        <img src="images/shop-2.jpg" alt="Cumquat University hoodie" class="w-full h-full object-cover img-hover">
+                    </div>
+                    <p class="text-white font-semibold group-hover:text-accent transition-colors">Cumquat University Hoodie</p>
+                    <p class="text-gray-500 text-sm mt-1">Shop Now</p>
+                </a>
+                <a href="https://www.cumquatvibes.com" target="_blank" class="group cursor-pointer">
+                    <div class="aspect-square overflow-hidden bg-surface-light mb-4">
+                        <img src="images/shop-3.jpg" alt="Forever Friends candle collection" class="w-full h-full object-cover img-hover">
+                    </div>
+                    <p class="text-white font-semibold group-hover:text-accent transition-colors">Forever Friends Candles</p>
+                    <p class="text-gray-500 text-sm mt-1">Shop Now</p>
+                </a>
+                <a href="https://www.cumquatvibes.com" target="_blank" class="group cursor-pointer">
+                    <div class="aspect-square overflow-hidden bg-surface-light mb-4">
+                        <img src="images/shop-4.jpg" alt="Fresco Adobe baby onesie" class="w-full h-full object-cover img-hover">
+                    </div>
+                    <p class="text-white font-semibold group-hover:text-accent transition-colors">Fresco Adobe Onesie</p>
+                    <p class="text-gray-500 text-sm mt-1">Shop Now</p>
+                </a>
+            </div>
+
+            <div class="text-center mt-12 reveal">
+                <a href="https://www.cumquatvibes.com" target="_blank" class="inline-block bg-accent text-black px-10 py-4 font-bold text-sm tracking-wide uppercase hover:bg-accent/90 transition-all">
+                    Browse Full Store
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- YouTube -->
+    <section id="youtube" class="py-32 bg-surface">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="flex justify-between items-end mb-16 reveal">
+                <div>
+                    <p class="text-accent text-sm font-bold tracking-[0.3em] uppercase mb-3">Watch</p>
+                    <h2 class="text-4xl md:text-6xl font-display font-bold">YouTube</h2>
+                </div>
+                <a href="https://www.youtube.com/@Cumquat-Vibez" target="_blank" class="hidden md:flex items-center gap-2 text-sm font-medium text-gray-400 hover:text-accent transition-colors group">
+                    Subscribe
+                    <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                </a>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 reveal">
+                <!-- Featured / Intro Video -->
+                <div class="md:row-span-2">
+                    <div class="aspect-video bg-surface-lighter rounded overflow-hidden">
+                        <iframe
+                            src="https://www.youtube.com/embed/SokgNp0QT9k"
+                            title="Cumquat Vibes - Intro"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen
+                            class="w-full h-full"
+                            loading="lazy">
+                        </iframe>
+                    </div>
+                    <h3 class="text-xl font-bold mt-4">Welcome to Cumquat Vibes</h3>
+                    <p class="text-gray-400 text-sm mt-2">Get to know the brand, the mission, and the creative vision behind everything I do.</p>
+                </div>
+
+                <!-- Most Popular Video -->
+                <div class="group">
+                    <div class="aspect-video bg-surface-lighter rounded overflow-hidden">
+                        <iframe
+                            src="https://www.youtube.com/embed/uhVC1w6ekbE"
+                            title="Most Popular - Cumquat Vibes"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen
+                            class="w-full h-full"
+                            loading="lazy">
+                        </iframe>
+                    </div>
+                    <h3 class="text-lg font-bold mt-3">Most Popular</h3>
+                    <p class="text-gray-500 text-sm mt-1">Fan favorite from the channel</p>
+                </div>
+
+                <!-- Channel Theme Song -->
+                <div class="group">
+                    <div class="aspect-video bg-surface-lighter rounded overflow-hidden">
+                        <iframe
+                            src="https://www.youtube.com/embed/w8X94mkIcig"
+                            title="Channel Theme Song - Cumquat Vibes"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen
+                            class="w-full h-full"
+                            loading="lazy">
+                        </iframe>
+                    </div>
+                    <h3 class="text-lg font-bold mt-3">Channel Theme Song</h3>
+                    <p class="text-gray-500 text-sm mt-1">The official Cumquat Vibes anthem</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Studio Signal Newsletter -->
+    <section id="newsletter" class="py-32">
+        <div class="max-w-3xl mx-auto px-6 lg:px-12">
+            <div class="border border-accent/20 bg-surface p-10 md:p-16 text-center reveal relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-1 bg-accent"></div>
+                <p class="text-accent text-sm font-bold tracking-[0.3em] uppercase mb-4">Newsletter</p>
+                <h2 class="text-4xl md:text-5xl font-display font-bold mb-6">Join The Studio Signal</h2>
+                <p class="text-gray-400 text-lg leading-relaxed max-w-xl mx-auto mb-10">
+                    Systems. Design. Freedom. The exact e-commerce and automation plays I used to transition from 20 years in the Navy to the digital studio.
+                </p>
+
+                <form id="studioSignalForm" class="max-w-md mx-auto flex flex-col gap-4">
+                    <input type="text" placeholder="First Name" required class="w-full bg-surface-light border border-white/10 text-white text-sm px-6 py-4 focus:outline-none focus:border-accent transition-colors placeholder-gray-600"/>
+                    <input type="email" placeholder="Your Best Email" required class="w-full bg-surface-light border border-white/10 text-white text-sm px-6 py-4 focus:outline-none focus:border-accent transition-colors placeholder-gray-600"/>
+                    <button type="submit" class="bg-accent text-black px-10 py-4 font-bold text-sm tracking-wide uppercase hover:bg-accent/90 transition-all">
+                        Join the Mission
+                    </button>
+                </form>
+                <p class="text-gray-600 text-xs mt-6">Zero spam. Just high-vibe systems once a week.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Navy Wisdom -->
+    <section class="py-20 bg-surface">
+        <div class="max-w-5xl mx-auto px-6 lg:px-12 reveal">
+            <div class="grid md:grid-cols-3 gap-px">
+                <div class="bg-black p-8 md:p-10 text-center">
+                    <p class="text-accent text-4xl font-display font-bold mb-2">20+</p>
+                    <p class="text-white font-bold text-sm tracking-wide uppercase mb-3">Years U.S. Navy</p>
+                    <p class="text-gray-500 text-sm leading-relaxed">Two decades of discipline, leadership, and mission-critical execution.</p>
+                </div>
+                <div class="bg-black p-8 md:p-10 text-center">
+                    <p class="text-accent text-4xl font-display font-bold mb-2">Systems</p>
+                    <p class="text-white font-bold text-sm tracking-wide uppercase mb-3">Built to Scale</p>
+                    <p class="text-gray-500 text-sm leading-relaxed">The same operational mindset that runs a warship now runs my e-commerce and creative business.</p>
+                </div>
+                <div class="bg-black p-8 md:p-10 text-center">
+                    <p class="text-accent text-4xl font-display font-bold mb-2">Proven</p>
+                    <p class="text-white font-bold text-sm tracking-wide uppercase mb-3">Proof of Discipline</p>
+                    <p class="text-gray-500 text-sm leading-relaxed">Military precision meets creative freedom. If you trust the process, the results follow.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="py-32 bg-surface">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="grid lg:grid-cols-2 gap-16 items-center reveal">
+                <div class="relative">
+                    <div class="aspect-[3/4] max-w-md overflow-hidden">
+                        <img src="images/about-headshot.jpg" alt="Richard Abreu - Product Designer and Illustrator" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="absolute -bottom-6 -right-6 w-32 h-32 border-2 border-accent"></div>
+                </div>
+                <div>
+                    <p class="text-accent text-sm font-bold tracking-[0.3em] uppercase mb-3">About</p>
+                    <h2 class="text-4xl md:text-5xl font-display font-bold mb-8">Richard Abreu</h2>
+                    <div class="space-y-4 text-gray-400 text-lg leading-relaxed">
+                        <p>
+                            After 20+ years in the U.S. Navy, I traded the uniform for the studio -- but I kept the discipline. I'm a product designer, illustrator, and creative director building Cumquat Vibes from the ground up.
+                        </p>
+                        <p>
+                            I design products, build e-commerce systems, and create content that connects. From Shopify to YouTube to Etsy, every piece of the business runs on the same operational mindset that ran a warship: systems, precision, and relentless execution.
+                        </p>
+                        <p>
+                            I share the playbook -- the tools, the automations, and the lessons -- through The Studio Signal and on my YouTube channel. If you're a veteran, creative, or entrepreneur looking to build something real, you're in the right place.
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap gap-6 mt-10">
+                        <div>
+                            <p class="text-3xl font-display font-bold text-accent">20+</p>
+                            <p class="text-gray-500 text-sm mt-1">Years U.S. Navy</p>
                         </div>
-</footer>
-</div>
-</div>
-</div>
-</div>
-<script>
-// Smooth scrolling for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        <div>
+                            <p class="text-3xl font-display font-bold text-accent">5</p>
+                            <p class="text-gray-500 text-sm mt-1">Active Stores</p>
+                        </div>
+                        <div>
+                            <p class="text-3xl font-display font-bold text-accent">100+</p>
+                            <p class="text-gray-500 text-sm mt-1">Products Designed</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work With Us -->
+    <section id="work-with-us" class="py-32">
+        <div class="max-w-3xl mx-auto px-6 lg:px-12">
+            <div class="text-center mb-12 reveal">
+                <p class="text-accent text-sm font-bold tracking-[0.3em] uppercase mb-3">Collaborate</p>
+                <h2 class="text-4xl md:text-5xl font-display font-bold mb-6">Work With Us</h2>
+                <p class="text-gray-400 text-lg max-w-xl mx-auto">Whether you need product design, brand strategy, or e-commerce systems built right -- let's talk. Start by telling me where you're stuck.</p>
+            </div>
+
+            <form id="workWithUsForm" class="bg-surface border border-white/5 p-10 md:p-14 reveal">
+                <div class="flex flex-col gap-5">
+                    <div class="grid md:grid-cols-2 gap-5">
+                        <input type="text" placeholder="Your Name" required class="w-full bg-surface-light border border-white/10 text-white text-sm px-6 py-4 focus:outline-none focus:border-accent transition-colors placeholder-gray-600"/>
+                        <input type="email" placeholder="Your Email" required class="w-full bg-surface-light border border-white/10 text-white text-sm px-6 py-4 focus:outline-none focus:border-accent transition-colors placeholder-gray-600"/>
+                    </div>
+                    <select class="w-full bg-surface-light border border-white/10 text-gray-400 text-sm px-6 py-4 focus:outline-none focus:border-accent transition-colors appearance-none">
+                        <option value="" disabled selected>What do you need help with?</option>
+                        <option value="product-design">Product Design & Branding</option>
+                        <option value="ecommerce">E-Commerce Setup & Systems</option>
+                        <option value="illustration">Illustration & Creative Work</option>
+                        <option value="automation">Automation & Workflows</option>
+                        <option value="other">Something Else</option>
+                    </select>
+                    <textarea placeholder="What's your biggest business bottleneck right now?" rows="4" required class="w-full bg-surface-light border border-white/10 text-white text-sm px-6 py-4 focus:outline-none focus:border-accent transition-colors placeholder-gray-600 resize-none"></textarea>
+                    <button type="submit" class="bg-accent text-black px-10 py-4 font-bold text-sm tracking-wide uppercase hover:bg-accent/90 transition-all">
+                        Send It
+                    </button>
+                </div>
+                <p class="text-gray-600 text-xs mt-4 text-center">I personally read every submission. Expect a response within 48 hours.</p>
+            </form>
+        </div>
+    </section>
+
+    <!-- Systems Library -->
+    <section id="systems" class="py-32 bg-surface">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="mb-16 reveal">
+                <p class="text-accent text-sm font-bold tracking-[0.3em] uppercase mb-3">Resources</p>
+                <h2 class="text-4xl md:text-6xl font-display font-bold">The Systems I Use</h2>
+                <p class="text-gray-400 text-lg mt-4 max-w-2xl">The exact tools powering my e-commerce, automation, and creative workflow. Battle-tested, Navy-approved.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 reveal">
+                <a href="https://www.shopify.com" target="_blank" class="group bg-surface-light border border-white/5 p-8 hover:border-accent/30 transition-all">
+                    <p class="text-accent text-xs font-bold tracking-widest uppercase mb-3">E-Commerce</p>
+                    <h3 class="text-xl font-bold mb-2 group-hover:text-accent transition-colors">Shopify</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">The backbone of my online store. Product listings, payments, and fulfillment all in one place.</p>
+                </a>
+                <a href="https://n8n.io" target="_blank" class="group bg-surface-light border border-white/5 p-8 hover:border-accent/30 transition-all">
+                    <p class="text-accent text-xs font-bold tracking-widest uppercase mb-3">Automation</p>
+                    <h3 class="text-xl font-bold mb-2 group-hover:text-accent transition-colors">N8N</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Open-source workflow automation. Connects my store, email, social media, and analytics on autopilot.</p>
+                </a>
+                <a href="https://zapier.com" target="_blank" class="group bg-surface-light border border-white/5 p-8 hover:border-accent/30 transition-all">
+                    <p class="text-accent text-xs font-bold tracking-widest uppercase mb-3">Integration</p>
+                    <h3 class="text-xl font-bold mb-2 group-hover:text-accent transition-colors">Zapier</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Quick automations for the things N8N doesn't cover. Email sequences, form triggers, and more.</p>
+                </a>
+                <a href="https://www.etsy.com" target="_blank" class="group bg-surface-light border border-white/5 p-8 hover:border-accent/30 transition-all">
+                    <p class="text-accent text-xs font-bold tracking-widest uppercase mb-3">Marketplace</p>
+                    <h3 class="text-xl font-bold mb-2 group-hover:text-accent transition-colors">Etsy</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">A second revenue stream. Handcrafted designs reaching customers who are actively searching.</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support / Donate -->
+    <section id="support" class="py-32">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="grid lg:grid-cols-2 gap-12">
+                <!-- Donation -->
+                <div class="bg-surface border border-white/5 p-10 md:p-14 reveal">
+                    <p class="text-accent text-sm font-bold tracking-[0.3em] uppercase mb-3">Support</p>
+                    <h2 class="text-3xl md:text-4xl font-display font-bold mb-4">Fuel the Vision</h2>
+                    <p class="text-gray-400 leading-relaxed mb-8">
+                        Your contribution directly supports new artwork, content creation, and keeping the creative engine running. Every bit helps.
+                    </p>
+
+                    <div class="flex flex-wrap gap-3 mb-6">
+                        <button class="donate-btn active bg-accent text-black px-8 py-3 font-bold text-sm transition-all" onclick="selectDonation(10, this)">$10</button>
+                        <button class="donate-btn border border-white/20 text-white px-8 py-3 font-bold text-sm hover:border-accent hover:text-accent transition-all" onclick="selectDonation(25, this)">$25</button>
+                        <button class="donate-btn border border-white/20 text-white px-8 py-3 font-bold text-sm hover:border-accent hover:text-accent transition-all" onclick="selectDonation(50, this)">$50</button>
+                        <button class="donate-btn border border-white/20 text-white px-8 py-3 font-bold text-sm hover:border-accent hover:text-accent transition-all" onclick="selectDonation(100, this)">$100</button>
+                    </div>
+                    <div class="flex gap-3">
+                        <input type="number" id="customDonation" placeholder="Custom amount" min="1" class="flex-1 bg-surface-light border border-white/10 text-white text-sm px-4 py-3 focus:outline-none focus:border-accent transition-colors placeholder-gray-600"/>
+                        <button class="bg-accent text-black px-8 py-3 font-bold text-sm tracking-wide uppercase hover:bg-accent/90 transition-all">
+                            Donate
+                        </button>
+                    </div>
+                    <p class="text-gray-600 text-xs mt-4">Secure payment. One-time or recurring.</p>
+                </div>
+
+                <!-- Members Only -->
+                <div class="bg-surface border border-accent/20 p-10 md:p-14 relative overflow-hidden reveal">
+                    <div class="absolute top-0 right-0 bg-accent text-black text-xs font-bold px-4 py-1 tracking-widest uppercase">Members</div>
+                    <p class="text-accent text-sm font-bold tracking-[0.3em] uppercase mb-3">Exclusive Access</p>
+                    <h2 class="text-3xl md:text-4xl font-display font-bold mb-4">Members Only</h2>
+                    <p class="text-gray-400 leading-relaxed mb-6">
+                        Get behind-the-scenes access, early drops, exclusive tutorials, and members-only content.
+                    </p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center gap-3 text-gray-300 text-sm">
+                            <span class="text-accent font-bold">+</span> Private Discord server packed with resources
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300 text-sm">
+                            <span class="text-accent font-bold">+</span> Early access to new artwork & shop drops
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300 text-sm">
+                            <span class="text-accent font-bold">+</span> Exclusive behind-the-scenes content
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300 text-sm">
+                            <span class="text-accent font-bold">+</span> Members-only tutorials & downloads
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300 text-sm">
+                            <span class="text-accent font-bold">+</span> Direct community access & support
+                        </li>
+                    </ul>
+                    <a href="#" class="inline-block w-full text-center bg-accent text-black px-10 py-4 font-bold text-sm tracking-wide uppercase hover:bg-accent/90 transition-all">
+                        Subscribe — Members Area
+                    </a>
+                    <p class="text-gray-600 text-xs mt-4 text-center">Cancel anytime. Pricing set in your Shopify store.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-32">
+        <div class="max-w-4xl mx-auto px-6 lg:px-12 text-center reveal">
+            <h2 class="text-5xl md:text-7xl font-display font-bold mb-6">Let's create<br/>something <span class="text-accent">great</span>.</h2>
+            <p class="text-gray-400 text-xl mb-10 max-w-2xl mx-auto">Whether you need product design, illustration, or creative direction - I'd love to hear about your project.</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="mailto:hello@richardabreu.studio" class="bg-accent text-black px-10 py-4 font-bold text-sm tracking-wide uppercase hover:bg-accent/90 transition-all">
+                    Get in Touch
+                </a>
+                <a href="https://www.cumquatvibes.com" target="_blank" class="border border-white/20 text-white px-10 py-4 font-bold text-sm tracking-wide uppercase hover:border-accent hover:text-accent transition-all">
+                    View Shop
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/5 py-16">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="grid md:grid-cols-5 gap-10 mb-16">
+                <div>
+                    <a href="#" class="text-2xl font-display font-bold tracking-tight">
+                        R<span class="text-accent">.</span>Abreu
+                    </a>
+                    <p class="text-gray-500 text-sm mt-4 leading-relaxed">Product Designer, Illustrator & Creative Director</p>
+                </div>
+                <div>
+                    <h4 class="text-sm font-bold tracking-widest uppercase mb-6">Navigate</h4>
+                    <ul class="space-y-3">
+                        <li><a class="text-gray-500 hover:text-accent transition-colors text-sm" href="#work">Work</a></li>
+                        <li><a class="text-gray-500 hover:text-accent transition-colors text-sm" href="#services">Services</a></li>
+                        <li><a class="text-gray-500 hover:text-accent transition-colors text-sm" href="#newsletter">Newsletter</a></li>
+                        <li><a class="text-gray-500 hover:text-accent transition-colors text-sm" href="#about">About</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-sm font-bold tracking-widest uppercase mb-6">Connect</h4>
+                    <ul class="space-y-3">
+                        <li><a class="text-gray-500 hover:text-accent transition-colors text-sm" href="https://www.instagram.com/cumquat_vibes/" target="_blank">Instagram</a></li>
+                        <li><a class="text-gray-500 hover:text-accent transition-colors text-sm" href="https://www.youtube.com/@Cumquat-Vibez" target="_blank">YouTube</a></li>
+                        <li><a class="text-gray-500 hover:text-accent transition-colors text-sm" href="https://www.tiktok.com/@cumquatvibes" target="_blank">TikTok</a></li>
+                        <li><a class="text-gray-500 hover:text-accent transition-colors text-sm" href="https://www.facebook.com/Cumquatvibes" target="_blank">Facebook</a></li>
+                        <li><a class="text-gray-500 hover:text-accent transition-colors text-sm" href="https://www.pinterest.com/CumquatVibes/" target="_blank">Pinterest</a></li>
+                        <li><a class="text-gray-500 hover:text-accent transition-colors text-sm" href="https://www.linkedin.com/in/richard-abreu1775" target="_blank">LinkedIn</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-sm font-bold tracking-widest uppercase mb-6">Stores</h4>
+                    <ul class="space-y-3">
+                        <li><a class="text-gray-500 hover:text-accent transition-colors text-sm" href="https://www.cumquatvibes.com" target="_blank">Shopify Store</a></li>
+                        <li><a class="text-gray-500 hover:text-accent transition-colors text-sm" href="https://cumquatvibes.etsy.com" target="_blank">Etsy Store</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-sm font-bold tracking-widest uppercase mb-6">Newsletter</h4>
+                    <p class="text-gray-500 text-sm mb-4">Get updates on new work, shop drops, and videos.</p>
+                    <form class="flex gap-2" id="newsletterForm">
+                        <input class="flex-1 bg-surface-light border border-white/10 text-white text-sm px-4 py-3 focus:outline-none focus:border-accent transition-colors placeholder-gray-600" placeholder="your@email.com" type="email" required/>
+                        <button type="submit" class="bg-accent text-black px-5 py-3 font-bold text-sm hover:bg-accent/90 transition-all">
+                            Join
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/5 gap-4">
+                <p class="text-gray-600 text-xs">&copy; 2026 Richard Abreu. All Rights Reserved.</p>
+                <p class="text-gray-600 text-xs">Designed & built by <a href="https://richardabreu.studio" class="text-gray-500 hover:text-accent transition-colors">richardabreu.studio</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        let menuOpen = false;
+
+        menuBtn.addEventListener('click', () => {
+            menuOpen = !menuOpen;
+            mobileMenu.classList.toggle('open', menuOpen);
+            document.body.style.overflow = menuOpen ? 'hidden' : '';
+        });
+
+        function closeMenu() {
+            menuOpen = false;
+            mobileMenu.classList.remove('open');
+            document.body.style.overflow = '';
         }
-    });
-});
 
-// Lazy loading for background images
-const observerOptions = {
-    root: null,
-    rootMargin: '50px',
-    threshold: 0.01
-};
+        // Scroll reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-const imageObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const element = entry.target;
-            element.classList.add('loaded');
-            observer.unobserve(element);
-        }
-    });
-}, observerOptions);
+        revealElements.forEach(el => revealObserver.observe(el));
 
-document.querySelectorAll('[data-alt]').forEach(img => {
-    imageObserver.observe(img);
-});
-
-// Email newsletter form handler
-const newsletterForm = document.querySelector('footer form');
-if (newsletterForm) {
-    newsletterForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const emailInput = this.querySelector('input[type="email"]');
-        const email = emailInput.value;
-
-        if (email && validateEmail(email)) {
-            // Here you would normally send to your email service
-            alert('Thank you for subscribing! You will receive updates from Richard Abreu\'s studio.');
-            emailInput.value = '';
-        } else {
-            alert('Please enter a valid email address.');
-        }
-    });
-}
-
-function validateEmail(email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
-
-// Add loading animation for buttons
-document.querySelectorAll('button').forEach(button => {
-    button.addEventListener('click', function() {
-        if (!this.classList.contains('loading')) {
-            this.classList.add('active-click');
-            setTimeout(() => this.classList.remove('active-click'), 200);
-        }
-    });
-});
-
-// Mobile menu toggle (if needed in future)
-const mobileMenuButton = document.querySelector('[aria-label="Menu"]');
-if (mobileMenuButton) {
-    mobileMenuButton.addEventListener('click', function() {
-        const menu = document.querySelector('.mobile-menu');
-        if (menu) menu.classList.toggle('hidden');
-    });
-}
-
-// Add fade-in animation on scroll
-const fadeElements = document.querySelectorAll('section');
-const fadeObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
-    });
-}, { threshold: 0.1 });
-
-fadeElements.forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
-    fadeObserver.observe(el);
-});
-
-// Dark mode toggle (optional enhancement)
-function toggleDarkMode() {
-    document.documentElement.classList.toggle('dark');
-    localStorage.setItem('darkMode', document.documentElement.classList.contains('dark'));
-}
-
-// Load dark mode preference
-if (localStorage.getItem('darkMode') === 'false') {
-    document.documentElement.classList.remove('dark');
-} else {
-    document.documentElement.classList.add('dark');
-}
-
-// Performance monitoring
-if ('PerformanceObserver' in window) {
-    const perfObserver = new PerformanceObserver((list) => {
-        for (const entry of list.getEntries()) {
-            if (entry.entryType === 'largest-contentful-paint') {
-                console.log('LCP:', entry.renderTime || entry.loadTime);
+        // Newsletter
+        document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('input[type="email"]').value;
+            if (email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                alert('Thanks for subscribing! You\'ll hear from me soon.');
+                this.querySelector('input[type="email"]').value = '';
             }
+        });
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Work With Us form
+        document.getElementById('workWithUsForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Message received! I\'ll get back to you within 48 hours.');
+            this.reset();
+        });
+
+        // Studio Signal newsletter
+        document.getElementById('studioSignalForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = this.querySelector('input[type="text"]').value;
+            const email = this.querySelector('input[type="email"]').value;
+            if (name && email) {
+                alert('Welcome aboard, ' + name + '! You\'re now part of The Studio Signal.');
+                this.reset();
+            }
+        });
+
+        // Donation amount selection
+        let selectedDonation = 10;
+        function selectDonation(amount, button) {
+            document.querySelectorAll('.donate-btn').forEach(btn => {
+                btn.classList.remove('active', 'bg-accent', 'text-black');
+                btn.classList.add('border', 'border-white/20', 'text-white');
+            });
+            button.classList.add('active', 'bg-accent', 'text-black');
+            button.classList.remove('border', 'border-white/20', 'text-white');
+            selectedDonation = amount;
+            document.getElementById('customDonation').value = '';
         }
-    });
-    perfObserver.observe({ entryTypes: ['largest-contentful-paint'] });
-}
-</script>
-</body></html>
+
+        document.getElementById('customDonation').addEventListener('input', function(e) {
+            if (e.target.value) {
+                selectedDonation = parseInt(e.target.value);
+                document.querySelectorAll('.donate-btn').forEach(btn => {
+                    btn.classList.remove('active', 'bg-accent', 'text-black');
+                    btn.classList.add('border', 'border-white/20', 'text-white');
+                });
+            }
+        });
+
+        // Nav background on scroll
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                nav.classList.add('bg-black/95');
+                nav.classList.remove('bg-black/80');
+            } else {
+                nav.classList.remove('bg-black/95');
+                nav.classList.add('bg-black/80');
+            }
+        });
+    </script>
+</body>
+</html>
