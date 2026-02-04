@@ -19,51 +19,58 @@
     <![endif]-->
 
     <style>
-        /* Reset */
         body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
         table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
         img { -ms-interpolation-mode: bicubic; border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
         body { margin: 0; padding: 0; width: 100% !important; height: 100% !important; }
-        a[x-apple-data-detectors] { color: inherit !important; text-decoration: none !important; font-size: inherit !important; font-family: inherit !important; font-weight: inherit !important; line-height: inherit !important; }
+        a[x-apple-data-detectors] { color: inherit !important; text-decoration: none !important; }
 
-        /* Responsive */
         @media only screen and (max-width: 620px) {
-            .email-container { width: 100% !important; max-width: 100% !important; }
-            .fluid { max-width: 100% !important; height: auto !important; margin-left: auto !important; margin-right: auto !important; }
-            .stack-column { display: block !important; width: 100% !important; max-width: 100% !important; }
-            .stack-column-center { text-align: center !important; }
-            .center-on-narrow { text-align: center !important; display: block !important; margin-left: auto !important; margin-right: auto !important; float: none !important; }
-            table.center-on-narrow { display: inline-block !important; }
-            .mobile-pad { padding-left: 24px !important; padding-right: 24px !important; }
+            .email-container { width: 100% !important; }
+            .mobile-pad { padding-left: 20px !important; padding-right: 20px !important; }
+            .mobile-stack { display: block !important; width: 100% !important; }
         }
     </style>
 </head>
-<body style="margin: 0; padding: 0; background-color: #f4f4f4; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+<body style="margin: 0; padding: 0; background-color: #f4f7f6; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
 
     <!-- Preview text -->
     <div style="display: none; font-size: 1px; line-height: 1px; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden; mso-hide: all;">
-        Systems. Design. Freedom. The exact plays I used to transition from 20 years in the Navy to the digital studio.
+        Systems. Design. Freedom. 20 years of Navy discipline, now in your inbox every week.
     </div>
 
     <!-- Email wrapper -->
-    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #f4f4f4;">
+    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #f4f7f6;">
         <tr>
             <td style="padding: 20px 0;">
 
                 <!-- Email container -->
-                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" align="center" class="email-container" style="margin: auto;">
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" align="center" class="email-container" style="margin: auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; border: 1px solid #e0e0e0;">
 
                     <!-- Header -->
                     <tr>
-                        <td style="background-color: #0a192f; padding: 30px 40px; text-align: center; border-radius: 8px 8px 0 0;" class="mobile-pad">
+                        <td style="background-color: #00ced1; padding: 40px 30px; text-align: center;">
+                            <h1 style="margin: 0; font-size: 28px; font-weight: 700; color: #ffffff; letter-spacing: 1px; text-transform: uppercase;">THE STUDIO SIGNAL</h1>
+                            <p style="margin: 10px 0 0; font-size: 16px; color: #ffffff; opacity: 0.9;">Systems &#8226; Design &#8226; Freedom</p>
+                        </td>
+                    </tr>
+
+                    <!-- Greeting -->
+                    <tr>
+                        <td style="padding: 30px 30px 0;" class="mobile-pad">
+                            <p style="margin: 0 0 16px; font-size: 16px; line-height: 1.6; color: #333333;">Hey {{first_name}},</p>
+                            <p style="margin: 0 0 20px; font-size: 16px; line-height: 1.6; color: #333333;">Rich here. If you're receiving this, you're at the ground floor of something special.</p>
+                        </td>
+                    </tr>
+
+                    <!-- Navy Wisdom Blockquote -->
+                    <tr>
+                        <td style="padding: 0 30px;" class="mobile-pad">
                             <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                                 <tr>
-                                    <td style="text-align: center;">
-                                        <p style="margin: 0; font-size: 24px; font-weight: 700; color: #ffffff; letter-spacing: -0.5px;">
-                                            The Studio <span style="color: #00ced1;">Signal</span>
-                                        </p>
-                                        <p style="margin: 6px 0 0; font-size: 11px; color: #00ced1; letter-spacing: 3px; text-transform: uppercase; font-weight: 600;">
-                                            Systems &bull; Design &bull; Freedom
+                                    <td style="background-color: #e0f7f9; padding: 20px 24px; border-left: 5px solid #008b8b; border-radius: 6px;">
+                                        <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #333333; font-style: italic;">
+                                            "In the Navy, systems aren't just 'nice to have'&#8212;they are the difference between a successful mission and total chaos."
                                         </p>
                                     </td>
                                 </tr>
@@ -71,287 +78,138 @@
                         </td>
                     </tr>
 
-                    <!-- Issue Badge -->
+                    <!-- Intro copy -->
                     <tr>
-                        <td style="background-color: #0a192f; padding: 0 40px 24px; text-align: center;" class="mobile-pad">
-                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center">
-                                <tr>
-                                    <td style="background-color: rgba(0,206,209,0.15); border: 1px solid rgba(0,206,209,0.3); border-radius: 20px; padding: 6px 16px;">
-                                        <p style="margin: 0; font-size: 11px; color: #00ced1; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;">Signal #1</p>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-
-                    <!-- Headline -->
-                    <tr>
-                        <td style="background-color: #0a192f; padding: 0 40px 30px; text-align: center;" class="mobile-pad">
-                            <h1 style="margin: 0; font-size: 28px; line-height: 1.2; font-weight: 800; color: #ffffff;">
-                                20 Years of Navy Systems,<br/>Now in Your Inbox.
-                            </h1>
-                        </td>
-                    </tr>
-
-                    <!-- Divider line -->
-                    <tr>
-                        <td style="background-color: #0a192f; padding: 0 40px;" class="mobile-pad">
-                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-                                <tr>
-                                    <td style="border-top: 1px solid rgba(255,255,255,0.1); font-size: 0; line-height: 0;">&nbsp;</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-
-                    <!-- Main Body -->
-                    <tr>
-                        <td style="background-color: #0a192f; padding: 30px 40px;" class="mobile-pad">
-
-                            <!-- Greeting -->
-                            <p style="margin: 0 0 16px; font-size: 16px; line-height: 1.7; color: #e2e8f0;">
-                                Hey {{first_name}},
+                        <td style="padding: 20px 30px 10px;" class="mobile-pad">
+                            <p style="margin: 0 0 16px; font-size: 16px; line-height: 1.6; color: #333333;">
+                                I spent over two decades in the U.S. Navy learning that discipline isn't about working harder; it's about having better systems. <strong>The Studio Signal</strong> is my way of handing you the manual for building a digital empire with that same precision.
                             </p>
-                            <p style="margin: 0 0 16px; font-size: 16px; line-height: 1.7; color: #e2e8f0;">
-                                Rich here.
-                            </p>
-                            <p style="margin: 0 0 16px; font-size: 16px; line-height: 1.7; color: #e2e8f0;">
-                                If you're receiving this, you're at the ground floor of something special.
-                            </p>
-                            <p style="margin: 0 0 16px; font-size: 16px; line-height: 1.7; color: #e2e8f0;">
-                                I spent over two decades in the U.S. Navy. In that world, systems aren't just "nice to have"&#8212;they are the difference between a successful mission and total chaos. When I transitioned into the world of design and e-commerce, I realized most entrepreneurs are living in that chaos every day.
-                            </p>
-                            <p style="margin: 0 0 16px; font-size: 16px; line-height: 1.7; color: #e2e8f0;">
-                                <strong style="color: #00ced1;">The Studio Signal</strong> is my way of handing you the manual.
-                            </p>
-                            <p style="margin: 0 0 16px; font-size: 16px; line-height: 1.7; color: #e2e8f0;">
-                                Every week, I'll be sharing the "Signal"&#8212;the automation workflows, design strategies, and visionary plays I'm using to build Cumquat Vibes and my personal studio.
-                            </p>
-                            <p style="margin: 0 0 8px; font-size: 16px; line-height: 1.7; color: #ffffff; font-weight: 600;">
-                                No noise. Just the signal.
-                            </p>
-
                         </td>
                     </tr>
 
                     <!-- Section: Weekly Blueprint -->
                     <tr>
-                        <td style="background-color: #0a192f; padding: 10px 40px 0;" class="mobile-pad">
+                        <td style="padding: 10px 30px 0;" class="mobile-pad">
+                            <!-- Section heading -->
                             <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                                 <tr>
-                                    <td style="border-top: 1px solid rgba(255,255,255,0.1); font-size: 0; line-height: 0;">&nbsp;</td>
+                                    <td style="border-bottom: 2px solid #e0f7f9; padding-bottom: 10px;">
+                                        <h2 style="margin: 0; font-size: 20px; font-weight: 700; color: #008b8b;">&#x1F4CD; THE WEEKLY BLUEPRINT</h2>
+                                    </td>
                                 </tr>
                             </table>
                         </td>
                     </tr>
+
+                    <!-- Blueprint Item 1 -->
                     <tr>
-                        <td style="background-color: #0a192f; padding: 24px 40px;" class="mobile-pad">
+                        <td style="padding: 20px 30px 0;" class="mobile-pad">
                             <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                                 <tr>
-                                    <td>
-                                        <p style="margin: 0 0 6px; font-size: 11px; color: #00ced1; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;">
-                                            &#x1F4CD; The Weekly Blueprint
+                                    <td style="border-left: 3px solid #00ced1; padding-left: 15px;">
+                                        <h3 style="margin: 0 0 5px; font-size: 18px; font-weight: 700; color: #333333;">1. Agentic Commerce: The Future is Autonomous</h3>
+                                        <p style="margin: 0 0 12px; font-size: 15px; line-height: 1.6; color: #555555;">
+                                            Stop thinking about "tools" and start thinking about "agents." I'm showing you how to build a business that runs while you sleep.
                                         </p>
-                                        <p style="margin: 0 0 24px; font-size: 14px; color: #94a3b8; line-height: 1.6;">
-                                            We've been busy in the lab. Here are the three big moves you need to know about right now:
-                                        </p>
+                                        <!--[if mso]>
+                                        <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://www.cumquatvibes.com/blogs/news" style="height:42px;v-text-anchor:middle;width:180px;" arcsize="12%" strokecolor="#00ced1" fillcolor="#00ced1">
+                                        <w:anchorlock/>
+                                        <center style="color:#ffffff;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:bold;">Read the Deep Dive</center>
+                                        </v:roundrect>
+                                        <![endif]-->
+                                        <!--[if !mso]><!-->
+                                        <a href="https://www.cumquatvibes.com/blogs/news" style="display: inline-block; padding: 12px 25px; background-color: #00ced1; color: #ffffff; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 14px;">Read the Deep Dive</a>
+                                        <!--<![endif]-->
                                     </td>
                                 </tr>
                             </table>
+                        </td>
+                    </tr>
 
-                            <!-- Article 1 -->
-                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin-bottom: 20px;">
+                    <!-- Blueprint Item 2 -->
+                    <tr>
+                        <td style="padding: 25px 30px 0;" class="mobile-pad">
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                                 <tr>
-                                    <td style="background-color: #112240; border-radius: 8px; padding: 24px; border-left: 3px solid #00ced1;">
-                                        <p style="margin: 0 0 8px; font-size: 17px; font-weight: 700; color: #ffffff; line-height: 1.3;">
-                                            Agentic Commerce: The Future is Autonomous
-                                        </p>
-                                        <p style="margin: 0 0 14px; font-size: 14px; color: #94a3b8; line-height: 1.6;">
-                                            Stop thinking about "tools" and start thinking about "agents." I'm building a business that runs while I sleep, and I'm showing you how to do it too.
-                                        </p>
-                                        <a href="#" style="color: #00ced1; font-size: 13px; font-weight: 600; text-decoration: none; letter-spacing: 0.5px;">Read the Deep Dive &#8594;</a>
-                                    </td>
-                                </tr>
-                            </table>
-
-                            <!-- Article 2 -->
-                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin-bottom: 20px;">
-                                <tr>
-                                    <td style="background-color: #112240; border-radius: 8px; padding: 24px; border-left: 3px solid #00ced1;">
-                                        <p style="margin: 0 0 8px; font-size: 17px; font-weight: 700; color: #ffffff; line-height: 1.3;">
-                                            7 E-Commerce Design Mistakes You're Making in 2026
-                                        </p>
-                                        <p style="margin: 0 0 14px; font-size: 14px; color: #94a3b8; line-height: 1.6;">
+                                    <td style="border-left: 3px solid #00ced1; padding-left: 15px;">
+                                        <h3 style="margin: 0 0 5px; font-size: 18px; font-weight: 700; color: #333333;">2. 7 E-Commerce Design Mistakes to Kill in 2026</h3>
+                                        <p style="margin: 0 0 12px; font-size: 15px; line-height: 1.6; color: #555555;">
                                             If your UX is stuck in 2023, you're leaving money on the table. We're fixing the friction.
                                         </p>
-                                        <a href="#" style="color: #00ced1; font-size: 13px; font-weight: 600; text-decoration: none; letter-spacing: 0.5px;">See the Fixes &#8594;</a>
-                                    </td>
-                                </tr>
-                            </table>
-
-                            <!-- Article 3 -->
-                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-                                <tr>
-                                    <td style="background-color: #112240; border-radius: 8px; padding: 24px; border-left: 3px solid #00ced1;">
-                                        <p style="margin: 0 0 8px; font-size: 17px; font-weight: 700; color: #ffffff; line-height: 1.3;">
-                                            Trust-First UX: Turning Browsers into Buyers
-                                        </p>
-                                        <p style="margin: 0 0 14px; font-size: 14px; color: #94a3b8; line-height: 1.6;">
-                                            In a world of AI noise, authenticity is your superpower. Here's how to design for trust.
-                                        </p>
-                                        <a href="#" style="color: #00ced1; font-size: 13px; font-weight: 600; text-decoration: none; letter-spacing: 0.5px;">Get the Strategy &#8594;</a>
+                                        <!--[if mso]>
+                                        <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://www.cumquatvibes.com/blogs/news" style="height:42px;v-text-anchor:middle;width:150px;" arcsize="12%" strokecolor="#00ced1" fillcolor="#00ced1">
+                                        <w:anchorlock/>
+                                        <center style="color:#ffffff;font-family:Helvetica,Arial,sans-serif;font-size:14px;font-weight:bold;">See the Fixes</center>
+                                        </v:roundrect>
+                                        <![endif]-->
+                                        <!--[if !mso]><!-->
+                                        <a href="https://www.cumquatvibes.com/blogs/news" style="display: inline-block; padding: 12px 25px; background-color: #00ced1; color: #ffffff; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 14px;">See the Fixes</a>
+                                        <!--<![endif]-->
                                     </td>
                                 </tr>
                             </table>
                         </td>
                     </tr>
 
-                    <!-- Section: Quick Win Automation -->
+                    <!-- Section: Quick Win -->
                     <tr>
-                        <td style="background-color: #0a192f; padding: 10px 40px 0;" class="mobile-pad">
+                        <td style="padding: 30px 30px 0;" class="mobile-pad">
                             <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                                 <tr>
-                                    <td style="border-top: 1px solid rgba(255,255,255,0.1); font-size: 0; line-height: 0;">&nbsp;</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="background-color: #0a192f; padding: 24px 40px;" class="mobile-pad">
-                            <p style="margin: 0 0 6px; font-size: 11px; color: #00ced1; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;">
-                                &#x2699;&#xFE0F; Quick Win Automation
-                            </p>
-                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin-top: 16px;">
-                                <tr>
-                                    <td style="background-color: #112240; border-radius: 8px; padding: 24px; border: 1px solid rgba(0,206,209,0.2);">
-                                        <p style="margin: 0 0 10px; font-size: 17px; font-weight: 700; color: #ffffff; line-height: 1.3;">
-                                            The "Dead-Simple" Content Loop
-                                        </p>
-                                        <p style="margin: 0 0 14px; font-size: 14px; color: #94a3b8; line-height: 1.7;">
-                                            If you find yourself manually posting the same thing across 5 platforms, stop. Use a tool like N8N or Zapier to create a "Watch Folder." Drop a video in, and have it automatically formatted for TikTok, Reels, and YouTube Shorts.
-                                        </p>
-                                        <p style="margin: 0; font-size: 14px; font-weight: 600; color: #00ced1;">
-                                            Time saved: 4 hours/week. Mental health saved: Priceless.
-                                        </p>
+                                    <td style="border-bottom: 2px solid #e0f7f9; padding-bottom: 10px;">
+                                        <h2 style="margin: 0; font-size: 20px; font-weight: 700; color: #008b8b;">&#x2699;&#xFE0F; THE QUICK WIN</h2>
                                     </td>
                                 </tr>
                             </table>
                         </td>
                     </tr>
-
-                    <!-- Section: Vibe of the Week -->
                     <tr>
-                        <td style="background-color: #0a192f; padding: 10px 40px 0;" class="mobile-pad">
-                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-                                <tr>
-                                    <td style="border-top: 1px solid rgba(255,255,255,0.1); font-size: 0; line-height: 0;">&nbsp;</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="background-color: #0a192f; padding: 24px 40px;" class="mobile-pad">
-                            <p style="margin: 0 0 6px; font-size: 11px; color: #00ced1; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;">
-                                &#x1F48E; Vibe of the Week
+                        <td style="padding: 16px 30px 0;" class="mobile-pad">
+                            <p style="margin: 0 0 12px; font-size: 15px; line-height: 1.6; color: #333333;">
+                                <strong>The "Dead-Simple" Content Loop:</strong> Use a tool like N8N or Zapier to create a "Watch Folder." Drop a video in, and have it automatically formatted for TikTok, Reels, and YouTube Shorts.
                             </p>
-                            <p style="margin: 16px 0 0; font-size: 15px; color: #e2e8f0; line-height: 1.7;">
-                                Keep an eye out for the <strong style="color: #00ced1;">Vibe Bazaar</strong>. We are building a multi-vendor marketplace to spotlight the creators and veterans who are actually doing the work. If you've got a brand that needs a platform, we're building it for you.
+                            <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #008b8b; font-weight: 600;">
+                                Time saved: 4 hours/week. Mental health saved: Priceless.
                             </p>
                         </td>
                     </tr>
 
-                    <!-- Section: Final Thought -->
+                    <!-- Closing -->
                     <tr>
-                        <td style="background-color: #0a192f; padding: 10px 40px 0;" class="mobile-pad">
+                        <td style="padding: 30px 30px 0;" class="mobile-pad">
                             <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                                 <tr>
-                                    <td style="border-top: 1px solid rgba(255,255,255,0.1); font-size: 0; line-height: 0;">&nbsp;</td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="background-color: #0a192f; padding: 24px 40px;" class="mobile-pad">
-                            <p style="margin: 0 0 6px; font-size: 11px; color: #00ced1; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;">
-                                &#x2693; Final Thought
-                            </p>
-                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin-top: 16px;">
-                                <tr>
-                                    <td style="background-color: #112240; border-radius: 8px; padding: 28px; border-left: 3px solid #00ced1;">
-                                        <p style="margin: 0 0 14px; font-size: 18px; font-weight: 600; color: #ffffff; line-height: 1.5; font-style: italic;">
-                                            "Success is a series of small, disciplined systems stacked on top of each other."
+                                    <td style="border-top: 1px solid #e0e0e0; padding-top: 24px;">
+                                        <p style="margin: 0 0 16px; font-size: 16px; line-height: 1.6; color: #333333;">
+                                            Success is a series of small, disciplined systems stacked on top of each other. What's one manual task you're going to kill this week?
                                         </p>
-                                        <p style="margin: 0; font-size: 15px; color: #e2e8f0; line-height: 1.7;">
-                                            What's one manual task you're going to kill this week?
+                                        <p style="margin: 0 0 16px; font-size: 16px; line-height: 1.6; color: #555555;">
+                                            Hit reply and tell me. I read every single one.
                                         </p>
                                     </td>
                                 </tr>
                             </table>
-                            <p style="margin: 20px 0 0; font-size: 15px; color: #94a3b8; line-height: 1.7;">
-                                Hit reply and tell me. I read every single one.
-                            </p>
                         </td>
                     </tr>
 
                     <!-- Sign-off -->
                     <tr>
-                        <td style="background-color: #0a192f; padding: 20px 40px 30px;" class="mobile-pad">
-                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-                                <tr>
-                                    <td style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px;">
-                                        <p style="margin: 0 0 4px; font-size: 15px; color: #e2e8f0;">
-                                            Stay visionary,
-                                        </p>
-                                        <p style="margin: 0 0 4px; font-size: 18px; font-weight: 700; color: #ffffff;">
-                                            Rich
-                                        </p>
-                                        <p style="margin: 0; font-size: 13px; color: #94a3b8;">
-                                            Founder, richardabreu.studio &amp; Cumquat Vibes
-                                        </p>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-
-                    <!-- Social Links -->
-                    <tr>
-                        <td style="background-color: #0a192f; padding: 0 40px 30px; text-align: center;" class="mobile-pad">
-                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center">
-                                <tr>
-                                    <td style="padding: 0 10px;">
-                                        <a href="https://www.instagram.com/cumquat_vibes/" style="color: #94a3b8; font-size: 12px; text-decoration: none; font-weight: 500;">Instagram</a>
-                                    </td>
-                                    <td style="color: #1d3557;">|</td>
-                                    <td style="padding: 0 10px;">
-                                        <a href="https://www.youtube.com/@Cumquat-Vibez" style="color: #94a3b8; font-size: 12px; text-decoration: none; font-weight: 500;">YouTube</a>
-                                    </td>
-                                    <td style="color: #1d3557;">|</td>
-                                    <td style="padding: 0 10px;">
-                                        <a href="https://www.tiktok.com/@cumquat_vibes" style="color: #94a3b8; font-size: 12px; text-decoration: none; font-weight: 500;">TikTok</a>
-                                    </td>
-                                    <td style="color: #1d3557;">|</td>
-                                    <td style="padding: 0 10px;">
-                                        <a href="https://www.cumquatvibes.com" style="color: #94a3b8; font-size: 12px; text-decoration: none; font-weight: 500;">Shop</a>
-                                    </td>
-                                </tr>
-                            </table>
+                        <td style="padding: 10px 30px 30px;" class="mobile-pad">
+                            <p style="margin: 0 0 4px; font-size: 16px; color: #333333;">Stay visionary,</p>
+                            <p style="margin: 0 0 4px; font-size: 18px; font-weight: 700; color: #333333;">Rich</p>
+                            <p style="margin: 0; font-size: 12px; color: #888888;">Founder, richardabreu.studio &amp; Cumquat Vibes</p>
                         </td>
                     </tr>
 
                     <!-- Footer -->
                     <tr>
-                        <td style="background-color: #060e1a; padding: 24px 40px; border-radius: 0 0 8px 8px; text-align: center;" class="mobile-pad">
-                            <p style="margin: 0 0 8px; font-size: 12px; color: #475569;">
-                                &copy; 2026 Richard Abreu. All Rights Reserved.
+                        <td style="background-color: #f9f9f9; padding: 20px 30px; text-align: center; border-top: 1px solid #eeeeee;" class="mobile-pad">
+                            <p style="margin: 0 0 8px; font-size: 12px; color: #777777;">&copy; 2026 Cumquat Vibes LLC. Norfolk, Virginia.</p>
+                            <p style="margin: 0 0 8px; font-size: 12px; color: #777777; line-height: 1.6;">
+                                You received this because you joined the mission at <a href="https://richardabreu.studio" style="color: #00ced1; text-decoration: none;">richardabreu.studio</a>
                             </p>
-                            <p style="margin: 0 0 8px; font-size: 11px; color: #475569; line-height: 1.6;">
-                                You're receiving this because you signed up for The Studio Signal at richardabreu.studio.
-                            </p>
-                            <p style="margin: 0; font-size: 11px;">
-                                <a href="#" style="color: #00ced1; text-decoration: underline;">Unsubscribe</a>
-                                <span style="color: #1e293b;">&nbsp;&bull;&nbsp;</span>
-                                <a href="#" style="color: #94a3b8; text-decoration: underline;">View in Browser</a>
+                            <p style="margin: 0; font-size: 12px;">
+                                <a href="#" style="color: #999999; text-decoration: underline;">Unsubscribe</a>
                             </p>
                         </td>
                     </tr>
@@ -362,7 +220,6 @@
             </td>
         </tr>
     </table>
-    <!-- End email wrapper -->
 
 </body>
 </html>
