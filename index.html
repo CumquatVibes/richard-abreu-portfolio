@@ -491,6 +491,10 @@
                         Join the Mission
                     </button>
                 </form>
+                <div id="studioSignalSuccess" class="hidden text-center">
+                    <p class="text-accent text-lg font-bold mb-2">You're in!</p>
+                    <p class="text-gray-400 text-sm">Welcome to The Studio Signal. Check your inbox for a confirmation from our Shopify store.</p>
+                </div>
                 <p class="text-gray-600 text-xs mt-6">Zero spam. Just high-vibe systems once a week.</p>
             </div>
         </div>
@@ -592,6 +596,10 @@
                 </div>
                 <p class="text-gray-600 text-xs mt-4 text-center">I personally read every submission. Expect a response within 48 hours.</p>
             </form>
+            <div id="workWithUsSuccess" class="hidden bg-surface border border-accent/20 p-10 md:p-14 text-center">
+                <p class="text-accent text-lg font-bold mb-2">Message Sent!</p>
+                <p class="text-gray-400 text-sm">I'll get back to you within 48 hours.</p>
+            </div>
         </div>
     </section>
 
@@ -649,7 +657,7 @@
                     </div>
                     <div class="flex gap-3">
                         <input type="number" id="customDonation" placeholder="Custom amount" min="1" class="flex-1 bg-surface-light border border-white/10 text-white text-sm px-4 py-3 focus:outline-none focus:border-accent transition-colors placeholder-gray-600"/>
-                        <button class="bg-accent text-black px-8 py-3 font-bold text-sm tracking-wide uppercase hover:bg-accent/90 transition-all">
+                        <button id="donateBtn" class="bg-accent text-black px-8 py-3 font-bold text-sm tracking-wide uppercase hover:bg-accent/90 transition-all">
                             Donate
                         </button>
                     </div>
@@ -681,7 +689,7 @@
                             <span class="text-accent font-bold">+</span> Direct community access & support
                         </li>
                     </ul>
-                    <a href="#" class="inline-block w-full text-center bg-accent text-black px-10 py-4 font-bold text-sm tracking-wide uppercase hover:bg-accent/90 transition-all">
+                    <a href="https://www.cumquatvibes.com" target="_blank" class="inline-block w-full text-center bg-accent text-black px-10 py-4 font-bold text-sm tracking-wide uppercase hover:bg-accent/90 transition-all">
                         Subscribe — Members Area
                     </a>
                     <p class="text-gray-600 text-xs mt-4 text-center">Cancel anytime. Pricing set in your Shopify store.</p>
@@ -752,6 +760,7 @@
                             Join
                         </button>
                     </form>
+                    <p id="newsletterSuccess" class="hidden text-accent text-sm mt-2 font-medium">You're in! Check your inbox.</p>
                 </div>
             </div>
 
@@ -763,7 +772,21 @@
     </footer>
 
     <script>
-        // Mobile menu
+        // ============================
+        // CONFIG - Update these values
+        // ============================
+        const CONFIG = {
+            // Create a Stripe Payment Link at https://dashboard.stripe.com/payment-links
+            // Set it to "Customer chooses amount" and paste the URL here
+            stripePaymentLink: 'YOUR_STRIPE_PAYMENT_LINK_URL',
+
+            // Your Shopify store URL (for newsletter signups)
+            shopifyStoreUrl: 'https://www.cumquatvibes.com',
+        };
+
+        // ============================
+        // Mobile Menu
+        // ============================
         const menuBtn = document.getElementById('menuBtn');
         const mobileMenu = document.getElementById('mobileMenu');
         let menuOpen = false;
@@ -780,7 +803,9 @@
             document.body.style.overflow = '';
         }
 
-        // Scroll reveal
+        // ============================
+        // Scroll Reveal
+        // ============================
         const revealElements = document.querySelectorAll('.reveal');
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -792,16 +817,6 @@
         }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
         revealElements.forEach(el => revealObserver.observe(el));
-
-        // Newsletter
-        document.getElementById('newsletterForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = this.querySelector('input[type="email"]').value;
-            if (email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                alert('Thanks for subscribing! You\'ll hear from me soon.');
-                this.querySelector('input[type="email"]').value = '';
-            }
-        });
 
         // Smooth scroll for nav links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -816,26 +831,99 @@
             });
         });
 
-        // Work With Us form
-        document.getElementById('workWithUsForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Message received! I\'ll get back to you within 48 hours.');
-            this.reset();
-        });
+        // ============================
+        // Shopify Newsletter Signup
+        // ============================
+        function subscribeToShopify(email, firstName) {
+            const body = new URLSearchParams({
+                'form_type': 'customer',
+                'utf8': '\u2713',
+                'contact[email]': email,
+            });
+            if (firstName) {
+                body.append('contact[first_name]', firstName);
+            }
 
-        // Studio Signal newsletter
+            return fetch(CONFIG.shopifyStoreUrl + '/contact#contact_form', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: body,
+            });
+        }
+
+        // Studio Signal form → Shopify
         document.getElementById('studioSignalForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const name = this.querySelector('input[type="text"]').value;
-            const email = this.querySelector('input[type="email"]').value;
-            if (name && email) {
-                alert('Welcome aboard, ' + name + '! You\'re now part of The Studio Signal.');
-                this.reset();
-            }
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const name = this.querySelector('input[type="text"]').value.trim();
+            const email = this.querySelector('input[type="email"]').value.trim();
+
+            if (!name || !email) return;
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Joining...';
+
+            subscribeToShopify(email, name).then(() => {
+                this.classList.add('hidden');
+                document.getElementById('studioSignalSuccess').classList.remove('hidden');
+            }).catch(() => {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Join the Mission';
+                alert('Something went wrong. Please try again.');
+            });
         });
 
-        // Donation amount selection
+        // Footer newsletter → Shopify
+        document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const emailInput = this.querySelector('input[type="email"]');
+            const email = emailInput.value.trim();
+
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return;
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = '...';
+
+            subscribeToShopify(email).then(() => {
+                this.classList.add('hidden');
+                document.getElementById('newsletterSuccess').classList.remove('hidden');
+            }).catch(() => {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Join';
+                alert('Something went wrong. Please try again.');
+            });
+        });
+
+        // ============================
+        // Work With Us Form
+        // ============================
+        document.getElementById('workWithUsForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const submitBtn = this.querySelector('button[type="submit"]');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+
+            // Submit contact info to Shopify as well (creates a customer record)
+            const name = this.querySelector('input[type="text"]').value.trim();
+            const email = this.querySelector('input[type="email"]').value.trim();
+
+            subscribeToShopify(email, name).then(() => {
+                this.classList.add('hidden');
+                document.getElementById('workWithUsSuccess').classList.remove('hidden');
+            }).catch(() => {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send It';
+                alert('Something went wrong. Please try again.');
+            });
+        });
+
+        // ============================
+        // Stripe Donations
+        // ============================
         let selectedDonation = 10;
+
         function selectDonation(amount, button) {
             document.querySelectorAll('.donate-btn').forEach(btn => {
                 btn.classList.remove('active', 'bg-accent', 'text-black');
@@ -857,7 +945,29 @@
             }
         });
 
-        // Nav background on scroll
+        document.getElementById('donateBtn').addEventListener('click', function() {
+            const customVal = document.getElementById('customDonation').value;
+            const amount = customVal ? parseInt(customVal) : selectedDonation;
+
+            if (!amount || amount < 1) {
+                alert('Please select or enter a donation amount.');
+                return;
+            }
+
+            if (CONFIG.stripePaymentLink === 'YOUR_STRIPE_PAYMENT_LINK_URL') {
+                alert('Stripe is being set up. Donations will be live soon!');
+                return;
+            }
+
+            // Redirect to Stripe Payment Link with prefilled amount (in cents)
+            const separator = CONFIG.stripePaymentLink.includes('?') ? '&' : '?';
+            const stripeUrl = CONFIG.stripePaymentLink + separator + 'prefilled_amount=' + (amount * 100);
+            window.open(stripeUrl, '_blank');
+        });
+
+        // ============================
+        // Nav scroll effect
+        // ============================
         const nav = document.querySelector('nav');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 100) {
