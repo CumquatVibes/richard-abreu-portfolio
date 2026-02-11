@@ -682,30 +682,34 @@
                     <div class="absolute top-0 right-0 bg-accent text-black text-xs font-bold px-4 py-1 tracking-widest uppercase">Members</div>
                     <p class="text-accent text-sm font-bold tracking-[0.3em] uppercase mb-3">Exclusive Access</p>
                     <h2 class="text-3xl md:text-4xl font-display font-bold mb-4">Members Only</h2>
-                    <p class="text-gray-400 leading-relaxed mb-6">
-                        Get behind-the-scenes access, early drops, exclusive tutorials, and members-only content.
+                    <p class="text-gray-400 leading-relaxed mb-4">
+                        Get behind-the-scenes access, early drops, exclusive tutorials, and my secrets of the trade.
                     </p>
+                    <div class="flex items-baseline gap-2 mb-6">
+                        <span class="text-accent text-4xl font-display font-bold">$9.99</span>
+                        <span class="text-gray-500 text-sm">/month</span>
+                    </div>
                     <ul class="space-y-3 mb-8">
                         <li class="flex items-center gap-3 text-gray-300 text-sm">
-                            <span class="text-accent font-bold">+</span> Private Discord server packed with resources
+                            <span class="text-accent font-bold">+</span> My e-commerce playbook & systems breakdowns
                         </li>
                         <li class="flex items-center gap-3 text-gray-300 text-sm">
                             <span class="text-accent font-bold">+</span> Early access to new artwork & shop drops
                         </li>
                         <li class="flex items-center gap-3 text-gray-300 text-sm">
-                            <span class="text-accent font-bold">+</span> Exclusive behind-the-scenes content
+                            <span class="text-accent font-bold">+</span> Behind-the-scenes creative process
                         </li>
                         <li class="flex items-center gap-3 text-gray-300 text-sm">
                             <span class="text-accent font-bold">+</span> Members-only tutorials & downloads
                         </li>
                         <li class="flex items-center gap-3 text-gray-300 text-sm">
-                            <span class="text-accent font-bold">+</span> Direct community access & support
+                            <span class="text-accent font-bold">+</span> Direct access & community support
                         </li>
                     </ul>
-                    <a href="https://www.cumquatvibes.com" target="_blank" class="inline-block w-full text-center bg-accent text-black px-10 py-4 font-bold text-sm tracking-wide uppercase hover:bg-accent/90 transition-all">
-                        Subscribe — Members Area
-                    </a>
-                    <p class="text-gray-600 text-xs mt-4 text-center">Cancel anytime. Pricing set in your Shopify store.</p>
+                    <button id="membershipBtn" class="w-full text-center bg-accent text-black px-10 py-4 font-bold text-sm tracking-wide uppercase hover:bg-accent/90 transition-all">
+                        Subscribe — $9.99/mo
+                    </button>
+                    <p class="text-gray-600 text-xs mt-4 text-center">Cancel anytime. Secure payment via Stripe.</p>
                 </div>
             </div>
         </div>
@@ -791,7 +795,11 @@
         const CONFIG = {
             // Create a Stripe Payment Link at https://dashboard.stripe.com/payment-links
             // Set it to "Customer chooses amount" and paste the URL here
-            stripePaymentLink: 'https://buy.stripe.com/test_9B6aEWa34dUq1qn56m7kc00',
+            stripePaymentLink: 'https://donate.stripe.com/9B68wR8Wb0NLfzz0jjes000',
+
+            // Stripe subscription link for $9.99/mo membership
+            // Create at https://dashboard.stripe.com/payment-links → Recurring → $9.99/mo
+            stripeMembershipLink: 'YOUR_STRIPE_MEMBERSHIP_LINK',
 
             // Your Shopify store URL (for newsletter signups)
             shopifyStoreUrl: 'https://www.cumquatvibes.com',
@@ -976,6 +984,17 @@
             const separator = CONFIG.stripePaymentLink.includes('?') ? '&' : '?';
             const stripeUrl = CONFIG.stripePaymentLink + separator + 'prefilled_amount=' + (amount * 100);
             window.open(stripeUrl, '_blank');
+        });
+
+        // ============================
+        // Stripe Membership
+        // ============================
+        document.getElementById('membershipBtn').addEventListener('click', function() {
+            if (CONFIG.stripeMembershipLink === 'YOUR_STRIPE_MEMBERSHIP_LINK') {
+                alert('Membership subscriptions launching soon! Check back shortly.');
+                return;
+            }
+            window.open(CONFIG.stripeMembershipLink, '_blank');
         });
 
         // ============================
