@@ -803,6 +803,10 @@
 
             // Your Shopify store URL (for newsletter signups)
             shopifyStoreUrl: 'https://www.cumquatvibes.com',
+
+            // Formspree endpoint for "Work With Us" form
+            // Get your form ID at https://formspree.io/forms → paste the ID below
+            formspreeEndpoint: 'https://formspree.io/f/xaqdqlkq',
         };
 
         // ============================
@@ -926,11 +930,26 @@
             submitBtn.disabled = true;
             submitBtn.textContent = 'Sending...';
 
-            // Submit contact info to Shopify as well (creates a customer record)
             const name = this.querySelector('input[type="text"]').value.trim();
             const email = this.querySelector('input[type="email"]').value.trim();
+            const service = this.querySelector('select').value;
+            const message = this.querySelector('textarea').value.trim();
 
-            subscribeToShopify(email, name).then(() => {
+            // Send full inquiry to Formspree
+            fetch(CONFIG.formspreeEndpoint, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                    service: service,
+                    message: message,
+                    _subject: 'New inquiry from richardabreu.studio: ' + (service || 'General'),
+                }),
+            }).then(response => {
+                if (!response.ok) throw new Error('Form submission failed');
+                // Also create Shopify customer record
+                subscribeToShopify(email, name);
                 this.classList.add('hidden');
                 document.getElementById('workWithUsSuccess').classList.remove('hidden');
             }).catch(() => {
