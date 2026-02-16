@@ -1,0 +1,93 @@
+# Richard Abreu - YouTube Content Calendar (Month 2)
+# Cumquat Vibes | @CumquatVibes
+# ============================================================
+# Theme: Going deeper - tutorials with more depth, collabs,
+# audience-requested content, and doubling down on top performers
+#
+# Format: One topic per line
+# Lines starting with # are comments (ignored by batch command)
+#
+# Usage:
+#   python produce_video.py batch content_calendar_month2.txt --output script --pillar art
+#   python produce_video.py batch content_calendar_month2.txt --output video --format landscape --duration long --pillar tech
+# ============================================================
+
+# ---- WEEK 5: ADVANCED ART TECHNIQUES ----
+
+# Tuesday Long-form (Art)
+Affinity Designer vs Illustrator in 2026 - Honest Comparison
+# Friday Long-form (Art)
+How to Create a Vector Logo From Scratch in Affinity Designer
+
+# Tuesday Shorts
+The Layer Blend Mode Nobody Uses
+How to Remove Backgrounds in 10 Seconds
+# Wednesday Shorts
+Color Theory Explained in Under a Minute
+The Trick to Perfect Typography
+# Friday Shorts
+3 Free Fonts Every Designer Should Have
+The Export Settings That Save Your File Quality
+# Weekend Shorts
+How I Made This Poster in Affinity Publisher
+Speed Art - Digital Portrait in 60 Seconds
+
+# ---- WEEK 6: AI DEEP DIVES ----
+
+# Tuesday Long-form (Tech)
+How to Build Your Own AI Automation Pipeline (No Code)
+# Friday Long-form (Tech)
+The Complete ElevenLabs Voice Clone Tutorial - Sound Like Yourself
+
+# Tuesday Shorts
+HeyGen AI Avatar in 60 Seconds
+The n8n Workflow That Runs My YouTube Channel
+# Wednesday Shorts
+How to Clone Your Voice With AI
+3 Free Automation Tools for Creators
+# Friday Shorts
+AI-Generated Music for YouTube - Is It Good Enough?
+The One AI Tool I Can't Live Without
+# Weekend Shorts
+How to Use Webhooks to Connect Everything
+Prompt Engineering Tips for Better AI Output
+
+# ---- WEEK 7: SCALING THE BUSINESS ----
+
+# Tuesday Long-form (Business)
+How to Get Your First 100 Sales on Shopify (Print on Demand)
+# Friday Long-form (Business)
+Building Multiple Income Streams as a Creative Entrepreneur
+
+# Tuesday Shorts
+The Etsy vs Shopify Decision - My Take
+How to Write Product Descriptions That Sell
+# Wednesday Shorts
+3 Marketing Strategies That Cost $0
+The Email List Hack Every Small Business Needs
+# Friday Shorts
+How I Handle Shipping and Returns With Printful
+Passive Income Ideas for Artists in 2026
+# Weekend Shorts
+The One Metric Every Shop Owner Should Track
+How to Use Instagram Reels to Drive Sales
+
+# ---- WEEK 8: COMMUNITY & REFLECTION ----
+
+# Tuesday Long-form (Wellness)
+What I Learned From My First Month on YouTube
+# Friday Long-form (Products)
+Designing a Limited Edition Collection - Full Process
+
+# Tuesday Shorts
+The Biggest Lesson From Month 1 on YouTube
+How Creativity Helped Me Transition Out of the Military
+# Wednesday Shorts
+5 Books Every Creative Entrepreneur Should Read
+The 5-Minute Journal Practice That Changed My Perspective
+# Friday Shorts
+Limited Edition Drop - Behind the Design Process
+Customer Reviews Reaction - Seeing My Art in People's Homes
+# Weekend Shorts
+Thank You to Our Growing Community
+What Content Do You Want Next? (Poll Video)

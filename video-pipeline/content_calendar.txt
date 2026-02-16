@@ -1,0 +1,106 @@
+# Richard Abreu - YouTube Content Calendar (Month 1)
+# Cumquat Vibes | @CumquatVibes
+# ============================================================
+# Format: One topic per line
+# Lines starting with # are comments (ignored by batch command)
+#
+# Usage:
+#   python produce_video.py batch content_calendar.txt --output script --format shorts --duration short --pillar art
+#   python produce_video.py batch content_calendar.txt --output video --format landscape --duration medium --pillar tech
+# ============================================================
+
+# ---- WEEK 1: LAUNCH (Art & Design Focus) ----
+
+# Tuesday Long-form
+How to Get Started with Affinity Designer in 2026
+
+# Tuesday Shorts (repurposed from long-form)
+3 Affinity Designer Shortcuts You Need to Know
+The One Affinity Tool Most People Ignore
+
+# Wednesday Shorts
+How to Pick Colors That Actually Work Together
+The Gradient Map Trick in 60 Seconds
+
+# Friday Long-form
+5 Digital Art Mistakes Beginners Make (and How to Fix Them)
+
+# Friday Shorts
+Stop Using the Pen Tool Like This
+The Brush Settings Nobody Talks About
+
+# Weekend Shorts
+How I Design Art Prints for My Online Store
+The Art Supply I Use Every Single Day
+
+# ---- WEEK 2: TECH & AI TOOLS ----
+
+# Tuesday Long-form
+How to Set Up Your First API Key (Complete Beginner Guide)
+
+# Tuesday Shorts
+API Keys Explained in 60 Seconds
+The Free AI Tool Every Creator Needs
+
+# Wednesday Shorts
+How I Automate My Content With n8n
+3 AI Tools That Actually Save Time
+
+# Friday Long-form
+I Tested 5 AI Art Tools - Here's Which One Actually Works
+
+# Friday Shorts
+The AI Image Generator You Haven't Tried Yet
+Stop Paying for Photoshop - Use This Instead
+
+# Weekend Shorts
+How to Use ChatGPT for YouTube Scripts
+The API Trick That Saves Me 3 Hours a Week
+
+# ---- WEEK 3: ENTREPRENEURSHIP ----
+
+# Tuesday Long-form
+How I Built a Print-on-Demand Business From Scratch
+
+# Tuesday Shorts
+3 Shopify Tips for New Store Owners
+The Print on Demand Mistake Everyone Makes
+
+# Wednesday Shorts
+How to Price Your Art Products
+Side Hustle Ideas for Creative People in 2026
+
+# Friday Long-form
+From Military to Entrepreneur - My Story and What I Learned
+
+# Friday Shorts
+What Nobody Tells Veterans About Starting a Business
+The First Thing I Did After Leaving the Military
+
+# Weekend Shorts
+How to Turn Your Art Into a Business
+3 Things I Wish I Knew Before Starting My Online Store
+
+# ---- WEEK 4: WELLNESS & PRODUCT SHOWCASE ----
+
+# Tuesday Long-form
+My Morning Routine as an Artist and Entrepreneur
+
+# Tuesday Shorts
+The 2-Minute Reset That Saved My Business
+How I Stay Focused as a Multi-Business Owner
+
+# Wednesday Shorts
+Meditation for Creators - A Quick Guide
+The Mindset Shift That Changed Everything
+
+# Friday Long-form
+Behind the Scenes - How I Design a New Cumquat Vibes Collection
+
+# Friday Shorts
+New Art Collection Just Dropped on Cumquat Vibes
+How I Designed This Product in 20 Minutes
+
+# Weekend Shorts
+The Art Print Everyone Is Asking About
+My Favorite Creation This Month

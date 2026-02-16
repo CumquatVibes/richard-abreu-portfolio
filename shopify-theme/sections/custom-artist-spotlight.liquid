@@ -1,0 +1,142 @@
+{% comment %}
+  ============================================
+  Artist Spotlight Section
+  Paste into: sections/custom-artist-spotlight.liquid
+  ============================================
+{% endcomment %}
+
+<section class="artist-spotlight section-{{ section.id }}-padding" style="background: var(--cv-bg-card, #222725);">
+  <div class="page-width">
+    <div class="artist-spotlight__grid">
+      <div class="artist-spotlight__image">
+        {% if section.settings.image %}
+          {{ section.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', alt: section.settings.heading }}
+        {% endif %}
+      </div>
+      <div class="artist-spotlight__content">
+        {% if section.settings.badge != blank %}
+          <span class="artist-spotlight__badge">{{ section.settings.badge }}</span>
+        {% endif %}
+        <h2 class="artist-spotlight__heading">{{ section.settings.heading }}</h2>
+        <div class="artist-spotlight__text rte">{{ section.settings.text }}</div>
+        {% if section.settings.cta_text != blank %}
+          <a href="{{ section.settings.cta_url | default: 'https://richardabreu.studio' }}" class="artist-spotlight__cta" target="_blank" rel="noopener">
+            {{ section.settings.cta_text }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .artist-spotlight__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+    padding: 48px 0;
+  }
+  .artist-spotlight__image img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }
+  .artist-spotlight__badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #e8941f;
+  }
+  .artist-spotlight__heading {
+    font-family: var(--font-heading-family, 'Trirong', serif);
+    font-size: 2rem;
+    font-weight: 300;
+    margin-bottom: 16px;
+  }
+  .artist-spotlight__text {
+    line-height: 1.7;
+    opacity: 0.75;
+    margin-bottom: 24px;
+    font-size: 0.95rem;
+  }
+  .artist-spotlight__cta {
+    display: inline-block;
+    background: var(--color-button, #2c332f);
+    color: var(--color-button-text, #fff);
+    padding: 12px 32px;
+    text-decoration: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    transition: opacity 0.3s;
+  }
+  .artist-spotlight__cta:hover { opacity: 0.85; }
+
+  @media (max-width: 749px) {
+    .artist-spotlight__grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      text-align: center;
+    }
+    .artist-spotlight__image { max-width: 300px; margin: 0 auto; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Artist Spotlight",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Artist Photo"
+    },
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Badge Text",
+      "default": "Meet the Artist"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Richard Abreu"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Bio Text",
+      "default": "<p>U.S. Navy veteran turned artist and creative director. Every Cumquat Vibes design is 100% human-made — from concept sketch to final product. Support real art. Support real artists.</p>"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Button Text",
+      "default": "Visit My Studio"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Button Link",
+      "info": "Default: https://richardabreu.studio"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#222725"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Artist Spotlight"
+    }
+  ]
+}
+{% endschema %}

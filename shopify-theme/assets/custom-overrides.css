@@ -1,0 +1,493 @@
+/* ============================================
+   CUMQUAT VIBES — Dark Theme Overrides
+   Overall dark background with pastel orange highlights
+   ============================================ */
+
+/* ----- Dark Theme Base Variables ----- */
+:root {
+  --cv-bg-primary: #1a1d1c;
+  --cv-bg-card: #222725;
+  --cv-bg-elevated: #2a2e2c;
+  --cv-text-primary: #efecec;
+  --cv-text-secondary: rgba(239, 236, 236, 0.65);
+  --cv-text-muted: rgba(239, 236, 236, 0.4);
+  --cv-accent: #e8941f;
+  --cv-accent-light: #f4b88a;
+  --cv-accent-cream: #fef5e7;
+  --cv-border: rgba(255, 255, 255, 0.08);
+  --cv-border-light: rgba(255, 255, 255, 0.05);
+}
+
+/* Force dark background on body */
+body,
+html {
+  background-color: var(--cv-bg-primary) !important;
+  color: var(--cv-text-primary) !important;
+}
+
+/* Theme gradient sections — dark */
+.gradient,
+.gradient--background {
+  background: var(--cv-bg-primary) !important;
+}
+
+/* All Shopify sections — dark base */
+.shopify-section,
+.section-template--padding,
+[class*="color-scheme"] {
+  background-color: var(--cv-bg-primary) !important;
+  color: var(--cv-text-primary) !important;
+}
+
+/* Header and footer dark */
+.header-wrapper,
+.section-header,
+.footer,
+.section-footer {
+  background-color: var(--cv-bg-primary) !important;
+  color: var(--cv-text-primary) !important;
+}
+
+/* Announcement bar — subtle with accent */
+.announcement-bar {
+  background: var(--cv-bg-card) !important;
+  color: var(--cv-accent-light) !important;
+}
+.announcement-bar a {
+  color: var(--cv-accent-light) !important;
+}
+
+/* Navigation */
+.header,
+.menu-drawer,
+.menu-drawer__menu-item,
+.header__menu-item,
+.header__icon {
+  color: var(--cv-text-primary) !important;
+}
+.menu-drawer {
+  background-color: var(--cv-bg-primary) !important;
+}
+.menu-drawer__navigation {
+  background-color: var(--cv-bg-primary) !important;
+}
+
+/* ----- Buttons — Pastel Orange Accent ----- */
+.button--primary,
+.shopify-challenge__button {
+  background-color: var(--cv-accent) !important;
+  color: #fff !important;
+}
+
+.button--secondary {
+  border-color: var(--cv-accent-light) !important;
+  color: var(--cv-accent-light) !important;
+}
+
+/* ----- Cards — Dark ----- */
+.card,
+.card--standard,
+.card--card,
+.card-wrapper,
+.product-card-wrapper,
+.collection-card,
+.article-card,
+.blog-articles__article {
+  background-color: var(--cv-bg-card) !important;
+  color: var(--cv-text-primary) !important;
+  border-color: var(--cv-border) !important;
+}
+
+.card__heading a,
+.card__heading,
+.card-information__text,
+.card__text,
+.price-item,
+.price .money {
+  color: var(--cv-text-primary) !important;
+}
+
+.price-item--sale {
+  color: var(--cv-accent-light) !important;
+}
+
+/* ----- Product Page ----- */
+.product,
+.product__info-wrapper,
+.product__info-container {
+  background-color: var(--cv-bg-primary) !important;
+  color: var(--cv-text-primary) !important;
+}
+
+/* Stars — accent amber */
+.spr-icon-star,
+.ryviu-star,
+[class*="star"] {
+  color: var(--cv-accent) !important;
+}
+
+/* ----- Cart ----- */
+.cart,
+.cart__contents,
+.cart-items,
+.cart-item,
+.drawer,
+.cart-drawer {
+  background-color: var(--cv-bg-primary) !important;
+  color: var(--cv-text-primary) !important;
+}
+
+
+/* ============================================
+   CUSTOM SECTIONS — Dark Theme Styles
+   ============================================ */
+
+/* --- Value Proposition Bar --- */
+.value-proposition {
+  background-color: var(--cv-bg-card) !important;
+  border-top: 1px solid var(--cv-border) !important;
+  border-bottom: 1px solid var(--cv-border) !important;
+}
+.value-proposition__heading,
+.value-proposition__text {
+  color: var(--cv-text-primary) !important;
+}
+
+/* --- Rotating Collections --- */
+.rotating-collections {
+  background-color: var(--cv-bg-primary) !important;
+}
+.rotating-collections__header h2,
+.rotating-collections__info h3 {
+  color: var(--cv-text-primary) !important;
+}
+.rotating-collections__info p {
+  color: var(--cv-text-secondary) !important;
+}
+.rotating-collections__cta {
+  color: var(--cv-accent-light) !important;
+  opacity: 1 !important;
+}
+.rotating-collections__dots .dot {
+  border-color: var(--cv-text-secondary) !important;
+}
+.rotating-collections__dots .dot.active {
+  background: var(--cv-accent-light) !important;
+  border-color: var(--cv-accent-light) !important;
+}
+
+/* --- Featured Rotation --- */
+.featured-rotation {
+  background-color: var(--cv-bg-primary) !important;
+}
+.featured-rotation__heading {
+  color: var(--cv-text-primary) !important;
+}
+.featured-rotation__product-title {
+  color: var(--cv-text-primary) !important;
+}
+.featured-rotation__price {
+  color: var(--cv-accent-light) !important;
+}
+.featured-rotation__image {
+  background: var(--cv-bg-card) !important;
+}
+
+/* --- Artist Spotlight --- */
+.artist-spotlight {
+  background-color: var(--cv-bg-card) !important;
+}
+.artist-spotlight__badge {
+  background: var(--cv-accent) !important;
+  color: #fff !important;
+}
+.artist-spotlight__heading {
+  color: var(--cv-text-primary) !important;
+}
+.artist-spotlight .rte,
+.artist-spotlight .rte p {
+  color: var(--cv-text-secondary) !important;
+}
+.artist-spotlight__cta {
+  background: var(--cv-accent) !important;
+  color: #fff !important;
+}
+
+/* --- Seasonal Highlight --- */
+.seasonal-highlight {
+  background-color: var(--cv-bg-primary) !important;
+}
+
+/* --- Testimonials --- */
+.testimonials {
+  background-color: var(--cv-bg-primary) !important;
+}
+.testimonials__heading {
+  color: var(--cv-text-primary) !important;
+}
+.testimonials__card {
+  background: var(--cv-bg-card) !important;
+  border-color: var(--cv-border) !important;
+}
+.testimonials__stars {
+  color: var(--cv-accent) !important;
+}
+.testimonials__quote {
+  color: var(--cv-text-secondary) !important;
+}
+.testimonials__footer {
+  border-color: var(--cv-border) !important;
+}
+.testimonials__author {
+  color: var(--cv-text-primary) !important;
+}
+.testimonials__product {
+  color: var(--cv-text-muted) !important;
+}
+
+/* --- YouTube Preview --- */
+.yt-preview {
+  background-color: var(--cv-bg-primary) !important;
+}
+.yt-preview__header h2 {
+  color: var(--cv-text-primary) !important;
+}
+.yt-preview__view-all {
+  color: var(--cv-accent-light) !important;
+  opacity: 1 !important;
+}
+.yt-preview__title {
+  color: var(--cv-text-primary) !important;
+}
+
+/* --- Blog Preview --- */
+.blog-preview {
+  background-color: var(--cv-bg-card) !important;
+}
+.blog-preview__header h2 {
+  color: var(--cv-text-primary) !important;
+}
+.blog-preview__view-all {
+  color: var(--cv-accent-light) !important;
+  opacity: 1 !important;
+}
+.blog-preview__date {
+  color: var(--cv-accent-light) !important;
+}
+.blog-preview__title {
+  color: var(--cv-text-primary) !important;
+}
+.blog-preview__excerpt {
+  color: var(--cv-text-secondary) !important;
+}
+
+/* --- Recently Viewed --- */
+.recently-viewed {
+  background-color: var(--cv-bg-primary) !important;
+}
+.recently-viewed__heading {
+  color: var(--cv-text-primary) !important;
+}
+.recently-viewed__title {
+  color: var(--cv-text-primary) !important;
+}
+.recently-viewed__price {
+  color: var(--cv-accent-light) !important;
+}
+.recently-viewed__image {
+  background: var(--cv-bg-card) !important;
+}
+
+/* --- Free Shipping Bar (in cart) --- */
+.free-shipping-bar {
+  background: var(--cv-bg-elevated) !important;
+  color: var(--cv-text-primary) !important;
+}
+.free-shipping-bar p {
+  color: var(--cv-text-primary) !important;
+}
+
+/* --- Exit Intent Popup --- */
+#cvExitPopup > div {
+  background: var(--cv-bg-card) !important;
+  color: var(--cv-text-primary) !important;
+}
+
+/* --- Purchase Notifications --- */
+#cvPurchaseNotification {
+  background: var(--cv-bg-card) !important;
+  color: var(--cv-text-primary) !important;
+  border-color: var(--cv-border) !important;
+}
+
+/* --- Quick View Modal --- */
+#cvQuickViewInner {
+  background: var(--cv-bg-card) !important;
+  color: var(--cv-text-primary) !important;
+}
+
+/* --- Mobile Sticky CTA --- */
+.cv-mobile-sticky-cta {
+  background: var(--cv-bg-card) !important;
+}
+.cv-mobile-sticky-cta a {
+  background: var(--cv-accent) !important;
+}
+
+
+/* ============================================
+   BUILT-IN SECTIONS — Dark Theme
+   ============================================ */
+
+.collage-wrapper,
+.collage-card,
+.collage {
+  background-color: var(--cv-bg-primary) !important;
+}
+
+/* All headings light */
+.title,
+.title--primary,
+h1, h2, h3, h4, h5 {
+  color: var(--cv-text-primary) !important;
+}
+
+/* Links — pastel orange */
+a:not(.button):not([class*="cta"]):not([class*="btn"]) {
+  color: var(--cv-accent-light);
+}
+.underlined-link {
+  color: var(--cv-accent-light) !important;
+}
+
+/* Form inputs */
+input,
+textarea,
+select,
+.field__input {
+  background-color: var(--cv-bg-elevated) !important;
+  color: var(--cv-text-primary) !important;
+  border-color: var(--cv-border) !important;
+}
+
+/* Search */
+.search-modal,
+.search-modal__content {
+  background-color: var(--cv-bg-primary) !important;
+  color: var(--cv-text-primary) !important;
+}
+
+/* Newsletter */
+.newsletter {
+  background-color: var(--cv-bg-card) !important;
+}
+
+/* Quantity selectors */
+.quantity,
+.quantity__button {
+  background-color: var(--cv-bg-elevated) !important;
+  color: var(--cv-text-primary) !important;
+  border-color: var(--cv-border) !important;
+}
+
+/* Footer links */
+.footer a,
+.footer__content-bottom a {
+  color: var(--cv-text-secondary) !important;
+}
+.footer,
+.section-footer {
+  border-color: var(--cv-border) !important;
+}
+
+/* Disclosure/country selector */
+.disclosure__button,
+.localization-selector {
+  color: var(--cv-text-secondary) !important;
+}
+
+/* richardabreu.studio footer badge */
+[href="https://richardabreu.studio"] {
+  color: var(--cv-text-secondary) !important;
+}
+
+
+/* ============================================
+   SMOOTH SECTION FLOW
+   ============================================ */
+
+/* Subtle separator between sections instead of color jumps */
+.shopify-section + .shopify-section {
+  border-top: 1px solid var(--cv-border-light);
+}
+
+
+/* ============================================
+   FONT PERFORMANCE
+   ============================================ */
+
+@font-face {
+  font-family: 'Quattrocento Sans';
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Trirong';
+  font-display: swap;
+}
+
+@media screen and (max-width: 749px) {
+  .section-template--padding {
+    padding-top: max(20px, 4vw);
+    padding-bottom: max(20px, 4vw);
+  }
+}
+
+
+/* ============================================
+   POPUP SIZING (preserved from original)
+   ============================================ */
+
+.popup-modal,
+.newsletter-popup,
+[class*="popup"] .modal__inner,
+.modal__dialog,
+.shopify-section--popup .popup__inner,
+.popup__content,
+.modal__content {
+  max-width: 420px !important;
+  max-height: 80vh !important;
+  margin: auto !important;
+  padding: 24px !important;
+  overflow-y: auto !important;
+  background-color: var(--cv-bg-card) !important;
+  color: var(--cv-text-primary) !important;
+}
+
+@media screen and (max-width: 749px) {
+  .popup-modal,
+  .newsletter-popup,
+  [class*="popup"] .modal__inner,
+  .modal__dialog,
+  .shopify-section--popup .popup__inner,
+  .popup__content {
+    max-width: 90vw !important;
+    max-height: 70vh !important;
+    padding: 20px !important;
+  }
+
+  .popup-modal img,
+  .newsletter-popup img,
+  .popup__content img {
+    max-height: 120px !important;
+    width: auto !important;
+    object-fit: contain !important;
+  }
+
+  .popup-modal h2,
+  .newsletter-popup h2,
+  .popup__content h2 {
+    font-size: 1.25rem !important;
+    line-height: 1.3 !important;
+  }
+}

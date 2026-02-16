@@ -1,0 +1,232 @@
+{% comment %}
+  ============================================
+  Seasonal / Limited Time Highlight with Countdown
+  Paste into: sections/custom-seasonal-highlight.liquid
+  ============================================
+{% endcomment %}
+
+<section class="seasonal-highlight section-{{ section.id }}-padding">
+  <div class="page-width">
+    <div class="seasonal-highlight__inner"
+         {% if section.settings.background_image %}
+           style="background-image: url('{{ section.settings.background_image | image_url: width: 1400 }}');"
+         {% endif %}>
+      <div class="seasonal-highlight__overlay"></div>
+      <div class="seasonal-highlight__content">
+        {% if section.settings.badge != blank %}
+          <span class="seasonal-highlight__badge">{{ section.settings.badge }}</span>
+        {% endif %}
+        <h2 class="seasonal-highlight__heading">{{ section.settings.heading }}</h2>
+        {% if section.settings.text != blank %}
+          <p class="seasonal-highlight__text">{{ section.settings.text }}</p>
+        {% endif %}
+
+        {% if section.settings.show_countdown %}
+          <div class="seasonal-highlight__countdown" id="countdown-{{ section.id }}" data-end="{{ section.settings.end_date }}">
+            <div class="countdown__item">
+              <span class="countdown__number" id="days-{{ section.id }}">00</span>
+              <span class="countdown__label">Days</span>
+            </div>
+            <div class="countdown__item">
+              <span class="countdown__number" id="hours-{{ section.id }}">00</span>
+              <span class="countdown__label">Hours</span>
+            </div>
+            <div class="countdown__item">
+              <span class="countdown__number" id="mins-{{ section.id }}">00</span>
+              <span class="countdown__label">Min</span>
+            </div>
+            <div class="countdown__item">
+              <span class="countdown__number" id="secs-{{ section.id }}">00</span>
+              <span class="countdown__label">Sec</span>
+            </div>
+          </div>
+        {% endif %}
+
+        {% if section.settings.cta_text != blank %}
+          <a href="{{ section.settings.cta_url }}" class="seasonal-highlight__cta">
+            {{ section.settings.cta_text }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function() {
+  var el = document.getElementById('countdown-{{ section.id }}');
+  if (!el) return;
+  var end = new Date(el.dataset.end + 'T23:59:59').getTime();
+
+  function update() {
+    var now = Date.now();
+    var diff = end - now;
+    if (diff <= 0) {
+      el.innerHTML = '<p style="font-size:1.1rem; font-weight:600; color:#fff;">This collection has ended!</p>';
+      clearInterval(timer);
+      return;
+    }
+    document.getElementById('days-{{ section.id }}').textContent = String(Math.floor(diff / 86400000)).padStart(2, '0');
+    document.getElementById('hours-{{ section.id }}').textContent = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, '0');
+    document.getElementById('mins-{{ section.id }}').textContent = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
+    document.getElementById('secs-{{ section.id }}').textContent = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
+  }
+
+  update();
+  var timer = setInterval(update, 1000);
+})();
+</script>
+
+<style>
+  .seasonal-highlight__inner {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-color: #252525;
+    border-radius: 4px;
+    overflow: hidden;
+    padding: 60px 40px;
+    text-align: center;
+  }
+  .seasonal-highlight__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 1;
+  }
+  .seasonal-highlight__content {
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .seasonal-highlight__badge {
+    display: inline-block;
+    background: #e8941f;
+    color: #fff;
+    padding: 5px 16px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    border-radius: 2px;
+  }
+  .seasonal-highlight__heading {
+    font-family: var(--font-heading-family, 'Trirong', serif);
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 300;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+  .seasonal-highlight__text {
+    color: rgba(255,255,255,0.8);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+  .seasonal-highlight__countdown {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+  .countdown__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .countdown__number {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #fff;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .countdown__label {
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .seasonal-highlight__cta {
+    display: inline-block;
+    background: #e8941f;
+    color: #fff;
+    padding: 14px 32px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    transition: opacity 0.3s;
+  }
+  .seasonal-highlight__cta:hover { opacity: 0.85; }
+
+  @media (max-width: 749px) {
+    .seasonal-highlight__inner { padding: 40px 20px; }
+    .countdown__number { font-size: 1.6rem; }
+    .seasonal-highlight__countdown { gap: 12px; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Seasonal Highlight",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Badge Text",
+      "default": "Limited Time"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Spring Collection"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Description",
+      "default": "Shop our seasonal collection before it's archived. New designs drop every season."
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_countdown",
+      "label": "Show Countdown Timer",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "end_date",
+      "label": "End Date (YYYY-MM-DD)",
+      "default": "2026-06-21",
+      "info": "The countdown will count down to midnight on this date"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Button Text",
+      "default": "Shop the Collection"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Seasonal Highlight"
+    }
+  ]
+}
+{% endschema %}

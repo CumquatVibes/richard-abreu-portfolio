@@ -1,0 +1,416 @@
+{% comment %}
+  ============================================
+  Instagram Feed Section (Manual Posts)
+  Paste into: sections/custom-instagram-feed.liquid
+  Add Instagram posts as blocks in Theme Customizer
+  Since Instagram Basic Display API is deprecated,
+  each post is added manually via blocks.
+  ============================================
+{% endcomment %}
+
+<section class="ig-feed section-{{ section.id }}-padding" style="background: {{ section.settings.bg_color | default: '#1a1d1c' }};">
+  <div class="page-width">
+    <h2 class="ig-feed__heading">{{ section.settings.heading | default: 'Follow the Vibe' }}</h2>
+
+    <div class="ig-feed__grid">
+      {% for block in section.blocks limit: section.settings.posts_to_show %}
+        <a
+          href="{{ block.settings.link_url | default: 'https://www.instagram.com/cumquatvibes/' }}"
+          target="_blank"
+          rel="noopener"
+          class="ig-feed__card"
+          {{ block.shopify_attributes }}
+        >
+          <div class="ig-feed__image-wrap">
+            {% if block.settings.image != blank %}
+              {{ block.settings.image | image_url: width: 640 | image_tag:
+                loading: 'lazy',
+                alt: block.settings.caption | default: 'Instagram post',
+                class: 'ig-feed__img'
+              }}
+            {% else %}
+              <div class="ig-feed__placeholder">
+                <svg class="ig-feed__placeholder-icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                  <circle cx="8.5" cy="8.5" r="1.5"/>
+                  <polyline points="21 15 16 10 5 21"/>
+                </svg>
+              </div>
+            {% endif %}
+
+            {%- comment -%} Instagram icon watermark {%- endcomment -%}
+            <div class="ig-feed__watermark" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+              </svg>
+            </div>
+
+            {%- comment -%} Caption overlay on hover {%- endcomment -%}
+            {% if block.settings.caption != blank %}
+              <div class="ig-feed__overlay">
+                <p class="ig-feed__caption">{{ block.settings.caption }}</p>
+              </div>
+            {% endif %}
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+
+    {%- comment -%} CTA Button {%- endcomment -%}
+    <div class="ig-feed__cta-wrap">
+      <a
+        href="{{ section.settings.instagram_url | default: 'https://www.instagram.com/cumquatvibes/' }}"
+        target="_blank"
+        rel="noopener"
+        class="ig-feed__cta"
+      >
+        <svg class="ig-feed__cta-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+        </svg>
+        <span>{{ section.settings.cta_text | default: 'Follow us on Instagram @cumquatvibes' }}</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ========================================
+     Instagram Feed — Section Styles
+     ======================================== */
+
+  .ig-feed {
+    padding: 60px 0;
+  }
+
+  .ig-feed__heading {
+    text-align: center;
+    font-family: var(--font-heading-family, 'Trirong', serif);
+    font-size: 2rem;
+    font-weight: 300;
+    color: #efecec;
+    margin-bottom: 36px;
+  }
+
+  /* ---- Grid Layout ---- */
+  .ig-feed__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  /* ---- Card ---- */
+  .ig-feed__card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 4px;
+    overflow: hidden;
+    background: #222725;
+    transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                box-shadow 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .ig-feed__card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+  }
+
+  /* ---- Image Wrapper ---- */
+  .ig-feed__image-wrap {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: #1a1d1c;
+  }
+
+  .ig-feed__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .ig-feed__card:hover .ig-feed__img {
+    transform: scale(1.08);
+  }
+
+  /* ---- Placeholder (no image) ---- */
+  .ig-feed__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(239, 236, 236, 0.2);
+    background: #222725;
+  }
+
+  /* ---- Instagram Watermark ---- */
+  .ig-feed__watermark {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: rgba(255, 255, 255, 0.55);
+    pointer-events: none;
+    z-index: 2;
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.5));
+    transition: opacity 0.3s;
+  }
+  .ig-feed__card:hover .ig-feed__watermark {
+    opacity: 0.3;
+  }
+
+  /* ---- Caption Overlay ---- */
+  .ig-feed__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      0deg,
+      rgba(26, 29, 28, 0.92) 0%,
+      rgba(26, 29, 28, 0.6) 50%,
+      rgba(26, 29, 28, 0.0) 100%
+    );
+    display: flex;
+    align-items: flex-end;
+    padding: 16px;
+    opacity: 0;
+    transition: opacity 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: 1;
+  }
+  .ig-feed__card:hover .ig-feed__overlay {
+    opacity: 1;
+  }
+
+  .ig-feed__caption {
+    color: #efecec;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* ---- CTA Button ---- */
+  .ig-feed__cta-wrap {
+    text-align: center;
+    margin-top: 36px;
+  }
+
+  .ig-feed__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 36px;
+    background: transparent;
+    border: 1px solid #e8941f;
+    color: #e8941f;
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    border-radius: 4px;
+    transition: background 0.3s, color 0.3s, transform 0.3s;
+  }
+  .ig-feed__cta:hover {
+    background: #e8941f;
+    color: #1a1d1c;
+    transform: translateY(-2px);
+  }
+
+  .ig-feed__cta-icon {
+    flex-shrink: 0;
+    transition: transform 0.3s;
+  }
+  .ig-feed__cta:hover .ig-feed__cta-icon {
+    transform: scale(1.1);
+  }
+
+  /* ---- Tablet (max-width: 989px) ---- */
+  @media (max-width: 989px) {
+    .ig-feed__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .ig-feed__heading {
+      font-size: 1.65rem;
+      margin-bottom: 28px;
+    }
+    .ig-feed {
+      padding: 48px 0;
+    }
+  }
+
+  /* ---- Mobile (max-width: 749px) ---- */
+  @media (max-width: 749px) {
+    .ig-feed__grid {
+      grid-template-columns: 1fr;
+      gap: 14px;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+    .ig-feed__heading {
+      font-size: 1.4rem;
+      margin-bottom: 24px;
+    }
+    .ig-feed {
+      padding: 36px 0;
+    }
+    .ig-feed__cta {
+      padding: 12px 24px;
+      font-size: 0.82rem;
+    }
+    .ig-feed__cta-wrap {
+      margin-top: 28px;
+    }
+
+    /* Show overlay by default on touch devices */
+    .ig-feed__overlay {
+      opacity: 1;
+      background: linear-gradient(
+        0deg,
+        rgba(26, 29, 28, 0.85) 0%,
+        rgba(26, 29, 28, 0.35) 40%,
+        rgba(26, 29, 28, 0.0) 100%
+      );
+    }
+  }
+
+  /* ---- Entrance Animation ---- */
+  .ig-feed__card {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  .ig-feed__card.ig-feed--visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+</style>
+
+<script>
+  /* ========================================
+     Instagram Feed — Entrance Animation
+     Uses IntersectionObserver for staggered
+     reveal as cards scroll into view.
+     ======================================== */
+  (function () {
+    var cards = document.querySelectorAll('.ig-feed__card');
+    if (!cards.length) return;
+
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              var card = entry.target;
+              var index = Array.prototype.indexOf.call(cards, card);
+              var delay = index * 80;
+              setTimeout(function () {
+                card.classList.add('ig-feed--visible');
+              }, delay);
+              observer.unobserve(card);
+            }
+          });
+        },
+        { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+      );
+
+      cards.forEach(function (card) {
+        observer.observe(card);
+      });
+    } else {
+      /* Fallback: show all cards immediately */
+      cards.forEach(function (card) {
+        card.classList.add('ig-feed--visible');
+      });
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Instagram Feed",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Follow the Vibe"
+    },
+    {
+      "type": "range",
+      "id": "posts_to_show",
+      "label": "Posts to Show",
+      "min": 3,
+      "max": 12,
+      "step": 3,
+      "default": 6,
+      "info": "Number of Instagram posts displayed (3, 6, 9, or 12)"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram Profile URL",
+      "info": "Default: https://www.instagram.com/cumquatvibes/"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Button Text",
+      "default": "Follow us on Instagram @cumquatvibes"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#1a1d1c"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "post",
+      "name": "Instagram Post",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Post Image",
+          "info": "Square images work best (1080x1080 recommended)"
+        },
+        {
+          "type": "textarea",
+          "id": "caption",
+          "label": "Caption",
+          "info": "Shows on hover. Keep it short for best results."
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Post Link",
+          "info": "Link to the original Instagram post. Defaults to your profile."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Instagram Feed",
+      "blocks": [
+        { "type": "post" },
+        { "type": "post" },
+        { "type": "post" },
+        { "type": "post" },
+        { "type": "post" },
+        { "type": "post" }
+      ]
+    }
+  ]
+}
+{% endschema %}

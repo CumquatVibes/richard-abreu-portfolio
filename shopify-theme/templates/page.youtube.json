@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "main": {
+      "type": "custom-youtube-gallery",
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}

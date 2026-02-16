@@ -1,0 +1,371 @@
+{
+  "brand": {
+    "name": "Richard Abreu",
+    "channel_name": "Richard Abreu",
+    "tagline": "Creator | Artist | Veteran | Entrepreneur",
+    "websites": {
+      "portfolio": "https://richardabreu.studio",
+      "shop": "https://cumquatvibes.com",
+      "community": "https://vibeconnectionlounge.com"
+    },
+    "youtube": {
+      "channel_id": "UCThXDUhXqcui2HqBv4MUBBA",
+      "channel_url": "https://www.youtube.com/@CumquatVibes"
+    },
+    "social_handles": {
+      "youtube": "@CumquatVibes",
+      "instagram": "@cumquatvibes"
+    }
+  },
+
+  "avatar": {
+    "heygen": {
+      "avatar_id": "1edeaab5994541c9a5df49d8353c2b9c",
+      "look_id": "108f69581cf740a0aac1437e3dd9105e",
+      "avatar_style": "normal",
+      "emotion_by_tone": {
+        "professional": "Serious",
+        "casual": "Friendly",
+        "energetic": "Excited",
+        "educational": "Friendly",
+        "storytelling": "Soothing"
+      },
+      "caption_enabled": true,
+      "background_options": {
+        "default": {"type": "color", "value": "#101922"},
+        "studio": {"type": "color", "value": "#1a1a2e"},
+        "warm": {"type": "color", "value": "#2d1b0e"},
+        "creative": {"type": "color", "value": "#0d1b2a"}
+      }
+    }
+  },
+
+  "voice": {
+    "heygen": {
+      "voice_id": "d6056fe3944d4b7e9c21601b8fd893f8",
+      "name": "Richard Abreu (Rich)",
+      "speed_default": 1.0,
+      "speed_energetic": 1.1,
+      "speed_calm": 0.95,
+      "speed_shorts": 1.15,
+      "pitch_default": 0,
+      "pitch_energetic": 5,
+      "pitch_calm": -3
+    },
+    "elevenlabs": {
+      "voice_id": "HHOfU1tpMpxmIjLlpy34",
+      "name": "Richard Abreu",
+      "models": {
+        "highest_quality": "eleven_v3",
+        "stable_longform": "eleven_multilingual_v2",
+        "fast_drafts": "eleven_flash_v2_5",
+        "balanced": "eleven_turbo_v2_5"
+      },
+      "model": "eleven_multilingual_v2",
+      "output_format": "mp3_44100_128",
+      "presets": {
+        "professional": {
+          "stability": 0.55,
+          "similarity_boost": 0.78,
+          "style": 0.25,
+          "use_speaker_boost": true,
+          "speed": 1.0,
+          "recommended_model": "eleven_v3",
+          "description": "Clear, authoritative, steady. For tutorials and how-tos.",
+          "audio_tags": ["[calm]", "[pauses]"]
+        },
+        "casual": {
+          "stability": 0.40,
+          "similarity_boost": 0.75,
+          "style": 0.35,
+          "use_speaker_boost": true,
+          "speed": 1.0,
+          "recommended_model": "eleven_v3",
+          "description": "Relaxed, conversational, natural variability. For vlogs and casual talk.",
+          "audio_tags": ["[laughs]", "[cheerfully]"]
+        },
+        "energetic": {
+          "stability": 0.30,
+          "similarity_boost": 0.70,
+          "style": 0.50,
+          "use_speaker_boost": true,
+          "speed": 1.1,
+          "recommended_model": "eleven_v3",
+          "description": "High energy, dynamic, expressive. For product launches and hype content.",
+          "audio_tags": ["[excited]", "[shouts]"]
+        },
+        "educational": {
+          "stability": 0.60,
+          "similarity_boost": 0.80,
+          "style": 0.20,
+          "use_speaker_boost": true,
+          "speed": 0.95,
+          "recommended_model": "eleven_multilingual_v2",
+          "description": "Measured pace, clear articulation. For step-by-step guides.",
+          "audio_tags": ["[calm]", "[thinking]"]
+        },
+        "storytelling": {
+          "stability": 0.35,
+          "similarity_boost": 0.75,
+          "style": 0.45,
+          "use_speaker_boost": true,
+          "speed": 0.95,
+          "recommended_model": "eleven_v3",
+          "description": "Emotional range, dramatic pauses, warm. For personal stories and motivation.",
+          "audio_tags": ["[sighs]", "[whispers]", "[pauses]"]
+        }
+      }
+    }
+  },
+
+  "video_formats": {
+    "youtube_landscape": {
+      "width": 1920,
+      "height": 1080,
+      "aspect_ratio": "16:9",
+      "use_for": ["tutorials", "vlogs", "long-form"]
+    },
+    "youtube_shorts": {
+      "width": 1080,
+      "height": 1920,
+      "aspect_ratio": "9:16",
+      "use_for": ["shorts", "reels", "tiktok"]
+    },
+    "youtube_square": {
+      "width": 1080,
+      "height": 1080,
+      "aspect_ratio": "1:1",
+      "use_for": ["instagram_feed", "facebook", "clips"]
+    }
+  },
+
+  "visual_identity": {
+    "background_color": "#101922",
+    "accent_color": "#e8941f",
+    "text_color": "#efecec",
+    "card_color": "#242424",
+    "brand_colors": {
+      "primary_dark": "#101922",
+      "primary_accent": "#e8941f",
+      "secondary_accent": "#f4b88a",
+      "text_light": "#efecec",
+      "text_muted": "rgba(239, 236, 236, 0.55)"
+    },
+    "thumbnail_style": {
+      "text_max_words": 5,
+      "font_min_size": "30pt",
+      "show_face": true,
+      "high_contrast": true,
+      "accent_colors": ["#e8941f", "#f4b88a", "#00b4d8"]
+    }
+  },
+
+  "content_pillars": [
+    {
+      "name": "Art & Design",
+      "id": "art",
+      "description": "Art tutorials, design process, creative tools, Affinity Suite tips",
+      "default_tone": "educational",
+      "content_split": "40%",
+      "series": ["60-Second Art School", "Design Deep Dive", "Art Process", "Tool Tips"],
+      "tags": ["art", "design", "creative", "tutorial", "affinity", "digital art"],
+      "shorts_hooks": [
+        "This {topic} trick changes everything.",
+        "POV: you just discovered {topic}.",
+        "Learn {topic} in under a minute."
+      ]
+    },
+    {
+      "name": "Tech & AI Tools",
+      "id": "tech",
+      "description": "API tutorials, AI tool reviews, automation, developer tips",
+      "default_tone": "professional",
+      "content_split": "25%",
+      "series": ["Tech Minute", "API Academy", "AI Tool Review", "Creator Tech Stack"],
+      "tags": ["tech", "api", "ai", "automation", "tutorial", "developer"],
+      "shorts_hooks": [
+        "Stop. Here's the {topic} trick nobody taught you.",
+        "One {topic} tip that changed everything.",
+        "{topic} in 60 seconds. Watch this."
+      ]
+    },
+    {
+      "name": "Entrepreneurship & Motivation",
+      "id": "business",
+      "description": "Business tips, side hustles, print-on-demand, veteran entrepreneurship",
+      "default_tone": "casual",
+      "content_split": "20%",
+      "series": ["Hustle Notes", "Creator Economy", "Shop Talk", "Building the Vibe"],
+      "tags": ["business", "entrepreneur", "side hustle", "ecommerce", "shopify", "veteran"],
+      "shorts_hooks": [
+        "The moment {topic} clicked for me...",
+        "I wish someone showed me this about {topic} sooner.",
+        "Bro, wait... this {topic} hack is insane."
+      ]
+    },
+    {
+      "name": "Wellness & Mindset",
+      "id": "wellness",
+      "description": "Meditation, mindset, veteran life, personal growth, spiritual wellness",
+      "default_tone": "storytelling",
+      "content_split": "10%",
+      "series": ["Vibe Check", "Mind Body Soul", "Veteran Perspective"],
+      "tags": ["wellness", "mindset", "meditation", "veteran", "growth", "motivation"],
+      "shorts_hooks": [
+        "This changed how I see {topic} forever.",
+        "The 2-minute reset that saved my business.",
+        "If you're a veteran, you need to hear this about {topic}."
+      ]
+    },
+    {
+      "name": "Product Showcase",
+      "id": "products",
+      "description": "Cumquat Vibes products, art prints, apparel, new arrivals, design process",
+      "default_tone": "energetic",
+      "content_split": "5%",
+      "series": ["New Drop", "Collection Spotlight", "Behind the Design", "Making Of"],
+      "tags": ["products", "art", "prints", "apparel", "cumquat vibes", "merch"],
+      "shorts_hooks": [
+        "I designed this in {topic}. Here's how.",
+        "This just dropped on Cumquat Vibes!",
+        "You NEED to see this {topic} design!"
+      ]
+    }
+  ],
+
+  "posting_schedule": {
+    "youtube_long_form": {
+      "frequency": "2x per week",
+      "best_days": ["Tuesday", "Friday"],
+      "best_times": ["12:00 PM EST", "3:00 PM EST"],
+      "duration_target": "8-15 minutes",
+      "mid_roll_eligible": true
+    },
+    "youtube_shorts": {
+      "frequency": "1-3x daily",
+      "best_days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      "best_times": ["12:00 PM EST", "2:00 PM EST", "6:00 PM EST"],
+      "duration_target": "25-35 seconds",
+      "optimal_length_seconds": 30
+    },
+    "community_posts": {
+      "frequency": "3+ per week",
+      "types": ["polls", "behind-the-scenes", "questions", "product teasers"]
+    }
+  },
+
+  "seo_templates": {
+    "title_formulas": [
+      "I Tried {topic} for 30 Days - Here's What Happened",
+      "{topic}: The Complete Beginner's Guide ({year})",
+      "Stop Making This {topic} Mistake (Do This Instead)",
+      "{number} {topic} Tips That Actually Work",
+      "How I {result} Using {topic} (Step by Step)",
+      "The Truth About {topic} Nobody Talks About",
+      "{topic} Changed Everything - Here's How",
+      "Why {topic} is a Game Changer for {audience}",
+      "I Tested {number} {topic} Tools. Only {number} Actually Work.",
+      "The {topic} Trick Nobody Taught You",
+      "What Nobody Tells You About {topic}",
+      "{topic} in Under {number} Minutes (Complete Guide)"
+    ],
+    "description_template": "{hook_sentence}\n\nIn this video, I break down {topic_summary}.\n\nTimestamps:\n{chapters}\n\nConnect with me:\nShop: https://cumquatvibes.com\nPortfolio: https://richardabreu.studio\nCommunity: https://vibeconnectionlounge.com\n\n#RichardAbreu #CumquatVibes {hashtags}",
+    "default_tags": [
+      "Richard Abreu",
+      "Cumquat Vibes",
+      "artist",
+      "veteran creator",
+      "entrepreneur"
+    ]
+  },
+
+  "hook_library": {
+    "curiosity_gap": [
+      "Nobody talks about this, but {topic} completely changed how I {result}.",
+      "I found something about {topic} that most people miss entirely.",
+      "What if everything you knew about {topic} was wrong?"
+    ],
+    "pattern_interrupt": [
+      "Wait. Before you scroll... this {topic} tip saved me {time/money}.",
+      "Stop. If you're doing {topic} without this, you're making it harder than it needs to be.",
+      "I almost didn't make this video about {topic}. But then this happened."
+    ],
+    "bold_claim": [
+      "This is the only {topic} video you'll ever need to watch.",
+      "{topic} in under 60 seconds. Ready? Let's go.",
+      "I'm going to show you {topic} faster than anyone else on YouTube."
+    ],
+    "personal_story": [
+      "Three years ago, I knew nothing about {topic}. Today it's my entire business.",
+      "Let me tell you about the time {topic} completely changed my perspective.",
+      "I made every mistake possible with {topic}. Here's what I learned."
+    ],
+    "question": [
+      "Have you ever felt completely lost trying to figure out {topic}?",
+      "What's the one thing holding you back from mastering {topic}?",
+      "Why does {topic} seem so complicated when it really doesn't have to be?"
+    ],
+    "shock": [
+      "Stop doing {topic} like this.",
+      "This {topic} mistake is costing you.",
+      "I can't believe people still do {topic} this way."
+    ],
+    "result_first": [
+      "I made this in 4 minutes. Here's how.",
+      "This one change tripled my results with {topic}.",
+      "The before and after of {topic} will shock you."
+    ]
+  },
+
+  "retention_tactics": {
+    "open_loops": [
+      "But the real game-changer comes in step {n}... we'll get there.",
+      "And wait until you see what happens when we combine these...",
+      "Keep watching because the last tip is the one that made the biggest difference.",
+      "I'll show you the exact tool in a second, but first...",
+      "The third tip is the one that actually matters, so stay until the end.",
+      "There's a reason I saved this for last..."
+    ],
+    "pattern_interrupts": [
+      "Okay, quick side note here...",
+      "Now here's where it gets really interesting...",
+      "But hold on, there's a catch...",
+      "Wait, let me show you something...",
+      "Here's something no one tells you...",
+      "This next part is where most people mess up..."
+    ],
+    "engagement_prompts": [
+      "Let me know in the comments if you've tried this.",
+      "Type 'YES' in the comments if this resonates with you.",
+      "What would you add to this list? Drop it below.",
+      "Comment 'VIBE' if you want me to make a full tutorial on this.",
+      "Drop a comment with what you're working on. I read every single one."
+    ]
+  },
+
+  "music_presets": {
+    "art_tutorial": "lo-fi chill instrumental background music for creative art tutorial video",
+    "tech_tutorial": "minimal ambient electronic background music for tech tutorial",
+    "motivation": "uplifting inspirational orchestral background music for motivational video",
+    "product_showcase": "upbeat trendy lo-fi hip hop beat for product showcase video",
+    "wellness": "calm peaceful ambient meditation background music",
+    "intro_jingle": "short energetic 5 second YouTube channel intro jingle",
+    "outro_jingle": "mellow 10 second YouTube outro music with gentle fade"
+  },
+
+  "sound_effects": {
+    "subscribe_ding": "upbeat notification ding for subscribe reminder",
+    "transition_whoosh": "cinematic whoosh transition sound effect",
+    "reveal_impact": "deep bass impact hit for dramatic reveal",
+    "typing": "keyboard typing sounds for coding tutorial",
+    "success": "positive achievement chime sound effect"
+  },
+
+  "benchmarks": {
+    "ctr_target": "7%+",
+    "avd_longform_target": "50%+",
+    "avd_shorts_target": "70%+",
+    "shorts_viewed_vs_swiped": "70%+",
+    "comment_response_rate": "100% first 2 hours"
+  }
+}

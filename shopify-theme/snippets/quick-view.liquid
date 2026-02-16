@@ -1,0 +1,80 @@
+{% comment %}
+  ============================================
+  Product Quick-View Modal
+  Paste into: snippets/quick-view.liquid
+
+  Then add to layout/theme.liquid before </body>:
+  {% render 'quick-view' %}
+
+  To use: add data-quick-view="{{ product.handle }}" to product card links
+  in homepage sections. When clicked, it opens a quick-view modal
+  instead of navigating to the product page.
+  ============================================
+{% endcomment %}
+
+<div id="cvQuickView" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.6);">
+  <div id="cvQuickViewInner" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:#222725; color:#efecec; max-width:780px; width:95%; max-height:85vh; overflow-y:auto; padding:36px; border-radius:4px;">
+    <button onclick="document.getElementById('cvQuickView').style.display='none'"
+            style="position:absolute; top:12px; right:16px; background:none; border:none; font-size:1.5rem; cursor:pointer; z-index:1; color:#999;">&times;</button>
+    <div id="cvQuickViewBody" style="text-align:center; padding:40px;">Loading...</div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('click', function(e) {
+  var trigger = e.target.closest('[data-quick-view]');
+  if (!trigger) return;
+  e.preventDefault();
+
+  var handle = trigger.dataset.quickView;
+  var modal = document.getElementById('cvQuickView');
+  var body = document.getElementById('cvQuickViewBody');
+
+  modal.style.display = 'block';
+  body.innerHTML = '<p style="text-align:center; padding:40px; opacity:0.5;">Loading...</p>';
+
+  fetch('/products/' + handle + '.js')
+    .then(function(r) { return r.json(); })
+    .then(function(p) {
+      var price = (p.price / 100).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+      var desc = p.description ? p.description.replace(/<[^>]*>/g, '').substring(0, 250) + '...' : '';
+
+      body.innerHTML =
+        '<div style="display:grid; grid-template-columns:1fr 1fr; gap:28px; text-align:left;">'
+        + '<div style="aspect-ratio:1; overflow:hidden; background:#1a1d1c; border-radius:4px;">'
+        + '<img src="' + p.featured_image + '" alt="' + p.title.replace(/"/g, '&quot;') + '" style="width:100%; height:100%; object-fit:cover;">'
+        + '</div>'
+        + '<div style="display:flex; flex-direction:column; justify-content:center;">'
+        + '<h2 style="font-family:var(--font-heading-family, serif); font-size:1.4rem; font-weight:300; margin-bottom:8px;">' + p.title + '</h2>'
+        + '<p style="font-size:1.2rem; font-weight:600; margin-bottom:16px; color:#e8941f;">' + price + '</p>'
+        + '<p style="font-size:0.88rem; line-height:1.6; opacity:0.7; margin-bottom:24px;">' + desc + '</p>'
+        + '<a href="/products/' + p.handle + '" style="display:inline-block; background:#e8941f; color:#fff; padding:14px 28px; text-decoration:none; font-weight:600; text-transform:uppercase; font-size:0.8rem; letter-spacing:0.05em; text-align:center;">View Full Details</a>'
+        + '</div></div>';
+    })
+    .catch(function() {
+      body.innerHTML = '<p style="text-align:center; padding:40px; opacity:0.5;">Could not load product.</p>';
+    });
+});
+
+/* Close on backdrop click */
+document.getElementById('cvQuickView').addEventListener('click', function(e) {
+  if (e.target === this) this.style.display = 'none';
+});
+
+/* Close on Escape */
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') document.getElementById('cvQuickView').style.display = 'none';
+});
+</script>
+
+<style>
+  @media (max-width: 749px) {
+    #cvQuickViewInner {
+      max-width: 95vw !important;
+      padding: 24px !important;
+    }
+    #cvQuickViewBody [style*="grid-template-columns: 1fr 1fr"] {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>

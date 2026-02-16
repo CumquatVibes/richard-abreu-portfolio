@@ -1,0 +1,111 @@
+{% comment %}
+  ============================================
+  Value Proposition / Trust Badges Bar
+  Paste into: sections/custom-value-proposition.liquid
+  ============================================
+{% endcomment %}
+
+<section class="value-prop section-{{ section.id }}-padding" style="background: var(--cv-bg-card, #222725);">
+  <div class="page-width">
+    <div class="value-prop__grid">
+      {% for block in section.blocks %}
+        <div class="value-prop__item" {{ block.shopify_attributes }}>
+          {% if block.settings.icon != blank %}
+            <div class="value-prop__icon">{{ block.settings.icon }}</div>
+          {% endif %}
+          <h3 class="value-prop__heading">{{ block.settings.heading }}</h3>
+          <p class="value-prop__text">{{ block.settings.text }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+  .value-prop__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 32px;
+    text-align: center;
+    padding: 40px 0;
+  }
+  .value-prop__icon {
+    font-size: 2.2rem;
+    margin-bottom: 12px;
+  }
+  .value-prop__heading {
+    font-family: var(--font-heading-family, 'Trirong', serif);
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+    letter-spacing: 0.02em;
+  }
+  .value-prop__text {
+    font-size: 0.85rem;
+    color: var(--color-foreground, #252525);
+    opacity: 0.6;
+    line-height: 1.5;
+  }
+
+  @media screen and (max-width: 749px) {
+    .value-prop__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      padding: 24px 0;
+    }
+    .value-prop__icon { font-size: 1.8rem; }
+    .value-prop__heading { font-size: 0.9rem; }
+    .value-prop__text { font-size: 0.8rem; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Value Proposition",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#222725"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Value Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon (emoji)",
+          "default": "🎨"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "100% Human-Made"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description",
+          "default": "Every design hand-crafted by artist Richard Abreu"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Value Proposition",
+      "blocks": [
+        { "type": "item", "settings": { "icon": "🎨", "heading": "100% Human-Made Art", "text": "Every design hand-crafted by artist Richard Abreu. No AI, no templates." } },
+        { "type": "item", "settings": { "icon": "🇺🇸", "heading": "Veteran-Owned", "text": "Proudly run by a U.S. Navy veteran." } },
+        { "type": "item", "settings": { "icon": "🚚", "heading": "Free Shipping $75+", "text": "Free shipping on all orders over $75." } },
+        { "type": "item", "settings": { "icon": "✨", "heading": "Premium Quality", "text": "Printed on demand with Printful's best materials." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,1115 @@
+{% comment %}
+  ============================================
+  Style Quiz — "Discover Your Art Style"
+  Paste into: sections/custom-style-quiz.liquid
+  Assign to page template: page.style-quiz.json
+  Uses product tags to match quiz answers to products:
+    style-modern, style-bohemian, style-minimalist, style-bold
+    palette-warm, palette-cool, palette-neutral, palette-vibrant
+    room-living, room-bedroom, room-office, room-kitchen
+    mood-calm, mood-energetic, mood-cozy, mood-dramatic
+    budget-under50, budget-50to100, budget-over100
+  ============================================
+{% endcomment %}
+
+<section class="style-quiz section-{{ section.id }}-padding" id="styleQuiz-{{ section.id }}">
+  <div class="style-quiz__container">
+
+    {%- comment -%} Header / Intro {%- endcomment -%}
+    <div class="style-quiz__header">
+      <h1 class="style-quiz__title">{{ section.settings.heading }}</h1>
+      <p class="style-quiz__subtitle">{{ section.settings.subheading }}</p>
+    </div>
+
+    {%- comment -%} Progress Bar {%- endcomment -%}
+    <div class="style-quiz__progress">
+      <div class="style-quiz__progress-track">
+        <div class="style-quiz__progress-fill" id="quizProgress-{{ section.id }}"></div>
+      </div>
+      <p class="style-quiz__progress-label" id="quizProgressLabel-{{ section.id }}">Question 1 of 5</p>
+    </div>
+
+    {%- comment -%} Question Steps {%- endcomment -%}
+    <div class="style-quiz__steps" id="quizSteps-{{ section.id }}">
+
+      {%- comment -%} Step 1: Art Style {%- endcomment -%}
+      <div class="style-quiz__step active" data-step="0" data-key="style">
+        <h2 class="style-quiz__question">{{ section.settings.q1_text | default: 'What art style speaks to you?' }}</h2>
+        <div class="style-quiz__options">
+          <button type="button" class="style-quiz__option" data-value="modern" aria-label="Modern and Clean">
+            <div class="style-quiz__option-icon">
+              <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="8" width="20" height="48" rx="2" stroke="currentColor" stroke-width="2"/><rect x="34" y="8" width="22" height="22" rx="2" stroke="currentColor" stroke-width="2"/><rect x="34" y="36" width="22" height="20" rx="2" stroke="currentColor" stroke-width="2"/></svg>
+            </div>
+            <span class="style-quiz__option-label">Modern &amp; Clean</span>
+            <span class="style-quiz__option-desc">Geometric shapes, bold lines, structured compositions</span>
+          </button>
+          <button type="button" class="style-quiz__option" data-value="bohemian" aria-label="Bohemian and Free">
+            <div class="style-quiz__option-icon">
+              <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="24" stroke="currentColor" stroke-width="2"/><path d="M32 8c0 13.255-10.745 24-24 24" stroke="currentColor" stroke-width="2"/><path d="M32 8c0 13.255 10.745 24 24 24" stroke="currentColor" stroke-width="2"/><path d="M32 56c0-13.255-10.745-24-24-24" stroke="currentColor" stroke-width="2"/><path d="M32 56c0-13.255 10.745-24 24-24" stroke="currentColor" stroke-width="2"/></svg>
+            </div>
+            <span class="style-quiz__option-label">Bohemian &amp; Free</span>
+            <span class="style-quiz__option-desc">Organic patterns, flowing forms, eclectic spirit</span>
+          </button>
+          <button type="button" class="style-quiz__option" data-value="minimalist" aria-label="Minimalist">
+            <div class="style-quiz__option-icon">
+              <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="16" y1="32" x2="48" y2="32" stroke="currentColor" stroke-width="2"/><circle cx="32" cy="20" r="4" stroke="currentColor" stroke-width="2"/></svg>
+            </div>
+            <span class="style-quiz__option-label">Minimalist</span>
+            <span class="style-quiz__option-desc">Less is more &mdash; subtle, refined, understated</span>
+          </button>
+          <button type="button" class="style-quiz__option" data-value="bold" aria-label="Bold and Expressive">
+            <div class="style-quiz__option-icon">
+              <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><polygon points="32,4 40,24 60,24 44,38 50,58 32,46 14,58 20,38 4,24 24,24" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+            </div>
+            <span class="style-quiz__option-label">Bold &amp; Expressive</span>
+            <span class="style-quiz__option-desc">Statement pieces, vivid imagery, high impact</span>
+          </button>
+        </div>
+      </div>
+
+      {%- comment -%} Step 2: Color Palette {%- endcomment -%}
+      <div class="style-quiz__step" data-step="1" data-key="palette">
+        <h2 class="style-quiz__question">{{ section.settings.q2_text | default: 'Which color palette are you drawn to?' }}</h2>
+        <div class="style-quiz__options">
+          <button type="button" class="style-quiz__option" data-value="warm" aria-label="Warm Tones">
+            <div class="style-quiz__option-swatches">
+              <span class="style-quiz__swatch" style="background:#d97706;"></span>
+              <span class="style-quiz__swatch" style="background:#dc2626;"></span>
+              <span class="style-quiz__swatch" style="background:#f59e0b;"></span>
+              <span class="style-quiz__swatch" style="background:#92400e;"></span>
+            </div>
+            <span class="style-quiz__option-label">Warm Tones</span>
+            <span class="style-quiz__option-desc">Ambers, reds, oranges &mdash; sunset energy</span>
+          </button>
+          <button type="button" class="style-quiz__option" data-value="cool" aria-label="Cool Tones">
+            <div class="style-quiz__option-swatches">
+              <span class="style-quiz__swatch" style="background:#2563eb;"></span>
+              <span class="style-quiz__swatch" style="background:#059669;"></span>
+              <span class="style-quiz__swatch" style="background:#7c3aed;"></span>
+              <span class="style-quiz__swatch" style="background:#0891b2;"></span>
+            </div>
+            <span class="style-quiz__option-label">Cool Tones</span>
+            <span class="style-quiz__option-desc">Blues, greens, purples &mdash; ocean calm</span>
+          </button>
+          <button type="button" class="style-quiz__option" data-value="neutral" aria-label="Neutral and Earthy">
+            <div class="style-quiz__option-swatches">
+              <span class="style-quiz__swatch" style="background:#a8a29e;"></span>
+              <span class="style-quiz__swatch" style="background:#78716c;"></span>
+              <span class="style-quiz__swatch" style="background:#d6d3d1;"></span>
+              <span class="style-quiz__swatch" style="background:#57534e;"></span>
+            </div>
+            <span class="style-quiz__option-label">Neutral &amp; Earthy</span>
+            <span class="style-quiz__option-desc">Stones, beiges, warm grays &mdash; grounded</span>
+          </button>
+          <button type="button" class="style-quiz__option" data-value="vibrant" aria-label="Vibrant Mix">
+            <div class="style-quiz__option-swatches">
+              <span class="style-quiz__swatch" style="background:#ec4899;"></span>
+              <span class="style-quiz__swatch" style="background:#f59e0b;"></span>
+              <span class="style-quiz__swatch" style="background:#10b981;"></span>
+              <span class="style-quiz__swatch" style="background:#6366f1;"></span>
+            </div>
+            <span class="style-quiz__option-label">Vibrant Mix</span>
+            <span class="style-quiz__option-desc">All the colors &mdash; life is too short for boring walls</span>
+          </button>
+        </div>
+      </div>
+
+      {%- comment -%} Step 3: Room Type {%- endcomment -%}
+      <div class="style-quiz__step" data-step="2" data-key="room">
+        <h2 class="style-quiz__question">{{ section.settings.q3_text | default: 'Where will this art live?' }}</h2>
+        <div class="style-quiz__options">
+          <button type="button" class="style-quiz__option" data-value="living" aria-label="Living Room">
+            <div class="style-quiz__option-icon">
+              <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="24" width="48" height="24" rx="4" stroke="currentColor" stroke-width="2"/><rect x="14" y="28" width="16" height="12" rx="2" stroke="currentColor" stroke-width="2"/><rect x="34" y="28" width="16" height="12" rx="2" stroke="currentColor" stroke-width="2"/><line x1="8" y1="48" x2="8" y2="54" stroke="currentColor" stroke-width="2"/><line x1="56" y1="48" x2="56" y2="54" stroke="currentColor" stroke-width="2"/><rect x="22" y="10" width="20" height="14" rx="1" stroke="currentColor" stroke-width="2"/></svg>
+            </div>
+            <span class="style-quiz__option-label">Living Room</span>
+            <span class="style-quiz__option-desc">The heart of the home, for everyone to enjoy</span>
+          </button>
+          <button type="button" class="style-quiz__option" data-value="bedroom" aria-label="Bedroom">
+            <div class="style-quiz__option-icon">
+              <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="28" width="52" height="20" rx="3" stroke="currentColor" stroke-width="2"/><rect x="10" y="32" width="14" height="8" rx="2" stroke="currentColor" stroke-width="2"/><rect x="40" y="32" width="14" height="8" rx="2" stroke="currentColor" stroke-width="2"/><line x1="6" y1="48" x2="6" y2="54" stroke="currentColor" stroke-width="2"/><line x1="58" y1="48" x2="58" y2="54" stroke="currentColor" stroke-width="2"/><path d="M6 28V22a4 4 0 014-4h44a4 4 0 014 4v6" stroke="currentColor" stroke-width="2"/></svg>
+            </div>
+            <span class="style-quiz__option-label">Bedroom</span>
+            <span class="style-quiz__option-desc">Your personal retreat and sanctuary</span>
+          </button>
+          <button type="button" class="style-quiz__option" data-value="office" aria-label="Office or Studio">
+            <div class="style-quiz__option-icon">
+              <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="24" width="44" height="4" rx="1" stroke="currentColor" stroke-width="2"/><line x1="16" y1="28" x2="16" y2="52" stroke="currentColor" stroke-width="2"/><line x1="48" y1="28" x2="48" y2="52" stroke="currentColor" stroke-width="2"/><rect x="20" y="30" width="10" height="8" rx="1" stroke="currentColor" stroke-width="2"/><rect x="24" y="10" width="16" height="12" rx="1" stroke="currentColor" stroke-width="2"/></svg>
+            </div>
+            <span class="style-quiz__option-label">Office / Studio</span>
+            <span class="style-quiz__option-desc">Inspire creativity and focus</span>
+          </button>
+          <button type="button" class="style-quiz__option" data-value="kitchen" aria-label="Kitchen or Dining">
+            <div class="style-quiz__option-icon">
+              <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="12" y="30" width="40" height="24" rx="3" stroke="currentColor" stroke-width="2"/><line x1="12" y1="40" x2="52" y2="40" stroke="currentColor" stroke-width="2"/><circle cx="22" cy="35" r="2" stroke="currentColor" stroke-width="2"/><circle cx="42" cy="35" r="2" stroke="currentColor" stroke-width="2"/><rect x="22" y="14" width="20" height="14" rx="1" stroke="currentColor" stroke-width="2"/></svg>
+            </div>
+            <span class="style-quiz__option-label">Kitchen / Dining</span>
+            <span class="style-quiz__option-desc">Where good food meets good art</span>
+          </button>
+        </div>
+      </div>
+
+      {%- comment -%} Step 4: Mood {%- endcomment -%}
+      <div class="style-quiz__step" data-step="3" data-key="mood">
+        <h2 class="style-quiz__question">{{ section.settings.q4_text | default: 'What mood do you want to create?' }}</h2>
+        <div class="style-quiz__options">
+          <button type="button" class="style-quiz__option" data-value="calm" aria-label="Calm and Serene">
+            <div class="style-quiz__option-icon">
+              <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 40c8-8 16 0 24-8s16 0 24-8" stroke="currentColor" stroke-width="2"/><path d="M8 48c8-8 16 0 24-8s16 0 24-8" stroke="currentColor" stroke-width="2" opacity="0.5"/></svg>
+            </div>
+            <span class="style-quiz__option-label">Calm &amp; Serene</span>
+            <span class="style-quiz__option-desc">Peaceful, soothing, zen-like atmosphere</span>
+          </button>
+          <button type="button" class="style-quiz__option" data-value="energetic" aria-label="Energetic and Vibrant">
+            <div class="style-quiz__option-icon">
+              <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M36 4L20 30h12L24 60l24-34H34L44 4H36z" stroke="currentColor" stroke-width="2"/></svg>
+            </div>
+            <span class="style-quiz__option-label">Energetic &amp; Vibrant</span>
+            <span class="style-quiz__option-desc">Dynamic, lively, conversation-starting</span>
+          </button>
+          <button type="button" class="style-quiz__option" data-value="cozy" aria-label="Cozy and Warm">
+            <div class="style-quiz__option-icon">
+              <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M32 14C24 14 18 20 18 28c0 12 14 22 14 22s14-10 14-22c0-8-6-14-14-14z" stroke="currentColor" stroke-width="2"/></svg>
+            </div>
+            <span class="style-quiz__option-label">Cozy &amp; Warm</span>
+            <span class="style-quiz__option-desc">Inviting, homey, like a warm hug</span>
+          </button>
+          <button type="button" class="style-quiz__option" data-value="dramatic" aria-label="Dramatic and Bold">
+            <div class="style-quiz__option-icon">
+              <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><polygon points="32,6 38,24 58,24 42,36 48,54 32,44 16,54 22,36 6,24 26,24" stroke="currentColor" stroke-width="2"/></svg>
+            </div>
+            <span class="style-quiz__option-label">Dramatic &amp; Bold</span>
+            <span class="style-quiz__option-desc">High contrast, striking, unforgettable</span>
+          </button>
+        </div>
+      </div>
+
+      {%- comment -%} Step 5: Budget {%- endcomment -%}
+      <div class="style-quiz__step" data-step="4" data-key="budget">
+        <h2 class="style-quiz__question">{{ section.settings.q5_text | default: 'What is your budget range?' }}</h2>
+        <div class="style-quiz__options style-quiz__options--budget">
+          <button type="button" class="style-quiz__option" data-value="under50" aria-label="Under $50">
+            <div class="style-quiz__option-icon">
+              <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><text x="32" y="40" text-anchor="middle" font-size="28" font-weight="300" fill="currentColor">$</text></svg>
+            </div>
+            <span class="style-quiz__option-label">Under $50</span>
+            <span class="style-quiz__option-desc">Affordable art for everyday spaces</span>
+          </button>
+          <button type="button" class="style-quiz__option" data-value="50to100" aria-label="$50 to $100">
+            <div class="style-quiz__option-icon">
+              <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><text x="32" y="40" text-anchor="middle" font-size="28" font-weight="300" fill="currentColor">$$</text></svg>
+            </div>
+            <span class="style-quiz__option-label">$50 &ndash; $100</span>
+            <span class="style-quiz__option-desc">Mid-range pieces with premium quality</span>
+          </button>
+          <button type="button" class="style-quiz__option" data-value="over100" aria-label="Over $100">
+            <div class="style-quiz__option-icon">
+              <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><text x="32" y="40" text-anchor="middle" font-size="28" font-weight="300" fill="currentColor">$$$</text></svg>
+            </div>
+            <span class="style-quiz__option-label">$100+</span>
+            <span class="style-quiz__option-desc">Investment pieces and statement art</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    {%- comment -%} Navigation Buttons {%- endcomment -%}
+    <div class="style-quiz__nav" id="quizNav-{{ section.id }}">
+      <button type="button" class="style-quiz__btn style-quiz__btn--back" id="quizBack-{{ section.id }}" disabled aria-label="Previous question">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Back
+      </button>
+      <button type="button" class="style-quiz__btn style-quiz__btn--next" id="quizNext-{{ section.id }}" disabled aria-label="Next question">
+        Next
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+
+    {%- comment -%} Results Screen {%- endcomment -%}
+    <div class="style-quiz__results" id="quizResults-{{ section.id }}" style="display:none;">
+      <div class="style-quiz__results-header">
+        <span class="style-quiz__results-badge">Your Style Profile</span>
+        <h2 class="style-quiz__results-title" id="quizResultsTitle-{{ section.id }}"></h2>
+        <p class="style-quiz__results-desc" id="quizResultsDesc-{{ section.id }}"></p>
+      </div>
+
+      <div class="style-quiz__results-products">
+        <h3 class="style-quiz__results-products-heading">{{ section.settings.results_heading | default: 'Curated Picks for You' }}</h3>
+        <div class="style-quiz__products-grid" id="quizProductsGrid-{{ section.id }}">
+          <div class="style-quiz__loading" id="quizLoading-{{ section.id }}">
+            <div class="style-quiz__spinner"></div>
+            <p>Finding your perfect matches...</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="style-quiz__results-actions">
+        <a href="{{ section.settings.shop_all_url | default: '/collections/all' }}" class="style-quiz__btn style-quiz__btn--primary">
+          {{ section.settings.shop_all_text | default: 'Shop All Art' }}
+        </a>
+        <button type="button" class="style-quiz__btn style-quiz__btn--secondary" id="quizRetake-{{ section.id }}">
+          Retake Quiz
+        </button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{%- comment -%} ============ Inline Styles ============ {%- endcomment -%}
+<style>
+  /* --- Base & Layout --- */
+  .style-quiz {
+    background: {{ section.settings.bg_color | default: '#1a1d1c' }};
+    color: {{ section.settings.text_color | default: '#efecec' }};
+    padding: 60px 0 80px;
+    font-family: var(--font-body-family, 'Trirong', serif);
+  }
+  .style-quiz__container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* --- Header --- */
+  .style-quiz__header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .style-quiz__title {
+    font-family: var(--font-heading-family, 'Trirong', serif);
+    font-size: 2.4rem;
+    font-weight: 300;
+    margin: 0 0 12px;
+    color: {{ section.settings.text_color | default: '#efecec' }};
+    line-height: 1.2;
+  }
+  .style-quiz__subtitle {
+    font-size: 1rem;
+    opacity: 0.65;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* --- Progress Bar --- */
+  .style-quiz__progress {
+    margin-bottom: 40px;
+  }
+  .style-quiz__progress-track {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .style-quiz__progress-fill {
+    height: 100%;
+    width: 20%;
+    background: {{ section.settings.accent_color | default: '#e8941f' }};
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+  .style-quiz__progress-label {
+    font-size: 0.8rem;
+    opacity: 0.5;
+    margin: 8px 0 0;
+    text-align: center;
+    letter-spacing: 0.04em;
+  }
+
+  /* --- Steps --- */
+  .style-quiz__step {
+    display: none;
+  }
+  .style-quiz__step.active {
+    display: block;
+    animation: quizFadeIn 0.35s ease;
+  }
+  @keyframes quizFadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .style-quiz__question {
+    font-family: var(--font-heading-family, 'Trirong', serif);
+    font-size: 1.5rem;
+    font-weight: 300;
+    text-align: center;
+    margin: 0 0 32px;
+    line-height: 1.3;
+  }
+
+  /* --- Option Cards --- */
+  .style-quiz__options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .style-quiz__options--budget {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .style-quiz__option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+    padding: 28px 20px;
+    background: {{ section.settings.card_color | default: '#222725' }};
+    border: 2px solid transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border-color 0.25s, background 0.25s, transform 0.2s;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    outline: none;
+  }
+  .style-quiz__option:hover {
+    border-color: rgba(232, 148, 31, 0.35);
+    transform: translateY(-2px);
+  }
+  .style-quiz__option:focus-visible {
+    border-color: {{ section.settings.accent_color | default: '#e8941f' }};
+    box-shadow: 0 0 0 3px rgba(232, 148, 31, 0.25);
+  }
+  .style-quiz__option.selected {
+    border-color: {{ section.settings.accent_color | default: '#e8941f' }};
+    background: rgba(232, 148, 31, 0.08);
+  }
+  .style-quiz__option-icon {
+    width: 48px;
+    height: 48px;
+    color: {{ section.settings.accent_color | default: '#e8941f' }};
+    margin-bottom: 4px;
+  }
+  .style-quiz__option-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+  .style-quiz__option-label {
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.01em;
+  }
+  .style-quiz__option-desc {
+    font-size: 0.8rem;
+    opacity: 0.55;
+    line-height: 1.4;
+  }
+
+  /* --- Color Swatches --- */
+  .style-quiz__option-swatches {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 6px;
+  }
+  .style-quiz__swatch {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: block;
+    border: 2px solid rgba(255,255,255,0.1);
+  }
+
+  /* --- Navigation Buttons --- */
+  .style-quiz__nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 36px;
+  }
+  .style-quiz__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    transition: opacity 0.25s, background 0.25s, transform 0.2s;
+    color: {{ section.settings.text_color | default: '#efecec' }};
+  }
+  .style-quiz__btn:hover { transform: translateY(-1px); }
+  .style-quiz__btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    transform: none;
+  }
+  .style-quiz__btn--back {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+  .style-quiz__btn--back:hover:not(:disabled) {
+    border-color: rgba(255,255,255,0.3);
+  }
+  .style-quiz__btn--next {
+    background: {{ section.settings.accent_color | default: '#e8941f' }};
+    color: #1a1d1c;
+  }
+  .style-quiz__btn--next:hover:not(:disabled) {
+    opacity: 0.9;
+  }
+  .style-quiz__btn--primary {
+    background: {{ section.settings.accent_color | default: '#e8941f' }};
+    color: #1a1d1c;
+    padding: 14px 36px;
+    font-size: 0.95rem;
+  }
+  .style-quiz__btn--primary:hover { opacity: 0.9; }
+  .style-quiz__btn--secondary {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+  .style-quiz__btn--secondary:hover {
+    border-color: rgba(255,255,255,0.3);
+  }
+
+  /* --- Results --- */
+  .style-quiz__results {
+    animation: quizFadeIn 0.5s ease;
+  }
+  .style-quiz__results-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .style-quiz__results-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: {{ section.settings.accent_color | default: '#e8941f' }};
+    margin-bottom: 12px;
+  }
+  .style-quiz__results-title {
+    font-family: var(--font-heading-family, 'Trirong', serif);
+    font-size: 2rem;
+    font-weight: 300;
+    margin: 0 0 12px;
+    line-height: 1.2;
+  }
+  .style-quiz__results-desc {
+    font-size: 0.95rem;
+    opacity: 0.65;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* --- Products Grid --- */
+  .style-quiz__results-products {
+    margin-bottom: 48px;
+  }
+  .style-quiz__results-products-heading {
+    font-family: var(--font-heading-family, 'Trirong', serif);
+    font-size: 1.3rem;
+    font-weight: 300;
+    text-align: center;
+    margin: 0 0 28px;
+    opacity: 0.85;
+  }
+  .style-quiz__products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    min-height: 200px;
+  }
+  .style-quiz__product-card {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    background: {{ section.settings.card_color | default: '#222725' }};
+    border-radius: 6px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .style-quiz__product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  }
+  .style-quiz__product-image {
+    aspect-ratio: 1;
+    overflow: hidden;
+    background: rgba(255,255,255,0.03);
+  }
+  .style-quiz__product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s;
+  }
+  .style-quiz__product-card:hover .style-quiz__product-image img {
+    transform: scale(1.06);
+  }
+  .style-quiz__product-info {
+    padding: 14px 16px 18px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .style-quiz__product-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 0;
+  }
+  .style-quiz__product-price {
+    font-size: 0.8rem;
+    opacity: 0.6;
+    margin: 0;
+  }
+
+  /* --- Loading Spinner --- */
+  .style-quiz__loading {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 48px 0;
+    color: {{ section.settings.text_color | default: '#efecec' }};
+    opacity: 0.6;
+    font-size: 0.9rem;
+  }
+  .style-quiz__spinner {
+    width: 36px;
+    height: 36px;
+    border: 3px solid rgba(255,255,255,0.1);
+    border-top-color: {{ section.settings.accent_color | default: '#e8941f' }};
+    border-radius: 50%;
+    animation: quizSpin 0.7s linear infinite;
+  }
+  @keyframes quizSpin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* --- No Results --- */
+  .style-quiz__no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 48px 24px;
+    opacity: 0.6;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  /* --- Results Actions --- */
+  .style-quiz__results-actions {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  /* --- Mobile Responsive --- */
+  @media screen and (max-width: 749px) {
+    .style-quiz { padding: 40px 0 60px; }
+    .style-quiz__container { padding: 0 16px; }
+    .style-quiz__title { font-size: 1.8rem; }
+    .style-quiz__question { font-size: 1.2rem; margin-bottom: 24px; }
+    .style-quiz__options {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    .style-quiz__options--budget {
+      grid-template-columns: 1fr;
+    }
+    .style-quiz__option {
+      flex-direction: row;
+      text-align: left;
+      padding: 18px 20px;
+      gap: 14px;
+    }
+    .style-quiz__option-icon {
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+      margin-bottom: 0;
+    }
+    .style-quiz__option-swatches {
+      flex-direction: column;
+      flex-wrap: wrap;
+      height: 60px;
+      margin-bottom: 0;
+      flex-shrink: 0;
+    }
+    .style-quiz__swatch {
+      width: 24px;
+      height: 24px;
+    }
+    .style-quiz__option-label { font-size: 0.9rem; }
+    .style-quiz__option-desc { font-size: 0.75rem; }
+    .style-quiz__nav { margin-top: 28px; }
+    .style-quiz__btn { padding: 10px 20px; font-size: 0.8rem; }
+    .style-quiz__products-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+    .style-quiz__results-title { font-size: 1.6rem; }
+    .style-quiz__results-desc { font-size: 0.85rem; }
+    .style-quiz__results-actions {
+      flex-direction: column;
+      align-items: center;
+    }
+    .style-quiz__btn--primary,
+    .style-quiz__btn--secondary {
+      width: 100%;
+      max-width: 300px;
+      justify-content: center;
+    }
+  }
+
+  @media screen and (min-width: 750px) and (max-width: 989px) {
+    .style-quiz__products-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>
+
+{%- comment -%} ============ Inline Script ============ {%- endcomment -%}
+<script>
+(function() {
+  var SECTION_ID = '{{ section.id }}';
+  var TOTAL_STEPS = 5;
+  var MAX_RESULTS = {{ section.settings.max_results | default: 8 }};
+
+  /* DOM references */
+  var stepsContainer = document.getElementById('quizSteps-' + SECTION_ID);
+  var progressFill   = document.getElementById('quizProgress-' + SECTION_ID);
+  var progressLabel  = document.getElementById('quizProgressLabel-' + SECTION_ID);
+  var btnBack        = document.getElementById('quizBack-' + SECTION_ID);
+  var btnNext        = document.getElementById('quizNext-' + SECTION_ID);
+  var navContainer   = document.getElementById('quizNav-' + SECTION_ID);
+  var resultsPanel   = document.getElementById('quizResults-' + SECTION_ID);
+  var resultsTitle   = document.getElementById('quizResultsTitle-' + SECTION_ID);
+  var resultsDesc    = document.getElementById('quizResultsDesc-' + SECTION_ID);
+  var productsGrid   = document.getElementById('quizProductsGrid-' + SECTION_ID);
+  var loadingEl      = document.getElementById('quizLoading-' + SECTION_ID);
+  var retakeBtn      = document.getElementById('quizRetake-' + SECTION_ID);
+
+  if (!stepsContainer) return;
+
+  var steps = stepsContainer.querySelectorAll('.style-quiz__step');
+  var currentStep = 0;
+  var answers = {};
+
+  /* --- Style Profile Data --- */
+  var styleProfiles = {
+    modern: {
+      title: 'The Contemporary Curator',
+      desc: 'You have an eye for clean lines and structured beauty. Your space is a gallery of intentional choices where every piece earns its place.'
+    },
+    bohemian: {
+      title: 'The Free Spirit',
+      desc: 'Your style is as unique as you are — eclectic, layered, and full of soul. You mix patterns and textures with effortless confidence.'
+    },
+    minimalist: {
+      title: 'The Quiet Connoisseur',
+      desc: 'You understand the power of restraint. For you, a single perfect piece says more than a dozen. Your space breathes elegance.'
+    },
+    bold: {
+      title: 'The Statement Maker',
+      desc: 'Go big or go home — that is your motto. You want art that stops people in their tracks and sparks conversation.'
+    }
+  };
+
+  /* --- Initialize --- */
+  function init() {
+    /* Bind option clicks */
+    steps.forEach(function(step) {
+      var options = step.querySelectorAll('.style-quiz__option');
+      options.forEach(function(opt) {
+        opt.addEventListener('click', function() {
+          /* Deselect siblings */
+          options.forEach(function(o) { o.classList.remove('selected'); });
+          opt.classList.add('selected');
+          /* Store answer */
+          var key = step.getAttribute('data-key');
+          answers[key] = opt.getAttribute('data-value');
+          /* Enable next */
+          btnNext.disabled = false;
+
+          /* Auto-advance after a short delay for better UX */
+          if (currentStep < TOTAL_STEPS - 1) {
+            setTimeout(function() { goToStep(currentStep + 1); }, 350);
+          } else {
+            /* Last step — show results after brief delay */
+            setTimeout(showResults, 400);
+          }
+        });
+      });
+    });
+
+    /* Nav button clicks */
+    btnBack.addEventListener('click', function() {
+      if (currentStep > 0) goToStep(currentStep - 1);
+    });
+    btnNext.addEventListener('click', function() {
+      if (currentStep < TOTAL_STEPS - 1) {
+        goToStep(currentStep + 1);
+      } else {
+        showResults();
+      }
+    });
+
+    /* Retake */
+    retakeBtn.addEventListener('click', retake);
+
+    updateUI();
+  }
+
+  /* --- Navigate to step --- */
+  function goToStep(index) {
+    steps[currentStep].classList.remove('active');
+    currentStep = index;
+    steps[currentStep].classList.add('active');
+    updateUI();
+  }
+
+  /* --- Update buttons, progress --- */
+  function updateUI() {
+    /* Progress bar */
+    var pct = ((currentStep + 1) / TOTAL_STEPS) * 100;
+    progressFill.style.width = pct + '%';
+    progressLabel.textContent = 'Question ' + (currentStep + 1) + ' of ' + TOTAL_STEPS;
+
+    /* Back button */
+    btnBack.disabled = currentStep === 0;
+
+    /* Next button — only enable if current step has a selection */
+    var key = steps[currentStep].getAttribute('data-key');
+    btnNext.disabled = !answers[key];
+
+    /* Change Next text on last step */
+    if (currentStep === TOTAL_STEPS - 1) {
+      btnNext.innerHTML = 'See Results <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    } else {
+      btnNext.innerHTML = 'Next <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    }
+  }
+
+  /* --- Show Results --- */
+  function showResults() {
+    /* Hide quiz steps & nav */
+    stepsContainer.style.display = 'none';
+    navContainer.style.display = 'none';
+    document.querySelector('#styleQuiz-' + SECTION_ID + ' .style-quiz__progress').style.display = 'none';
+
+    /* Build profile */
+    var profile = styleProfiles[answers.style] || styleProfiles.modern;
+    resultsTitle.textContent = profile.title;
+    resultsDesc.textContent = profile.desc;
+
+    /* Show results panel */
+    resultsPanel.style.display = 'block';
+
+    /* Scroll to results */
+    resultsPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    /* Fetch matching products */
+    fetchProducts();
+  }
+
+  /* --- Fetch Products via Shopify AJAX Search --- */
+  function fetchProducts() {
+    loadingEl.style.display = 'flex';
+
+    /* Build tag queries from answers — primary tags first, then fallbacks */
+    var tagSets = [];
+
+    /* Combine style + palette as primary search (most specific) */
+    if (answers.style && answers.palette) {
+      tagSets.push(['style-' + answers.style, 'palette-' + answers.palette]);
+    }
+    /* Style + mood */
+    if (answers.style && answers.mood) {
+      tagSets.push(['style-' + answers.style, 'mood-' + answers.mood]);
+    }
+    /* Style only as fallback */
+    if (answers.style) {
+      tagSets.push(['style-' + answers.style]);
+    }
+    /* Palette only as secondary fallback */
+    if (answers.palette) {
+      tagSets.push(['palette-' + answers.palette]);
+    }
+
+    /* Budget tag for post-filtering */
+    var budgetTag = answers.budget ? 'budget-' + answers.budget : null;
+
+    /* Try each tag set in order until we get enough results */
+    var allProducts = [];
+    var seenHandles = {};
+
+    function tryNextTagSet(index) {
+      if (index >= tagSets.length || allProducts.length >= MAX_RESULTS) {
+        renderProducts(allProducts);
+        return;
+      }
+
+      var tags = tagSets[index];
+      var query = tags.map(function(t) { return 'tag:' + t; }).join(' AND ');
+
+      fetch('/search.json?q=' + encodeURIComponent(query) + '&type=product&resources[type]=product&resources[limit]=' + MAX_RESULTS)
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+          var products = [];
+
+          /* Handle both search response formats */
+          if (data.resources && data.resources.results && data.resources.results.products) {
+            products = data.resources.results.products;
+          } else if (data.results) {
+            products = data.results;
+          }
+
+          products.forEach(function(p) {
+            if (!seenHandles[p.handle] && allProducts.length < MAX_RESULTS) {
+              seenHandles[p.handle] = true;
+              allProducts.push(p);
+            }
+          });
+
+          tryNextTagSet(index + 1);
+        })
+        .catch(function() {
+          tryNextTagSet(index + 1);
+        });
+    }
+
+    tryNextTagSet(0);
+  }
+
+  /* --- Render Product Cards --- */
+  function renderProducts(products) {
+    loadingEl.style.display = 'none';
+
+    if (products.length === 0) {
+      productsGrid.innerHTML = '<div class="style-quiz__no-results">' +
+        '<p>We are still building our collection for your unique style.</p>' +
+        '<p>Browse our full catalog to find something you love.</p>' +
+        '</div>';
+      return;
+    }
+
+    var html = '';
+    products.forEach(function(product) {
+      var imageUrl = '';
+      if (product.featured_image && product.featured_image.url) {
+        imageUrl = product.featured_image.url;
+      } else if (product.image) {
+        imageUrl = product.image;
+      } else if (product.featured_image) {
+        imageUrl = product.featured_image;
+      }
+
+      var price = '';
+      if (product.price) {
+        /* price comes in cents from search.json — convert to dollars */
+        var priceNum = parseFloat(product.price);
+        if (product.price_min !== undefined) {
+          priceNum = parseFloat(product.price_min);
+        }
+        /* Shopify search.json returns price as string like "25.00" or in cents */
+        if (priceNum > 0) {
+          /* If price looks like cents (> 100 and an integer), convert */
+          if (priceNum === Math.floor(priceNum) && priceNum > 999) {
+            price = '$' + (priceNum / 100).toFixed(2);
+          } else {
+            price = '$' + priceNum.toFixed(2);
+          }
+        }
+      }
+
+      var productUrl = product.url || '/products/' + product.handle;
+      var title = product.title || '';
+      var altText = title.replace(/"/g, '&quot;');
+
+      html += '<a href="' + productUrl + '" class="style-quiz__product-card">' +
+        '<div class="style-quiz__product-image">' +
+          (imageUrl ? '<img src="' + imageUrl + '" alt="' + altText + '" loading="lazy" width="400" height="400">' : '') +
+        '</div>' +
+        '<div class="style-quiz__product-info">' +
+          '<p class="style-quiz__product-title">' + title + '</p>' +
+          (price ? '<p class="style-quiz__product-price">' + price + '</p>' : '') +
+        '</div>' +
+      '</a>';
+    });
+
+    productsGrid.innerHTML = html;
+  }
+
+  /* --- Retake Quiz --- */
+  function retake() {
+    answers = {};
+    currentStep = 0;
+
+    /* Reset all selections */
+    steps.forEach(function(step) {
+      step.classList.remove('active');
+      step.querySelectorAll('.style-quiz__option').forEach(function(opt) {
+        opt.classList.remove('selected');
+      });
+    });
+    steps[0].classList.add('active');
+
+    /* Show quiz, hide results */
+    stepsContainer.style.display = '';
+    navContainer.style.display = '';
+    document.querySelector('#styleQuiz-' + SECTION_ID + ' .style-quiz__progress').style.display = '';
+    resultsPanel.style.display = 'none';
+
+    /* Reset products grid */
+    productsGrid.innerHTML = '<div class="style-quiz__loading" id="quizLoading-' + SECTION_ID + '">' +
+      '<div class="style-quiz__spinner"></div>' +
+      '<p>Finding your perfect matches...</p>' +
+      '</div>';
+    loadingEl = document.getElementById('quizLoading-' + SECTION_ID);
+
+    updateUI();
+
+    /* Scroll to top of quiz */
+    document.getElementById('styleQuiz-' + SECTION_ID).scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  /* --- Kick off --- */
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Style Quiz",
+  "tag": "section",
+  "class": "style-quiz-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "General"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Discover Your Art Style"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Answer a few quick questions and we'll match you with artwork that fits your vibe. Takes less than a minute."
+    },
+    {
+      "type": "header",
+      "content": "Questions"
+    },
+    {
+      "type": "text",
+      "id": "q1_text",
+      "label": "Question 1 — Art Style",
+      "default": "What art style speaks to you?"
+    },
+    {
+      "type": "text",
+      "id": "q2_text",
+      "label": "Question 2 — Color Palette",
+      "default": "Which color palette are you drawn to?"
+    },
+    {
+      "type": "text",
+      "id": "q3_text",
+      "label": "Question 3 — Room Type",
+      "default": "Where will this art live?"
+    },
+    {
+      "type": "text",
+      "id": "q4_text",
+      "label": "Question 4 — Mood",
+      "default": "What mood do you want to create?"
+    },
+    {
+      "type": "text",
+      "id": "q5_text",
+      "label": "Question 5 — Budget",
+      "default": "What is your budget range?"
+    },
+    {
+      "type": "header",
+      "content": "Results"
+    },
+    {
+      "type": "text",
+      "id": "results_heading",
+      "label": "Results Products Heading",
+      "default": "Curated Picks for You"
+    },
+    {
+      "type": "range",
+      "id": "max_results",
+      "label": "Max Products to Show",
+      "min": 4,
+      "max": 12,
+      "step": 2,
+      "default": 8
+    },
+    {
+      "type": "text",
+      "id": "shop_all_text",
+      "label": "Shop All Button Text",
+      "default": "Shop All Art"
+    },
+    {
+      "type": "url",
+      "id": "shop_all_url",
+      "label": "Shop All Button URL",
+      "info": "Defaults to /collections/all"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#1a1d1c"
+    },
+    {
+      "type": "color",
+      "id": "card_color",
+      "label": "Card Color",
+      "default": "#222725"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#efecec"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color",
+      "default": "#e8941f"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Style Quiz"
+    }
+  ]
+}
+{% endschema %}

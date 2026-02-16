@@ -1,0 +1,176 @@
+{% comment %}
+  ============================================
+  YouTube Gallery (Full Page)
+  Paste into: sections/custom-youtube-gallery.liquid
+
+  SETUP:
+  1. Create this section file
+  2. Create templates/page.youtube.json (see separate file)
+  3. Create assets/custom-youtube-gallery.css (see separate file)
+  4. In Shopify Admin: Pages > Add page > "YouTube"
+  5. Assign template: page.youtube
+  6. In Theme Customizer for that page, enter your API Key & Channel ID
+  ============================================
+{% endcomment %}
+
+{{ 'custom-youtube-gallery.css' | asset_url | stylesheet_tag }}
+
+<div class="youtube-gallery page-width section-{{ section.id }}-padding">
+  <div class="youtube-gallery__header">
+    <h1 class="youtube-gallery__title">{{ section.settings.heading | default: 'Our Videos' }}</h1>
+    {% if section.settings.subheading != blank %}
+      <p class="youtube-gallery__subtitle">{{ section.settings.subheading }}</p>
+    {% endif %}
+  </div>
+
+  <div class="youtube-gallery__tabs">
+    <button class="youtube-tab active" data-tab="recent">Most Recent</button>
+    <button class="youtube-tab" data-tab="popular">Most Popular</button>
+    <button class="youtube-tab" data-tab="all">All Videos</button>
+  </div>
+
+  <div class="youtube-gallery__grid" id="youtubeGrid-{{ section.id }}">
+    <div class="youtube-gallery__loading">Loading videos...</div>
+  </div>
+
+  <!-- Creator link -->
+  <div style="text-align: center; margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--color-border, #e5e5e5);">
+    <a href="https://richardabreu.studio" target="_blank" rel="noopener"
+       style="font-size: 0.8rem; color: var(--color-foreground, #252525); opacity: 0.5; text-decoration: none; transition: opacity 0.3s;"
+       onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='0.5'">
+      Designed by Richard Abreu Studio &rarr;
+    </a>
+  </div>
+</div>
+
+<script>
+(function() {
+  var API_KEY = '{{ section.settings.api_key }}';
+  var CHANNEL_ID = '{{ section.settings.channel_id }}';
+  var MAX_RESULTS = {{ section.settings.max_results | default: 12 }};
+  var sectionId = '{{ section.id }}';
+
+  if (!API_KEY || !CHANNEL_ID) {
+    document.getElementById('youtubeGrid-' + sectionId).innerHTML =
+      '<p style="text-align:center; padding:40px; opacity:0.5;">Please configure your YouTube API Key and Channel ID in the Theme Customizer.</p>';
+    return;
+  }
+
+  var cache = {};
+
+  function getOrderParam(tab) {
+    if (tab === 'popular') return 'viewCount';
+    return 'date';
+  }
+
+  function fetchVideos(tab) {
+    if (cache[tab]) {
+      renderVideos(cache[tab]);
+      return;
+    }
+
+    var grid = document.getElementById('youtubeGrid-' + sectionId);
+    grid.innerHTML = '<div class="youtube-gallery__loading">Loading videos...</div>';
+
+    var order = getOrderParam(tab);
+    var url = 'https://www.googleapis.com/youtube/v3/search?key=' + API_KEY
+      + '&channelId=' + CHANNEL_ID
+      + '&part=snippet&type=video&order=' + order
+      + '&maxResults=' + MAX_RESULTS;
+
+    fetch(url)
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data.error) {
+          grid.innerHTML = '<p style="text-align:center; padding:40px; color:#c00;">YouTube API error: ' + data.error.message + '</p>';
+          return;
+        }
+        var items = data.items || [];
+        cache[tab] = items;
+        renderVideos(items);
+      })
+      .catch(function(err) {
+        grid.innerHTML = '<p style="text-align:center; padding:40px; opacity:0.5;">Failed to load videos. Please try again later.</p>';
+      });
+  }
+
+  function renderVideos(videos) {
+    var grid = document.getElementById('youtubeGrid-' + sectionId);
+    if (!videos || videos.length === 0) {
+      grid.innerHTML = '<p style="text-align:center; padding:40px; opacity:0.5;">No videos found.</p>';
+      return;
+    }
+    grid.innerHTML = videos.map(function(v) {
+      var thumb = v.snippet.thumbnails.high ? v.snippet.thumbnails.high.url : v.snippet.thumbnails.default.url;
+      var date = new Date(v.snippet.publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+      return '<div class="youtube-card">'
+        + '<a href="https://www.youtube.com/watch?v=' + v.id.videoId + '" target="_blank" rel="noopener">'
+        + '<div class="youtube-card__thumbnail">'
+        + '<img src="' + thumb + '" alt="' + v.snippet.title.replace(/"/g, '&quot;') + '" loading="lazy" width="480" height="360">'
+        + '<div class="youtube-card__play"><svg width="52" height="36" viewBox="0 0 52 36" fill="none"><rect width="52" height="36" rx="8" fill="rgba(0,0,0,0.7)"/><path d="M21 11v14l14-7-14-7z" fill="#fff"/></svg></div>'
+        + '</div>'
+        + '<h3 class="youtube-card__title">' + v.snippet.title + '</h3>'
+        + '<p class="youtube-card__date">' + date + '</p>'
+        + '</a></div>';
+    }).join('');
+  }
+
+  /* Tab switching */
+  document.querySelectorAll('.youtube-tab').forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      document.querySelectorAll('.youtube-tab').forEach(function(t) { t.classList.remove('active'); });
+      this.classList.add('active');
+      fetchVideos(this.dataset.tab);
+    });
+  });
+
+  /* Load initial (most recent) */
+  fetchVideos('recent');
+})();
+</script>
+
+{% schema %}
+{
+  "name": "YouTube Gallery",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Our Videos"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Watch our latest creative content"
+    },
+    {
+      "type": "text",
+      "id": "api_key",
+      "label": "YouTube Data API Key",
+      "info": "Get this from Google Cloud Console > APIs & Services"
+    },
+    {
+      "type": "text",
+      "id": "channel_id",
+      "label": "YouTube Channel ID",
+      "info": "Find at youtube.com/account_advanced or from your channel URL"
+    },
+    {
+      "type": "range",
+      "id": "max_results",
+      "label": "Max videos per tab",
+      "min": 4,
+      "max": 24,
+      "step": 4,
+      "default": 12
+    }
+  ],
+  "presets": [
+    {
+      "name": "YouTube Gallery"
+    }
+  ]
+}
+{% endschema %}

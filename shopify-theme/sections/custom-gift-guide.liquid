@@ -1,0 +1,684 @@
+{% comment %}
+  ============================================
+  Curated Gift Guide with Category Tabs
+  Paste into: sections/custom-gift-guide.liquid
+  Add category blocks in Theme Customizer, each
+  pointing to a collection with a label and icon.
+  ============================================
+{% endcomment %}
+
+<section class="gift-guide section-{{ section.id }}-padding" id="giftGuide-{{ section.id }}">
+  <div class="page-width">
+
+    {%- comment -%} ── Header ── {%- endcomment -%}
+    <div class="gift-guide__header">
+      {% if section.settings.badge != blank %}
+        <span class="gift-guide__badge">{{ section.settings.badge }}</span>
+      {% endif %}
+      <h2 class="gift-guide__heading">{{ section.settings.heading }}</h2>
+      {% if section.settings.subheading != blank %}
+        <p class="gift-guide__subheading">{{ section.settings.subheading }}</p>
+      {% endif %}
+    </div>
+
+    {%- comment -%} ── Category Tabs ── {%- endcomment -%}
+    {% if section.blocks.size > 0 %}
+      <div class="gift-guide__tabs-wrapper">
+        <div class="gift-guide__tabs" id="giftGuideTabs-{{ section.id }}" role="tablist" aria-label="Gift guide categories">
+          {% for block in section.blocks %}
+            <button class="gift-guide__tab {% if forloop.first %}gift-guide__tab--active{% endif %}"
+                    role="tab"
+                    id="tab-{{ section.id }}-{{ forloop.index0 }}"
+                    aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+                    aria-controls="panel-{{ section.id }}-{{ forloop.index0 }}"
+                    data-index="{{ forloop.index0 }}"
+                    {{ block.shopify_attributes }}>
+              {% if block.settings.icon != blank %}
+                <span class="gift-guide__tab-icon" aria-hidden="true">{{ block.settings.icon }}</span>
+              {% endif %}
+              <span class="gift-guide__tab-label">{{ block.settings.tab_title | default: 'Category' }}</span>
+            </button>
+          {% endfor %}
+        </div>
+      </div>
+
+      {%- comment -%} ── Tab Panels (one per block, pre-rendered) ── {%- endcomment -%}
+      <div class="gift-guide__panels">
+        {% for block in section.blocks %}
+          {% assign collection = collections[block.settings.collection] %}
+          <div class="gift-guide__panel {% if forloop.first %}gift-guide__panel--active{% endif %}"
+               role="tabpanel"
+               id="panel-{{ section.id }}-{{ forloop.index0 }}"
+               aria-labelledby="tab-{{ section.id }}-{{ forloop.index0 }}"
+               {% unless forloop.first %}hidden{% endunless %}>
+
+            {% if collection %}
+              {% assign products_limit = block.settings.products_to_show | default: 4 %}
+              <div class="gift-guide__grid">
+                {% for product in collection.products limit: products_limit %}
+                  <div class="gift-guide__card">
+                    <a href="{{ product.url }}" class="gift-guide__card-link" aria-label="{{ product.title }}">
+                      <div class="gift-guide__card-image">
+                        {% if product.featured_image %}
+                          {{ product.featured_image | image_url: width: 480 | image_tag:
+                            loading: 'lazy',
+                            alt: product.title,
+                            class: 'gift-guide__img'
+                          }}
+                        {% else %}
+                          <div class="gift-guide__placeholder-img" aria-label="No image available">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="48" height="48"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+                          </div>
+                        {% endif %}
+
+                        {%- comment -%} Sale badge if compare-at price exists {%- endcomment -%}
+                        {% if product.compare_at_price > product.price %}
+                          {% assign discount = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price %}
+                          <span class="gift-guide__sale-badge">-{{ discount }}%</span>
+                        {% endif %}
+                      </div>
+
+                      <div class="gift-guide__card-body">
+                        <h3 class="gift-guide__product-title">{{ product.title }}</h3>
+                        <div class="gift-guide__price-row">
+                          <span class="gift-guide__price">{{ product.price | money }}</span>
+                          {% if product.compare_at_price > product.price %}
+                            <span class="gift-guide__compare-price">{{ product.compare_at_price | money }}</span>
+                          {% endif %}
+                        </div>
+                        <span class="gift-guide__shop-link">Shop Now &rarr;</span>
+                      </div>
+                    </a>
+                  </div>
+                {% endfor %}
+              </div>
+
+              {%- comment -%} View Collection link below the grid {%- endcomment -%}
+              {% if block.settings.show_view_collection and collection.url != blank %}
+                <div class="gift-guide__view-collection">
+                  <a href="{{ collection.url }}" class="gift-guide__view-collection-link">
+                    View All {{ block.settings.tab_title | default: collection.title }} &rarr;
+                  </a>
+                </div>
+              {% endif %}
+
+            {% else %}
+              <div class="gift-guide__empty">
+                <p>No collection selected for this category. Add one in the Theme Customizer.</p>
+              </div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="gift-guide__empty">
+        <p>Add gift guide categories as blocks in the Theme Customizer.</p>
+      </div>
+    {% endif %}
+
+    {%- comment -%} ── Bottom CTA ── {%- endcomment -%}
+    {% if section.settings.cta_text != blank %}
+      <div class="gift-guide__footer">
+        <a href="{{ section.settings.cta_url }}" class="gift-guide__cta">
+          {{ section.settings.cta_text }}
+        </a>
+      </div>
+    {% endif %}
+
+  </div>
+</section>
+
+{%- comment -%} ────────── JavaScript ────────── {%- endcomment -%}
+<script>
+(function() {
+  var sectionId = '{{ section.id }}';
+  var tabsContainer = document.getElementById('giftGuideTabs-' + sectionId);
+  if (!tabsContainer) return;
+
+  var tabs = tabsContainer.querySelectorAll('.gift-guide__tab');
+  var section = document.getElementById('giftGuide-' + sectionId);
+  var panels = section.querySelectorAll('.gift-guide__panel');
+
+  function activateTab(index) {
+    /* Deactivate all */
+    tabs.forEach(function(tab) {
+      tab.classList.remove('gift-guide__tab--active');
+      tab.setAttribute('aria-selected', 'false');
+    });
+    panels.forEach(function(panel) {
+      panel.classList.remove('gift-guide__panel--active');
+      panel.setAttribute('hidden', '');
+    });
+
+    /* Activate selected */
+    tabs[index].classList.add('gift-guide__tab--active');
+    tabs[index].setAttribute('aria-selected', 'true');
+    panels[index].classList.remove('gift-guide__panel--active'); /* remove first to reset */
+    panels[index].classList.add('gift-guide__panel--active');
+    panels[index].removeAttribute('hidden');
+
+    /* Scroll tab into view on mobile */
+    tabs[index].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+  }
+
+  tabs.forEach(function(tab, i) {
+    tab.addEventListener('click', function() {
+      activateTab(i);
+    });
+
+    /* Keyboard navigation */
+    tab.addEventListener('keydown', function(e) {
+      var newIndex;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+        e.preventDefault();
+        newIndex = (i + 1) % tabs.length;
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        newIndex = (i - 1 + tabs.length) % tabs.length;
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        newIndex = 0;
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        newIndex = tabs.length - 1;
+      }
+      if (newIndex !== undefined) {
+        activateTab(newIndex);
+        tabs[newIndex].focus();
+      }
+    });
+  });
+})();
+</script>
+
+{%- comment -%} ────────── Styles ────────── {%- endcomment -%}
+<style>
+  /* ── Section container ── */
+  .gift-guide {
+    background: #1a1d1c;
+    padding: 64px 0;
+    color: #efecec;
+  }
+
+  /* ── Header ── */
+  .gift-guide__header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .gift-guide__badge {
+    display: inline-block;
+    background: #e8941f;
+    color: #fff;
+    padding: 5px 16px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    border-radius: 2px;
+  }
+  .gift-guide__heading {
+    font-family: var(--font-heading-family, 'Trirong', serif);
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 300;
+    color: #efecec;
+    margin: 0 0 12px;
+    line-height: 1.2;
+  }
+  .gift-guide__subheading {
+    color: rgba(239, 236, 236, 0.65);
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  /* ── Tabs ── */
+  .gift-guide__tabs-wrapper {
+    position: relative;
+    margin-bottom: 36px;
+  }
+  .gift-guide__tabs-wrapper::before,
+  .gift-guide__tabs-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 32px;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .gift-guide__tabs-wrapper::before {
+    left: 0;
+    background: linear-gradient(90deg, #1a1d1c 0%, transparent 100%);
+  }
+  .gift-guide__tabs-wrapper::after {
+    right: 0;
+    background: linear-gradient(270deg, #1a1d1c 0%, transparent 100%);
+  }
+  .gift-guide__tabs {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 4px 36px;
+  }
+  .gift-guide__tabs::-webkit-scrollbar {
+    display: none;
+  }
+  .gift-guide__tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    padding: 10px 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    color: rgba(239, 236, 236, 0.6);
+    background: #222725;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+    font-family: inherit;
+    line-height: 1.3;
+  }
+  .gift-guide__tab:hover {
+    color: #efecec;
+    border-color: rgba(232, 148, 31, 0.4);
+    background: #2a2e2c;
+  }
+  .gift-guide__tab--active {
+    color: #fff;
+    background: #e8941f;
+    border-color: #e8941f;
+  }
+  .gift-guide__tab--active:hover {
+    background: #d17f14;
+    border-color: #d17f14;
+  }
+  .gift-guide__tab-icon {
+    font-size: 1.1rem;
+    line-height: 1;
+  }
+  .gift-guide__tab-label {
+    line-height: 1;
+  }
+  .gift-guide__tab:focus-visible {
+    outline: 2px solid #e8941f;
+    outline-offset: 2px;
+  }
+
+  /* ── Panels ── */
+  .gift-guide__panels {
+    position: relative;
+  }
+  .gift-guide__panel {
+    display: none;
+    animation: giftGuideFadeIn 0.35s ease;
+  }
+  .gift-guide__panel--active {
+    display: block;
+  }
+  @keyframes giftGuideFadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Product Grid ── */
+  .gift-guide__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+
+  /* ── Product Card ── */
+  .gift-guide__card {
+    background: #222725;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    transition: border-color 0.3s ease, transform 0.3s ease;
+  }
+  .gift-guide__card:hover {
+    border-color: rgba(232, 148, 31, 0.3);
+    transform: translateY(-4px);
+  }
+  .gift-guide__card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  /* Card Image */
+  .gift-guide__card-image {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: #1a1d1c;
+  }
+  .gift-guide__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  .gift-guide__card:hover .gift-guide__img {
+    transform: scale(1.06);
+  }
+  .gift-guide__placeholder-img {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(239, 236, 236, 0.2);
+  }
+  .gift-guide__sale-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #e8941f;
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 2px;
+    letter-spacing: 0.04em;
+    line-height: 1.4;
+  }
+
+  /* Card Body */
+  .gift-guide__card-body {
+    padding: 16px;
+  }
+  .gift-guide__product-title {
+    font-family: var(--font-heading-family, 'Trirong', serif);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #efecec;
+    margin: 0 0 8px;
+    line-height: 1.35;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .gift-guide__price-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  .gift-guide__price {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #f4b88a;
+  }
+  .gift-guide__compare-price {
+    font-size: 0.8rem;
+    color: rgba(239, 236, 236, 0.4);
+    text-decoration: line-through;
+  }
+  .gift-guide__shop-link {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #e8941f;
+    opacity: 0.75;
+    transition: opacity 0.25s ease;
+  }
+  .gift-guide__card:hover .gift-guide__shop-link {
+    opacity: 1;
+  }
+
+  /* ── View Collection Link ── */
+  .gift-guide__view-collection {
+    text-align: center;
+    margin-top: 24px;
+  }
+  .gift-guide__view-collection-link {
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #e8941f;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color 0.25s ease;
+  }
+  .gift-guide__view-collection-link:hover {
+    color: #f4b88a;
+  }
+
+  /* ── Empty State ── */
+  .gift-guide__empty {
+    text-align: center;
+    padding: 48px 0;
+    color: rgba(239, 236, 236, 0.4);
+    font-size: 0.9rem;
+  }
+
+  /* ── Footer CTA ── */
+  .gift-guide__footer {
+    text-align: center;
+    margin-top: 48px;
+  }
+  .gift-guide__cta {
+    display: inline-block;
+    background: #e8941f;
+    color: #fff;
+    padding: 14px 36px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: background 0.25s ease, transform 0.25s ease;
+  }
+  .gift-guide__cta:hover {
+    background: #d17f14;
+    transform: translateY(-1px);
+  }
+  .gift-guide__cta:active {
+    transform: translateY(0);
+  }
+
+  /* ── Responsive: Tablet ── */
+  @media screen and (max-width: 989px) {
+    .gift-guide__grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+  }
+
+  /* ── Responsive: Mobile ── */
+  @media screen and (max-width: 749px) {
+    .gift-guide {
+      padding: 40px 0;
+    }
+    .gift-guide__header {
+      margin-bottom: 28px;
+    }
+    .gift-guide__subheading {
+      font-size: 0.9rem;
+    }
+    .gift-guide__tabs-wrapper {
+      margin-bottom: 24px;
+    }
+    .gift-guide__tabs {
+      justify-content: flex-start;
+      padding: 4px 20px;
+    }
+    .gift-guide__tab {
+      padding: 8px 16px;
+      font-size: 0.8rem;
+    }
+    .gift-guide__tab-icon {
+      font-size: 1rem;
+    }
+    .gift-guide__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+    .gift-guide__card-body {
+      padding: 12px;
+    }
+    .gift-guide__product-title {
+      font-size: 0.82rem;
+    }
+    .gift-guide__price {
+      font-size: 0.88rem;
+    }
+    .gift-guide__shop-link {
+      font-size: 0.72rem;
+    }
+    .gift-guide__cta {
+      padding: 12px 28px;
+      font-size: 0.82rem;
+      width: 100%;
+      max-width: 320px;
+      text-align: center;
+    }
+    .gift-guide__footer {
+      margin-top: 36px;
+    }
+  }
+
+  /* ── Responsive: Small phones ── */
+  @media screen and (max-width: 449px) {
+    .gift-guide__grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Gift Guide",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Badge Text (optional)",
+      "default": "Gift Guide"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Curated Gift Guide"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Find the perfect gift for every art lover"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Bottom CTA Button Text",
+      "default": "Shop All Gifts"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Bottom CTA Button Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Gift Category",
+      "limit": 8,
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_title",
+          "label": "Tab Label",
+          "default": "For Her"
+        },
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Tab Icon (emoji)",
+          "default": "🎁",
+          "info": "A single emoji shown before the tab label"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "range",
+          "id": "products_to_show",
+          "label": "Products to Show",
+          "min": 2,
+          "max": 12,
+          "step": 1,
+          "default": 4
+        },
+        {
+          "type": "checkbox",
+          "id": "show_view_collection",
+          "label": "Show 'View All' link below products",
+          "default": true
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Gift Guide",
+      "blocks": [
+        {
+          "type": "category",
+          "settings": {
+            "tab_title": "For Her",
+            "icon": "💝"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "tab_title": "For Him",
+            "icon": "🎩"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "tab_title": "For the Home",
+            "icon": "🏠"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "tab_title": "Under $50",
+            "icon": "💰"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "tab_title": "Art Lovers",
+            "icon": "🎨"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

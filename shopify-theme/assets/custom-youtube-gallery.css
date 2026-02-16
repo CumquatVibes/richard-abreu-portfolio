@@ -1,0 +1,139 @@
+/* ============================================
+   YouTube Gallery Page — CSS
+   Paste into: assets/custom-youtube-gallery.css
+   ============================================ */
+
+.youtube-gallery {
+  padding: 40px 0 60px;
+}
+
+.youtube-gallery__header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.youtube-gallery__title {
+  font-family: var(--font-heading-family, 'Trirong', serif);
+  font-size: 2.4rem;
+  font-weight: 300;
+  margin-bottom: 8px;
+}
+
+.youtube-gallery__subtitle {
+  font-size: 1rem;
+  opacity: 0.6;
+}
+
+.youtube-gallery__tabs {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.youtube-tab {
+  padding: 10px 24px;
+  border: 1px solid var(--color-border, #d4d4d4);
+  background: transparent;
+  cursor: pointer;
+  font-family: var(--font-body-family, 'Quattrocento Sans', sans-serif);
+  font-size: 0.9rem;
+  transition: all 0.3s;
+  color: var(--color-foreground, #252525);
+}
+
+.youtube-tab:hover {
+  border-color: var(--color-foreground, #252525);
+}
+
+.youtube-tab.active {
+  background: var(--color-button, #2c332f);
+  color: var(--color-button-text, #fff);
+  border-color: var(--color-button, #2c332f);
+}
+
+.youtube-gallery__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.youtube-gallery__loading {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 20px;
+  font-size: 1rem;
+  opacity: 0.5;
+}
+
+.youtube-card {
+  background: var(--color-background, #fff);
+  border: 1px solid var(--color-border, #e5e5e5);
+  overflow: hidden;
+  transition: box-shadow 0.3s;
+}
+
+.youtube-card:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.youtube-card a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.youtube-card__thumbnail {
+  position: relative;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+}
+
+.youtube-card__thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.youtube-card:hover img {
+  transform: scale(1.05);
+}
+
+.youtube-card__play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.8;
+  transition: opacity 0.3s;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+}
+
+.youtube-card:hover .youtube-card__play {
+  opacity: 1;
+}
+
+.youtube-card__title {
+  padding: 14px 16px 6px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1.35;
+}
+
+.youtube-card__date {
+  padding: 0 16px 14px;
+  font-size: 0.8rem;
+  opacity: 0.5;
+}
+
+@media screen and (max-width: 749px) {
+  .youtube-gallery__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .youtube-tab {
+    padding: 8px 18px;
+    font-size: 0.8rem;
+  }
+}

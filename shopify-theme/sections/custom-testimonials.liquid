@@ -1,0 +1,135 @@
+{% comment %}
+  ============================================
+  Customer Testimonials
+  Paste into: sections/custom-testimonials.liquid
+  Add testimonials as blocks in Theme Customizer
+  ============================================
+{% endcomment %}
+
+<section class="testimonials section-{{ section.id }}-padding" style="background: {{ section.settings.bg_color }};">
+  <div class="page-width">
+    <h2 class="testimonials__heading">{{ section.settings.heading | default: 'What Customers Say' }}</h2>
+    <div class="testimonials__grid">
+      {% for block in section.blocks %}
+        <div class="testimonials__card" {{ block.shopify_attributes }}>
+          <div class="testimonials__stars">
+            {% for i in (1..block.settings.rating) %}&#9733;{% endfor %}
+            {% assign empty_stars = 5 | minus: block.settings.rating %}
+            {% for i in (1..empty_stars) %}&#9734;{% endfor %}
+          </div>
+          <p class="testimonials__quote">&ldquo;{{ block.settings.quote }}&rdquo;</p>
+          <div class="testimonials__footer">
+            <p class="testimonials__author">{{ block.settings.author }}</p>
+            {% if block.settings.product != blank %}
+              <p class="testimonials__product">Purchased: {{ block.settings.product }}</p>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonials__heading {
+    text-align: center;
+    font-family: var(--font-heading-family, 'Trirong', serif);
+    font-size: 2rem;
+    font-weight: 300;
+    margin-bottom: 32px;
+  }
+  .testimonials__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+  .testimonials__card {
+    background: var(--cv-bg-card, #222725);
+    padding: 28px;
+    border-radius: 4px;
+    border: 1px solid var(--cv-border, rgba(255, 255, 255, 0.08));
+  }
+  .testimonials__stars {
+    color: #e8941f;
+    font-size: 1.1rem;
+    margin-bottom: 14px;
+    letter-spacing: 2px;
+  }
+  .testimonials__quote {
+    font-style: italic;
+    line-height: 1.7;
+    margin-bottom: 18px;
+    font-size: 0.95rem;
+    color: var(--color-foreground, #252525);
+  }
+  .testimonials__footer {
+    border-top: 1px solid var(--cv-border, rgba(255, 255, 255, 0.08));
+    padding-top: 14px;
+  }
+  .testimonials__author {
+    font-weight: 700;
+    font-size: 0.85rem;
+  }
+  .testimonials__product {
+    font-size: 0.75rem;
+    opacity: 0.5;
+    margin-top: 2px;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "What Customers Say"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background",
+      "default": "#1a1d1c"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Star Rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Customer Quote"
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Customer Name"
+        },
+        {
+          "type": "text",
+          "id": "product",
+          "label": "Product Purchased (optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials"
+    }
+  ]
+}
+{% endschema %}

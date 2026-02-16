@@ -1,6 +1,14 @@
 .DS_Store
 .vercel/
+.env
 .env.local
 node_modules/
 Site images/
 about_richard_abreu/
+video-pipeline/youtube_token.json
+video-pipeline/__pycache__/
+media/
+ebooks/
+portfolio/gallery/*.mp4
+portfolio/gallery/*.wav
+countdownHQ - Google Play package/

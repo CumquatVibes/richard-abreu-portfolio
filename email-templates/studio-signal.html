@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>The Studio Signal | Richard Abreu — Systems. Design. Freedom.</title>
+    <meta name="description" content="The Studio Signal: Weekly automation workflows, design strategies, and visionary plays from a 20-year Navy veteran turned creative entrepreneur."/>
+    <meta property="og:title" content="The Studio Signal | Richard Abreu"/>
+    <meta property="og:description" content="Systems. Design. Freedom. The exact e-commerce and automation plays I used to transition from 20 years in the Navy to the digital studio."/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:image" content="images/hero-portrait.png"/>
+    <meta name="twitter:card" content="summary_large_image"/>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "signal": "#00ced1",
+                        "signal-dark": "#00a8ab",
+                        "signal-light": "#e0f7f9",
+                        "navy": "#0a192f",
+                        "navy-light": "#112240",
+                        "navy-lighter": "#1d3557",
+                    },
+                    fontFamily: {
+                        "sans": ["Inter", "system-ui", "sans-serif"],
+                        "display": ["Playfair Display", "Georgia", "serif"],
+                    },
+                },
+            },
+        }
+    </script>
+
+    <style>
+        * { scroll-behavior: smooth; }
+        ::selection { background: #00ced1; color: #0a192f; }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(0, 206, 209, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(0, 206, 209, 0.6); }
+        }
+        .animate-fade-up { animation: fadeUp 0.8s ease-out forwards; }
+        .stagger-1 { animation-delay: 0.15s; opacity: 0; }
+        .stagger-2 { animation-delay: 0.3s; opacity: 0; }
+        .stagger-3 { animation-delay: 0.45s; opacity: 0; }
+        .stagger-4 { animation-delay: 0.6s; opacity: 0; }
+        .glow { animation: pulse-glow 3s ease-in-out infinite; }
+    </style>
+</head>
+<body class="bg-navy text-white font-sans antialiased">
+
+    <!-- Minimal Nav -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-navy/90 backdrop-blur-xl border-b border-white/5">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-xl font-display font-bold tracking-tight">
+                R<span class="text-signal">.</span>Abreu
+            </a>
+            <a href="index.html" class="text-sm text-gray-400 hover:text-signal transition-colors">Back to Studio</a>
+        </div>
+    </nav>
+
+    <!-- Hero / Above the Fold -->
+    <section class="min-h-screen flex items-center pt-20 relative overflow-hidden">
+        <!-- Background grid effect -->
+        <div class="absolute inset-0 opacity-5" style="background-image: linear-gradient(rgba(0,206,209,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(0,206,209,0.3) 1px, transparent 1px); background-size: 60px 60px;"></div>
+
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+            <div class="inline-block bg-signal/10 border border-signal/30 rounded-full px-5 py-2 mb-8 animate-fade-up">
+                <span class="text-signal text-xs font-bold tracking-[0.2em] uppercase">Veteran-Owned & Mission-Driven</span>
+            </div>
+
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-display font-black leading-[0.95] tracking-tight animate-fade-up stagger-1">
+                The Studio<br/><span class="text-signal">Signal</span>
+            </h1>
+
+            <p class="text-xl md:text-2xl text-gray-300 mt-8 max-w-2xl mx-auto leading-relaxed animate-fade-up stagger-2">
+                Systems. Design. Freedom.<br class="hidden md:block"/>
+                The exact e-commerce and automation plays I used to transition from <span class="text-signal font-semibold">20 years in the Navy</span> to the digital studio.
+            </p>
+
+            <div class="mt-12 animate-fade-up stagger-3">
+                <form id="heroForm" class="max-w-lg mx-auto">
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <input type="text" placeholder="First Name" required class="flex-1 bg-navy-light border border-white/10 text-white px-6 py-4 rounded-lg text-sm focus:outline-none focus:border-signal transition-colors placeholder-gray-500"/>
+                        <input type="email" placeholder="Your Best Email" required class="flex-1 bg-navy-light border border-white/10 text-white px-6 py-4 rounded-lg text-sm focus:outline-none focus:border-signal transition-colors placeholder-gray-500"/>
+                    </div>
+                    <button type="submit" class="w-full mt-3 bg-signal text-navy font-bold text-sm tracking-wide uppercase px-10 py-4 rounded-lg hover:bg-signal-dark transition-all glow">
+                        Join the Mission
+                    </button>
+                </form>
+                <p class="text-gray-500 text-xs mt-4">Zero spam. Just high-vibe systems once a week. Unsubscribe anytime.</p>
+            </div>
+
+            <div class="flex justify-center gap-8 mt-16 animate-fade-up stagger-4">
+                <div class="text-center">
+                    <p class="text-signal text-2xl font-display font-bold">20+</p>
+                    <p class="text-gray-500 text-xs uppercase tracking-wide mt-1">Years Navy</p>
+                </div>
+                <div class="w-px bg-white/10"></div>
+                <div class="text-center">
+                    <p class="text-signal text-2xl font-display font-bold">Weekly</p>
+                    <p class="text-gray-500 text-xs uppercase tracking-wide mt-1">Signals</p>
+                </div>
+                <div class="w-px bg-white/10"></div>
+                <div class="text-center">
+                    <p class="text-signal text-2xl font-display font-bold">Free</p>
+                    <p class="text-gray-500 text-xs uppercase tracking-wide mt-1">Always</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What You'll Get -->
+    <section class="py-24 bg-navy-light">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <p class="text-signal text-sm font-bold tracking-[0.3em] uppercase mb-3">Every Week You'll Get</p>
+                <h2 class="text-3xl md:text-5xl font-display font-bold">No Noise. Just the Signal.</h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-navy border border-white/5 p-8 rounded-lg hover:border-signal/30 transition-all group">
+                    <div class="w-12 h-12 bg-signal/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-signal/20 transition-colors">
+                        <span class="text-signal text-xl font-bold">01</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3">The Weekly Blueprint</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Deep dives on agentic commerce, design strategy, and the visionary plays reshaping e-commerce in 2026.</p>
+                </div>
+                <div class="bg-navy border border-white/5 p-8 rounded-lg hover:border-signal/30 transition-all group">
+                    <div class="w-12 h-12 bg-signal/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-signal/20 transition-colors">
+                        <span class="text-signal text-xl font-bold">02</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3">Quick Win Automations</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Actionable automation workflows you can deploy today using N8N, Zapier, and Shopify. Save hours every week.</p>
+                </div>
+                <div class="bg-navy border border-white/5 p-8 rounded-lg hover:border-signal/30 transition-all group">
+                    <div class="w-12 h-12 bg-signal/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-signal/20 transition-colors">
+                        <span class="text-signal text-xl font-bold">03</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3">Vibe of the Week</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Spotlights on creators, veterans, and entrepreneurs doing the work. Plus updates on the Vibe Bazaar marketplace.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proof / Why Listen -->
+    <section class="py-24">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div>
+                    <div class="aspect-[3/4] max-w-sm overflow-hidden rounded-lg border border-white/10">
+                        <img src="images/about-headshot.jpg" alt="Richard Abreu - Founder" class="w-full h-full object-cover object-top">
+                    </div>
+                </div>
+                <div>
+                    <p class="text-signal text-sm font-bold tracking-[0.3em] uppercase mb-4">From the Founder</p>
+                    <h2 class="text-3xl md:text-4xl font-display font-bold mb-6 leading-tight">
+                        "In the Navy, systems aren't 'nice to have' -- they're the difference between success and chaos."
+                    </h2>
+                    <div class="space-y-4 text-gray-400 leading-relaxed">
+                        <p>I spent over two decades in the U.S. Navy. When I transitioned into design and e-commerce, I realized most entrepreneurs are living in that chaos every day.</p>
+                        <p>The Studio Signal is my way of handing you the manual. The automation workflows, design strategies, and visionary plays I'm using to build Cumquat Vibes and my personal studio.</p>
+                    </div>
+                    <div class="mt-8 flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-signal/20 flex items-center justify-center">
+                            <span class="text-signal font-bold text-lg">R</span>
+                        </div>
+                        <div>
+                            <p class="font-bold text-sm">Rich Abreu</p>
+                            <p class="text-gray-500 text-xs">Founder, richardabreu.studio & Cumquat Vibes</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recent Signal Preview -->
+    <section class="py-24 bg-navy-light">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <p class="text-signal text-sm font-bold tracking-[0.3em] uppercase mb-3">Sneak Peek</p>
+                <h2 class="text-3xl md:text-5xl font-display font-bold">What's Inside Signal #1</h2>
+            </div>
+
+            <div class="space-y-6">
+                <div class="bg-navy border border-white/5 p-8 rounded-lg hover:border-signal/20 transition-all">
+                    <div class="flex items-start gap-4">
+                        <span class="text-signal text-2xl">&#9670;</span>
+                        <div>
+                            <h3 class="font-bold text-lg mb-2">Agentic Commerce: The Future is Autonomous</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed">Stop thinking about "tools" and start thinking about "agents." I'm building a business that runs while I sleep, and I'm showing you how to do it too.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-navy border border-white/5 p-8 rounded-lg hover:border-signal/20 transition-all">
+                    <div class="flex items-start gap-4">
+                        <span class="text-signal text-2xl">&#9670;</span>
+                        <div>
+                            <h3 class="font-bold text-lg mb-2">7 E-Commerce Design Mistakes You're Making in 2026</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed">If your UX is stuck in 2023, you're leaving money on the table. We're fixing the friction.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-navy border border-white/5 p-8 rounded-lg hover:border-signal/20 transition-all">
+                    <div class="flex items-start gap-4">
+                        <span class="text-signal text-2xl">&#9670;</span>
+                        <div>
+                            <h3 class="font-bold text-lg mb-2">Trust-First UX: Turning Browsers into Buyers</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed">In a world of AI noise, authenticity is your superpower. Here's how to design for trust.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-navy border border-signal/20 p-8 rounded-lg">
+                    <div class="flex items-start gap-4">
+                        <span class="text-signal text-2xl">&#9881;</span>
+                        <div>
+                            <h3 class="font-bold text-lg mb-2">Quick Win: The "Dead-Simple" Content Loop</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed">Drop a video in a watch folder and have it automatically formatted for TikTok, Reels, and YouTube Shorts. <span class="text-signal">Time saved: 4 hours/week.</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-32 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-5" style="background-image: linear-gradient(rgba(0,206,209,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(0,206,209,0.3) 1px, transparent 1px); background-size: 60px 60px;"></div>
+
+        <div class="max-w-3xl mx-auto px-6 text-center relative z-10">
+            <h2 class="text-4xl md:text-6xl font-display font-bold mb-6">
+                Ready to receive<br/>the <span class="text-signal">signal</span>?
+            </h2>
+            <p class="text-gray-400 text-lg mb-10 max-w-xl mx-auto">
+                Success is a series of small, disciplined systems stacked on top of each other. Let's build yours.
+            </p>
+
+            <form id="ctaForm" class="max-w-lg mx-auto">
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <input type="text" placeholder="First Name" required class="flex-1 bg-navy-light border border-white/10 text-white px-6 py-4 rounded-lg text-sm focus:outline-none focus:border-signal transition-colors placeholder-gray-500"/>
+                    <input type="email" placeholder="Your Best Email" required class="flex-1 bg-navy-light border border-white/10 text-white px-6 py-4 rounded-lg text-sm focus:outline-none focus:border-signal transition-colors placeholder-gray-500"/>
+                </div>
+                <button type="submit" class="w-full mt-3 bg-signal text-navy font-bold text-sm tracking-wide uppercase px-10 py-4 rounded-lg hover:bg-signal-dark transition-all glow">
+                    Join the Mission
+                </button>
+            </form>
+            <p class="text-gray-600 text-xs mt-4">Zero spam. Unsubscribe anytime. Stay visionary.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/5 py-10">
+        <div class="max-w-5xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-gray-600 text-xs">&copy; 2026 Richard Abreu. All Rights Reserved.</p>
+            <div class="flex gap-6">
+                <a href="https://www.instagram.com/cumquat_vibes/" target="_blank" class="text-gray-500 hover:text-signal transition-colors text-xs">Instagram</a>
+                <a href="https://www.youtube.com/@Cumquat-Vibez" target="_blank" class="text-gray-500 hover:text-signal transition-colors text-xs">YouTube</a>
+                <a href="https://www.cumquatvibes.com" target="_blank" class="text-gray-500 hover:text-signal transition-colors text-xs">Shop</a>
+                <a href="index.html" class="text-gray-500 hover:text-signal transition-colors text-xs">Studio</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = this.querySelector('input[type="text"]').value;
+                alert('Welcome aboard, ' + name + '! You\'re now part of The Studio Signal.');
+                this.reset();
+            });
+        });
+    </script>
+</body>
+</html>

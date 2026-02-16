@@ -1,0 +1,153 @@
+{% comment %}
+  ============================================
+  Rotating Collections Carousel
+  Paste into: sections/custom-rotating-collections.liquid
+  Add collections as blocks in Theme Customizer
+  ============================================
+{% endcomment %}
+
+{{ 'custom-rotating-collections.css' | asset_url | stylesheet_tag }}
+
+<section class="rotating-collections section-{{ section.id }}-padding">
+  <div class="page-width">
+    <div class="rotating-collections__header">
+      <h2>{{ section.settings.heading | default: 'Our Collections' }}</h2>
+    </div>
+
+    <div class="rotating-collections__slider" id="collectionsSlider-{{ section.id }}">
+      {% for block in section.blocks %}
+        {% assign collection = collections[block.settings.collection] %}
+        {% if collection %}
+          <div class="rotating-collections__slide {% if forloop.first %}active{% endif %}"
+               data-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+            <a href="{{ collection.url }}" class="rotating-collections__link">
+              <div class="rotating-collections__image">
+                {% if collection.image %}
+                  {{ collection.image | image_url: width: 800 | image_tag: loading: 'lazy', alt: collection.title }}
+                {% elsif collection.products.first.featured_image %}
+                  {{ collection.products.first.featured_image | image_url: width: 800 | image_tag: loading: 'lazy', alt: collection.title }}
+                {% endif %}
+              </div>
+              <div class="rotating-collections__info">
+                <h3>{{ collection.title }}</h3>
+                <p>{{ collection.products_count }} products</p>
+                <span class="rotating-collections__cta">Shop Collection &rarr;</span>
+              </div>
+            </a>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="rotating-collections__dots" id="collectionsDots-{{ section.id }}">
+      {% for block in section.blocks %}
+        <button class="dot {% if forloop.first %}active{% endif %}"
+                data-index="{{ forloop.index0 }}"
+                aria-label="Go to collection {{ forloop.index }}"></button>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<script>
+(function() {
+  var sectionId = '{{ section.id }}';
+  var slider = document.getElementById('collectionsSlider-' + sectionId);
+  if (!slider) return;
+
+  var slides = slider.querySelectorAll('.rotating-collections__slide');
+  var dotsContainer = document.getElementById('collectionsDots-' + sectionId);
+  var dots = dotsContainer ? dotsContainer.querySelectorAll('.dot') : [];
+  var current = 0;
+  var interval = {{ section.settings.rotation_speed | default: 5 }} * 1000;
+
+  if (slides.length <= 1) return;
+
+  function goTo(index) {
+    slides[current].classList.remove('active');
+    if (dots[current]) dots[current].classList.remove('active');
+    current = ((index % slides.length) + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    if (dots[current]) dots[current].classList.add('active');
+  }
+
+  var timer = setInterval(function() { goTo(current + 1); }, interval);
+
+  dots.forEach(function(dot) {
+    dot.addEventListener('click', function() {
+      clearInterval(timer);
+      goTo(parseInt(this.dataset.index));
+      timer = setInterval(function() { goTo(current + 1); }, interval);
+    });
+  });
+
+  /* Pause on hover */
+  slider.addEventListener('mouseenter', function() { clearInterval(timer); });
+  slider.addEventListener('mouseleave', function() {
+    timer = setInterval(function() { goTo(current + 1); }, interval);
+  });
+})();
+</script>
+
+<style>
+  .rotating-collections__link {
+    text-decoration: none;
+    color: inherit;
+    display: contents;
+  }
+  .rotating-collections__cta {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-foreground, #252525);
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+  .rotating-collections__slide:hover .rotating-collections__cta {
+    opacity: 1;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Rotating Collections",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Our Collections"
+    },
+    {
+      "type": "range",
+      "id": "rotation_speed",
+      "label": "Rotation Speed (seconds)",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "default": 5
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Rotating Collections"
+    }
+  ]
+}
+{% endschema %}

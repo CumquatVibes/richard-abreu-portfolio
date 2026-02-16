@@ -1,0 +1,221 @@
+{
+  "name": "Scheduled Video Production - Richard Abreu",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 8 * * 1,3,5"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [-600, 300],
+      "id": "schedule-trigger",
+      "name": "Mon/Wed/Fri at 8AM",
+      "notes": "Triggers video production 3x per week"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [-600, 100],
+      "id": "manual-trigger",
+      "name": "Manual Trigger"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a YouTube content strategist for Richard Abreu's channel @CumquatVibes.\n\nToday's date: {{ $today }}\nDay of week: {{ $today.toLocaleString('en-US', {weekday: 'long'}) }}\n\nBased on the content calendar below, pick the NEXT topic that should be produced today.\n\nContent pillars (by day):\n- Monday/Tuesday: Art & Design OR Tech & AI\n- Wednesday/Thursday: Business & Entrepreneurship\n- Friday: Wellness OR Product Showcase\n- Weekend: Mix of Shorts from any pillar\n\nReturn ONLY a JSON object with these fields:\n{\n  \"topic\": \"the video topic\",\n  \"pillar\": \"art|tech|business|wellness|products\",\n  \"is_shorts\": true/false,\n  \"duration\": \"short|medium|long\",\n  \"tone\": \"professional|casual|energetic|educational|storytelling\",\n  \"series\": \"series name or null\"\n}\n\nPick a topic that is timely, relevant, and aligned with the day's pillar. Vary topics to avoid repetition.",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [-200, 200],
+      "id": "topic-picker",
+      "name": "Pick Today's Topic"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "claude-sonnet-4-5-20250929",
+          "cachedResultName": "Claude Sonnet 4.5"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [-300, 500],
+      "id": "anthropic-model-1",
+      "name": "Anthropic (Topic Picker)"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "parsed-topic",
+              "name": "parsed",
+              "value": "={{ JSON.parse($json.output) }}",
+              "type": "object"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [100, 200],
+      "id": "parse-topic",
+      "name": "Parse Topic JSON"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are Richard Abreu. Write a complete YouTube script.\n\nTOPIC: {{ $json.parsed.topic }}\nTONE: {{ $json.parsed.tone }}\nDURATION: {{ $json.parsed.duration }}\nIS_SHORTS: {{ $json.parsed.is_shorts }}\n\nWrite the actual educational/entertaining content for this topic. Be specific, give real tips, tools, and examples. Speak as Richard — a veteran, artist, and creative entrepreneur.\n\nFor shorts (under 60s): Hook (3s), 2-3 rapid-fire points, short CTA.\nFor medium (~2min): Hook, intro, 3 detailed points, recap, CTA.\nFor long (~5min): Hook, intro, 5+ detailed points with examples, transitions, recap, CTA.\n\nReturn ONLY the script text. No headers.",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [400, 200],
+      "id": "script-writer",
+      "name": "Write Script (Claude)"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "claude-sonnet-4-5-20250929",
+          "cachedResultName": "Claude Sonnet 4.5"
+        },
+        "options": {
+          "maxTokensToSample": 2048
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [300, 500],
+      "id": "anthropic-model-2",
+      "name": "Anthropic (Script Writer)"
+    },
+    {
+      "parameters": {
+        "sendTo": "rabreu84@gmail.com",
+        "subject": "=New Video Script Ready: {{ $('Parse Topic JSON').item.json.parsed.topic }}",
+        "emailType": "text",
+        "message": "=Topic: {{ $('Parse Topic JSON').item.json.parsed.topic }}\nPillar: {{ $('Parse Topic JSON').item.json.parsed.pillar }}\nTone: {{ $('Parse Topic JSON').item.json.parsed.tone }}\nDuration: {{ $('Parse Topic JSON').item.json.parsed.duration }}\nShorts: {{ $('Parse Topic JSON').item.json.parsed.is_shorts }}\n\n---\n\nSCRIPT:\n\n{{ $json.output }}\n\n---\n\nTo produce this video, run:\npython produce_video.py from-script [save-this-script.txt] --output video --format {{ $('Parse Topic JSON').item.json.parsed.is_shorts ? 'shorts' : 'landscape' }} --tone {{ $('Parse Topic JSON').item.json.parsed.tone }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [700, 200],
+      "id": "send-email",
+      "name": "Email Script to Richard"
+    },
+    {
+      "parameters": {
+        "content": "### Video Production Scheduler\n\nThis workflow:\n1. Runs Mon/Wed/Fri at 8AM\n2. Uses Claude to pick today's topic\n3. Generates a full script with Claude\n4. Emails the script to Richard\n\nTo also auto-produce HeyGen video:\nAdd an HTTP Request node after the script to call produce_video.py via a webhook.",
+        "height": 200,
+        "width": 400,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [-600, -100],
+      "id": "info-note",
+      "name": "Info"
+    }
+  ],
+  "connections": {
+    "Mon/Wed/Fri at 8AM": {
+      "main": [
+        [
+          {
+            "node": "Pick Today's Topic",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Pick Today's Topic",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pick Today's Topic": {
+      "main": [
+        [
+          {
+            "node": "Parse Topic JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Anthropic (Topic Picker)": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Pick Today's Topic",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Topic JSON": {
+      "main": [
+        [
+          {
+            "node": "Write Script (Claude)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Write Script (Claude)": {
+      "main": [
+        [
+          {
+            "node": "Email Script to Richard",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Anthropic (Script Writer)": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Write Script (Claude)",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "availableInMCP": true
+  },
+  "meta": {
+    "description": "Automated video production scheduler. Picks topics and generates scripts 3x/week using Claude, emails results to Richard."
+  }
+}

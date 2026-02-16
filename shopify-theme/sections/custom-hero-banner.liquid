@@ -1,0 +1,103 @@
+{% comment %}
+  ============================================
+  Custom Hero Banner
+  Paste into: sections/custom-hero-banner.liquid
+  Then add to homepage via Theme Customizer > Add section > Custom Hero Banner
+  ============================================
+{% endcomment %}
+
+{{ 'custom-hero-banner.css' | asset_url | stylesheet_tag }}
+
+<section class="custom-hero section-{{ section.id }}-padding"
+  style="{% if section.settings.background_image %}background-image: url('{{ section.settings.background_image | image_url: width: 1920 }}');{% endif %}
+         background-color: {{ section.settings.bg_color }};
+         min-height: {{ section.settings.height }}vh;">
+  <div class="custom-hero__overlay" style="background: rgba(0,0,0,{{ section.settings.overlay_opacity | divided_by: 100.0 }});"></div>
+  <div class="custom-hero__content page-width">
+    {% if section.settings.badge_text != blank %}
+      <span class="custom-hero__badge">{{ section.settings.badge_text }}</span>
+    {% endif %}
+    <h1 class="custom-hero__heading">{{ section.settings.heading }}</h1>
+    {% if section.settings.subheading != blank %}
+      <p class="custom-hero__subheading">{{ section.settings.subheading }}</p>
+    {% endif %}
+    {% if section.settings.cta_text != blank %}
+      <a href="{{ section.settings.cta_url }}" class="custom-hero__cta button">
+        {{ section.settings.cta_text }}
+      </a>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Custom Hero Banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Elevate Your Space with Human-Made Art"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Original designs by artist Richard Abreu. Every piece tells a story."
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge Text",
+      "default": "100% Human-Made Art"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Button Text",
+      "default": "Shop Best Sellers"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA Button Link"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Fallback Background Color",
+      "default": "#252525"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay Darkness",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "default": 40,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "height",
+      "label": "Section Height",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "default": 70,
+      "unit": "vh"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Hero Banner"
+    }
+  ]
+}
+{% endschema %}

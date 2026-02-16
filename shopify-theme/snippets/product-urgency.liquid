@@ -1,0 +1,38 @@
+{% comment %}
+  ============================================
+  Product Urgency Badges
+  Paste into: snippets/product-urgency.liquid
+
+  Then include on product pages in the product form area:
+  {% render 'product-urgency', product: product %}
+
+  Find the product form section (e.g. sections/main-product.liquid)
+  and add the render tag above the Add to Cart button.
+
+  Uses product TAGS since Printful doesn't sync inventory.
+  Tag products with: limited-edition, new-arrival, best-seller
+  ============================================
+{% endcomment %}
+
+{% if product.tags contains 'limited-edition' %}
+  <div class="urgency-badge" style="display:inline-flex; align-items:center; gap:6px; background:#fff3e0; color:#e65100; padding:7px 14px; font-size:0.78rem; font-weight:600; border-radius:2px; margin-bottom:12px;">
+    <span style="display:inline-block; width:8px; height:8px; background:#e65100; border-radius:50%; animation: cvPulse 1.5s infinite;"></span>
+    Limited Edition Design
+  </div>
+{% endif %}
+
+{% if product.tags contains 'best-seller' %}
+  <div class="urgency-badge" style="display:inline-flex; align-items:center; gap:6px; background:#e8f5e9; color:#2e7d32; padding:7px 14px; font-size:0.78rem; font-weight:600; border-radius:2px; margin-bottom:12px;">
+    ⭐ Best Seller
+  </div>
+{% endif %}
+
+{% if product.tags contains 'new-arrival' %}
+  <div class="urgency-badge" style="display:inline-flex; align-items:center; gap:6px; background:#e3f2fd; color:#1565c0; padding:7px 14px; font-size:0.78rem; font-weight:600; border-radius:2px; margin-bottom:12px;">
+    ✨ New Arrival
+  </div>
+{% endif %}
+
+<style>
+  @keyframes cvPulse { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
+</style>

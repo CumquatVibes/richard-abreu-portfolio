@@ -1,0 +1,33 @@
+{% comment %}
+  ============================================
+  Free Shipping Progress Bar ($75 threshold)
+  Paste into: snippets/free-shipping-bar.liquid
+
+  Then include in your cart section:
+  {% render 'free-shipping-bar' %}
+
+  Find cart section at: sections/cart-drawer.liquid or sections/main-cart-items.liquid
+  Add the render tag near the top of the cart content area.
+  ============================================
+{% endcomment %}
+
+{% assign threshold = 7500 %}
+{% assign cart_total = cart.total_price %}
+{% assign remaining = threshold | minus: cart_total %}
+{% assign progress = cart_total | times: 100 | divided_by: threshold %}
+{% if progress > 100 %}{% assign progress = 100 %}{% endif %}
+
+<div class="free-shipping-bar" style="padding: 14px 20px; background: rgba(232,148,31,0.1); border-radius: 4px; margin-bottom: 16px;">
+  {% if remaining <= 0 %}
+    <p style="text-align: center; font-weight: 600; color: #efecec; margin: 0 0 8px; font-size: 0.9rem;">
+      🎉 You've earned FREE shipping!
+    </p>
+  {% else %}
+    <p style="text-align: center; font-size: 0.85rem; color: #efecec; margin: 0 0 10px;">
+      You're <strong style="color: #e8941f;">{{ remaining | money }}</strong> away from FREE shipping!
+    </p>
+  {% endif %}
+  <div style="background: rgba(255,255,255,0.1); border-radius: 100px; height: 8px; overflow: hidden;">
+    <div style="background: linear-gradient(90deg, #f4b88a, #e8941f); height: 100%; width: {{ progress }}%; border-radius: 100px; transition: width 0.5s ease;"></div>
+  </div>
+</div>

@@ -1,0 +1,75 @@
+{% comment %}
+  ============================================
+  ADDITIONS TO layout/theme.liquid
+
+  DO NOT paste this as a standalone file.
+  Instead, open your existing layout/theme.liquid and add these pieces:
+  ============================================
+{% endcomment %}
+
+
+{% comment %} ═══════════════════════════════════
+  ADD TO <head> (after existing stylesheets):
+═══════════════════════════════════ {% endcomment %}
+
+{{ 'custom-overrides.css' | asset_url | stylesheet_tag }}
+<link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+<link rel="dns-prefetch" href="https://cdn.shopify.com">
+
+
+{% comment %} ═══════════════════════════════════
+  ADD BEFORE </body> (at the very end, before the closing body tag):
+═══════════════════════════════════ {% endcomment %}
+
+{% comment %} Exit-Intent Popup {% endcomment %}
+{% render 'exit-intent-popup' %}
+
+{% comment %} Purchase Notifications {% endcomment %}
+{% render 'purchase-notifications' %}
+
+{% comment %} Quick View Modal {% endcomment %}
+{% render 'quick-view' %}
+
+{% comment %} Sticky Mobile CTA {% endcomment %}
+<div class="cv-mobile-sticky-cta">
+  <a href="/collections/all">Shop Now</a>
+</div>
+
+<style>
+  .cv-mobile-sticky-cta {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 997;
+    background: #2c332f;
+    padding: 12px 16px;
+    text-align: center;
+  }
+  .cv-mobile-sticky-cta a {
+    display: block;
+    background: #e8941f;
+    color: #fff;
+    padding: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.85rem;
+    text-decoration: none;
+    border-radius: 4px;
+  }
+  @media screen and (max-width: 749px) {
+    .cv-mobile-sticky-cta { display: block; }
+    body { padding-bottom: 70px; }
+  }
+</style>
+
+{% comment %} richardabreu.studio Creator Badge (Footer) {% endcomment %}
+<div style="text-align: center; padding: 12px; border-top: 1px solid rgba(0,0,0,0.06); margin-top: 8px;">
+  <a href="https://richardabreu.studio" target="_blank" rel="noopener"
+     style="color: var(--color-foreground, #252525); text-decoration: none; font-size: 0.78rem; opacity: 0.45; transition: opacity 0.3s; font-family: var(--font-body-family, sans-serif);"
+     onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='0.45'">
+    Designed by <strong>Richard Abreu Studio</strong> &rarr;
+  </a>
+</div>
