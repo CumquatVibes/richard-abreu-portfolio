@@ -20,8 +20,8 @@
 
   "avatar": {
     "heygen": {
-      "avatar_id": "1edeaab5994541c9a5df49d8353c2b9c",
-      "look_id": "108f69581cf740a0aac1437e3dd9105e",
+      "avatar_id": "79027ba724c74f059691d110b87d5b82",
+      "look_id": "79027ba724c74f059691d110b87d5b82",
       "avatar_style": "normal",
       "emotion_by_tone": {
         "professional": "Serious",
@@ -44,10 +44,10 @@
     "heygen": {
       "voice_id": "d6056fe3944d4b7e9c21601b8fd893f8",
       "name": "Richard Abreu (Rich)",
-      "speed_default": 1.0,
-      "speed_energetic": 1.1,
-      "speed_calm": 0.95,
-      "speed_shorts": 1.15,
+      "speed_default": 0.9,
+      "speed_energetic": 0.95,
+      "speed_calm": 0.85,
+      "speed_shorts": 1.05,
       "pitch_default": 0,
       "pitch_energetic": 5,
       "pitch_calm": -3

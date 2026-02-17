@@ -68,7 +68,7 @@ BRAND = load_brand_config()
 
 # HeyGen avatar + voice (proven working IDs from brand config)
 _avatar_cfg = BRAND.get("avatar", {}).get("heygen", {})
-HEYGEN_AVATAR_ID = _avatar_cfg.get("avatar_id", "1edeaab5994541c9a5df49d8353c2b9c")
+HEYGEN_AVATAR_ID = _avatar_cfg.get("avatar_id", "79027ba724c74f059691d110b87d5b82")
 HEYGEN_LOOK_ID = _avatar_cfg.get("look_id", "108f69581cf740a0aac1437e3dd9105e")
 HEYGEN_AVATAR_STYLE = _avatar_cfg.get("avatar_style", "normal")
 HEYGEN_EMOTION_BY_TONE = _avatar_cfg.get("emotion_by_tone", {})
@@ -965,27 +965,43 @@ class HeyGenClient:
 
         Splits on double-newlines to create multiple scenes with the same
         avatar but varied background colours for visual interest.
+        Enforces 4800-char limit per scene (HeyGen max is 5000).
         """
+        MAX_SCENE_CHARS = 4800  # Leave buffer below HeyGen's 5000 limit
         paragraphs = [p.strip() for p in script_text.split("\n\n") if p.strip()]
 
-        # If script is short enough, single scene
-        if len(paragraphs) <= 2:
-            return [self._make_scene("\n\n".join(paragraphs), speed, emotion)]
+        # If total text is short enough, single scene
+        full_text = "\n\n".join(paragraphs)
+        if len(full_text) <= MAX_SCENE_CHARS:
+            return [self._make_scene(full_text, speed, emotion)]
 
-        # Multi-scene: group paragraphs into 2-3 scenes
+        # Group paragraphs into scenes respecting the char limit
         bg_keys = list(HEYGEN_BACKGROUNDS.keys()) if HEYGEN_BACKGROUNDS else ["default"]
         scenes = []
-        chunk_size = max(1, len(paragraphs) // 3)
-        for i in range(0, len(paragraphs), chunk_size):
-            chunk = paragraphs[i:i + chunk_size]
-            text = " ".join(chunk)
-            if text:
-                # Cycle through background options for visual variety
+        current_chunk = []
+        current_len = 0
+
+        for para in paragraphs:
+            para_len = len(para) + (2 if current_chunk else 0)  # +2 for separator
+            if current_len + para_len > MAX_SCENE_CHARS and current_chunk:
+                # Flush current chunk as a scene
+                text = " ".join(current_chunk)
                 bg_key = bg_keys[len(scenes) % len(bg_keys)]
                 bg = HEYGEN_BACKGROUNDS.get(bg_key, {"type": "color", "value": BACKGROUND_COLOR})
                 scenes.append(self._make_scene(text, speed, emotion, bg))
+                current_chunk = []
+                current_len = 0
+            current_chunk.append(para)
+            current_len += para_len
 
-        return scenes if scenes else [self._make_scene(script_text, speed, emotion)]
+        # Flush remaining
+        if current_chunk:
+            text = " ".join(current_chunk)
+            bg_key = bg_keys[len(scenes) % len(bg_keys)]
+            bg = HEYGEN_BACKGROUNDS.get(bg_key, {"type": "color", "value": BACKGROUND_COLOR})
+            scenes.append(self._make_scene(text, speed, emotion, bg))
+
+        return scenes if scenes else [self._make_scene(script_text[:MAX_SCENE_CHARS], speed, emotion)]
 
     def _make_scene(self, text, speed, emotion=None, background=None):
         """Create a single HeyGen scene dict with emotion and background."""
@@ -1128,10 +1144,18 @@ class ElevenLabsClient:
         print(f"[ElevenLabs] Model: {ELEVENLABS_MODEL}")
         print(f"[ElevenLabs] Tone preset: {tone}")
         print(f"[ElevenLabs] Settings: stability={_stability}, similarity={_similarity}, style={_style}")
+
+        # Auto-chunk if text exceeds ElevenLabs 10K char limit
+        MAX_CHARS = 9500  # Leave buffer below 10K limit
+        if len(clean_text) > MAX_CHARS:
+            return self._generate_audio_chunked(
+                clean_text, title, url, headers, payload, MAX_CHARS
+            )
+
         print("[ElevenLabs] Generating audio...")
 
         try:
-            resp = requests.post(url, headers=headers, json=payload, timeout=120)
+            resp = requests.post(url, headers=headers, json=payload, timeout=180)
             resp.raise_for_status()
         except requests.RequestException as exc:
             print(f"[ElevenLabs] Request failed: {exc}")
@@ -1150,6 +1174,59 @@ class ElevenLabsClient:
         size_mb = filepath.stat().st_size / (1024 * 1024)
         print(f"[ElevenLabs] Audio saved: {filepath} ({size_mb:.2f} MB)")
         return str(filepath)
+
+    def _generate_audio_chunked(self, text, title, url, headers, payload_template, max_chars):
+        """Split long text into chunks and generate audio for each, saving as separate files."""
+        # Split at sentence boundaries
+        sentences = re.split(r'(?<=[.!?])\s+', text)
+        chunks = []
+        current = []
+        current_len = 0
+
+        for sent in sentences:
+            if current_len + len(sent) + 1 > max_chars and current:
+                chunks.append(" ".join(current))
+                current = []
+                current_len = 0
+            current.append(sent)
+            current_len += len(sent) + 1
+
+        if current:
+            chunks.append(" ".join(current))
+
+        print(f"[ElevenLabs] Text is {len(text)} chars — splitting into {len(chunks)} chunks")
+
+        safe_title = re.sub(r'[^\w\s-]', '', title).strip().replace(' ', '_')
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        saved_parts = []
+
+        for i, chunk in enumerate(chunks):
+            part_num = i + 1
+            print(f"[ElevenLabs] Generating part {part_num}/{len(chunks)} ({len(chunk)} chars)...")
+            chunk_payload = dict(payload_template)
+            chunk_payload["text"] = chunk
+
+            try:
+                resp = requests.post(url, headers=headers, json=chunk_payload, timeout=180)
+                resp.raise_for_status()
+            except requests.RequestException as exc:
+                print(f"[ElevenLabs] Part {part_num} failed: {exc}")
+                if hasattr(exc, "response") and exc.response is not None:
+                    print(f"[ElevenLabs] Response: {exc.response.text}")
+                continue
+
+            filename = f"{safe_title}_part{part_num}_{timestamp}.mp3"
+            filepath = DOWNLOADS_DIR / filename
+            with open(filepath, "wb") as f:
+                f.write(resp.content)
+            size_mb = filepath.stat().st_size / (1024 * 1024)
+            print(f"[ElevenLabs] Part {part_num} saved: {filepath} ({size_mb:.2f} MB)")
+            saved_parts.append(str(filepath))
+
+        if saved_parts:
+            print(f"[ElevenLabs] All {len(saved_parts)} parts saved. Combine in your editor.")
+            return saved_parts[0]  # Return first part path
+        return None
 
     def generate_music(self, prompt, duration_ms=30000, title="music"):
         """

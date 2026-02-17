@@ -1,0 +1,274 @@
+{
+  "name": "Site Monitor - richardabreu.studio",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 9,22 * * *"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [-600, 300],
+      "id": "schedule-trigger",
+      "name": "Daily 9AM & 10PM",
+      "notes": "Runs site health check twice daily"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [-600, 100],
+      "id": "manual-trigger",
+      "name": "Manual Trigger"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "pages",
+              "name": "pages",
+              "value": "={{ ['https://richardabreu.studio', 'https://richardabreu.studio/pages/about', 'https://richardabreu.studio/pages/youtube', 'https://richardabreu.studio/pages/services', 'https://richardabreu.studio/pages/newsletter', 'https://cumquatvibes.com'] }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [-200, 200],
+      "id": "set-pages",
+      "name": "Define Pages to Check"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "pages",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [100, 200],
+      "id": "split-pages",
+      "name": "Split Into Individual Pages"
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{ $json.pages }}",
+        "options": {
+          "timeout": 15000,
+          "redirect": {
+            "redirect": {
+              "followRedirects": true,
+              "maxRedirects": 5
+            }
+          }
+        },
+        "onError": "continueErrorOutput"
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [300, 200],
+      "id": "http-check",
+      "name": "HTTP Health Check"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "result",
+              "name": "result",
+              "value": "={{ { url: $json.pages || $json.url, status: $json.statusCode || 'ERROR', ok: ($json.statusCode >= 200 && $json.statusCode < 400), timestamp: new Date().toISOString(), responseTime: $json.responseTime || 'N/A' } }}",
+              "type": "object"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [500, 200],
+      "id": "format-result",
+      "name": "Format Result"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "results",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [700, 200],
+      "id": "aggregate-results",
+      "name": "Aggregate All Results"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "has-failure",
+              "leftValue": "={{ $json.results.filter(r => !r.result?.ok).length }}",
+              "rightValue": "0",
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [900, 200],
+      "id": "check-failures",
+      "name": "Any Failures?"
+    },
+    {
+      "parameters": {
+        "sendTo": "rabreu84@gmail.com",
+        "subject": "=⚠️ Site Monitor ALERT: richardabreu.studio issues detected",
+        "emailType": "text",
+        "message": "=SITE MONITOR ALERT\n========================\nTime: {{ new Date().toISOString() }}\n\nThe following pages have issues:\n\n{{ $json.results.filter(r => !r.result?.ok).map(r => `❌ ${r.result?.url} — Status: ${r.result?.status}`).join('\\n') }}\n\nPages that are OK:\n{{ $json.results.filter(r => r.result?.ok).map(r => `✅ ${r.result?.url} — Status: ${r.result?.status}`).join('\\n') }}\n\nPlease investigate.",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [1100, 100],
+      "id": "alert-email",
+      "name": "Send Alert Email"
+    },
+    {
+      "parameters": {
+        "content": "### Site Monitor\n\nChecks richardabreu.studio and cumquatvibes.com\ntwice daily (9AM and 10PM).\n\nEmails Richard only when issues are detected.\n\nPages monitored:\n- richardabreu.studio (homepage)\n- /pages/about\n- /pages/youtube\n- /pages/services\n- /pages/newsletter\n- cumquatvibes.com",
+        "height": 240,
+        "width": 400,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [-600, -100],
+      "id": "info-note",
+      "name": "Info"
+    }
+  ],
+  "connections": {
+    "Daily 9AM & 10PM": {
+      "main": [
+        [
+          {
+            "node": "Define Pages to Check",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Define Pages to Check",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Define Pages to Check": {
+      "main": [
+        [
+          {
+            "node": "Split Into Individual Pages",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Into Individual Pages": {
+      "main": [
+        [
+          {
+            "node": "HTTP Health Check",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Health Check": {
+      "main": [
+        [
+          {
+            "node": "Format Result",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Format Result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Result": {
+      "main": [
+        [
+          {
+            "node": "Aggregate All Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate All Results": {
+      "main": [
+        [
+          {
+            "node": "Any Failures?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Any Failures?": {
+      "main": [
+        [
+          {
+            "node": "Send Alert Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "availableInMCP": true
+  },
+  "meta": {
+    "description": "Monitors richardabreu.studio and cumquatvibes.com twice daily (9AM and 10PM). Emails Richard only when issues are detected. Checks homepage, about, youtube, services, newsletter pages."
+  }
+}
