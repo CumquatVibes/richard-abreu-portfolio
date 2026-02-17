@@ -1373,7 +1373,7 @@ class YouTubeUploader:
                 "client_secret": self.client_secret,
                 "auth_uri": "https://accounts.google.com/o/oauth2/auth",
                 "token_uri": "https://oauth2.googleapis.com/token",
-                "redirect_uris": ["http://localhost:8080/"],
+                "redirect_uris": ["http://localhost/"],
             }
         }
 
@@ -1381,7 +1381,9 @@ class YouTubeUploader:
         print("[YouTube] A browser window will open. Sign in and grant YouTube upload access.")
 
         flow = InstalledAppFlow.from_client_config(client_config, self.SCOPES)
-        credentials = flow.run_local_server(port=8080, prompt="consent")
+        credentials = flow.run_local_server(
+            port=8090, open_browser=True, prompt="consent"
+        )
 
         # Save token for future use
         token_data = {
