@@ -29,105 +29,102 @@
       }
     }
   },
-
   "voice_profiles": {
     "neutral_male": {
       "engine": "elevenlabs",
-      "voice_id": "HHOfU1tpMpxmIjLlpy34",
+      "voice_id": "cjVigY5qzO86Huf0OWal",
       "model": "eleven_multilingual_v2",
       "stability": 0.55,
       "similarity_boost": 0.78,
-      "style": 0.20,
+      "style": 0.2,
       "speed": 1.0,
-      "description": "Default Rich voice — clear, authoritative narrator"
+      "description": "Smooth, trustworthy narrator \u2014 tech, finance, reviews"
     },
     "energetic_male": {
       "engine": "elevenlabs",
-      "voice_id": "HHOfU1tpMpxmIjLlpy34",
-      "model": "eleven_v3",
-      "stability": 0.30,
+      "voice_id": "TX3LPaxmHKxFdv7VOQHJ",
+      "model": "eleven_multilingual_v2",
+      "stability": 0.3,
       "similarity_boost": 0.72,
-      "style": 0.50,
+      "style": 0.5,
       "speed": 1.1,
-      "description": "High energy — gaming, sports, hype content"
+      "description": "High energy, social media creator \u2014 gaming, sports, comedy"
     },
     "calm_narrator": {
       "engine": "elevenlabs",
-      "voice_id": "HHOfU1tpMpxmIjLlpy34",
+      "voice_id": "onwK4e9ZLuTAKqWW03F9",
       "model": "eleven_multilingual_v2",
       "stability": 0.65,
-      "similarity_boost": 0.80,
+      "similarity_boost": 0.8,
       "style": 0.15,
       "speed": 0.95,
-      "description": "Calm, measured — history, nature, education, science"
+      "description": "Steady, measured broadcaster \u2014 history, nature, education, science"
     },
     "storyteller": {
       "engine": "elevenlabs",
-      "voice_id": "HHOfU1tpMpxmIjLlpy34",
-      "model": "eleven_v3",
+      "voice_id": "JBFqnCBsd6RMkjVDRZzb",
+      "model": "eleven_multilingual_v2",
       "stability": 0.35,
       "similarity_boost": 0.75,
       "style": 0.45,
       "speed": 0.95,
-      "description": "Dramatic range — horror, movies, motivation, storytelling"
+      "description": "Warm, captivating storyteller \u2014 horror, movies, motivation"
     },
     "friendly_casual": {
       "engine": "elevenlabs",
-      "voice_id": "HHOfU1tpMpxmIjLlpy34",
-      "model": "eleven_v3",
-      "stability": 0.40,
+      "voice_id": "iP95p4xoKVk53GoZ742B",
+      "model": "eleven_multilingual_v2",
+      "stability": 0.4,
       "similarity_boost": 0.75,
       "style": 0.35,
       "speed": 1.0,
-      "description": "Warm, approachable — lifestyle, food, pets, family, kids"
+      "description": "Charming, down-to-earth \u2014 lifestyle, food, pets, family, kids"
     }
   },
-
   "content_formats": {
     "listicle": {
-      "structure": "hook → numbered items → recap → CTA",
+      "structure": "hook \u2192 numbered items \u2192 recap \u2192 CTA",
       "duration_target": "8-12 min",
       "word_count": 1200,
       "visual_style": "image slideshow with text overlays per item"
     },
     "explainer": {
-      "structure": "hook → problem → deep dive → solution → CTA",
+      "structure": "hook \u2192 problem \u2192 deep dive \u2192 solution \u2192 CTA",
       "duration_target": "10-15 min",
       "word_count": 1500,
       "visual_style": "mixed footage + diagrams + text"
     },
     "compilation": {
-      "structure": "hook → clip montage with narration → CTA",
+      "structure": "hook \u2192 clip montage with narration \u2192 CTA",
       "duration_target": "12-20 min",
       "word_count": 1800,
       "visual_style": "stock footage montage with transitions"
     },
     "shorts_facts": {
-      "structure": "hook → 1-3 facts → CTA",
+      "structure": "hook \u2192 1-3 facts \u2192 CTA",
       "duration_target": "30-59 sec",
       "word_count": 80,
       "visual_style": "single image or clip with bold text"
     },
     "shorts_story": {
-      "structure": "hook → mini story → punchline",
+      "structure": "hook \u2192 mini story \u2192 punchline",
       "duration_target": "30-59 sec",
       "word_count": 80,
       "visual_style": "dramatic visuals with captions"
     },
     "tutorial": {
-      "structure": "hook → step-by-step → recap → CTA",
+      "structure": "hook \u2192 step-by-step \u2192 recap \u2192 CTA",
       "duration_target": "8-15 min",
       "word_count": 1200,
       "visual_style": "screen recordings + overlay graphics"
     },
     "news_recap": {
-      "structure": "hook → top stories → analysis → CTA",
+      "structure": "hook \u2192 top stories \u2192 analysis \u2192 CTA",
       "duration_target": "8-12 min",
       "word_count": 1200,
       "visual_style": "news-style graphics + source screenshots"
     }
   },
-
   "channels": {
     "cumquat_vibes": {
       "name": "Cumquat Vibes",
@@ -136,84 +133,195 @@
       "type": "personal",
       "faceless": false,
       "niche": "Creator lifestyle, art, tech, entrepreneurship",
-      "note": "Main personal channel — uses avatar pipeline, NOT faceless"
+      "note": "Main personal channel \u2014 uses avatar pipeline, NOT faceless"
     },
-
     "cumquat_gaming": {
       "name": "Cumquat Gaming",
-      "handle": "@Cumquat_Gaming",
+      "handle": "@cumquat_gaming",
+      "channel_id": "UCJzYsB6MJgQnakQF_S35SRw",
       "type": "cumquat_brand",
       "faceless": true,
       "niche": "Gaming",
-      "sub_topics": ["game reviews", "top 10 lists", "gaming news", "hidden gems", "retro gaming", "indie games"],
-      "formats": ["listicle", "compilation", "shorts_facts", "news_recap"],
+      "sub_topics": [
+        "game reviews",
+        "top 10 lists",
+        "gaming news",
+        "hidden gems",
+        "retro gaming",
+        "indie games"
+      ],
+      "formats": [
+        "listicle",
+        "compilation",
+        "shorts_facts",
+        "news_recap"
+      ],
       "voice_profile": "energetic_male",
       "youtube_category": "20",
-      "visual_theme": {"primary": "#7B2FF7", "accent": "#00FF87", "bg": "#0A0A0A"},
-      "posting": {"long_form": "2x/week", "shorts": "daily"},
-      "monetization": ["gaming affiliate links", "game sponsorships", "merch"],
+      "visual_theme": {
+        "primary": "#7B2FF7",
+        "accent": "#00FF87",
+        "bg": "#0A0A0A"
+      },
+      "posting": {
+        "long_form": "2x/week",
+        "shorts": "daily"
+      },
+      "monetization": [
+        "gaming affiliate links",
+        "game sponsorships",
+        "merch"
+      ],
       "thumbnail_style": "bold text + game art + neon glow"
     },
     "cumquat_shortform": {
       "name": "Cumquat ShortForm",
-      "handle": "@Cumquat_ShortForm",
+      "handle": "@cumquat_shortform",
+      "channel_id": "UCcmzxbB2cfClq_nN3P5c6ow",
       "type": "cumquat_brand",
       "faceless": true,
-      "niche": "Short-form viral content — best-of clips, facts, trends",
-      "sub_topics": ["viral facts", "satisfying compilations", "mind-blowing moments", "quick tips"],
-      "formats": ["shorts_facts", "shorts_story"],
+      "niche": "Short-form viral content \u2014 best-of clips, facts, trends",
+      "sub_topics": [
+        "viral facts",
+        "satisfying compilations",
+        "mind-blowing moments",
+        "quick tips"
+      ],
+      "formats": [
+        "shorts_facts",
+        "shorts_story"
+      ],
       "voice_profile": "energetic_male",
       "youtube_category": "22",
-      "visual_theme": {"primary": "#FF6B35", "accent": "#FFC700", "bg": "#0A0A0A"},
-      "posting": {"shorts": "3x/day"},
-      "monetization": ["shorts fund", "cross-promo to long-form channels"],
-      "thumbnail_style": "N/A — shorts auto-thumbnail"
+      "visual_theme": {
+        "primary": "#FF6B35",
+        "accent": "#FFC700",
+        "bg": "#0A0A0A"
+      },
+      "posting": {
+        "shorts": "3x/day"
+      },
+      "monetization": [
+        "shorts fund",
+        "cross-promo to long-form channels"
+      ],
+      "thumbnail_style": "N/A \u2014 shorts auto-thumbnail"
     },
     "cumquat_motivation": {
       "name": "Cumquat Motivation",
-      "handle": "@Cumquat_Motivation",
+      "handle": "@cumquat_motivation",
       "type": "cumquat_brand",
       "faceless": true,
       "niche": "Motivational content, discipline, success mindset",
-      "sub_topics": ["morning routines", "discipline habits", "success stories", "stoic philosophy", "military mindset"],
-      "formats": ["compilation", "shorts_story", "explainer"],
+      "sub_topics": [
+        "morning routines",
+        "discipline habits",
+        "success stories",
+        "stoic philosophy",
+        "military mindset"
+      ],
+      "formats": [
+        "compilation",
+        "shorts_story",
+        "explainer"
+      ],
       "voice_profile": "storyteller",
       "youtube_category": "22",
-      "visual_theme": {"primary": "#D4AF37", "accent": "#FFFFFF", "bg": "#1A1A1A"},
-      "posting": {"long_form": "2x/week", "shorts": "daily"},
-      "monetization": ["self-help book affiliates", "course affiliates", "sponsors"],
-      "thumbnail_style": "dramatic lighting + bold motivational text"
+      "visual_theme": {
+        "primary": "#D4AF37",
+        "accent": "#FFFFFF",
+        "bg": "#1A1A1A"
+      },
+      "posting": {
+        "long_form": "2x/week",
+        "shorts": "daily"
+      },
+      "monetization": [
+        "self-help book affiliates",
+        "course affiliates",
+        "sponsors"
+      ],
+      "thumbnail_style": "dramatic lighting + bold motivational text",
+      "channel_id": "UCtrCefKinhom7LFBV8rnfpQ"
     },
-
     "rich_tech": {
       "name": "RichTech",
-      "handle": "@RichTech",
+      "handle": "@richtech1-c8u",
       "type": "rich_brand",
       "faceless": true,
       "niche": "Technology news, gadget reviews, AI tools, software",
-      "sub_topics": ["AI tool reviews", "gadget comparisons", "tech news", "software tutorials", "best apps", "future tech", "productivity tools"],
-      "formats": ["listicle", "explainer", "news_recap", "shorts_facts"],
+      "sub_topics": [
+        "AI tool reviews",
+        "gadget comparisons",
+        "tech news",
+        "software tutorials",
+        "best apps",
+        "future tech",
+        "productivity tools"
+      ],
+      "formats": [
+        "listicle",
+        "explainer",
+        "news_recap",
+        "shorts_facts"
+      ],
       "voice_profile": "neutral_male",
       "youtube_category": "28",
-      "visual_theme": {"primary": "#00D4FF", "accent": "#7B2FF7", "bg": "#0D0D0D"},
-      "posting": {"long_form": "3x/week", "shorts": "daily"},
-      "monetization": ["tech affiliate links (Amazon, Best Buy)", "VPN/software sponsors", "email list → product reviews"],
-      "thumbnail_style": "product shots + tech blue gradient + comparison arrows"
+      "visual_theme": {
+        "primary": "#00D4FF",
+        "accent": "#7B2FF7",
+        "bg": "#0D0D0D"
+      },
+      "posting": {
+        "long_form": "3x/week",
+        "shorts": "daily"
+      },
+      "monetization": [
+        "tech affiliate links (Amazon, Best Buy)",
+        "VPN/software sponsors",
+        "email list \u2192 product reviews"
+      ],
+      "thumbnail_style": "product shots + tech blue gradient + comparison arrows",
+      "channel_id": "UCH7Om9fi1IA3SrRXmx2vApQ"
     },
     "rich_animation": {
       "name": "RichAnimation",
-      "handle": "@RichAnimation",
+      "handle": "@richanimation14",
       "type": "rich_brand",
       "faceless": true,
       "niche": "Animation breakdowns, cartoon history, anime analysis",
-      "sub_topics": ["animation techniques", "cartoon history", "anime reviews", "hidden details in films", "studio spotlights", "animation tools"],
-      "formats": ["explainer", "listicle", "compilation", "shorts_facts"],
+      "sub_topics": [
+        "animation techniques",
+        "cartoon history",
+        "anime reviews",
+        "hidden details in films",
+        "studio spotlights",
+        "animation tools"
+      ],
+      "formats": [
+        "explainer",
+        "listicle",
+        "compilation",
+        "shorts_facts"
+      ],
       "voice_profile": "friendly_casual",
       "youtube_category": "1",
-      "visual_theme": {"primary": "#FF4081", "accent": "#FFAB40", "bg": "#121212"},
-      "posting": {"long_form": "2x/week", "shorts": "3x/week"},
-      "monetization": ["streaming service affiliates", "art tool affiliates", "merch"],
-      "thumbnail_style": "colorful art + expressive text + character highlights"
+      "visual_theme": {
+        "primary": "#FF4081",
+        "accent": "#FFAB40",
+        "bg": "#121212"
+      },
+      "posting": {
+        "long_form": "2x/week",
+        "shorts": "3x/week"
+      },
+      "monetization": [
+        "streaming service affiliates",
+        "art tool affiliates",
+        "merch"
+      ],
+      "thumbnail_style": "colorful art + expressive text + character highlights",
+      "channel_id": "UCtsmXjQaCdMTEyDTDWRpVVA"
     },
     "rich_fashion": {
       "name": "RichFashion",
@@ -221,14 +329,39 @@
       "type": "rich_brand",
       "faceless": true,
       "niche": "Men's fashion, streetwear, style guides, outfit breakdowns",
-      "sub_topics": ["outfit ideas", "streetwear trends", "budget fashion", "sneaker culture", "grooming tips", "seasonal lookbooks"],
-      "formats": ["listicle", "compilation", "shorts_facts", "explainer"],
+      "sub_topics": [
+        "outfit ideas",
+        "streetwear trends",
+        "budget fashion",
+        "sneaker culture",
+        "grooming tips",
+        "seasonal lookbooks"
+      ],
+      "formats": [
+        "listicle",
+        "compilation",
+        "shorts_facts",
+        "explainer"
+      ],
       "voice_profile": "friendly_casual",
       "youtube_category": "26",
-      "visual_theme": {"primary": "#1A1A1A", "accent": "#C8A96E", "bg": "#0D0D0D"},
-      "posting": {"long_form": "2x/week", "shorts": "daily"},
-      "monetization": ["fashion affiliate links", "brand deals", "style box sponsors"],
-      "thumbnail_style": "clean outfit shots + minimal text + luxury feel"
+      "visual_theme": {
+        "primary": "#1A1A1A",
+        "accent": "#C8A96E",
+        "bg": "#0D0D0D"
+      },
+      "posting": {
+        "long_form": "2x/week",
+        "shorts": "daily"
+      },
+      "monetization": [
+        "fashion affiliate links",
+        "brand deals",
+        "style box sponsors"
+      ],
+      "thumbnail_style": "clean outfit shots + minimal text + luxury feel",
+      "channel_id": "UCf0Y1kCz_2nTmKpJtPQKoyg",
+      "handle": "@richfashion9"
     },
     "rich_family": {
       "name": "RichFamily",
@@ -236,14 +369,39 @@
       "type": "rich_brand",
       "faceless": true,
       "niche": "Family life, parenting tips, family activities, military family",
-      "sub_topics": ["parenting hacks", "family activities", "military family life", "dad tips", "family travel", "home organization"],
-      "formats": ["listicle", "explainer", "shorts_facts", "compilation"],
+      "sub_topics": [
+        "parenting hacks",
+        "family activities",
+        "military family life",
+        "dad tips",
+        "family travel",
+        "home organization"
+      ],
+      "formats": [
+        "listicle",
+        "explainer",
+        "shorts_facts",
+        "compilation"
+      ],
       "voice_profile": "friendly_casual",
       "youtube_category": "22",
-      "visual_theme": {"primary": "#4CAF50", "accent": "#FFC107", "bg": "#F5F5F0"},
-      "posting": {"long_form": "2x/week", "shorts": "3x/week"},
-      "monetization": ["family product affiliates", "subscription box sponsors", "parenting app sponsors"],
-      "thumbnail_style": "warm colors + family imagery + friendly text"
+      "visual_theme": {
+        "primary": "#4CAF50",
+        "accent": "#FFC107",
+        "bg": "#F5F5F0"
+      },
+      "posting": {
+        "long_form": "2x/week",
+        "shorts": "3x/week"
+      },
+      "monetization": [
+        "family product affiliates",
+        "subscription box sponsors",
+        "parenting app sponsors"
+      ],
+      "thumbnail_style": "warm colors + family imagery + friendly text",
+      "channel_id": "UC3rXZPP828z8w9UdEdQEWtw",
+      "handle": "@richfamily34"
     },
     "rich_beauty": {
       "name": "RichBeauty",
@@ -251,14 +409,39 @@
       "type": "rich_brand",
       "faceless": true,
       "niche": "Beauty, skincare, grooming, product reviews",
-      "sub_topics": ["skincare routines", "product reviews", "grooming tips", "beauty hacks", "ingredient breakdowns", "budget beauty"],
-      "formats": ["listicle", "tutorial", "shorts_facts", "explainer"],
+      "sub_topics": [
+        "skincare routines",
+        "product reviews",
+        "grooming tips",
+        "beauty hacks",
+        "ingredient breakdowns",
+        "budget beauty"
+      ],
+      "formats": [
+        "listicle",
+        "tutorial",
+        "shorts_facts",
+        "explainer"
+      ],
       "voice_profile": "friendly_casual",
       "youtube_category": "26",
-      "visual_theme": {"primary": "#E91E63", "accent": "#F8BBD0", "bg": "#FFF5F5"},
-      "posting": {"long_form": "2x/week", "shorts": "daily"},
-      "monetization": ["beauty affiliate links", "brand sponsorships", "skincare affiliates"],
-      "thumbnail_style": "product close-ups + clean aesthetic + before/after"
+      "visual_theme": {
+        "primary": "#E91E63",
+        "accent": "#F8BBD0",
+        "bg": "#FFF5F5"
+      },
+      "posting": {
+        "long_form": "2x/week",
+        "shorts": "daily"
+      },
+      "monetization": [
+        "beauty affiliate links",
+        "brand sponsorships",
+        "skincare affiliates"
+      ],
+      "thumbnail_style": "product close-ups + clean aesthetic + before/after",
+      "channel_id": "UCfBoNA8eUrqmSTPLtMhrpdQ",
+      "handle": "@richbeauty10"
     },
     "rich_cooking": {
       "name": "RichCooking",
@@ -266,14 +449,39 @@
       "type": "rich_brand",
       "faceless": true,
       "niche": "Cooking tutorials, recipes, kitchen hacks, meal prep",
-      "sub_topics": ["quick recipes", "meal prep", "kitchen gadgets", "cultural cuisines", "budget meals", "chef techniques"],
-      "formats": ["tutorial", "listicle", "shorts_facts", "compilation"],
+      "sub_topics": [
+        "quick recipes",
+        "meal prep",
+        "kitchen gadgets",
+        "cultural cuisines",
+        "budget meals",
+        "chef techniques"
+      ],
+      "formats": [
+        "tutorial",
+        "listicle",
+        "shorts_facts",
+        "compilation"
+      ],
       "voice_profile": "friendly_casual",
       "youtube_category": "26",
-      "visual_theme": {"primary": "#FF5722", "accent": "#FFC107", "bg": "#1B1210"},
-      "posting": {"long_form": "2x/week", "shorts": "daily"},
-      "monetization": ["kitchen gadget affiliates", "meal kit sponsors", "cookbook affiliates"],
-      "thumbnail_style": "overhead food shots + warm lighting + bold recipe text"
+      "visual_theme": {
+        "primary": "#FF5722",
+        "accent": "#FFC107",
+        "bg": "#1B1210"
+      },
+      "posting": {
+        "long_form": "2x/week",
+        "shorts": "daily"
+      },
+      "monetization": [
+        "kitchen gadget affiliates",
+        "meal kit sponsors",
+        "cookbook affiliates"
+      ],
+      "thumbnail_style": "overhead food shots + warm lighting + bold recipe text",
+      "channel_id": "UC8OrR3UMdyzy4DRgmCWOXcA",
+      "handle": "@richcooking-w1h"
     },
     "rich_education": {
       "name": "RichEducation",
@@ -281,14 +489,39 @@
       "type": "rich_brand",
       "faceless": true,
       "niche": "Educational content, learning hacks, study tips, career skills",
-      "sub_topics": ["study techniques", "career advice", "skill building", "learning methods", "certifications", "online courses"],
-      "formats": ["explainer", "listicle", "tutorial", "shorts_facts"],
+      "sub_topics": [
+        "study techniques",
+        "career advice",
+        "skill building",
+        "learning methods",
+        "certifications",
+        "online courses"
+      ],
+      "formats": [
+        "explainer",
+        "listicle",
+        "tutorial",
+        "shorts_facts"
+      ],
       "voice_profile": "calm_narrator",
       "youtube_category": "27",
-      "visual_theme": {"primary": "#2196F3", "accent": "#03DAC6", "bg": "#0A1628"},
-      "posting": {"long_form": "2x/week", "shorts": "3x/week"},
-      "monetization": ["online course affiliates", "book affiliates", "education platform sponsors"],
-      "thumbnail_style": "clean infographic style + educational icons + blue tones"
+      "visual_theme": {
+        "primary": "#2196F3",
+        "accent": "#03DAC6",
+        "bg": "#0A1628"
+      },
+      "posting": {
+        "long_form": "2x/week",
+        "shorts": "3x/week"
+      },
+      "monetization": [
+        "online course affiliates",
+        "book affiliates",
+        "education platform sponsors"
+      ],
+      "thumbnail_style": "clean infographic style + educational icons + blue tones",
+      "channel_id": "UCp3WkXsFFzdRLZX_UYp43cw",
+      "handle": "@richeducation8"
     },
     "rich_history": {
       "name": "RichHistory",
@@ -296,14 +529,39 @@
       "type": "rich_brand",
       "faceless": true,
       "niche": "History deep dives, forgotten events, historical figures, mysteries",
-      "sub_topics": ["forgotten history", "ancient civilizations", "military history", "historical mysteries", "famous figures", "what-if scenarios"],
-      "formats": ["explainer", "compilation", "listicle", "shorts_facts"],
+      "sub_topics": [
+        "forgotten history",
+        "ancient civilizations",
+        "military history",
+        "historical mysteries",
+        "famous figures",
+        "what-if scenarios"
+      ],
+      "formats": [
+        "explainer",
+        "compilation",
+        "listicle",
+        "shorts_facts"
+      ],
       "voice_profile": "calm_narrator",
       "youtube_category": "27",
-      "visual_theme": {"primary": "#8D6E63", "accent": "#D4AF37", "bg": "#1A1510"},
-      "posting": {"long_form": "2x/week", "shorts": "3x/week"},
-      "monetization": ["history book affiliates", "documentary streaming affiliates", "history app sponsors"],
-      "thumbnail_style": "vintage textures + sepia tones + dramatic historical imagery"
+      "visual_theme": {
+        "primary": "#8D6E63",
+        "accent": "#D4AF37",
+        "bg": "#1A1510"
+      },
+      "posting": {
+        "long_form": "2x/week",
+        "shorts": "3x/week"
+      },
+      "monetization": [
+        "history book affiliates",
+        "documentary streaming affiliates",
+        "history app sponsors"
+      ],
+      "thumbnail_style": "vintage textures + sepia tones + dramatic historical imagery",
+      "channel_id": "UC1pCR2B_mQwCacIlvRhUacA",
+      "handle": "@richhistory18"
     },
     "rich_nature": {
       "name": "RichNature",
@@ -311,14 +569,39 @@
       "type": "rich_brand",
       "faceless": true,
       "niche": "Nature, wildlife, earth science, amazing animals",
-      "sub_topics": ["animal facts", "nature phenomena", "ocean life", "endangered species", "national parks", "earth science"],
-      "formats": ["compilation", "explainer", "listicle", "shorts_facts"],
+      "sub_topics": [
+        "animal facts",
+        "nature phenomena",
+        "ocean life",
+        "endangered species",
+        "national parks",
+        "earth science"
+      ],
+      "formats": [
+        "compilation",
+        "explainer",
+        "listicle",
+        "shorts_facts"
+      ],
       "voice_profile": "calm_narrator",
       "youtube_category": "15",
-      "visual_theme": {"primary": "#2E7D32", "accent": "#81C784", "bg": "#0A1A0A"},
-      "posting": {"long_form": "2x/week", "shorts": "daily"},
-      "monetization": ["nature documentary affiliates", "outdoor gear affiliates", "conservation sponsors"],
-      "thumbnail_style": "stunning wildlife shots + nature green tones + bold animal names"
+      "visual_theme": {
+        "primary": "#2E7D32",
+        "accent": "#81C784",
+        "bg": "#0A1A0A"
+      },
+      "posting": {
+        "long_form": "2x/week",
+        "shorts": "daily"
+      },
+      "monetization": [
+        "nature documentary affiliates",
+        "outdoor gear affiliates",
+        "conservation sponsors"
+      ],
+      "thumbnail_style": "stunning wildlife shots + nature green tones + bold animal names",
+      "channel_id": "UCqzGBwIvr3sY1nUc9M2EVsg",
+      "handle": "@richnature26"
     },
     "rich_crypto": {
       "name": "RichCrypto",
@@ -326,14 +609,39 @@
       "type": "rich_brand",
       "faceless": true,
       "niche": "Cryptocurrency, blockchain, DeFi, Web3",
-      "sub_topics": ["crypto news", "altcoin analysis", "DeFi explainers", "blockchain tech", "NFT updates", "trading strategies"],
-      "formats": ["news_recap", "explainer", "listicle", "shorts_facts"],
+      "sub_topics": [
+        "crypto news",
+        "altcoin analysis",
+        "DeFi explainers",
+        "blockchain tech",
+        "NFT updates",
+        "trading strategies"
+      ],
+      "formats": [
+        "news_recap",
+        "explainer",
+        "listicle",
+        "shorts_facts"
+      ],
       "voice_profile": "neutral_male",
       "youtube_category": "28",
-      "visual_theme": {"primary": "#F7931A", "accent": "#627EEA", "bg": "#0D0D1A"},
-      "posting": {"long_form": "3x/week", "shorts": "daily"},
-      "monetization": ["exchange affiliates", "hardware wallet affiliates", "crypto tool sponsors"],
-      "thumbnail_style": "crypto logos + price charts + neon accents + urgency text"
+      "visual_theme": {
+        "primary": "#F7931A",
+        "accent": "#627EEA",
+        "bg": "#0D0D1A"
+      },
+      "posting": {
+        "long_form": "3x/week",
+        "shorts": "daily"
+      },
+      "monetization": [
+        "exchange affiliates",
+        "hardware wallet affiliates",
+        "crypto tool sponsors"
+      ],
+      "thumbnail_style": "crypto logos + price charts + neon accents + urgency text",
+      "channel_id": "UCc5XhfHIkEp5WwG9CRZm_6w",
+      "handle": "@richcrypto16"
     },
     "rich_science": {
       "name": "RichScience",
@@ -341,14 +649,39 @@
       "type": "rich_brand",
       "faceless": true,
       "niche": "Science, space, physics, biology, discoveries",
-      "sub_topics": ["space exploration", "quantum physics", "biology facts", "new discoveries", "engineering marvels", "scientific mysteries"],
-      "formats": ["explainer", "listicle", "compilation", "shorts_facts"],
+      "sub_topics": [
+        "space exploration",
+        "quantum physics",
+        "biology facts",
+        "new discoveries",
+        "engineering marvels",
+        "scientific mysteries"
+      ],
+      "formats": [
+        "explainer",
+        "listicle",
+        "compilation",
+        "shorts_facts"
+      ],
       "voice_profile": "calm_narrator",
       "youtube_category": "28",
-      "visual_theme": {"primary": "#6200EA", "accent": "#03DAC6", "bg": "#0A0A1A"},
-      "posting": {"long_form": "2x/week", "shorts": "daily"},
-      "monetization": ["science kit affiliates", "online course affiliates", "telescope/microscope affiliates"],
-      "thumbnail_style": "cosmic imagery + scientific diagrams + purple/teal gradients"
+      "visual_theme": {
+        "primary": "#6200EA",
+        "accent": "#03DAC6",
+        "bg": "#0A0A1A"
+      },
+      "posting": {
+        "long_form": "2x/week",
+        "shorts": "daily"
+      },
+      "monetization": [
+        "science kit affiliates",
+        "online course affiliates",
+        "telescope/microscope affiliates"
+      ],
+      "thumbnail_style": "cosmic imagery + scientific diagrams + purple/teal gradients",
+      "channel_id": "UC0ODvK8Hvrd9Bd3QWIWPecA",
+      "handle": "@richscience17"
     },
     "rich_travel": {
       "name": "RichTravel",
@@ -356,14 +689,40 @@
       "type": "rich_brand",
       "faceless": true,
       "niche": "Travel guides, hidden destinations, budget travel, travel tips",
-      "sub_topics": ["hidden destinations", "budget travel", "travel hacks", "cultural guides", "best hotels", "road trips"],
-      "formats": ["listicle", "compilation", "explainer", "shorts_facts"],
+      "sub_topics": [
+        "hidden destinations",
+        "budget travel",
+        "travel hacks",
+        "cultural guides",
+        "best hotels",
+        "road trips"
+      ],
+      "formats": [
+        "listicle",
+        "compilation",
+        "explainer",
+        "shorts_facts"
+      ],
       "voice_profile": "friendly_casual",
       "youtube_category": "19",
-      "visual_theme": {"primary": "#00BCD4", "accent": "#FF9800", "bg": "#0A1A20"},
-      "posting": {"long_form": "2x/week", "shorts": "3x/week"},
-      "monetization": ["booking.com affiliates", "travel gear affiliates", "VPN sponsors", "travel insurance"],
-      "thumbnail_style": "stunning destination shots + flag icons + wanderlust text"
+      "visual_theme": {
+        "primary": "#00BCD4",
+        "accent": "#FF9800",
+        "bg": "#0A1A20"
+      },
+      "posting": {
+        "long_form": "2x/week",
+        "shorts": "3x/week"
+      },
+      "monetization": [
+        "booking.com affiliates",
+        "travel gear affiliates",
+        "VPN sponsors",
+        "travel insurance"
+      ],
+      "thumbnail_style": "stunning destination shots + flag icons + wanderlust text",
+      "channel_id": "UCEA1FMT0W2lS93Ig1W1ddUA",
+      "handle": "@richtravel5"
     },
     "rich_vlogging": {
       "name": "RichVlogging",
@@ -371,14 +730,39 @@
       "type": "rich_brand",
       "faceless": true,
       "niche": "Vlogging tips, content creation, YouTube growth, creator economy",
-      "sub_topics": ["YouTube algorithm", "content strategy", "filming tips", "editing tutorials", "monetization guides", "creator tools"],
-      "formats": ["tutorial", "explainer", "listicle", "shorts_facts"],
+      "sub_topics": [
+        "YouTube algorithm",
+        "content strategy",
+        "filming tips",
+        "editing tutorials",
+        "monetization guides",
+        "creator tools"
+      ],
+      "formats": [
+        "tutorial",
+        "explainer",
+        "listicle",
+        "shorts_facts"
+      ],
       "voice_profile": "friendly_casual",
       "youtube_category": "22",
-      "visual_theme": {"primary": "#FF0000", "accent": "#FFFFFF", "bg": "#1A0000"},
-      "posting": {"long_form": "2x/week", "shorts": "3x/week"},
-      "monetization": ["camera/gear affiliates", "editing software affiliates", "creator tool sponsors"],
-      "thumbnail_style": "YouTube-themed red/white + play button icons + growth charts"
+      "visual_theme": {
+        "primary": "#FF0000",
+        "accent": "#FFFFFF",
+        "bg": "#1A0000"
+      },
+      "posting": {
+        "long_form": "2x/week",
+        "shorts": "3x/week"
+      },
+      "monetization": [
+        "camera/gear affiliates",
+        "editing software affiliates",
+        "creator tool sponsors"
+      ],
+      "thumbnail_style": "YouTube-themed red/white + play button icons + growth charts",
+      "channel_id": "UCfcF72fTPY1khgl5bEHzZEQ",
+      "handle": "@richvlogging-o9srichvlogging13"
     },
     "rich_gaming": {
       "name": "RichGaming",
@@ -386,14 +770,39 @@
       "type": "rich_brand",
       "faceless": true,
       "niche": "Gaming news, reviews, lore, walkthroughs",
-      "sub_topics": ["game lore", "easter eggs", "game comparisons", "upcoming releases", "retro games", "gaming setups"],
-      "formats": ["listicle", "explainer", "compilation", "shorts_facts"],
+      "sub_topics": [
+        "game lore",
+        "easter eggs",
+        "game comparisons",
+        "upcoming releases",
+        "retro games",
+        "gaming setups"
+      ],
+      "formats": [
+        "listicle",
+        "explainer",
+        "compilation",
+        "shorts_facts"
+      ],
       "voice_profile": "energetic_male",
       "youtube_category": "20",
-      "visual_theme": {"primary": "#76FF03", "accent": "#FF1744", "bg": "#0A0A0A"},
-      "posting": {"long_form": "3x/week", "shorts": "daily"},
-      "monetization": ["gaming peripherals affiliates", "game key affiliates", "gaming chair sponsors"],
-      "thumbnail_style": "game screenshots + neon green highlights + versus layouts"
+      "visual_theme": {
+        "primary": "#76FF03",
+        "accent": "#FF1744",
+        "bg": "#0A0A0A"
+      },
+      "posting": {
+        "long_form": "3x/week",
+        "shorts": "daily"
+      },
+      "monetization": [
+        "gaming peripherals affiliates",
+        "game key affiliates",
+        "gaming chair sponsors"
+      ],
+      "thumbnail_style": "game screenshots + neon green highlights + versus layouts",
+      "channel_id": "UCxa7nahEFd_39_jUl-VB57A",
+      "handle": "@richgaming-t8hrichgaming"
     },
     "rich_reviews": {
       "name": "RichReviews",
@@ -401,14 +810,39 @@
       "type": "rich_brand",
       "faceless": true,
       "niche": "Product reviews, comparisons, unboxings, best-of lists",
-      "sub_topics": ["tech reviews", "home products", "budget vs premium", "Amazon finds", "gadget tests", "honest reviews"],
-      "formats": ["listicle", "explainer", "shorts_facts", "compilation"],
+      "sub_topics": [
+        "tech reviews",
+        "home products",
+        "budget vs premium",
+        "Amazon finds",
+        "gadget tests",
+        "honest reviews"
+      ],
+      "formats": [
+        "listicle",
+        "explainer",
+        "shorts_facts",
+        "compilation"
+      ],
       "voice_profile": "neutral_male",
       "youtube_category": "28",
-      "visual_theme": {"primary": "#FF6F00", "accent": "#FFFFFF", "bg": "#1A1200"},
-      "posting": {"long_form": "3x/week", "shorts": "daily"},
-      "monetization": ["Amazon affiliates", "product sponsor deals", "coupon code partnerships"],
-      "thumbnail_style": "product photos + rating stars + comparison layouts"
+      "visual_theme": {
+        "primary": "#FF6F00",
+        "accent": "#FFFFFF",
+        "bg": "#1A1200"
+      },
+      "posting": {
+        "long_form": "3x/week",
+        "shorts": "daily"
+      },
+      "monetization": [
+        "Amazon affiliates",
+        "product sponsor deals",
+        "coupon code partnerships"
+      ],
+      "thumbnail_style": "product photos + rating stars + comparison layouts",
+      "channel_id": "UCQZAmWq2Y_1W09mIOSRSrFw",
+      "handle": "@richreviews26"
     },
     "rich_kids": {
       "name": "RichKids",
@@ -416,281 +850,711 @@
       "type": "rich_brand",
       "faceless": true,
       "niche": "Kids educational content, fun facts, learning activities",
-      "sub_topics": ["fun science", "animal facts for kids", "learning games", "kid-friendly history", "space for kids", "art projects"],
-      "formats": ["explainer", "listicle", "shorts_facts", "compilation"],
+      "sub_topics": [
+        "fun science",
+        "animal facts for kids",
+        "learning games",
+        "kid-friendly history",
+        "space for kids",
+        "art projects"
+      ],
+      "formats": [
+        "explainer",
+        "listicle",
+        "shorts_facts",
+        "compilation"
+      ],
       "voice_profile": "friendly_casual",
       "youtube_category": "27",
-      "visual_theme": {"primary": "#FF9800", "accent": "#4CAF50", "bg": "#FFF8E1"},
-      "posting": {"long_form": "2x/week", "shorts": "daily"},
-      "monetization": ["kids educational toy affiliates", "learning app sponsors", "book affiliates"],
+      "visual_theme": {
+        "primary": "#FF9800",
+        "accent": "#4CAF50",
+        "bg": "#FFF8E1"
+      },
+      "posting": {
+        "long_form": "2x/week",
+        "shorts": "daily"
+      },
+      "monetization": [
+        "kids educational toy affiliates",
+        "learning app sponsors",
+        "book affiliates"
+      ],
       "thumbnail_style": "bright colors + cartoon elements + large friendly text",
-      "made_for_kids": true
+      "made_for_kids": true,
+      "channel_id": "UCTR_qaU4bdip3DSvgBkRMGA",
+      "handle": "@richkids33"
     },
     "rich_pets": {
       "name": "RichPets",
-      "handle": "@RichPets",
+      "handle": "@richpets21",
+      "channel_id": "UCqPWKbwAGtKfiay4fB8bF1g",
+      "uploads_playlist_id": "UUqPWKbwAGtKfiay4fB8bF1g",
       "type": "rich_brand",
       "faceless": true,
       "niche": "Pets, animal care, cute compilations, pet tips",
-      "sub_topics": ["dog training", "cat facts", "pet health", "cute compilations", "exotic pets", "pet products"],
-      "formats": ["compilation", "listicle", "shorts_facts", "explainer"],
+      "sub_topics": [
+        "dog training",
+        "cat facts",
+        "pet health",
+        "cute compilations",
+        "exotic pets",
+        "pet products"
+      ],
+      "formats": [
+        "compilation",
+        "listicle",
+        "shorts_facts",
+        "explainer"
+      ],
       "voice_profile": "friendly_casual",
       "youtube_category": "15",
-      "visual_theme": {"primary": "#FF7043", "accent": "#A1887F", "bg": "#1A1510"},
-      "posting": {"long_form": "2x/week", "shorts": "daily"},
-      "monetization": ["pet product affiliates", "pet food sponsors", "pet insurance affiliates"],
+      "visual_theme": {
+        "primary": "#FF7043",
+        "accent": "#A1887F",
+        "bg": "#1A1510"
+      },
+      "posting": {
+        "long_form": "2x/week",
+        "shorts": "daily"
+      },
+      "monetization": [
+        "pet product affiliates",
+        "pet food sponsors",
+        "pet insurance affiliates"
+      ],
       "thumbnail_style": "adorable pet photos + warm tones + heart/paw icons"
     },
     "rich_horror": {
       "name": "RichHorror",
-      "handle": "@RichHorror",
+      "handle": "@richhorror24",
+      "channel_id": "UCoWN7G6XuFBPgM-m3d1ZMvQ",
       "type": "rich_brand",
       "faceless": true,
       "niche": "Horror stories, creepy facts, unsolved mysteries, true crime",
-      "sub_topics": ["true scary stories", "unsolved mysteries", "creepy places", "horror movie analysis", "urban legends", "paranormal"],
-      "formats": ["explainer", "compilation", "listicle", "shorts_story"],
+      "sub_topics": [
+        "true scary stories",
+        "unsolved mysteries",
+        "creepy places",
+        "horror movie analysis",
+        "urban legends",
+        "paranormal"
+      ],
+      "formats": [
+        "explainer",
+        "compilation",
+        "listicle",
+        "shorts_story"
+      ],
       "voice_profile": "storyteller",
       "youtube_category": "22",
-      "visual_theme": {"primary": "#B71C1C", "accent": "#F44336", "bg": "#0A0000"},
-      "posting": {"long_form": "2x/week", "shorts": "daily"},
-      "monetization": ["horror merch affiliates", "audiobook affiliates (Audible)", "VPN sponsors"],
+      "visual_theme": {
+        "primary": "#B71C1C",
+        "accent": "#F44336",
+        "bg": "#0A0000"
+      },
+      "posting": {
+        "long_form": "2x/week",
+        "shorts": "daily"
+      },
+      "monetization": [
+        "horror merch affiliates",
+        "audiobook affiliates (Audible)",
+        "VPN sponsors"
+      ],
       "thumbnail_style": "dark moody imagery + red accents + mysterious shadowy figures"
     },
     "rich_movie": {
       "name": "RichMovie",
-      "handle": "@RichMovie",
+      "handle": "@richmovie20",
+      "channel_id": "UCuQwKYGe1hNdbQqJH51qqAw",
       "type": "rich_brand",
       "faceless": true,
       "niche": "Movie reviews, film analysis, hidden details, entertainment news",
-      "sub_topics": ["movie breakdowns", "hidden details", "film theories", "box office analysis", "upcoming releases", "director spotlights"],
-      "formats": ["explainer", "listicle", "compilation", "shorts_facts"],
+      "sub_topics": [
+        "movie breakdowns",
+        "hidden details",
+        "film theories",
+        "box office analysis",
+        "upcoming releases",
+        "director spotlights"
+      ],
+      "formats": [
+        "explainer",
+        "listicle",
+        "compilation",
+        "shorts_facts"
+      ],
       "voice_profile": "storyteller",
       "youtube_category": "1",
-      "visual_theme": {"primary": "#FFD700", "accent": "#1A237E", "bg": "#0D0D1A"},
-      "posting": {"long_form": "2x/week", "shorts": "daily"},
-      "monetization": ["streaming service affiliates", "merch affiliates", "movie ticket affiliates"],
+      "visual_theme": {
+        "primary": "#FFD700",
+        "accent": "#1A237E",
+        "bg": "#0D0D1A"
+      },
+      "posting": {
+        "long_form": "2x/week",
+        "shorts": "daily"
+      },
+      "monetization": [
+        "streaming service affiliates",
+        "merch affiliates",
+        "movie ticket affiliates"
+      ],
       "thumbnail_style": "movie posters + dramatic lighting + film strip borders"
     },
     "rich_business": {
       "name": "Rich Business",
-      "handle": "@RichBusiness",
+      "handle": "@richbusiness35",
       "type": "rich_brand",
       "faceless": true,
       "niche": "Business tips, entrepreneurship, side hustles, passive income",
-      "sub_topics": ["side hustle ideas", "passive income", "business strategies", "startup stories", "marketing tips", "e-commerce"],
-      "formats": ["explainer", "listicle", "tutorial", "shorts_facts"],
+      "sub_topics": [
+        "side hustle ideas",
+        "passive income",
+        "business strategies",
+        "startup stories",
+        "marketing tips",
+        "e-commerce"
+      ],
+      "formats": [
+        "explainer",
+        "listicle",
+        "tutorial",
+        "shorts_facts"
+      ],
       "voice_profile": "neutral_male",
       "youtube_category": "22",
-      "visual_theme": {"primary": "#1B5E20", "accent": "#A5D6A7", "bg": "#0A1A0A"},
-      "posting": {"long_form": "2x/week", "shorts": "daily"},
-      "monetization": ["business tool affiliates", "course affiliates", "web hosting sponsors"],
-      "thumbnail_style": "money/growth imagery + green tones + bold income numbers"
+      "visual_theme": {
+        "primary": "#1B5E20",
+        "accent": "#A5D6A7",
+        "bg": "#0A1A0A"
+      },
+      "posting": {
+        "long_form": "2x/week",
+        "shorts": "daily"
+      },
+      "monetization": [
+        "business tool affiliates",
+        "course affiliates",
+        "web hosting sponsors"
+      ],
+      "thumbnail_style": "money/growth imagery + green tones + bold income numbers",
+      "channel_id": "UCPQ8N53EgcqEKR4SfQ1DcXQ"
     },
     "rich_fitness": {
       "name": "RichFitness",
-      "handle": "@RichFitness",
+      "handle": "@richfitness-g7s",
       "type": "rich_brand",
       "faceless": true,
       "niche": "Fitness, workouts, nutrition, health tips",
-      "sub_topics": ["home workouts", "nutrition tips", "supplement reviews", "workout routines", "weight loss", "muscle building"],
-      "formats": ["tutorial", "listicle", "explainer", "shorts_facts"],
+      "sub_topics": [
+        "home workouts",
+        "nutrition tips",
+        "supplement reviews",
+        "workout routines",
+        "weight loss",
+        "muscle building"
+      ],
+      "formats": [
+        "tutorial",
+        "listicle",
+        "explainer",
+        "shorts_facts"
+      ],
       "voice_profile": "energetic_male",
       "youtube_category": "17",
-      "visual_theme": {"primary": "#D50000", "accent": "#FF8A80", "bg": "#1A0A0A"},
-      "posting": {"long_form": "2x/week", "shorts": "daily"},
-      "monetization": ["supplement affiliates", "fitness equipment affiliates", "workout app sponsors"],
-      "thumbnail_style": "fitness imagery + bold red/black + transformation shots"
+      "visual_theme": {
+        "primary": "#D50000",
+        "accent": "#FF8A80",
+        "bg": "#1A0A0A"
+      },
+      "posting": {
+        "long_form": "2x/week",
+        "shorts": "daily"
+      },
+      "monetization": [
+        "supplement affiliates",
+        "fitness equipment affiliates",
+        "workout app sponsors"
+      ],
+      "thumbnail_style": "fitness imagery + bold red/black + transformation shots",
+      "channel_id": "UCYelLGcByI-Qh94two6CaMA"
     },
     "rich_music": {
       "name": "RichMusic",
-      "handle": "@RichMusic",
+      "handle": "@richmusic99-q1d",
       "type": "rich_brand",
       "faceless": true,
       "niche": "Music production, beat making, music theory, artist breakdowns",
-      "sub_topics": ["beat making tutorials", "music theory", "producer tips", "sample packs", "mixing/mastering", "artist breakdowns"],
-      "formats": ["tutorial", "explainer", "listicle", "shorts_facts"],
+      "sub_topics": [
+        "beat making tutorials",
+        "music theory",
+        "producer tips",
+        "sample packs",
+        "mixing/mastering",
+        "artist breakdowns"
+      ],
+      "formats": [
+        "tutorial",
+        "explainer",
+        "listicle",
+        "shorts_facts"
+      ],
       "voice_profile": "friendly_casual",
       "youtube_category": "10",
-      "visual_theme": {"primary": "#AA00FF", "accent": "#EA80FC", "bg": "#1A0A2A"},
-      "posting": {"long_form": "2x/week", "shorts": "3x/week"},
-      "monetization": ["DAW/plugin affiliates", "sample pack affiliates", "audio gear sponsors"],
-      "thumbnail_style": "waveform visuals + purple neon + studio aesthetic"
+      "visual_theme": {
+        "primary": "#AA00FF",
+        "accent": "#EA80FC",
+        "bg": "#1A0A2A"
+      },
+      "posting": {
+        "long_form": "2x/week",
+        "shorts": "3x/week"
+      },
+      "monetization": [
+        "DAW/plugin affiliates",
+        "sample pack affiliates",
+        "audio gear sponsors"
+      ],
+      "thumbnail_style": "waveform visuals + purple neon + studio aesthetic",
+      "channel_id": "UCCI_ynXNuutXGrzWDYzUZiA"
     },
     "rich_finance": {
       "name": "RichFinance",
-      "handle": "@RichFinance",
+      "handle": "@richfinance-w2orichfinance15",
       "type": "rich_brand",
       "faceless": true,
       "niche": "Personal finance, investing, money management, financial literacy",
-      "sub_topics": ["investing basics", "budgeting", "credit score", "retirement planning", "tax tips", "stock market"],
-      "formats": ["explainer", "listicle", "tutorial", "shorts_facts"],
+      "sub_topics": [
+        "investing basics",
+        "budgeting",
+        "credit score",
+        "retirement planning",
+        "tax tips",
+        "stock market"
+      ],
+      "formats": [
+        "explainer",
+        "listicle",
+        "tutorial",
+        "shorts_facts"
+      ],
       "voice_profile": "neutral_male",
       "youtube_category": "27",
-      "visual_theme": {"primary": "#2E7D32", "accent": "#00E676", "bg": "#0A1A0A"},
-      "posting": {"long_form": "2x/week", "shorts": "daily"},
-      "monetization": ["brokerage affiliates", "financial app sponsors", "credit card affiliates"],
-      "thumbnail_style": "money/chart imagery + green gradients + dollar signs"
+      "visual_theme": {
+        "primary": "#2E7D32",
+        "accent": "#00E676",
+        "bg": "#0A1A0A"
+      },
+      "posting": {
+        "long_form": "2x/week",
+        "shorts": "daily"
+      },
+      "monetization": [
+        "brokerage affiliates",
+        "financial app sponsors",
+        "credit card affiliates"
+      ],
+      "thumbnail_style": "money/chart imagery + green gradients + dollar signs",
+      "channel_id": "UCJwfAudM4c4rWSk3P8iib8g"
     },
     "rich_cars": {
       "name": "RichCars",
-      "handle": "@RichCars",
+      "handle": "@richcars23",
       "type": "rich_brand",
       "faceless": true,
       "niche": "Cars, auto reviews, car culture, EV news, modifications",
-      "sub_topics": ["car reviews", "car comparisons", "EV news", "car mods", "racing", "car history"],
-      "formats": ["listicle", "explainer", "compilation", "shorts_facts"],
+      "sub_topics": [
+        "car reviews",
+        "car comparisons",
+        "EV news",
+        "car mods",
+        "racing",
+        "car history"
+      ],
+      "formats": [
+        "listicle",
+        "explainer",
+        "compilation",
+        "shorts_facts"
+      ],
       "voice_profile": "energetic_male",
       "youtube_category": "2",
-      "visual_theme": {"primary": "#E65100", "accent": "#FFD54F", "bg": "#1A1000"},
-      "posting": {"long_form": "2x/week", "shorts": "daily"},
-      "monetization": ["auto parts affiliates", "car insurance affiliates", "detailing product sponsors"],
-      "thumbnail_style": "car beauty shots + speed lines + orange/black contrast"
+      "visual_theme": {
+        "primary": "#E65100",
+        "accent": "#FFD54F",
+        "bg": "#1A1000"
+      },
+      "posting": {
+        "long_form": "2x/week",
+        "shorts": "daily"
+      },
+      "monetization": [
+        "auto parts affiliates",
+        "car insurance affiliates",
+        "detailing product sponsors"
+      ],
+      "thumbnail_style": "car beauty shots + speed lines + orange/black contrast",
+      "channel_id": "UCr0q31TN0vW0c65JUD0eaBw"
     },
     "rich_lifestyle": {
       "name": "RichLifestyle",
-      "handle": "@RichLifestyle",
+      "handle": "@richlifestyle25x",
       "type": "rich_brand",
       "faceless": true,
       "niche": "Lifestyle, productivity, self-improvement, daily routines",
-      "sub_topics": ["morning routines", "productivity hacks", "minimalism", "apartment tours", "self-care", "habit building"],
-      "formats": ["listicle", "explainer", "shorts_facts", "compilation"],
+      "sub_topics": [
+        "morning routines",
+        "productivity hacks",
+        "minimalism",
+        "apartment tours",
+        "self-care",
+        "habit building"
+      ],
+      "formats": [
+        "listicle",
+        "explainer",
+        "shorts_facts",
+        "compilation"
+      ],
       "voice_profile": "friendly_casual",
       "youtube_category": "22",
-      "visual_theme": {"primary": "#455A64", "accent": "#B0BEC5", "bg": "#121212"},
-      "posting": {"long_form": "2x/week", "shorts": "daily"},
-      "monetization": ["lifestyle product affiliates", "app sponsors", "subscription box sponsors"],
-      "thumbnail_style": "clean minimal aesthetic + muted tones + lifestyle imagery"
+      "visual_theme": {
+        "primary": "#455A64",
+        "accent": "#B0BEC5",
+        "bg": "#121212"
+      },
+      "posting": {
+        "long_form": "2x/week",
+        "shorts": "daily"
+      },
+      "monetization": [
+        "lifestyle product affiliates",
+        "app sponsors",
+        "subscription box sponsors"
+      ],
+      "thumbnail_style": "clean minimal aesthetic + muted tones + lifestyle imagery",
+      "channel_id": "UC1Qnne6cR4N4RJgpySYUevw"
     },
     "rich_photography": {
       "name": "RichPhotography",
-      "handle": "@RichPhotography",
+      "handle": "@richphotography19",
       "type": "rich_brand",
       "faceless": true,
       "niche": "Photography tips, camera reviews, editing tutorials, photo walks",
-      "sub_topics": ["camera reviews", "editing tutorials", "composition tips", "lightroom presets", "phone photography", "genre guides"],
-      "formats": ["tutorial", "listicle", "explainer", "shorts_facts"],
+      "sub_topics": [
+        "camera reviews",
+        "editing tutorials",
+        "composition tips",
+        "lightroom presets",
+        "phone photography",
+        "genre guides"
+      ],
+      "formats": [
+        "tutorial",
+        "listicle",
+        "explainer",
+        "shorts_facts"
+      ],
       "voice_profile": "calm_narrator",
       "youtube_category": "26",
-      "visual_theme": {"primary": "#37474F", "accent": "#FF6F00", "bg": "#1A1A1A"},
-      "posting": {"long_form": "2x/week", "shorts": "3x/week"},
-      "monetization": ["camera/lens affiliates", "editing software affiliates", "preset pack sponsors"],
-      "thumbnail_style": "stunning photo examples + camera icons + clean typography"
+      "visual_theme": {
+        "primary": "#37474F",
+        "accent": "#FF6F00",
+        "bg": "#1A1A1A"
+      },
+      "posting": {
+        "long_form": "2x/week",
+        "shorts": "3x/week"
+      },
+      "monetization": [
+        "camera/lens affiliates",
+        "editing software affiliates",
+        "preset pack sponsors"
+      ],
+      "thumbnail_style": "stunning photo examples + camera icons + clean typography",
+      "channel_id": "UCZLGO4ioG50Y3FBK3oLKmpA"
     },
     "rich_sports": {
       "name": "RichSports",
-      "handle": "@RichSports",
+      "handle": "@richsports11",
       "type": "rich_brand",
       "faceless": true,
       "niche": "Sports highlights, analysis, athlete stories, records",
-      "sub_topics": ["game analysis", "athlete stories", "sports records", "draft analysis", "sports science", "training secrets"],
-      "formats": ["compilation", "listicle", "explainer", "shorts_facts"],
+      "sub_topics": [
+        "game analysis",
+        "athlete stories",
+        "sports records",
+        "draft analysis",
+        "sports science",
+        "training secrets"
+      ],
+      "formats": [
+        "compilation",
+        "listicle",
+        "explainer",
+        "shorts_facts"
+      ],
       "voice_profile": "energetic_male",
       "youtube_category": "17",
-      "visual_theme": {"primary": "#1565C0", "accent": "#FF1744", "bg": "#0A0A1A"},
-      "posting": {"long_form": "3x/week", "shorts": "daily"},
-      "monetization": ["sports betting affiliates", "sports merch affiliates", "fitness app sponsors"],
-      "thumbnail_style": "action shots + team colors + bold stat numbers"
+      "visual_theme": {
+        "primary": "#1565C0",
+        "accent": "#FF1744",
+        "bg": "#0A0A1A"
+      },
+      "posting": {
+        "long_form": "3x/week",
+        "shorts": "daily"
+      },
+      "monetization": [
+        "sports betting affiliates",
+        "sports merch affiliates",
+        "fitness app sponsors"
+      ],
+      "thumbnail_style": "action shots + team colors + bold stat numbers",
+      "channel_id": "UCE33LOzIvklXaPbH1920vqQ"
     },
     "rich_food": {
       "name": "RichFood",
-      "handle": "@RichFood",
+      "handle": "@richfood22",
       "type": "rich_brand",
       "faceless": true,
       "niche": "Food reviews, restaurant tours, food culture, taste tests",
-      "sub_topics": ["restaurant reviews", "food challenges", "street food", "food history", "taste tests", "food trends"],
-      "formats": ["compilation", "listicle", "shorts_facts", "explainer"],
+      "sub_topics": [
+        "restaurant reviews",
+        "food challenges",
+        "street food",
+        "food history",
+        "taste tests",
+        "food trends"
+      ],
+      "formats": [
+        "compilation",
+        "listicle",
+        "shorts_facts",
+        "explainer"
+      ],
       "voice_profile": "friendly_casual",
       "youtube_category": "22",
-      "visual_theme": {"primary": "#BF360C", "accent": "#FFE0B2", "bg": "#1A0A00"},
-      "posting": {"long_form": "2x/week", "shorts": "daily"},
-      "monetization": ["food delivery affiliates", "kitchen gadget affiliates", "restaurant partnerships"],
-      "thumbnail_style": "close-up food shots + warm saturated colors + drool-worthy text"
+      "visual_theme": {
+        "primary": "#BF360C",
+        "accent": "#FFE0B2",
+        "bg": "#1A0A00"
+      },
+      "posting": {
+        "long_form": "2x/week",
+        "shorts": "daily"
+      },
+      "monetization": [
+        "food delivery affiliates",
+        "kitchen gadget affiliates",
+        "restaurant partnerships"
+      ],
+      "thumbnail_style": "close-up food shots + warm saturated colors + drool-worthy text",
+      "channel_id": "UCSRXBfCZTafYTtfH9KF-SZw"
     },
     "rich_memes": {
       "name": "RichMemes",
-      "handle": "@RichMemes",
+      "handle": "@richmemes31",
       "type": "rich_brand",
       "faceless": true,
       "niche": "Meme compilations, internet culture, trending content, humor",
-      "sub_topics": ["daily meme compilations", "internet trends", "meme history", "viral moments", "Reddit best-of"],
-      "formats": ["compilation", "shorts_facts", "shorts_story"],
+      "sub_topics": [
+        "daily meme compilations",
+        "internet trends",
+        "meme history",
+        "viral moments",
+        "Reddit best-of"
+      ],
+      "formats": [
+        "compilation",
+        "shorts_facts",
+        "shorts_story"
+      ],
       "voice_profile": "energetic_male",
       "youtube_category": "23",
-      "visual_theme": {"primary": "#FFD600", "accent": "#000000", "bg": "#FFFFFF"},
-      "posting": {"long_form": "3x/week", "shorts": "3x/day"},
-      "monetization": ["merch (meme shirts)", "shorts fund", "sponsor integrations"],
-      "thumbnail_style": "meme format + impact font + bright yellow/contrasting"
+      "visual_theme": {
+        "primary": "#FFD600",
+        "accent": "#000000",
+        "bg": "#FFFFFF"
+      },
+      "posting": {
+        "long_form": "3x/week",
+        "shorts": "3x/day"
+      },
+      "monetization": [
+        "merch (meme shirts)",
+        "shorts fund",
+        "sponsor integrations"
+      ],
+      "thumbnail_style": "meme format + impact font + bright yellow/contrasting",
+      "channel_id": "UC5Sa2tKSk-5Nek01b-v1LpQ"
     },
     "rich_design": {
       "name": "RichDesign",
-      "handle": "@RichDesign",
+      "handle": "@richdesign30",
       "type": "rich_brand",
       "faceless": true,
       "niche": "Graphic design, UI/UX, branding, design tools, typography",
-      "sub_topics": ["design tutorials", "branding breakdowns", "typography", "logo design", "UI/UX tips", "design trends"],
-      "formats": ["tutorial", "explainer", "listicle", "shorts_facts"],
+      "sub_topics": [
+        "design tutorials",
+        "branding breakdowns",
+        "typography",
+        "logo design",
+        "UI/UX tips",
+        "design trends"
+      ],
+      "formats": [
+        "tutorial",
+        "explainer",
+        "listicle",
+        "shorts_facts"
+      ],
       "voice_profile": "calm_narrator",
       "youtube_category": "26",
-      "visual_theme": {"primary": "#000000", "accent": "#c8ff00", "bg": "#0A0A0A"},
-      "posting": {"long_form": "2x/week", "shorts": "3x/week"},
-      "monetization": ["design tool affiliates", "font/asset affiliates", "course sponsors"],
-      "thumbnail_style": "sleek design mockups + accent pops + grid layouts"
+      "visual_theme": {
+        "primary": "#000000",
+        "accent": "#c8ff00",
+        "bg": "#0A0A0A"
+      },
+      "posting": {
+        "long_form": "2x/week",
+        "shorts": "3x/week"
+      },
+      "monetization": [
+        "design tool affiliates",
+        "font/asset affiliates",
+        "course sponsors"
+      ],
+      "thumbnail_style": "sleek design mockups + accent pops + grid layouts",
+      "channel_id": "UCSc0w6tez-UI3fyXQbUcF5g"
     },
     "rich_comedy": {
       "name": "RichComedy",
-      "handle": "@RichComedy",
+      "handle": "@richcomedy7",
       "type": "rich_brand",
       "faceless": true,
       "niche": "Comedy sketches, funny compilations, internet humor, commentary",
-      "sub_topics": ["funny compilations", "commentary", "fail compilations", "awkward moments", "relatable humor", "parodies"],
-      "formats": ["compilation", "shorts_story", "shorts_facts"],
+      "sub_topics": [
+        "funny compilations",
+        "commentary",
+        "fail compilations",
+        "awkward moments",
+        "relatable humor",
+        "parodies"
+      ],
+      "formats": [
+        "compilation",
+        "shorts_story",
+        "shorts_facts"
+      ],
       "voice_profile": "energetic_male",
       "youtube_category": "23",
-      "visual_theme": {"primary": "#FF6D00", "accent": "#FFFF00", "bg": "#1A1A00"},
-      "posting": {"long_form": "2x/week", "shorts": "3x/day"},
-      "monetization": ["merch", "shorts fund", "brand comedy integrations"],
-      "thumbnail_style": "expressive reactions + bright colors + funny text overlays"
+      "visual_theme": {
+        "primary": "#FF6D00",
+        "accent": "#FFFF00",
+        "bg": "#1A1A00"
+      },
+      "posting": {
+        "long_form": "2x/week",
+        "shorts": "3x/day"
+      },
+      "monetization": [
+        "merch",
+        "shorts fund",
+        "brand comedy integrations"
+      ],
+      "thumbnail_style": "expressive reactions + bright colors + funny text overlays",
+      "channel_id": "UC7OZtJLgHJ1ooWWlPLRYIXg"
     },
     "rich_diy": {
       "name": "RichDIY",
-      "handle": "@RichDIY",
+      "handle": "@richdiy12",
       "type": "rich_brand",
       "faceless": true,
       "niche": "DIY projects, home improvement, crafts, maker projects",
-      "sub_topics": ["home improvement", "woodworking", "3D printing", "craft projects", "upcycling", "tool reviews"],
-      "formats": ["tutorial", "listicle", "compilation", "shorts_facts"],
+      "sub_topics": [
+        "home improvement",
+        "woodworking",
+        "3D printing",
+        "craft projects",
+        "upcycling",
+        "tool reviews"
+      ],
+      "formats": [
+        "tutorial",
+        "listicle",
+        "compilation",
+        "shorts_facts"
+      ],
       "voice_profile": "friendly_casual",
       "youtube_category": "26",
-      "visual_theme": {"primary": "#795548", "accent": "#FFB300", "bg": "#1A1510"},
-      "posting": {"long_form": "2x/week", "shorts": "3x/week"},
-      "monetization": ["tool affiliates", "material affiliates", "workshop sponsor deals"],
-      "thumbnail_style": "before/after shots + workshop aesthetic + warm wood tones"
+      "visual_theme": {
+        "primary": "#795548",
+        "accent": "#FFB300",
+        "bg": "#1A1510"
+      },
+      "posting": {
+        "long_form": "2x/week",
+        "shorts": "3x/week"
+      },
+      "monetization": [
+        "tool affiliates",
+        "material affiliates",
+        "workshop sponsor deals"
+      ],
+      "thumbnail_style": "before/after shots + workshop aesthetic + warm wood tones",
+      "channel_id": "UC7dfL3CGJCbG7QcGnjrmqbQ"
     },
     "rich_dance": {
       "name": "RichDance",
-      "handle": "@RichDance",
+      "handle": "@richdance32",
       "type": "rich_brand",
       "faceless": true,
       "niche": "Dance tutorials, choreography, dance culture, music videos",
-      "sub_topics": ["dance tutorials", "choreography breakdowns", "dance history", "viral dances", "dance fitness", "music video analysis"],
-      "formats": ["compilation", "tutorial", "shorts_facts", "shorts_story"],
+      "sub_topics": [
+        "dance tutorials",
+        "choreography breakdowns",
+        "dance history",
+        "viral dances",
+        "dance fitness",
+        "music video analysis"
+      ],
+      "formats": [
+        "compilation",
+        "tutorial",
+        "shorts_facts",
+        "shorts_story"
+      ],
       "voice_profile": "energetic_male",
       "youtube_category": "10",
-      "visual_theme": {"primary": "#D500F9", "accent": "#00E5FF", "bg": "#0A001A"},
-      "posting": {"long_form": "1x/week", "shorts": "daily"},
-      "monetization": ["dance class affiliates", "music streaming affiliates", "activewear sponsors"],
-      "thumbnail_style": "dynamic dance poses + neon lights + motion blur effects"
+      "visual_theme": {
+        "primary": "#D500F9",
+        "accent": "#00E5FF",
+        "bg": "#0A001A"
+      },
+      "posting": {
+        "long_form": "1x/week",
+        "shorts": "daily"
+      },
+      "monetization": [
+        "dance class affiliates",
+        "music streaming affiliates",
+        "activewear sponsors"
+      ],
+      "thumbnail_style": "dynamic dance poses + neon lights + motion blur effects",
+      "channel_id": "UCsNqeu5ZPnBOE3liu9-ofYg"
     }
   },
-
   "script_templates": {
     "listicle": {
       "intro": "[HOOK]\n\nHey, welcome back. Today we're counting down {count} {topic}. Make sure to stick around because number one is genuinely surprising.\n\nLet's get into it.",
       "item": "\n\nNumber {n}: {item_title}.\n\n{item_body}\n\n{retention_hook}",
-      "outro": "\n\nAnd that wraps up our list. If you found this useful, hit that like button and subscribe for more. Drop a comment below — which one was your favorite?\n\nUntil next time."
+      "outro": "\n\nAnd that wraps up our list. If you found this useful, hit that like button and subscribe for more. Drop a comment below \u2014 which one was your favorite?\n\nUntil next time."
     },
     "explainer": {
-      "intro": "[HOOK]\n\nToday we're breaking down {topic} — what it is, why it matters, and what you need to know.\n\nLet's dive in.",
+      "intro": "[HOOK]\n\nToday we're breaking down {topic} \u2014 what it is, why it matters, and what you need to know.\n\nLet's dive in.",
       "section": "\n\n{section_title}\n\n{section_body}\n\n{retention_hook}",
       "outro": "\n\nSo that's {topic} explained. If this helped you understand it better, leave a like and subscribe. I've got more content like this coming.\n\nSee you in the next one."
     },
@@ -713,13 +1577,12 @@
     "tutorial": {
       "intro": "[HOOK]\n\nToday I'm going to walk you through {topic} step by step. By the end, you'll know exactly how to do this yourself.\n\nLet's get started.",
       "step": "\n\nStep {n}: {step_title}.\n\n{step_body}",
-      "outro": "\n\nAnd there you go — {topic} done. If this helped you, please like and subscribe. Drop any questions in the comments.\n\nUntil next time."
+      "outro": "\n\nAnd there you go \u2014 {topic} done. If this helped you, please like and subscribe. Drop any questions in the comments.\n\nUntil next time."
     },
     "product_showcase": {
-      "full": "[HOOK]\n\nCheck out this {product_name} from the Cumquat Vibes store.\n\n{product_description}\n\nGrab yours at cumquatvibes.com — link in the description.\n\nFollow for more drops."
+      "full": "[HOOK]\n\nCheck out this {product_name} from the Cumquat Vibes store.\n\n{product_description}\n\nGrab yours at cumquatvibes.com \u2014 link in the description.\n\nFollow for more drops."
     }
   },
-
   "hooks_by_niche": {
     "tech": [
       "This AI tool just changed everything.",
@@ -771,12 +1634,15 @@
       "You won't believe what we found about {topic}."
     ]
   },
-
   "seo_defaults": {
     "description_footer": "\n\n---\nMain Channel: https://www.youtube.com/@CumquatVibes\nShop: https://cumquatvibes.com\nPortfolio: https://richardabreu.studio\nCommunity: https://vibeconnectionlounge.com\n\n#Faceless #YouTube",
-    "default_tags": ["faceless youtube", "AI narration", "top 10", "facts"]
+    "default_tags": [
+      "faceless youtube",
+      "AI narration",
+      "top 10",
+      "facts"
+    ]
   },
-
   "automation": {
     "batch_size": 5,
     "batch_delay_seconds": 30,
@@ -786,9 +1652,27 @@
     "voice_engine": "elevenlabs",
     "image_engine": "gemini_imagen",
     "scheduling": {
-      "priority_channels": ["rich_tech", "rich_gaming", "rich_finance", "rich_horror", "rich_science"],
-      "secondary_channels": ["rich_crypto", "rich_reviews", "rich_sports", "rich_movie", "rich_business"],
-      "growth_channels": ["rich_memes", "rich_comedy", "cumquat_shortform", "rich_nature", "rich_pets"]
+      "priority_channels": [
+        "rich_tech",
+        "rich_gaming",
+        "rich_finance",
+        "rich_horror",
+        "rich_science"
+      ],
+      "secondary_channels": [
+        "rich_crypto",
+        "rich_reviews",
+        "rich_sports",
+        "rich_movie",
+        "rich_business"
+      ],
+      "growth_channels": [
+        "rich_memes",
+        "rich_comedy",
+        "cumquat_shortform",
+        "rich_nature",
+        "rich_pets"
+      ]
     }
   }
 }
