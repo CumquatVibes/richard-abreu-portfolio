@@ -1905,11 +1905,457 @@
       "comment_engagement": "Pinned comments with network links encourage exploration",
       "playlist_strategy": "Each channel maintains a 'Network Picks' playlist featuring top videos from cluster channels",
       "upload_coordination": "Stagger uploads across cluster channels so related content appears in suggested videos together"
+    },
+    "hashtag_strategy": {
+      "network_hashtag": "#CumquatVibes",
+      "per_video_hashtags": ["#CumquatVibes", "#{channel_name}", "#{niche_tag}"],
+      "description_hashtags": "#CumquatVibes #{channel_name} #{topic_tag_1} #{topic_tag_2} #{topic_tag_3}",
+      "note": "First 3 hashtags appear above the video title on YouTube. Always lead with #CumquatVibes for network branding."
+    },
+    "community_tab_strategy": {
+      "cross_post_frequency": "2x/week per channel",
+      "post_types": [
+        {
+          "type": "sister_channel_highlight",
+          "template": "Our friends at {sister_channel} just dropped this banger. Go check it out!\n\n{video_link}\n\n#CumquatVibes",
+          "frequency": "1x/week"
+        },
+        {
+          "type": "poll_engagement",
+          "template": "Which topic should we cover next?\n\n{option_1}\n{option_2}\n{option_3}\n{option_4}",
+          "frequency": "1x/week"
+        },
+        {
+          "type": "network_announcement",
+          "template": "The Cumquat Vibes network just hit {milestone}! Thank you to every single one of you.\n\nExplore more channels: {network_link}\n\n#CumquatVibes",
+          "frequency": "monthly"
+        },
+        {
+          "type": "shop_promo",
+          "template": "New drop in the Cumquat Vibes store!\n\n{product_link}\n\nShop: https://cumquatvibes.com",
+          "frequency": "1x/week"
+        }
+      ]
+    },
+    "network_giveaway_system": {
+      "frequency": "monthly",
+      "entry_requirements": [
+        "Subscribe to {channel_1}",
+        "Subscribe to {channel_2}",
+        "Subscribe to {channel_3}",
+        "Like this video",
+        "Comment your favorite channel in the network"
+      ],
+      "prize_tiers": {
+        "small": "Free item from cumquatvibes.com store",
+        "medium": "Cumquat Vibes merch bundle + digital product pack",
+        "large": "Full digital course access + merch + 1-on-1 consultation"
+      },
+      "announcement_template": "GIVEAWAY TIME! We're giving away {prize} to celebrate {milestone}.\n\nTo enter:\n1. Subscribe to {channel_1}, {channel_2}, and {channel_3}\n2. Like this video\n3. Comment which Cumquat Vibes channel is your favorite\n\nWinner announced in {timeframe}. Good luck!\n\n#CumquatVibes #Giveaway",
+      "cross_post_to_all_channels": true
+    },
+    "network_trailer": {
+      "upload_to_all_channels": true,
+      "set_as_channel_trailer": true,
+      "script": "[HOOK]\n\nWelcome to the Cumquat Vibes network \u2014 41 channels, one ecosystem, all the content you could ever want.\n\n[MONTAGE of clips from each channel cluster]\n\nWhether you're into tech, finance, gaming, horror, fitness, cooking, science, or just pure entertainment \u2014 we've got a channel for you.\n\n[RAPID-FIRE channel name + handle display]\n\nEvery channel in our network cross-promotes each other, so when you subscribe to one, you discover more content you'll love.\n\nNew videos across the network every single day.\n\nShop the vibe at cumquatvibes.com. Support us at the link below.\n\nSubscribe to this channel and explore the full network in the description.\n\nWelcome to the vibe.\n\n#CumquatVibes",
+      "duration_target": "60-90 sec",
+      "format": "shorts_story",
+      "visual_style": "Fast montage of best clips from each channel, channel logos, network map graphic"
+    }
+  },
+  "social_media_distribution": {
+    "platforms": {
+      "facebook_page": {
+        "name": "Cumquat Vibes",
+        "url": "https://www.facebook.com/cumquatvibes",
+        "post_types": ["video_link", "thumbnail_image", "quote_card", "shop_promo"],
+        "frequency": "3-5x/day",
+        "strategy": "Post best-performing videos from across all channels. Rotate niches to keep the page diverse. Always link back to YouTube."
+      },
+      "facebook_group": {
+        "name": "Cumquat Vibes Community",
+        "url": "https://www.facebook.com/groups/cumquatvibes",
+        "post_types": ["video_link", "discussion_prompt", "poll", "behind_the_scenes", "member_spotlight"],
+        "frequency": "2-3x/day",
+        "strategy": "Build community engagement. Share videos + ask questions. Use polls to let members vote on upcoming topics. Feature active members."
+      },
+      "instagram": {
+        "handle": "@cumquatvibes",
+        "post_types": {
+          "feed": ["carousel_tips", "quote_cards", "thumbnail_repurpose", "shop_promo"],
+          "stories": ["video_teasers", "polls", "quiz", "countdown_to_upload", "swipe_up_links"],
+          "reels": ["shorts_repurpose", "behind_the_scenes", "quick_tips"]
+        },
+        "frequency": {
+          "feed": "1x/day",
+          "stories": "5-10x/day",
+          "reels": "2-3x/day"
+        },
+        "strategy": "Repurpose YouTube Shorts as Reels. Create carousel posts from listicle videos (one slide per item). Use Stories for engagement (polls, quizzes). Always drive to YouTube + shop."
+      }
+    },
+    "content_repurposing_rules": {
+      "youtube_to_facebook_page": {
+        "format": "Share video link with custom caption. Include thumbnail image. Add 2-3 relevant hashtags + #CumquatVibes.",
+        "caption_template": "{hook_line}\n\nWatch the full video: {youtube_link}\n\n{hashtags}\n\nShop: cumquatvibes.com"
+      },
+      "youtube_to_facebook_group": {
+        "format": "Share video with discussion prompt. Encourage comments and debate.",
+        "caption_template": "{hook_line}\n\n{discussion_question}\n\nWatch: {youtube_link}\n\nDrop your thoughts below!"
+      },
+      "youtube_to_instagram_reel": {
+        "format": "Re-export YouTube Short as vertical video. Add Instagram-specific captions and trending audio if relevant.",
+        "caption_template": "{hook_line}\n\nFull video on YouTube \u2014 link in bio!\n\n{hashtags}\n\n#CumquatVibes #Reels"
+      },
+      "youtube_to_instagram_carousel": {
+        "format": "Extract key points from listicle videos. 1 point per slide. Slide 1 = title card. Last slide = CTA to watch full video.",
+        "caption_template": "{topic_title} (swipe \u2192)\n\nFull breakdown on YouTube \u2014 link in bio.\n\nSave this post for later!\n\n{hashtags}"
+      },
+      "youtube_to_instagram_story": {
+        "format": "15-sec clip from video + poll sticker or question sticker for engagement.",
+        "caption_template": "New video just dropped! Tap to watch."
+      }
+    },
+    "posting_schedule": {
+      "facebook_page": {
+        "morning": "9:00 AM EST - Best-performing video from priority channel",
+        "midday": "12:30 PM EST - Shop promo or quote card",
+        "afternoon": "3:00 PM EST - Video from secondary channel",
+        "evening": "7:00 PM EST - Engagement post (poll or question)",
+        "night": "9:30 PM EST - Horror/entertainment content (peak engagement)"
+      },
+      "facebook_group": {
+        "morning": "8:30 AM EST - Discussion prompt + video",
+        "afternoon": "2:00 PM EST - Poll or behind-the-scenes",
+        "evening": "6:30 PM EST - Member spotlight or community highlight"
+      },
+      "instagram": {
+        "feed": "11:00 AM EST daily",
+        "reels_1": "9:00 AM EST",
+        "reels_2": "5:00 PM EST",
+        "reels_3": "8:00 PM EST",
+        "stories": "Throughout the day, 5-10 posts"
+      }
+    },
+    "cross_channel_social_rules": {
+      "rotate_channels": "Each day, feature videos from different channels. No channel gets posted more than 3x/week on any platform.",
+      "priority_content": "Videos with highest first-24hr views get priority social distribution.",
+      "shop_integration": "Every 3rd Facebook/Instagram post should reference cumquatvibes.com products.",
+      "engagement_first": "Always include a question or CTA in every social post to drive comments."
+    }
+  },
+  "monetization_engine": {
+    "ad_revenue": {
+      "strategy": "Maximize CPM by targeting 8+ minute videos for mid-roll ads. Upload consistently to maintain monetization eligibility across all channels.",
+      "mid_roll_placement": "Every 3-4 minutes in long-form content",
+      "shorts_fund": "All Shorts-focused channels (cumquat_shortform, rich_memes, rich_comedy) eligible for Shorts revenue sharing"
+    },
+    "channel_memberships": {
+      "enabled_channels": "All channels with 500+ subscribers",
+      "tiers": {
+        "supporter": {
+          "price": "$2.99/month",
+          "perks": ["Custom badge", "Members-only community posts", "Early access to videos (24hr)"]
+        },
+        "insider": {
+          "price": "$4.99/month",
+          "perks": ["All Supporter perks", "Bonus videos (extended cuts, deleted segments)", "Behind-the-scenes content", "Vote on upcoming topics"]
+        },
+        "vip": {
+          "price": "$9.99/month",
+          "perks": ["All Insider perks", "Monthly Q&A access", "Free digital product each month", "Name in video credits", "Exclusive Discord role"]
+        }
+      }
+    },
+    "super_thanks_super_chats": {
+      "enabled": true,
+      "live_stream_types": [
+        "Screen-share tier list rankings (tech, gaming, movies)",
+        "Live product reviews and unboxings",
+        "Live Q&A sessions on niche topics",
+        "Watch parties for related content",
+        "Live audits (website audits for RichTech, portfolio reviews for RichDesign)",
+        "Live cooking/recipe sessions for RichCooking",
+        "Guided meditation sessions for How to Meditate"
+      ],
+      "frequency": "1 live per priority channel per week",
+      "monetization_note": "Super Chats and Super Thanks work on faceless channels. No camera needed \u2014 screen share, slides, or visual overlays."
+    },
+    "digital_products": {
+      "by_channel": {
+        "rich_tech": {
+          "products": ["AI Tools Masterlist (PDF)", "Tech Setup Guide", "Productivity App Stack Template"],
+          "platform": "gumroad",
+          "price_range": "$5-$29"
+        },
+        "how_to_use_ai": {
+          "products": ["Prompt Engineering Bible (ebook)", "AI Automation Playbook", "ChatGPT Cheat Sheet Pack", "100 AI Business Ideas"],
+          "platform": "gumroad",
+          "price_range": "$9-$49"
+        },
+        "rich_finance": {
+          "products": ["Budget Tracker Spreadsheet", "Investment Portfolio Template", "Tax Deduction Checklist", "Side Hustle Starter Kit"],
+          "platform": "gumroad",
+          "price_range": "$5-$29"
+        },
+        "rich_mind": {
+          "products": ["Dark Psychology Field Guide (ebook)", "Body Language Cheat Sheet", "Persuasion Playbook", "Cognitive Bias Deck (printable cards)"],
+          "platform": "gumroad",
+          "price_range": "$7-$19"
+        },
+        "rich_business": {
+          "products": ["Business Plan Template Pack", "Side Hustle Evaluation Matrix", "Marketing Funnel Blueprint"],
+          "platform": "gumroad",
+          "price_range": "$9-$49"
+        },
+        "rich_design": {
+          "products": ["Brand Identity Template Kit", "Color Palette Generator Guide", "Typography Cheat Sheet", "Portfolio Website Template"],
+          "platform": "gumroad",
+          "price_range": "$9-$39"
+        },
+        "rich_photography": {
+          "products": ["Lightroom Preset Pack", "Composition Cheat Sheet", "Camera Settings Quick Guide"],
+          "platform": "gumroad",
+          "price_range": "$5-$29"
+        },
+        "how_to_meditate": {
+          "products": ["30-Day Meditation Challenge (PDF + audio)", "Breathwork Guide", "Sleep Meditation Audio Pack", "Mindfulness Journal Template"],
+          "platform": "gumroad",
+          "price_range": "$5-$19"
+        },
+        "rich_cooking": {
+          "products": ["Meal Prep Master Guide", "Quick Recipe Cards (50-pack)", "Kitchen Setup Checklist"],
+          "platform": "gumroad",
+          "price_range": "$5-$19"
+        },
+        "rich_fitness": {
+          "products": ["Home Workout Program (12-week PDF)", "Nutrition Calculator Spreadsheet", "Supplement Guide"],
+          "platform": "gumroad",
+          "price_range": "$9-$39"
+        },
+        "rich_education": {
+          "products": ["Study System Template (Notion)", "Career Skills Roadmap", "Certification Tracker"],
+          "platform": "gumroad",
+          "price_range": "$5-$19"
+        },
+        "eva_reyes": {
+          "products": ["Self-Confidence Workbook", "Vision Board Template Kit", "Daily Affirmation Card Deck"],
+          "platform": "gumroad",
+          "price_range": "$5-$19"
+        },
+        "cumquat_motivation": {
+          "products": ["Discipline Tracker (Notion)", "Morning Routine Builder", "Stoic Philosophy Quick Guide"],
+          "platform": "gumroad",
+          "price_range": "$5-$15"
+        },
+        "rich_vlogging": {
+          "products": ["YouTube Starter Kit (templates + checklist)", "Thumbnail Template Pack", "Script Writing Framework"],
+          "platform": "gumroad",
+          "price_range": "$9-$29"
+        },
+        "rich_music": {
+          "products": ["Sample Pack Collection", "Beat Making Starter Kit", "Music Theory Cheat Sheet"],
+          "platform": "gumroad",
+          "price_range": "$9-$39"
+        }
+      },
+      "global_digital_products": [
+        {
+          "name": "Cumquat Vibes Creator Bundle",
+          "description": "Everything you need to start a faceless YouTube channel. Scripts, templates, thumbnail packs, SEO guide.",
+          "price": "$49",
+          "platform": "gumroad",
+          "promoted_on": "all channels"
+        },
+        {
+          "name": "The Network Playbook",
+          "description": "How to build and manage a multi-channel YouTube network. Strategy, automation, monetization.",
+          "price": "$79",
+          "platform": "gumroad",
+          "promoted_on": ["rich_vlogging", "rich_business", "how_to_use_ai"]
+        }
+      ]
+    },
+    "paid_communities": {
+      "primary": {
+        "name": "Cumquat Vibes Inner Circle",
+        "platform": "discord",
+        "url": "https://vibeconnectionlounge.com",
+        "pricing": {
+          "free": "General chat, announcements, network updates",
+          "premium": {
+            "price": "$9.99/month",
+            "perks": ["Private channels per niche", "Weekly group calls", "Early access to all videos", "Exclusive digital products", "Direct feedback from team", "Networking with other creators"]
+          }
+        },
+        "niche_channels": {
+          "note": "Create a Discord channel for each YouTube channel niche so members self-select into communities",
+          "channels": ["#tech-talk", "#finance-hub", "#gaming-lounge", "#horror-corner", "#mind-psychology", "#fitness-grind", "#creative-studio", "#ai-tools", "#cooking-kitchen", "#general"]
+        }
+      }
+    },
+    "consulting_services": {
+      "offerings": [
+        {
+          "name": "AI Automation Setup",
+          "channel": "how_to_use_ai",
+          "description": "I'll set up your AI workflow \u2014 content pipeline, automation, tool stack",
+          "price": "$199-$499",
+          "booking_link": "richardabreu.studio/#work-with-us"
+        },
+        {
+          "name": "YouTube Channel Audit",
+          "channel": "rich_vlogging",
+          "description": "Full audit of your YouTube channel \u2014 SEO, thumbnails, content strategy, growth plan",
+          "price": "$99-$299",
+          "booking_link": "richardabreu.studio/#work-with-us"
+        },
+        {
+          "name": "Brand Identity Package",
+          "channel": "rich_design",
+          "description": "Logo, color palette, typography, brand guidelines, social templates",
+          "price": "$299-$999",
+          "booking_link": "richardabreu.studio/#work-with-us"
+        },
+        {
+          "name": "Financial Planning Session",
+          "channel": "rich_finance",
+          "description": "1-on-1 session covering budgeting, investing basics, and goal setting",
+          "price": "$49-$149",
+          "booking_link": "richardabreu.studio/#work-with-us"
+        },
+        {
+          "name": "Faceless Channel Build-Out",
+          "channel": "rich_business",
+          "description": "Done-for-you faceless YouTube channel setup \u2014 niche selection, branding, first 10 videos",
+          "price": "$499-$1499",
+          "booking_link": "richardabreu.studio/#work-with-us"
+        }
+      ],
+      "promoted_in_video_cta": "Want me to do this for you? Book a session at richardabreu.studio \u2014 link in the description."
+    },
+    "content_licensing": {
+      "enabled": true,
+      "licensable_assets": [
+        "B-roll footage and AI-generated visuals",
+        "Explainer animations and diagrams",
+        "Voiceover narrations (non-exclusive)",
+        "Music loops and sound effects",
+        "Thumbnail templates and graphics"
+      ],
+      "pricing": {
+        "single_asset": "$10-$50",
+        "pack_10": "$49-$149",
+        "unlimited_subscription": "$29/month"
+      },
+      "platform": "gumroad",
+      "note": "Repurpose assets created for videos into licensable stock. Especially valuable for B-roll, overlays, and AI images."
+    },
+    "playlist_to_course_pipeline": {
+      "strategy": "When a playlist on any channel hits 10+ videos on a cohesive topic, package it as a structured paid course.",
+      "course_platform": "teachable",
+      "backup_platform": "gumroad",
+      "pipeline": [
+        "Identify high-performing playlist (10+ videos, strong retention)",
+        "Reorder videos into logical curriculum structure",
+        "Record 2-3 exclusive bonus lessons not on YouTube",
+        "Add downloadable resources (worksheets, templates, checklists)",
+        "Host on Teachable with drip schedule",
+        "Price at $29-$99 depending on depth",
+        "Promote in video descriptions and pinned comments"
+      ],
+      "candidate_channels": ["how_to_use_ai", "rich_finance", "rich_fitness", "rich_cooking", "rich_photography", "how_to_meditate", "rich_design", "rich_education"]
+    },
+    "stock_asset_library": {
+      "name": "Cumquat Vibes Asset Library",
+      "platform": "gumroad",
+      "categories": [
+        {
+          "type": "AI-generated B-roll images",
+          "source": "Gemini Imagen outputs from video production",
+          "price_per_pack": "$9-$19"
+        },
+        {
+          "type": "Video overlays and graphics",
+          "source": "Text overlays, lower thirds, transitions used in videos",
+          "price_per_pack": "$14-$29"
+        },
+        {
+          "type": "Thumbnail templates",
+          "source": "Canva/Photoshop templates based on proven high-CTR thumbnails",
+          "price_per_pack": "$9-$19"
+        },
+        {
+          "type": "Music and sound effects",
+          "source": "Background music, stingers, whooshes used in productions",
+          "price_per_pack": "$9-$19"
+        },
+        {
+          "type": "Script templates",
+          "source": "Proven script frameworks from our highest-performing videos",
+          "price_per_pack": "$14-$29"
+        }
+      ],
+      "bundle": {
+        "name": "Cumquat Vibes Complete Creator Pack",
+        "includes": "All asset categories",
+        "price": "$49"
+      }
+    },
+    "shopify_merch_integration": {
+      "store_url": "https://cumquatvibes.com",
+      "merch_categories": [
+        "Network-branded apparel (#CumquatVibes logo tees, hoodies)",
+        "Niche-specific designs (RichTech circuit board tee, RichHorror skull hoodie, RichMind brain graphic)",
+        "Catchphrase merch (viral hooks from top videos printed on apparel)",
+        "Art prints from RichDesign and RichPhotography channels",
+        "Sticker packs (channel logos, niche icons)"
+      ],
+      "promo_strategy": {
+        "in_video": "Subtle product placement in B-roll. Mention in outro: 'Grab the merch at cumquatvibes.com'",
+        "description": "Shop link in every video description (already configured)",
+        "pinned_comment": "Shop link in every pinned comment (already configured)",
+        "dedicated_videos": "Monthly 'merch drop' Shorts across all channels showcasing new products"
+      }
+    },
+    "email_newsletter": {
+      "name": "The Cumquat Vibes Weekly",
+      "platform": "convertkit",
+      "collection_points": [
+        "YouTube video descriptions (lead magnet CTA)",
+        "cumquatvibes.com popup",
+        "richardabreu.studio newsletter form",
+        "vibeconnectionlounge.com signup",
+        "Digital product purchase follow-up"
+      ],
+      "lead_magnets_by_channel": {
+        "rich_tech": "Free AI Tools Cheat Sheet",
+        "how_to_use_ai": "10 ChatGPT Prompts That Actually Work",
+        "rich_finance": "Free Budget Template",
+        "rich_mind": "5 Dark Psychology Tactics (PDF)",
+        "rich_fitness": "7-Day Home Workout Plan",
+        "rich_cooking": "20 Quick Recipes Under 15 Minutes",
+        "rich_business": "Side Hustle Starter Checklist",
+        "default": "Free Cumquat Vibes Creator Starter Kit"
+      },
+      "newsletter_structure": {
+        "section_1": "This week's top video (highest performer across network)",
+        "section_2": "3 quick tips from this week's content",
+        "section_3": "New product spotlight from cumquatvibes.com",
+        "section_4": "Sponsor spotlight (paid ad slot)",
+        "section_5": "Community highlight + upcoming content preview"
+      },
+      "sponsorship_pricing": {
+        "under_5k_subscribers": "$50/issue",
+        "5k_to_25k": "$150/issue",
+        "25k_to_100k": "$500/issue",
+        "100k_plus": "$1500/issue"
+      }
     }
   },
   "seo_defaults": {
-    "description_footer": "\n\n---\nMain Channel: https://www.youtube.com/@CumquatVibes\nShop: https://cumquatvibes.com\nPortfolio: https://richardabreu.studio\nCommunity: https://vibeconnectionlounge.com\nSupport/Donate: https://donate.stripe.com/9B68wR8Wb0NLfzz0jjes000\n\n#Faceless #YouTube",
-    "channel_description_template": "{channel_name} — {niche}\n\nNew videos every week + daily Shorts!\n\nPart of the Cumquat Vibes network.\n\n--- Links ---\nShop: https://cumquatvibes.com\nPortfolio: https://richardabreu.studio\nMain Channel: https://www.youtube.com/@CumquatVibes\nCommunity: https://vibeconnectionlounge.com\nSupport/Donate: https://donate.stripe.com/9B68wR8Wb0NLfzz0jjes000",
+    "description_footer": "\n\n---\nMain Channel: https://www.youtube.com/@CumquatVibes\nShop: https://cumquatvibes.com\nPortfolio: https://richardabreu.studio\nCommunity: https://vibeconnectionlounge.com\nSupport/Donate: https://donate.stripe.com/9B68wR8Wb0NLfzz0jjes000\n\nFollow us:\nInstagram: https://instagram.com/cumquatvibes\nFacebook: https://facebook.com/cumquatvibes\nJoin the group: https://facebook.com/groups/cumquatvibes\n\n#CumquatVibes #{channel_hashtag} #Faceless #YouTube",
+    "channel_description_template": "{channel_name} \u2014 {niche}\n\nNew videos every week + daily Shorts!\n\nPart of the Cumquat Vibes network \u2014 41 channels, one ecosystem.\n\n--- Links ---\nShop: https://cumquatvibes.com\nPortfolio: https://richardabreu.studio\nMain Channel: https://www.youtube.com/@CumquatVibes\nCommunity: https://vibeconnectionlounge.com\nSupport/Donate: https://donate.stripe.com/9B68wR8Wb0NLfzz0jjes000\n\n--- Follow ---\nInstagram: https://instagram.com/cumquatvibes\nFacebook: https://facebook.com/cumquatvibes\nFacebook Group: https://facebook.com/groups/cumquatvibes\n\n#CumquatVibes",
     "default_tags": [
       "faceless youtube",
       "AI narration",
