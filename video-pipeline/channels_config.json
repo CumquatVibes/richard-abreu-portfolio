@@ -1808,7 +1808,8 @@
     ]
   },
   "seo_defaults": {
-    "description_footer": "\n\n---\nMain Channel: https://www.youtube.com/@CumquatVibes\nShop: https://cumquatvibes.com\nPortfolio: https://richardabreu.studio\nCommunity: https://vibeconnectionlounge.com\n\n#Faceless #YouTube",
+    "description_footer": "\n\n---\nMain Channel: https://www.youtube.com/@CumquatVibes\nShop: https://cumquatvibes.com\nPortfolio: https://richardabreu.studio\nCommunity: https://vibeconnectionlounge.com\nSupport/Donate: https://donate.stripe.com/9B68wR8Wb0NLfzz0jjes000\n\n#Faceless #YouTube",
+    "channel_description_template": "{channel_name} — {niche}\n\nNew videos every week + daily Shorts!\n\nPart of the Cumquat Vibes network.\n\n--- Links ---\nShop: https://cumquatvibes.com\nPortfolio: https://richardabreu.studio\nMain Channel: https://www.youtube.com/@CumquatVibes\nCommunity: https://vibeconnectionlounge.com\nSupport/Donate: https://donate.stripe.com/9B68wR8Wb0NLfzz0jjes000",
     "default_tags": [
       "faceless youtube",
       "AI narration",
