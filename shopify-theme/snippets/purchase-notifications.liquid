@@ -1,80 +1,12 @@
 {% comment %}
   ============================================
-  Recent Purchase Notifications (Social Proof)
-  Paste into: snippets/purchase-notifications.liquid
+  DISABLED — Fake purchase notifications removed.
 
-  Then add to layout/theme.liquid before </body>:
-  {% render 'purchase-notifications' %}
+  These showed fabricated "X from Y just purchased Z" messages
+  with random timestamps, which is deceptive and can hurt
+  store trust and Google's E-E-A-T signals.
 
-  Edit the notifications array below with your actual product names.
+  Replace with real Shopify notification apps that pull
+  actual order data if social proof is needed.
   ============================================
 {% endcomment %}
-
-<div id="cvPurchaseNotification"
-     style="display:none; position:fixed; bottom:20px; left:20px; background:#222725; box-shadow:0 4px 24px rgba(0,0,0,0.3); padding:16px 20px; border-radius:4px; z-index:998; max-width:320px; font-size:0.85rem; border-left:3px solid #e8941f; font-family:var(--font-body-family, sans-serif);">
-  <button onclick="this.parentElement.style.display='none'"
-          style="position:absolute; top:6px; right:10px; background:none; border:none; cursor:pointer; font-size:1rem; color:#999; line-height:1;">&times;</button>
-  <p style="margin:0; line-height:1.5; color:#efecec;" id="cvNotificationText"></p>
-</div>
-
-<style>
-  @keyframes cvSlideIn {
-    from { transform: translateY(100%); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-  }
-  #cvPurchaseNotification[style*="block"] {
-    animation: cvSlideIn 0.5s ease;
-  }
-
-  @media screen and (max-width: 749px) {
-    #cvPurchaseNotification {
-      left: 10px !important;
-      right: 10px !important;
-      max-width: none !important;
-      bottom: 80px !important; /* Above sticky mobile CTA */
-    }
-  }
-</style>
-
-<script>
-(function() {
-  /* Customize these with your actual products and realistic names */
-  var notifications = [
-    { name: 'Sarah M.', location: 'Austin, TX', product: 'Cumquat Wall Art' },
-    { name: 'Jake R.', location: 'Portland, OR', product: 'Fleece Joggers' },
-    { name: 'Maria L.', location: 'Miami, FL', product: 'Accent Coffee Mug' },
-    { name: 'Chris T.', location: 'Denver, CO', product: 'Classic Stretched Canvas' },
-    { name: 'Amy K.', location: 'Seattle, WA', product: 'Cumquat Vibes Tee' },
-    { name: 'David W.', location: 'Chicago, IL', product: 'Wall Art Print' },
-    { name: 'Lisa P.', location: 'Brooklyn, NY', product: 'Canvas Print Set' }
-  ];
-
-  var shown = 0;
-  var maxShow = 3; /* Max notifications per session */
-
-  function showNotification() {
-    if (shown >= maxShow) return;
-
-    var n = notifications[Math.floor(Math.random() * notifications.length)];
-    var el = document.getElementById('cvPurchaseNotification');
-    var timeAgo = Math.floor(Math.random() * 45) + 5;
-
-    document.getElementById('cvNotificationText').innerHTML =
-      '<strong>' + n.name + '</strong> from ' + n.location + ' just purchased <strong>' + n.product + '</strong> <em style="opacity:0.5;">' + timeAgo + ' min ago</em>';
-
-    el.style.display = 'block';
-    shown++;
-
-    setTimeout(function() {
-      el.style.display = 'none';
-      /* Schedule next notification */
-      if (shown < maxShow) {
-        setTimeout(showNotification, Math.random() * 25000 + 15000);
-      }
-    }, 5500);
-  }
-
-  /* First notification after 10 seconds */
-  setTimeout(showNotification, 10000);
-})();
-</script>
