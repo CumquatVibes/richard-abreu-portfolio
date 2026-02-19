@@ -1545,6 +1545,172 @@
       ],
       "thumbnail_style": "dynamic dance poses + neon lights + motion blur effects",
       "channel_id": "UCsNqeu5ZPnBOE3liu9-ofYg"
+    },
+    "eva_reyes": {
+      "name": "Eva Reyes - Inspire & Empower",
+      "handle": "@evareyes-inspireempower",
+      "channel_id": "UCsp5NIA6aeQmqdn7omBqkYg",
+      "type": "partner_brand",
+      "faceless": true,
+      "niche": "Women's empowerment, inspiration, self-improvement, mindset",
+      "sub_topics": [
+        "women's empowerment",
+        "confidence building",
+        "inspirational stories",
+        "mindset shifts",
+        "self-care routines",
+        "career growth for women"
+      ],
+      "formats": [
+        "explainer",
+        "listicle",
+        "shorts_story",
+        "compilation"
+      ],
+      "voice_profile": "friendly_casual",
+      "youtube_category": "22",
+      "visual_theme": {
+        "primary": "#E040FB",
+        "accent": "#FFD54F",
+        "bg": "#1A0A20"
+      },
+      "posting": {
+        "long_form": "2x/week",
+        "shorts": "daily"
+      },
+      "monetization": [
+        "self-help book affiliates",
+        "wellness app sponsors",
+        "course affiliates"
+      ],
+      "thumbnail_style": "warm empowering imagery + bold text + purple/gold tones"
+    },
+    "rich_mind": {
+      "name": "RichMind",
+      "handle": "@cumquatgamingcumquatgaming",
+      "channel_id": "UCvrGunMx9dVfAeGYLQYoaLw",
+      "type": "rich_brand",
+      "faceless": true,
+      "niche": "Psychology, human behavior, manipulation tactics, body language, cognitive biases",
+      "sub_topics": [
+        "dark psychology",
+        "body language secrets",
+        "manipulation tactics",
+        "cognitive biases",
+        "why people do what they do",
+        "social engineering",
+        "emotional intelligence",
+        "persuasion techniques"
+      ],
+      "formats": [
+        "explainer",
+        "listicle",
+        "shorts_facts",
+        "shorts_story"
+      ],
+      "voice_profile": "storyteller",
+      "youtube_category": "27",
+      "visual_theme": {
+        "primary": "#1A237E",
+        "accent": "#B388FF",
+        "bg": "#0A0A1A"
+      },
+      "posting": {
+        "long_form": "3x/week",
+        "shorts": "daily"
+      },
+      "monetization": [
+        "psychology book affiliates",
+        "self-improvement course affiliates",
+        "therapy app sponsors",
+        "Audible affiliates"
+      ],
+      "thumbnail_style": "brain imagery + dark moody tones + provocative text + silhouettes"
+    },
+    "how_to_meditate": {
+      "name": "How to Meditate",
+      "handle": "@howtomeditate-v4u",
+      "channel_id": "UCbd6kzX3giNYyAeLaMPdgAA",
+      "type": "howto_brand",
+      "faceless": true,
+      "niche": "Meditation, mindfulness, breathing techniques, stress relief, mental health",
+      "sub_topics": [
+        "guided meditation",
+        "breathing exercises",
+        "mindfulness techniques",
+        "meditation for beginners",
+        "sleep meditation",
+        "stress relief",
+        "chakra meditation",
+        "meditation music"
+      ],
+      "formats": [
+        "tutorial",
+        "explainer",
+        "shorts_facts",
+        "compilation"
+      ],
+      "voice_profile": "calm_narrator",
+      "youtube_category": "22",
+      "visual_theme": {
+        "primary": "#7E57C2",
+        "accent": "#B2DFDB",
+        "bg": "#0A0A1A"
+      },
+      "posting": {
+        "long_form": "2x/week",
+        "shorts": "daily"
+      },
+      "monetization": [
+        "meditation app affiliates",
+        "wellness product affiliates",
+        "yoga mat/cushion affiliates",
+        "mindfulness course sponsors"
+      ],
+      "thumbnail_style": "serene nature + soft purple/teal tones + zen imagery + calming text"
+    },
+    "how_to_use_ai": {
+      "name": "How to Use AI",
+      "handle": "@howtouseai-k6z",
+      "channel_id": "UCkrCbfr9qQkfCYw1WkCILKQ",
+      "type": "howto_brand",
+      "faceless": true,
+      "niche": "AI tutorials, prompt engineering, AI tools, ChatGPT, Midjourney, automation",
+      "sub_topics": [
+        "ChatGPT tutorials",
+        "AI art generation",
+        "prompt engineering",
+        "AI automation workflows",
+        "AI for business",
+        "best AI tools",
+        "AI news and updates",
+        "AI side hustles"
+      ],
+      "formats": [
+        "tutorial",
+        "listicle",
+        "explainer",
+        "shorts_facts",
+        "news_recap"
+      ],
+      "voice_profile": "neutral_male",
+      "youtube_category": "28",
+      "visual_theme": {
+        "primary": "#00BFA5",
+        "accent": "#7C4DFF",
+        "bg": "#0D0D1A"
+      },
+      "posting": {
+        "long_form": "3x/week",
+        "shorts": "daily"
+      },
+      "monetization": [
+        "AI tool affiliates",
+        "online course affiliates",
+        "SaaS sponsors",
+        "VPN/cloud sponsors"
+      ],
+      "thumbnail_style": "futuristic UI mockups + teal/purple gradients + AI robot imagery + bold how-to text"
     }
   },
   "script_templates": {
@@ -1625,6 +1791,13 @@
       "This one habit separates winners from losers.",
       "If you're struggling right now, hear me out.",
       "Stop making excuses. Start doing this instead."
+    ],
+    "psychology": [
+      "Your brain is lying to you. Here's how.",
+      "{count} manipulation tactics people use on you daily.",
+      "Why you can't stop thinking about {topic}.",
+      "The psychology trick that controls your decisions.",
+      "Dark psychology: {count} signs someone is manipulating you."
     ],
     "default": [
       "{count} {topic} facts that will blow your mind.",
