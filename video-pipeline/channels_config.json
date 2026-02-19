@@ -2813,6 +2813,264 @@
         "25k_to_100k": "$500/issue",
         "100k_plus": "$1500/issue"
       }
+    },
+    "product_ladders": {
+      "note": "Each channel has a product ladder: Free lead magnet → Low-ticket digital ($5-$29) → Core product ($29-$99) → Premium service ($199-$1499). Videos drive traffic up the ladder.",
+      "ladders_by_channel": {
+        "how_to_use_ai": {
+          "free_lead_magnet": "10 ChatGPT Prompts That Actually Work (PDF)",
+          "low_ticket": [
+            {"name": "AI Tools Masterlist 2026", "price": "$9", "format": "Notion database + PDF"},
+            {"name": "Prompt Engineering Cheat Sheet Pack", "price": "$14", "format": "50 prompt templates organized by use case"},
+            {"name": "AI Automation Starter Workflows", "price": "$19", "format": "5 ready-to-use n8n/Zapier workflow templates"}
+          ],
+          "core_product": {"name": "AI Creator Accelerator Course", "price": "$79", "format": "2-hour video course + templates + community access", "description": "Set up a faceless YouTube channel powered by AI in a weekend"},
+          "premium_service": {"name": "Done-For-You AI Content Machine", "price": "$499-$999", "description": "I'll set up your entire AI content pipeline — tools, automation, first 10 scripts, branding"}
+        },
+        "rich_tech": {
+          "free_lead_magnet": "Weekly Tech Launch Tracker (newsletter signup)",
+          "low_ticket": [
+            {"name": "Best Tech Setup Guide 2026", "price": "$12", "format": "PDF with affiliate links"},
+            {"name": "Productivity App Stack Template", "price": "$9", "format": "Notion template"},
+            {"name": "YouTube Automation Setup Checklist", "price": "$7", "format": "PDF + video walkthrough"}
+          ],
+          "core_product": {"name": "Tech Reviewer's Toolkit", "price": "$49", "format": "Script templates + thumbnail pack + SEO keyword database for tech niche"},
+          "premium_service": {"name": "Tech Channel Launch Package", "price": "$299-$799", "description": "Full tech channel setup — branding, first 10 scripts, thumbnail templates, SEO strategy"}
+        },
+        "rich_finance": {
+          "free_lead_magnet": "Personal Budget Template (Google Sheets)",
+          "low_ticket": [
+            {"name": "Investing Starter Kit", "price": "$14", "format": "PDF guide + portfolio tracker spreadsheet"},
+            {"name": "Tax Deduction Checklist", "price": "$9", "format": "PDF"},
+            {"name": "Side Hustle Evaluation Matrix", "price": "$12", "format": "Notion template + scoring system"}
+          ],
+          "core_product": {"name": "Financial Freedom Blueprint", "price": "$49", "format": "Video course: budgeting, investing, passive income — 90 min + worksheets"},
+          "premium_service": {"name": "1-on-1 Financial Strategy Session", "price": "$99-$249", "description": "Personalized financial planning, budget review, investment strategy"}
+        },
+        "rich_mind": {
+          "free_lead_magnet": "5 Dark Psychology Tactics Everyone Should Know (PDF)",
+          "low_ticket": [
+            {"name": "Body Language Cheat Sheet", "price": "$9", "format": "Visual PDF guide"},
+            {"name": "Cognitive Bias Card Deck", "price": "$14", "format": "Printable cards — 50 biases explained"},
+            {"name": "Persuasion Playbook", "price": "$19", "format": "PDF + audio summary"}
+          ],
+          "core_product": {"name": "The Psychology of Influence Course", "price": "$59", "format": "1.5-hour video course — negotiation, persuasion, reading people"},
+          "premium_service": {"name": "Communication Coaching", "price": "$149-$299", "description": "1-on-1 session on persuasion, public speaking, or negotiation skills"}
+        },
+        "rich_business": {
+          "free_lead_magnet": "Side Hustle Starter Checklist (PDF)",
+          "low_ticket": [
+            {"name": "Business Plan Template Pack", "price": "$19", "format": "5 business plan templates for different models"},
+            {"name": "Marketing Funnel Blueprint", "price": "$14", "format": "Visual PDF + Notion template"},
+            {"name": "Passive Income Playbook", "price": "$12", "format": "PDF guide to 20 passive income streams"}
+          ],
+          "core_product": {"name": "Faceless YouTube Empire Course", "price": "$99", "format": "Complete guide to building and monetizing a faceless channel network"},
+          "premium_service": {"name": "Faceless Channel Build-Out", "price": "$499-$1499", "description": "Done-for-you setup — niche research, branding, 10 videos, automation, SEO"}
+        },
+        "rich_design": {
+          "free_lead_magnet": "Color Palette Generator Quick Guide (PDF)",
+          "low_ticket": [
+            {"name": "Brand Identity Template Kit", "price": "$19", "format": "Canva + Figma templates: logo, banner, colors, fonts"},
+            {"name": "Typography Cheat Sheet", "price": "$9", "format": "PDF — font pairings, hierarchy rules"},
+            {"name": "Thumbnail Template Pack (50 templates)", "price": "$14", "format": "Canva templates for YouTube thumbnails"}
+          ],
+          "core_product": {"name": "Creator Branding Masterclass", "price": "$59", "format": "Build your brand identity from scratch — 90 min video course"},
+          "premium_service": {"name": "Full Brand Identity Package", "price": "$299-$999", "description": "Custom logo, colors, typography, brand guidelines, social templates, thumbnail style guide"}
+        },
+        "rich_vlogging": {
+          "free_lead_magnet": "YouTube Starter Checklist (PDF)",
+          "low_ticket": [
+            {"name": "Video Script Framework Pack", "price": "$14", "format": "7 proven script templates for different video formats"},
+            {"name": "Content Calendar Template", "price": "$9", "format": "Notion template — 90-day content plan"},
+            {"name": "YouTube SEO Keyword Database", "price": "$19", "format": "Google Sheet — 500+ high-volume keywords by niche"}
+          ],
+          "core_product": {"name": "Faceless YouTube Channel in a Weekend", "price": "$79", "format": "Step-by-step video workshop — niche selection to first upload"},
+          "premium_service": {"name": "YouTube Growth Coaching (4 weeks)", "price": "$299-$599", "description": "Weekly calls + strategy + content review + optimization"}
+        },
+        "rich_music": {
+          "free_lead_magnet": "5 Free Lo-fi Beats (MP3 download)",
+          "low_ticket": [
+            {"name": "Sample Pack Collection Vol. 1", "price": "$14", "format": "50 AI-generated loops and samples"},
+            {"name": "Beat Making Starter Kit", "price": "$19", "format": "Samples + MIDI + project files"},
+            {"name": "Music Theory Cheat Sheet", "price": "$9", "format": "Visual PDF"}
+          ],
+          "core_product": {"name": "AI Music Production Course", "price": "$49", "format": "Create professional music with AI tools — Suno, Udio, production tips"},
+          "premium_service": {"name": "Custom AI Music Pack", "price": "$99-$299", "description": "Custom-generated music pack for your brand/channel/project"}
+        },
+        "how_to_meditate": {
+          "free_lead_magnet": "7-Day Meditation Starter Guide (PDF + 3 free audio sessions)",
+          "low_ticket": [
+            {"name": "30-Day Meditation Challenge", "price": "$12", "format": "PDF guide + daily audio sessions"},
+            {"name": "Breathwork Technique Guide", "price": "$9", "format": "PDF + 5 guided audio sessions"},
+            {"name": "Sleep Meditation Audio Pack", "price": "$14", "format": "10 sleep meditation MP3s (30-60 min each)"}
+          ],
+          "core_product": {"name": "Mindfulness Mastery Course", "price": "$49", "format": "6-week program: meditation, breathwork, journaling, mindfulness"},
+          "premium_service": {"name": "Private Guided Meditation Sessions", "price": "$49-$99/session", "description": "1-on-1 or small group guided meditation via Zoom"}
+        }
+      }
+    },
+    "design_asset_packs": {
+      "note": "Styled in the Cumquat Vibes aesthetic. Sell to other creators via Gumroad.",
+      "packs": [
+        {
+          "name": "Faceless Channel Branding Kit",
+          "description": "Everything to brand a faceless YouTube channel: banner templates, profile icon templates, color palettes, font pairings, thumbnail frameworks",
+          "price": "$29",
+          "niches": ["gaming", "tech", "finance", "horror", "motivation", "education", "lifestyle"],
+          "format": "Canva + Figma + PNG"
+        },
+        {
+          "name": "YouTube Overlay Pack",
+          "description": "50+ overlays: lower thirds, subscribe animations, like reminders, end screens, transitions, intro/outro screens",
+          "price": "$24",
+          "format": "PNG + MOV (alpha channel)"
+        },
+        {
+          "name": "Emoji & Sticker Pack — Cumquat Vibes Edition",
+          "description": "100 custom emoji/stickers in the Cumquat aesthetic for Discord, YouTube, social media",
+          "price": "$14",
+          "format": "PNG + GIF"
+        },
+        {
+          "name": "Mobile Wallpaper Collection",
+          "description": "30 AI-generated wallpapers organized by mood: motivational, nature, dark mode, aesthetic, neon",
+          "price": "$9",
+          "format": "High-res PNG (phone + desktop)"
+        },
+        {
+          "name": "Content Creator Notion Dashboard",
+          "description": "All-in-one Notion system: content calendar, script database, analytics tracker, idea bank, upload checklist, collaboration hub",
+          "price": "$19",
+          "format": "Notion template"
+        },
+        {
+          "name": "Video Script Template Pack",
+          "description": "12 proven script frameworks: listicle, explainer, tutorial, news recap, compilation, shorts, product review, story, comparison, how-to, myth-busting, reaction",
+          "price": "$14",
+          "format": "Google Docs + Notion"
+        },
+        {
+          "name": "Thumbnail Framework Pack",
+          "description": "25 high-CTR thumbnail layouts with psychology notes on why each works. Drag-and-drop in Canva.",
+          "price": "$19",
+          "format": "Canva templates"
+        }
+      ]
+    },
+    "mini_courses": {
+      "platform": "teachable",
+      "backup": "gumroad",
+      "courses": [
+        {
+          "name": "Set Up a Faceless YouTube Channel in a Weekend",
+          "price": "$79",
+          "duration": "2 hours",
+          "modules": ["Niche selection & validation", "Channel branding (name, logo, banner, colors)", "Content strategy & calendar", "Script writing with AI", "Voiceover with ElevenLabs", "B-roll and visual production", "Upload, SEO, and thumbnails", "Monetization setup"],
+          "promoted_on": ["rich_vlogging", "rich_business", "how_to_use_ai"],
+          "lead_magnet": "Free YouTube Starter Checklist"
+        },
+        {
+          "name": "AI + Print-on-Demand: Turn Designs into Products",
+          "price": "$49",
+          "duration": "1.5 hours",
+          "modules": ["AI image generation for product designs", "Setting up Shopify + Printful/Printify", "Niche research for POD", "Listing optimization", "Marketing via YouTube channels"],
+          "promoted_on": ["rich_design", "rich_business", "how_to_use_ai"],
+          "lead_magnet": "Free POD Checklist & Supplier List"
+        },
+        {
+          "name": "Beginner's Guide to Video Automation",
+          "price": "$39",
+          "duration": "1 hour",
+          "modules": ["Content pipeline overview", "AI script generation", "Automated voiceover production", "B-roll sourcing and generation", "Batch processing and scheduling", "Cross-platform distribution"],
+          "promoted_on": ["how_to_use_ai", "rich_tech", "rich_vlogging"],
+          "lead_magnet": "Free Automation Setup Checklist"
+        },
+        {
+          "name": "Build a Multi-Channel YouTube Network",
+          "price": "$149",
+          "duration": "3 hours",
+          "modules": ["Network strategy and architecture", "Niche selection for 10+ channels", "Cross-promotion ecosystem design", "Automation at scale", "Monetization stacking (11 revenue streams)", "Looping content strategy", "Social media distribution", "Scaling to 50+ channels"],
+          "promoted_on": ["rich_business", "rich_vlogging", "how_to_use_ai"],
+          "lead_magnet": "Free Network Planning Template"
+        }
+      ]
+    },
+    "resource_libraries": {
+      "note": "Curated databases gated behind one-time purchase or membership. Updated monthly.",
+      "libraries": [
+        {
+          "name": "Ultimate AI Tools Database",
+          "description": "500+ AI tools organized by category: writing, image, video, audio, code, business, marketing. Ratings, pricing, links.",
+          "price": "$19 (one-time) or included in membership",
+          "format": "Notion database",
+          "promoted_on": ["how_to_use_ai", "rich_tech"],
+          "update_frequency": "monthly"
+        },
+        {
+          "name": "Free Asset Sites for Creators",
+          "description": "200+ curated free resources: stock photos, videos, music, fonts, icons, templates, tools",
+          "price": "$9",
+          "format": "Notion database",
+          "promoted_on": ["rich_vlogging", "rich_design"],
+          "update_frequency": "quarterly"
+        },
+        {
+          "name": "Print-on-Demand Supplier & Checklist Database",
+          "description": "30+ POD suppliers compared: pricing, quality, shipping, integration. Plus launch checklist.",
+          "price": "$14",
+          "format": "Notion database + PDF checklist",
+          "promoted_on": ["rich_business", "rich_design"],
+          "update_frequency": "quarterly"
+        },
+        {
+          "name": "YouTube Niche Research Database",
+          "description": "100 profitable YouTube niches analyzed: competition level, CPM range, content ideas, keyword data",
+          "price": "$19",
+          "format": "Google Sheets + Notion",
+          "promoted_on": ["rich_vlogging", "rich_business"],
+          "update_frequency": "quarterly"
+        }
+      ]
+    },
+    "expanded_services": {
+      "note": "High-ticket, low-volume services promoted through channel content. All booked via richardabreu.studio.",
+      "services": [
+        {
+          "name": "YouTube Content System Setup",
+          "description": "Full faceless YouTube machine: channel branding, template thumbnails, automation flows (n8n/Zapier), starter batch of 10 scripts, SEO strategy, posting schedule",
+          "price": "$799-$1499",
+          "delivery": "1-2 weeks",
+          "promoted_on": ["rich_business", "rich_vlogging", "how_to_use_ai"]
+        },
+        {
+          "name": "Creator Branding Kit",
+          "description": "Logo, banner, thumbnail style guide, color system, font pairing, social media templates — tailored to your niche",
+          "price": "$299-$699",
+          "delivery": "5-7 days",
+          "promoted_on": ["rich_design", "rich_vlogging"]
+        },
+        {
+          "name": "Done-With-You Coaching (4 weeks)",
+          "description": "Weekly 1-on-1 calls + async support. Topics: faceless YouTube, POD brands, AI automation, content strategy. Includes all digital products free.",
+          "price": "$499-$999",
+          "delivery": "4 weekly sessions + Slack/Discord access",
+          "promoted_on": ["rich_business", "how_to_use_ai", "rich_vlogging"]
+        },
+        {
+          "name": "Group Office Hours (monthly)",
+          "description": "Monthly live group call — Q&A, channel audits, strategy discussion. Open to Inner Circle premium members or $29/session drop-in.",
+          "price": "Included in membership / $29 drop-in",
+          "delivery": "Monthly 90-min Zoom call",
+          "promoted_on": "all channels"
+        },
+        {
+          "name": "AI Automation Pipeline Build",
+          "description": "Custom automation: content pipeline, social posting, email sequences, data collection — built with n8n, Zapier, Make, or custom scripts",
+          "price": "$399-$999",
+          "delivery": "1-2 weeks",
+          "promoted_on": ["how_to_use_ai", "rich_tech", "rich_business"]
+        }
+      ]
     }
   },
   "seo_defaults": {
