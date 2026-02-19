@@ -126,6 +126,12 @@
       "word_count": 1200,
       "visual_style": "screen recordings + overlay graphics"
     },
+    "looping_ambient": {
+      "structure": "title card (5s) \u2192 music + visual loop (full duration) \u2192 fade out + end screen (15s)",
+      "duration_target": "1-10 hours",
+      "word_count": 0,
+      "visual_style": "seamless looping video or slow-motion AI visuals with channel watermark"
+    },
     "news_recap": {
       "structure": "hook \u2192 top stories \u2192 analysis \u2192 CTA",
       "duration_target": "8-12 min",
@@ -1961,6 +1967,246 @@
       "duration_target": "60-90 sec",
       "format": "shorts_story",
       "visual_style": "Fast montage of best clips from each channel, channel logos, network map graphic"
+    },
+    "looping_content_strategy": {
+      "overview": "Create long-form (1-4+ hour) looping content with AI-generated music over looping visuals. Maximizes watch time, ad revenue (more mid-rolls), and provides endless Shorts material when chopped.",
+      "ai_music_tools": {
+        "primary": "suno",
+        "secondary": "udio",
+        "note": "Generate 3-5 min tracks, then loop/crossfade them to fill target duration. Each track should have a consistent vibe so looping feels seamless."
+      },
+      "visual_loop_tools": {
+        "ai_video": "runway_gen3",
+        "ai_image_animation": "gemini_imagen + panning/zoom effects",
+        "stock_loops": "pexels, pixabay (free), storyblocks (paid)",
+        "effects": "Slow pan, gentle zoom, parallax, particle overlays, color grade shifts"
+      },
+      "duration_tiers": {
+        "short": {"duration": "30-60 min", "use": "Background music, ambient loops", "mid_roll_ads": "~6-8"},
+        "medium": {"duration": "1-2 hours", "use": "Study sessions, workout mixes, sleep sounds", "mid_roll_ads": "~12-20"},
+        "long": {"duration": "3-4 hours", "use": "Full night sleep, all-day work sessions, live-feel compilations", "mid_roll_ads": "~30-45"},
+        "ultra": {"duration": "8-10 hours", "use": "Sleep all night, full workday background", "mid_roll_ads": "~80-100"}
+      },
+      "shorts_chopping_pipeline": {
+        "strategy": "Every long-form loop video gets chopped into 15-30 Shorts. Each Short is a 30-60 sec highlight with text overlay identifying the vibe/mood.",
+        "shorts_per_long_video": 20,
+        "distribution": "Spread Shorts across the source channel + cumquat_shortform + related niche channels",
+        "text_overlay_template": "{mood_emoji} {vibe_name} | Full mix on {channel_name}",
+        "shorts_cta": "Full {duration} mix on our channel \u2014 link in bio"
+      },
+      "channels": {
+        "rich_music": {
+          "loop_types": [
+            {"name": "Lo-fi Study Beats", "genre": "lo-fi hip hop", "mood": "chill, focused", "visual": "animated cozy room, rain on window, café scene", "duration": "2-4 hours"},
+            {"name": "Chill Vibes Mix", "genre": "chillhop, jazz hop", "mood": "relaxed, warm", "visual": "sunset timelapse, city lights, vinyl records spinning", "duration": "1-3 hours"},
+            {"name": "Late Night Jazz", "genre": "smooth jazz, neo-soul", "mood": "sophisticated, mellow", "visual": "dimly lit jazz bar, candlelight, city skyline at night", "duration": "2-3 hours"},
+            {"name": "Synthwave Drive", "genre": "synthwave, retrowave", "mood": "energetic, nostalgic", "visual": "neon city drive, retro grid, 80s aesthetic", "duration": "1-2 hours"},
+            {"name": "Acoustic Morning", "genre": "acoustic, folk", "mood": "peaceful, fresh", "visual": "morning light, coffee steam, mountain cabin", "duration": "1-2 hours"},
+            {"name": "Hip Hop Instrumentals", "genre": "boom bap, trap beats", "mood": "creative, flow state", "visual": "studio setup, turntables, urban scenery", "duration": "2-3 hours"}
+          ],
+          "posting": "2 long-form loops/week + 5 Shorts/day chopped from loops",
+          "revenue_note": "Music loop videos consistently rank in top RPM categories. A 3-hour video with 30+ mid-rolls can earn $50-200/day at scale."
+        },
+        "how_to_meditate": {
+          "loop_types": [
+            {"name": "Deep Sleep Meditation", "genre": "ambient drone, binaural beats", "mood": "deeply relaxing, sleep-inducing", "visual": "starfield, slow nebula drift, candlelight", "duration": "8-10 hours"},
+            {"name": "Morning Mindfulness", "genre": "soft piano, nature ambience", "mood": "calm, centered", "visual": "sunrise timelapse, dew on leaves, still water", "duration": "1 hour"},
+            {"name": "Anxiety Relief Soundscape", "genre": "ambient, 432Hz tuning", "mood": "soothing, grounding", "visual": "flowing water, gentle rain, forest path", "duration": "2-3 hours"},
+            {"name": "Tibetan Singing Bowls", "genre": "singing bowls, gongs", "mood": "meditative, spiritual", "visual": "temple interior, incense smoke, mandala patterns", "duration": "2-4 hours"},
+            {"name": "Body Scan Meditation", "genre": "guided + ambient", "mood": "healing, restorative", "visual": "soft light particles, abstract flowing shapes", "duration": "30-60 min"},
+            {"name": "Rain + Thunder Sleep", "genre": "nature sounds", "mood": "cozy, sleepy", "visual": "rain on window, cabin interior, fireplace", "duration": "8-10 hours"}
+          ],
+          "posting": "2 long-form loops/week + 3 Shorts/day",
+          "revenue_note": "Sleep/meditation content gets extreme watch time. 8-10 hour videos regularly accumulate millions of hours watched."
+        },
+        "rich_nature": {
+          "loop_types": [
+            {"name": "Ocean Waves for Sleep", "genre": "ocean sounds", "mood": "peaceful, rhythmic", "visual": "aerial ocean footage, beach waves, underwater", "duration": "8-10 hours"},
+            {"name": "Forest Rain Ambiance", "genre": "rain + forest sounds", "mood": "calming, immersive", "visual": "rain falling on leaves, misty forest, puddles", "duration": "3-4 hours"},
+            {"name": "Birdsong Morning", "genre": "bird calls + gentle wind", "mood": "fresh, natural", "visual": "forest canopy, birds in trees, sunrise meadow", "duration": "2-3 hours"},
+            {"name": "Thunderstorm Power", "genre": "heavy rain + thunder", "mood": "dramatic, cozy", "visual": "lightning flashes, rain sheets, dark clouds", "duration": "4-6 hours"},
+            {"name": "Underwater World", "genre": "underwater ambience, whale songs", "mood": "mysterious, serene", "visual": "coral reefs, fish schools, deep ocean", "duration": "2-3 hours"},
+            {"name": "Campfire Crackling", "genre": "fire sounds + crickets", "mood": "cozy, nostalgic", "visual": "campfire close-up, stars, embers floating", "duration": "3-4 hours"}
+          ],
+          "posting": "2 long-form loops/week + 5 Shorts/day",
+          "revenue_note": "Nature ambiance is evergreen. These videos accumulate views for years with zero additional effort."
+        },
+        "rich_horror": {
+          "loop_types": [
+            {"name": "Dark Ambient Nightscape", "genre": "dark ambient, drone", "mood": "eerie, unsettling", "visual": "abandoned hallways, fog, flickering lights", "duration": "2-3 hours"},
+            {"name": "Haunted House Atmosphere", "genre": "creepy soundscape", "mood": "creepy, tense", "visual": "old mansion interior, shadows moving, creaking doors", "duration": "1-2 hours"},
+            {"name": "Cosmic Horror Ambience", "genre": "lovecraftian ambient", "mood": "vast, dreadful", "visual": "deep space anomalies, alien structures, void", "duration": "3-4 hours"},
+            {"name": "Creepypasta Background", "genre": "minimal tension music", "mood": "suspenseful, quiet", "visual": "dark forest, static TV, empty rooms", "duration": "2-3 hours"}
+          ],
+          "posting": "1 long-form loop/week + 3 Shorts/day",
+          "revenue_note": "Horror ambient is niche but loyal. High engagement, repeat viewers, great for late-night algorithm placement."
+        },
+        "rich_fitness": {
+          "loop_types": [
+            {"name": "Beast Mode Workout Mix", "genre": "trap, EDM, dubstep", "mood": "aggressive, pumped", "visual": "gym footage, weights, fire effects", "duration": "1-2 hours"},
+            {"name": "Running Playlist", "genre": "uptempo EDM, house", "mood": "energetic, steady", "visual": "running POV, nature trails, city runs", "duration": "1-2 hours"},
+            {"name": "Yoga Flow Music", "genre": "ambient, world music", "mood": "flowing, peaceful", "visual": "yoga studio, nature landscapes, soft light", "duration": "1-2 hours"},
+            {"name": "Morning Stretch & Warmup", "genre": "chill electronic", "mood": "gentle, energizing", "visual": "sunrise workout, stretching silhouettes", "duration": "30-60 min"}
+          ],
+          "posting": "1 long-form loop/week + 3 Shorts/day"
+        },
+        "rich_dance": {
+          "loop_types": [
+            {"name": "Dance Party Mix", "genre": "house, EDM, pop remixes", "mood": "high energy, fun", "visual": "dance floor lights, DJ booth, crowd energy", "duration": "2-3 hours"},
+            {"name": "Latin Dance Mix", "genre": "reggaeton, salsa, bachata", "mood": "passionate, rhythmic", "visual": "Latin dance scenes, tropical vibes", "duration": "1-2 hours"},
+            {"name": "Afrobeats Vibes", "genre": "afrobeats, amapiano", "mood": "groovy, feel-good", "visual": "colorful African art, dance moves, sunset", "duration": "1-2 hours"}
+          ],
+          "posting": "1 long-form loop/week + 5 Shorts/day (dance clips)"
+        },
+        "rich_cooking": {
+          "loop_types": [
+            {"name": "Italian Kitchen Ambiance", "genre": "Italian café music + kitchen sounds", "mood": "warm, homey", "visual": "pasta making, olive oil pouring, rustic kitchen", "duration": "2-3 hours"},
+            {"name": "Coffee Shop Background", "genre": "jazz + café chatter + espresso machine", "mood": "cozy, productive", "visual": "coffee being poured, café interior, pastries", "duration": "3-4 hours"},
+            {"name": "Sunday Brunch Vibes", "genre": "bossa nova, light jazz", "mood": "relaxed, social", "visual": "brunch spread, mimosas, sunny patio", "duration": "1-2 hours"}
+          ],
+          "posting": "1 long-form loop/week + 2 Shorts/day"
+        },
+        "rich_travel": {
+          "loop_types": [
+            {"name": "Tokyo Rain Walk", "genre": "city rain + soft lo-fi", "mood": "atmospheric, wanderlust", "visual": "rainy Tokyo streets, neon reflections, umbrellas", "duration": "2-3 hours"},
+            {"name": "Paris Café Morning", "genre": "French café music + ambient", "mood": "romantic, peaceful", "visual": "Parisian street, croissants, Eiffel Tower fog", "duration": "2-3 hours"},
+            {"name": "Tropical Beach Sunset", "genre": "island vibes, steel drums", "mood": "vacation, bliss", "visual": "palm trees, turquoise water, hammock", "duration": "2-3 hours"},
+            {"name": "NYC City Sounds", "genre": "urban ambient + jazz", "mood": "energetic, alive", "visual": "Times Square, yellow cabs, subway, skyline", "duration": "2-3 hours"}
+          ],
+          "posting": "1 long-form loop/week + 3 Shorts/day"
+        },
+        "cumquat_motivation": {
+          "loop_types": [
+            {"name": "Grind Mode \u2014 Cinematic Motivation", "genre": "epic cinematic, orchestral", "mood": "powerful, driven", "visual": "lion imagery, mountain summits, warriors, fire", "duration": "2-3 hours"},
+            {"name": "Silent Discipline", "genre": "minimal piano + ambient", "mood": "focused, disciplined", "visual": "empty gym at dawn, lone figure running, clock ticking", "duration": "1-2 hours"},
+            {"name": "Success Frequency", "genre": "binaural beats + affirmations", "mood": "manifestation, confident", "visual": "wealth imagery, growth charts, nature power", "duration": "3-4 hours"}
+          ],
+          "posting": "1 long-form loop/week + 3 Shorts/day"
+        },
+        "eva_reyes": {
+          "loop_types": [
+            {"name": "Empowerment Soundscape", "genre": "uplifting ambient, soft pop instrumentals", "mood": "confident, radiant", "visual": "sunrise, flowers blooming, woman silhouette on mountain", "duration": "1-2 hours"},
+            {"name": "Self-Care Sunday", "genre": "spa music, gentle piano", "mood": "nurturing, peaceful", "visual": "candles, bath, journaling, tea steam", "duration": "2-3 hours"}
+          ],
+          "posting": "1 long-form loop/week + 2 Shorts/day"
+        },
+        "rich_education": {
+          "loop_types": [
+            {"name": "Deep Focus Study Music", "genre": "ambient electronic, minimal piano", "mood": "concentrated, clear", "visual": "clean desk, books, library, gentle rain", "duration": "3-4 hours"},
+            {"name": "Exam Prep Power Session", "genre": "alpha wave binaural + soft beats", "mood": "alert, productive", "visual": "study materials, highlighters, clock, coffee", "duration": "2-3 hours"}
+          ],
+          "posting": "1 long-form loop/week + 2 Shorts/day"
+        },
+        "rich_design": {
+          "loop_types": [
+            {"name": "Creative Flow Beats", "genre": "lo-fi, art pop instrumentals", "mood": "inspired, in the zone", "visual": "paint strokes, design tools, color palettes morphing", "duration": "2-3 hours"},
+            {"name": "Studio Session Ambiance", "genre": "chill electronic, trip-hop", "mood": "focused, creative", "visual": "design studio, cursor on screen, typography animation", "duration": "2-3 hours"}
+          ],
+          "posting": "1 long-form loop/week + 2 Shorts/day"
+        }
+      },
+      "seasonal_holiday_loops": {
+        "note": "Holiday content gets MASSIVE spikes. Upload 2-4 weeks before each holiday for algorithm indexing. These videos earn year after year.",
+        "holidays": {
+          "christmas": {
+            "channels": ["rich_music", "rich_cooking", "rich_nature", "rich_family"],
+            "content": [
+              {"title": "Christmas Fireplace | {duration} of Crackling Fire + Christmas Jazz", "visual": "fireplace with stockings, Christmas tree lights, falling snow outside window", "genre": "Christmas jazz, holiday instrumental, piano carols", "duration": "8-10 hours"},
+              {"title": "Cozy Christmas Morning | {duration} of Holiday Music & Snow", "visual": "snowy cabin, hot cocoa, presents, warm lighting", "genre": "acoustic holiday covers, gentle Christmas music", "duration": "3-4 hours"},
+              {"title": "Christmas Cooking Ambiance | Holiday Kitchen Sounds & Music", "visual": "baking cookies, Christmas kitchen, gingerbread", "genre": "holiday jazz + kitchen sounds", "duration": "2-3 hours"},
+              {"title": "Silent Night | {duration} of Peaceful Christmas Sleep Music", "visual": "starry night, nativity scene, gentle snow", "genre": "ambient Christmas, music box, soft choirs", "duration": "8-10 hours"}
+            ],
+            "upload_window": "November 15 - December 1"
+          },
+          "halloween": {
+            "channels": ["rich_horror", "rich_music", "rich_nature"],
+            "content": [
+              {"title": "Haunted Mansion Ambiance | {duration} of Creepy Halloween Atmosphere", "visual": "haunted house interior, flickering candles, cobwebs, bats", "genre": "horror ambient, creepy music box, wind howling", "duration": "3-4 hours"},
+              {"title": "Halloween Night Sounds | Wolves, Wind & Eerie Music", "visual": "full moon, graveyard, fog, bare trees", "genre": "dark orchestral, wolf howls, thunder", "duration": "2-3 hours"}
+            ],
+            "upload_window": "October 1 - October 15"
+          },
+          "new_years": {
+            "channels": ["rich_music", "cumquat_motivation", "rich_lifestyle"],
+            "content": [
+              {"title": "New Year New You | {duration} of Motivational Music for {year}", "visual": "fireworks, sunrise, goal setting, fresh start imagery", "genre": "epic cinematic, uplifting orchestral", "duration": "2-3 hours"},
+              {"title": "NYE Party Mix | {duration} of Dance Music for New Year's Eve", "visual": "party lights, champagne, countdown, confetti", "genre": "house, EDM, party bangers", "duration": "3-4 hours"}
+            ],
+            "upload_window": "December 15 - December 28"
+          },
+          "valentines": {
+            "channels": ["rich_music", "eva_reyes", "rich_cooking"],
+            "content": [
+              {"title": "Valentine's Day Jazz | {duration} of Romantic Dinner Music", "visual": "candlelit dinner, roses, wine, soft lighting", "genre": "smooth jazz, romantic piano, bossa nova", "duration": "2-3 hours"}
+            ],
+            "upload_window": "February 1 - February 10"
+          },
+          "summer": {
+            "channels": ["rich_music", "rich_travel", "rich_nature"],
+            "content": [
+              {"title": "Summer Vibes Mix | {duration} of Tropical House & Beach Music", "visual": "beach sunset, palm trees, ocean waves, pool party", "genre": "tropical house, summer pop instrumentals", "duration": "2-3 hours"}
+            ],
+            "upload_window": "May 15 - June 1"
+          },
+          "back_to_school": {
+            "channels": ["rich_education", "rich_music"],
+            "content": [
+              {"title": "Back to School Study Music | {duration} for Focus & Productivity", "visual": "clean desk, notebooks, campus, library", "genre": "lo-fi study beats, ambient electronic", "duration": "3-4 hours"}
+            ],
+            "upload_window": "August 1 - August 20"
+          }
+        }
+      },
+      "copyright_compliance": {
+        "music": {
+          "rule": "ALL music must be AI-generated via Suno or Udio. Never use copyrighted songs, samples, or melodies.",
+          "suno_license": "Suno Pro/Premier subscribers own generated music commercially. Free tier is non-commercial only.",
+          "udio_license": "Similar commercial rights for paid tiers.",
+          "verification": "Before uploading, run audio through YouTube's Copyright Match preview in Studio. If flagged, regenerate.",
+          "no_cover_songs": "Do NOT generate AI covers of existing copyrighted songs. Even instrumental versions of copyrighted melodies can be flagged.",
+          "safe_genres": "Original compositions in generic genres (lo-fi, ambient, jazz, EDM) are safe. Avoid anything that sounds like a specific copyrighted work."
+        },
+        "visuals": {
+          "rule": "Use only AI-generated visuals (Gemini Imagen, Runway) or properly licensed stock footage.",
+          "stock_licenses": "Pexels and Pixabay are royalty-free. Storyblocks requires active subscription for license.",
+          "no_movie_clips": "Never use clips from copyrighted movies, TV shows, or other YouTube videos.",
+          "ai_generated": "AI-generated images and videos are original works and are safe for commercial use."
+        },
+        "general": {
+          "content_id_check": "Always preview uploads in YouTube Studio for Content ID matches before publishing.",
+          "dispute_process": "If a false claim occurs on AI-generated content, dispute with proof of AI generation (Suno/Udio generation history).",
+          "monetization_safety": "Only use content you fully own or have explicit commercial license for. One valid copyright strike can demonetize the entire channel."
+        }
+      },
+      "production_pipeline": {
+        "step_1": "Generate 3-5 min AI music tracks via Suno/Udio matching the mood and genre",
+        "step_2": "Loop and crossfade tracks to fill target duration (use ffmpeg for seamless looping)",
+        "step_3": "Generate or source looping visuals (AI video via Runway, AI images with pan/zoom, or stock loops)",
+        "step_4": "Composite audio + video with ffmpeg (add subtle color grade, vignette, channel watermark)",
+        "step_5": "Generate thumbnail (mood visual + text overlay: '3 Hours of Lo-fi Study Beats')",
+        "step_6": "Upload to channel with SEO-optimized title, description, and tags",
+        "step_7": "Schedule Shorts chopping: extract 20 best 30-60 sec segments with text overlays",
+        "step_8": "Distribute Shorts across source channel + cumquat_shortform + related channels",
+        "ffmpeg_loop_command": "ffmpeg -stream_loop -1 -i music.mp3 -stream_loop -1 -i visual_loop.mp4 -t {duration_seconds} -c:v libx264 -c:a aac -shortest output.mp4",
+        "ffmpeg_chop_command": "ffmpeg -i long_video.mp4 -ss {start} -t {duration} -c copy short_{n}.mp4"
+      },
+      "seo_templates": {
+        "title": "{mood_name} | {genre} | {duration} of {vibe} Music for {activity}",
+        "title_examples": [
+          "Lo-fi Study Beats | 3 Hours of Chill Hip Hop Music for Focus & Concentration",
+          "Deep Sleep Meditation | 10 Hours of Calming Ambient Music for Relaxation",
+          "Dark Ambient Horror | 3 Hours of Creepy Atmospheric Music for Writing",
+          "Beast Mode Workout Mix | 2 Hours of Aggressive Gym Music for Training"
+        ],
+        "description_template": "{mood_description}\n\nThis {duration} mix of {genre} music is perfect for {activity}. Hit play, relax, and let the music do its thing.\n\nTimestamps:\n{timestamps}\n\nThe music in this video is AI-generated and original to this channel.\n\n{description_footer}",
+        "tags_template": ["{genre}", "{mood}", "{activity} music", "{duration} music", "background music", "ambient", "#CumquatVibes", "#{channel_hashtag}"]
+      },
+      "monetization_notes": {
+        "ad_placement": "Place mid-roll ads every 8-10 minutes on loop videos (less intrusive than regular content). YouTube auto-places if enabled.",
+        "membership_exclusive": "Release 'extended versions' (8-10 hour) as members-only content",
+        "digital_product_tie_in": "Offer downloadable MP3 packs of the AI music on Gumroad",
+        "licensing": "License the AI-generated tracks to other creators via the asset library"
+      }
     }
   },
   "social_media_distribution": {
