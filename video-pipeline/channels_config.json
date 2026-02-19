@@ -26,6 +26,14 @@
         "video_format": "shorts_facts",
         "video_template": "product_showcase",
         "cta_in_description": true
+      },
+      "network_picks": {
+        "name": "Network Picks - Best of Cumquat Vibes",
+        "description": "Top videos from across the Cumquat Vibes network. 41 channels, one ecosystem.",
+        "source": "same_cluster",
+        "auto_populate": true,
+        "max_videos": 25,
+        "refresh": "weekly"
       }
     }
   },
@@ -1717,33 +1725,33 @@
     "listicle": {
       "intro": "[HOOK]\n\nHey, welcome back. Today we're counting down {count} {topic}. Make sure to stick around because number one is genuinely surprising.\n\nLet's get into it.",
       "item": "\n\nNumber {n}: {item_title}.\n\n{item_body}\n\n{retention_hook}",
-      "outro": "\n\nAnd that wraps up our list. If you found this useful, hit that like button and subscribe for more. Drop a comment below \u2014 which one was your favorite?\n\nUntil next time."
+      "outro": "\n\nAnd that wraps up our list. If you found this useful, hit that like button and subscribe for more. Drop a comment below \u2014 which one was your favorite?\n\n{cross_promo_segment}\n\nUntil next time."
     },
     "explainer": {
       "intro": "[HOOK]\n\nToday we're breaking down {topic} \u2014 what it is, why it matters, and what you need to know.\n\nLet's dive in.",
       "section": "\n\n{section_title}\n\n{section_body}\n\n{retention_hook}",
-      "outro": "\n\nSo that's {topic} explained. If this helped you understand it better, leave a like and subscribe. I've got more content like this coming.\n\nSee you in the next one."
+      "outro": "\n\nSo that's {topic} explained. If this helped you understand it better, leave a like and subscribe. I've got more content like this coming.\n\n{cross_promo_segment}\n\nSee you in the next one."
     },
     "compilation": {
       "intro": "[HOOK]\n\nYou're about to see {count} incredible {topic} that will blow your mind. Let's not waste any time.",
       "segment": "\n\n{segment_narration}\n\n",
-      "outro": "\n\nWhich one was the most impressive? Let me know in the comments. If you enjoyed this, smash that like button and subscribe.\n\nCatch you next time."
+      "outro": "\n\nWhich one was the most impressive? Let me know in the comments. If you enjoyed this, smash that like button and subscribe.\n\n{cross_promo_segment}\n\nCatch you next time."
     },
     "shorts_facts": {
-      "full": "[HOOK]\n\n{fact}\n\nFollow for more {niche} content."
+      "full": "[HOOK]\n\n{fact}\n\nFollow for more {niche} content. {shorts_network_cta}"
     },
     "shorts_story": {
-      "full": "[HOOK]\n\n{story}\n\n{punchline}\n\nFollow for more."
+      "full": "[HOOK]\n\n{story}\n\n{punchline}\n\nFollow for more. {shorts_network_cta}"
     },
     "news_recap": {
       "intro": "[HOOK]\n\nHere's everything you need to know about {topic} this week.\n\nLet's break it down.",
       "story": "\n\nFirst up: {headline}.\n\n{details}\n\n{analysis}",
-      "outro": "\n\nThat's your {niche} news recap. Like and subscribe to stay updated. See you next time."
+      "outro": "\n\nThat's your {niche} news recap. Like and subscribe to stay updated.\n\n{cross_promo_segment}\n\nSee you next time."
     },
     "tutorial": {
       "intro": "[HOOK]\n\nToday I'm going to walk you through {topic} step by step. By the end, you'll know exactly how to do this yourself.\n\nLet's get started.",
       "step": "\n\nStep {n}: {step_title}.\n\n{step_body}",
-      "outro": "\n\nAnd there you go \u2014 {topic} done. If this helped you, please like and subscribe. Drop any questions in the comments.\n\nUntil next time."
+      "outro": "\n\nAnd there you go \u2014 {topic} done. If this helped you, please like and subscribe. Drop any questions in the comments.\n\n{cross_promo_segment}\n\nUntil next time."
     },
     "product_showcase": {
       "full": "[HOOK]\n\nCheck out this {product_name} from the Cumquat Vibes store.\n\n{product_description}\n\nGrab yours at cumquatvibes.com \u2014 link in the description.\n\nFollow for more drops."
@@ -1807,6 +1815,98 @@
       "You won't believe what we found about {topic}."
     ]
   },
+  "ecosystem": {
+    "niche_clusters": {
+      "money_wealth": {
+        "channels": ["rich_finance", "rich_crypto", "rich_business"],
+        "theme": "Building wealth and financial freedom",
+        "cross_promo_cta": "Want to level up your finances?"
+      },
+      "mind_body": {
+        "channels": ["rich_mind", "rich_fitness", "how_to_meditate", "eva_reyes"],
+        "theme": "Mental and physical peak performance",
+        "cross_promo_cta": "Want to unlock your full potential?"
+      },
+      "entertainment": {
+        "channels": ["rich_movie", "rich_comedy", "rich_memes", "rich_animation", "rich_horror"],
+        "theme": "Entertainment, stories, and laughs",
+        "cross_promo_cta": "Need more entertainment?"
+      },
+      "tech_ai": {
+        "channels": ["rich_tech", "how_to_use_ai", "rich_reviews", "rich_design"],
+        "theme": "Technology, AI, and digital creation",
+        "cross_promo_cta": "Want to stay ahead of the tech curve?"
+      },
+      "lifestyle_food": {
+        "channels": ["rich_lifestyle", "rich_food", "rich_cooking", "rich_fashion", "rich_beauty"],
+        "theme": "Living your best life",
+        "cross_promo_cta": "Looking to upgrade your lifestyle?"
+      },
+      "nature_science": {
+        "channels": ["rich_nature", "rich_science", "rich_history"],
+        "theme": "Exploring the world and beyond",
+        "cross_promo_cta": "Curious about the world?"
+      },
+      "creative_arts": {
+        "channels": ["rich_music", "rich_photography", "rich_design", "rich_dance", "rich_animation"],
+        "theme": "Creative expression and artistry",
+        "cross_promo_cta": "Want to fuel your creative side?"
+      },
+      "gaming_sports": {
+        "channels": ["rich_gaming", "cumquat_gaming", "rich_sports", "rich_cars"],
+        "theme": "Games, competition, and adrenaline",
+        "cross_promo_cta": "Love the thrill?"
+      },
+      "family_education": {
+        "channels": ["rich_family", "rich_kids", "rich_education", "rich_pets"],
+        "theme": "Family, learning, and growing together",
+        "cross_promo_cta": "Want more family-friendly content?"
+      },
+      "content_growth": {
+        "channels": ["rich_vlogging", "rich_diy", "cumquat_shortform"],
+        "theme": "Creating, building, and growing",
+        "cross_promo_cta": "Ready to start creating?"
+      },
+      "travel_adventure": {
+        "channels": ["rich_travel", "rich_nature", "rich_photography"],
+        "theme": "Explore the world",
+        "cross_promo_cta": "Got wanderlust?"
+      }
+    },
+    "cross_promo_rules": {
+      "max_channels_per_outro": 2,
+      "max_channels_per_description": 4,
+      "prefer_same_cluster": true,
+      "always_include_main": true,
+      "rotation": "round_robin",
+      "avoid_self_reference": true
+    },
+    "outro_cross_promo_template": "\n\n[CROSS-PROMO]\n\n{cross_promo_cta} Check out our sister channel {promo_channel_1} \u2014 they just dropped a great video on {promo_topic_1}. And if you're into {promo_niche_2}, {promo_channel_2} has you covered. Links in the description.\n\nAnd don't forget to subscribe to this channel so you never miss an upload. See you in the next one.",
+    "description_network_section": "\n\n\ud83c\udf10 More from the Cumquat Vibes Network:\n{related_channel_1}: https://www.youtube.com/{related_handle_1}\n{related_channel_2}: https://www.youtube.com/{related_handle_2}\n{related_channel_3}: https://www.youtube.com/{related_handle_3}\n{related_channel_4}: https://www.youtube.com/{related_handle_4}",
+    "pinned_comment_template": "\ud83d\udd14 New here? Welcome to {channel_name}! We post {posting_schedule}.\n\n\ud83d\udecd\ufe0f Shop: https://cumquatvibes.com\n\u2764\ufe0f Support: https://donate.stripe.com/9B68wR8Wb0NLfzz0jjes000\n\n\ud83c\udf1f More from our network:\n\u25b6\ufe0f {related_channel_1}: https://www.youtube.com/{related_handle_1}\n\u25b6\ufe0f {related_channel_2}: https://www.youtube.com/{related_handle_2}\n\u25b6\ufe0f {related_channel_3}: https://www.youtube.com/{related_handle_3}\n\nDrop a \ud83d\udc4b in the comments if you're new!",
+    "end_screen_slots": {
+      "slot_1": "best_for_viewer_video",
+      "slot_2": "sister_channel_video",
+      "subscribe_button": true
+    },
+    "shorts_funnel": {
+      "funnel_channels": ["cumquat_shortform", "rich_memes", "rich_comedy"],
+      "target_longform_channels": ["rich_tech", "rich_finance", "rich_horror", "rich_science", "rich_mind"],
+      "shorts_cta_template": "Full video on our channel {target_channel} \u2014 link in bio.",
+      "strategy": "Use viral Shorts to hook viewers, then drive them to deep-dive long-form content on sister channels"
+    },
+    "collab_segment_templates": [
+      "Speaking of {related_topic}, our friends over at {sister_channel} just did an incredible deep dive on this. I'll link it in the description \u2014 definitely worth watching after this.",
+      "Now if you want to take this even further, {sister_channel} has a whole video breaking down {related_topic}. Check the link below.",
+      "This ties directly into something {sister_channel} covered recently. If you're into {related_niche}, you'll want to see that one. Link in the description."
+    ],
+    "algorithm_boost_strategy": {
+      "watch_session_chaining": "End screens point to sister channel videos to extend watch sessions across the network",
+      "comment_engagement": "Pinned comments with network links encourage exploration",
+      "playlist_strategy": "Each channel maintains a 'Network Picks' playlist featuring top videos from cluster channels",
+      "upload_coordination": "Stagger uploads across cluster channels so related content appears in suggested videos together"
+    }
+  },
   "seo_defaults": {
     "description_footer": "\n\n---\nMain Channel: https://www.youtube.com/@CumquatVibes\nShop: https://cumquatvibes.com\nPortfolio: https://richardabreu.studio\nCommunity: https://vibeconnectionlounge.com\nSupport/Donate: https://donate.stripe.com/9B68wR8Wb0NLfzz0jjes000\n\n#Faceless #YouTube",
     "channel_description_template": "{channel_name} — {niche}\n\nNew videos every week + daily Shorts!\n\nPart of the Cumquat Vibes network.\n\n--- Links ---\nShop: https://cumquatvibes.com\nPortfolio: https://richardabreu.studio\nMain Channel: https://www.youtube.com/@CumquatVibes\nCommunity: https://vibeconnectionlounge.com\nSupport/Donate: https://donate.stripe.com/9B68wR8Wb0NLfzz0jjes000",
@@ -1828,9 +1928,10 @@
     "scheduling": {
       "priority_channels": [
         "rich_tech",
-        "rich_gaming",
+        "how_to_use_ai",
         "rich_finance",
         "rich_horror",
+        "rich_mind",
         "rich_science"
       ],
       "secondary_channels": [
@@ -1838,14 +1939,19 @@
         "rich_reviews",
         "rich_sports",
         "rich_movie",
-        "rich_business"
+        "rich_business",
+        "rich_gaming",
+        "cumquat_gaming",
+        "how_to_meditate"
       ],
       "growth_channels": [
         "rich_memes",
         "rich_comedy",
         "cumquat_shortform",
         "rich_nature",
-        "rich_pets"
+        "rich_pets",
+        "eva_reyes",
+        "cumquat_motivation"
       ]
     }
   }
