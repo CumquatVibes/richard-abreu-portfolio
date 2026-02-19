@@ -72,6 +72,11 @@
                         "sans": ["Inter", "system-ui", "sans-serif"],
                         "display": ["Playfair Display", "Georgia", "serif"],
                     },
+                    boxShadow: {
+                        'glass': '0 8px 32px rgba(0, 0, 0, 0.4)',
+                        'glass-glow': '0 8px 32px rgba(0, 0, 0, 0.4), 0 0 60px rgba(200, 255, 0, 0.03)',
+                        'accent-glow': '0 0 30px rgba(200, 255, 0, 0.3)',
+                    },
                 },
             },
         }
@@ -162,6 +167,74 @@
         .mobile-menu.open {
             transform: translateX(0);
         }
+
+        /* ============================
+           Liquid Glass Design System
+           ============================ */
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px) saturate(1.3);
+            -webkit-backdrop-filter: blur(20px) saturate(1.3);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08) 20%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0.08) 80%, transparent);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .glass-accent {
+            background: rgba(200, 255, 0, 0.02);
+            backdrop-filter: blur(24px) saturate(1.4);
+            -webkit-backdrop-filter: blur(24px) saturate(1.4);
+            border: 1px solid rgba(200, 255, 0, 0.08);
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-accent::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(200,255,0,0.1) 20%, rgba(200,255,0,0.15) 50%, rgba(200,255,0,0.1) 80%, transparent);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .glass-hover {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-hover:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 8px 40px rgba(0,0,0,0.4), 0 0 60px rgba(200,255,0,0.03);
+            transform: translateY(-2px);
+        }
+
+        .glow-accent {
+            transition: box-shadow 0.3s ease;
+        }
+
+        .glow-accent:hover {
+            box-shadow: 0 0 30px rgba(200,255,0,0.3), 0 0 60px rgba(200,255,0,0.1);
+        }
+
+        .glass-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06) 20%, rgba(200,255,0,0.08) 50%, rgba(255,255,255,0.06) 80%, transparent);
+            margin: 0 5%;
+        }
     </style>
 </head>
 <body class="bg-black text-white font-sans antialiased">
@@ -171,7 +244,7 @@
     <!-- End Google Tag Manager (noscript) -->
 
     <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-xl border-b border-white/5">
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/[0.03] backdrop-blur-2xl backdrop-saturate-150 border-b border-white/[0.08]">
         <div class="max-w-7xl mx-auto px-6 lg:px-12">
             <div class="flex justify-between items-center h-20">
                 <a href="#" class="text-2xl font-display font-bold tracking-tight">
@@ -185,7 +258,7 @@
                     <a href="#youtube" class="nav-link text-sm font-medium text-gray-400 hover:text-white transition-colors tracking-wide uppercase">YouTube</a>
                     <a href="#newsletter" class="nav-link text-sm font-medium text-gray-400 hover:text-white transition-colors tracking-wide uppercase">Newsletter</a>
                     <a href="#about" class="nav-link text-sm font-medium text-gray-400 hover:text-white transition-colors tracking-wide uppercase">About</a>
-                    <a href="#support" class="border border-accent/30 text-accent px-5 py-2.5 text-sm font-bold tracking-wide uppercase hover:bg-accent hover:text-black transition-all">
+                    <a href="#support" class="bg-white/[0.03] backdrop-blur-sm border border-accent/20 text-accent px-5 py-2.5 text-sm font-bold tracking-wide uppercase hover:bg-accent hover:text-black glow-accent transition-all">
                         Support
                     </a>
                     <a href="https://www.cumquatvibes.com" target="_blank" rel="noopener noreferrer" class="bg-accent text-black px-6 py-2.5 text-sm font-bold tracking-wide uppercase hover:bg-accent/90 transition-all">
@@ -229,10 +302,10 @@
                         I create products, illustrations, and visual experiences that connect with people on a deeper level.
                     </p>
                     <div class="flex flex-wrap gap-4 mt-10 animate-fade-up stagger-3">
-                        <a href="#work" class="bg-white text-black px-8 py-4 font-bold text-sm tracking-wide uppercase hover:bg-accent transition-colors">
+                        <a href="#work" class="bg-white text-black px-8 py-4 font-bold text-sm tracking-wide uppercase hover:bg-accent glow-accent transition-all">
                             View Work
                         </a>
-                        <a href="https://www.cumquatvibes.com" target="_blank" rel="noopener noreferrer" class="border border-white/20 text-white px-8 py-4 font-bold text-sm tracking-wide uppercase hover:border-accent hover:text-accent transition-all">
+                        <a href="https://www.cumquatvibes.com" target="_blank" rel="noopener noreferrer" class="bg-white/[0.05] backdrop-blur-sm border border-white/[0.12] text-white px-8 py-4 font-bold text-sm tracking-wide uppercase hover:bg-white/[0.1] hover:border-accent/30 transition-all">
                             Visit Shop
                         </a>
                     </div>
@@ -332,28 +405,30 @@
         </div>
     </section>
 
+    <div class="glass-divider"></div>
+
     <!-- Services -->
-    <section id="services" class="py-32 bg-surface">
+    <section id="services" class="py-32">
         <div class="max-w-7xl mx-auto px-6 lg:px-12">
             <div class="mb-16 reveal">
                 <p class="text-accent text-sm font-bold tracking-[0.3em] uppercase mb-3">What I Do</p>
                 <h2 class="text-4xl md:text-6xl font-display font-bold">Services</h2>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-px bg-white/5 reveal">
-                <div class="bg-surface p-10 md:p-12 group hover:bg-surface-light transition-colors">
+            <div class="grid md:grid-cols-3 gap-4 reveal">
+                <div class="glass glass-hover p-10 md:p-12 group">
                     <span class="text-accent text-6xl font-display font-bold block mb-6">01</span>
                     <h3 class="text-2xl font-bold mb-4">Product Design</h3>
                     <p class="text-gray-400 leading-relaxed mb-6">End-to-end product design from concept to production. Packaging, branding, and physical product aesthetics that stand out on shelves and screens.</p>
                     <span class="text-accent text-sm font-bold tracking-widest uppercase group-hover:tracking-[0.4em] transition-all">Learn More</span>
                 </div>
-                <div class="bg-surface p-10 md:p-12 group hover:bg-surface-light transition-colors">
+                <div class="glass glass-hover p-10 md:p-12 group">
                     <span class="text-accent text-6xl font-display font-bold block mb-6">02</span>
                     <h3 class="text-2xl font-bold mb-4">Illustration</h3>
                     <p class="text-gray-400 leading-relaxed mb-6">Custom illustrations for editorial, commercial, and personal projects. From detailed hand-drawn work to polished digital pieces that tell your story.</p>
                     <span class="text-accent text-sm font-bold tracking-widest uppercase group-hover:tracking-[0.4em] transition-all">Learn More</span>
                 </div>
-                <div class="bg-surface p-10 md:p-12 group hover:bg-surface-light transition-colors">
+                <div class="glass glass-hover p-10 md:p-12 group">
                     <span class="text-accent text-6xl font-display font-bold block mb-6">03</span>
                     <h3 class="text-2xl font-bold mb-4">Creative Direction</h3>
                     <p class="text-gray-400 leading-relaxed mb-6">Strategic creative vision for brands and campaigns. I help translate your message into visual language that resonates with your audience.</p>
@@ -379,28 +454,28 @@
 
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6 reveal">
                 <a href="https://www.cumquatvibes.com/products/handwritten-marker-heart-doodle-candle-soy-jar-candle-marker-scribble-design" target="_blank" rel="noopener noreferrer" class="group cursor-pointer">
-                    <div class="aspect-square overflow-hidden bg-surface-light mb-4">
+                    <div class="aspect-square overflow-hidden bg-white/[0.03] backdrop-blur-sm border border-white/[0.06] rounded-xl mb-4">
                         <img src="images/shop-1.jpg" alt="Handwritten Marker Heart Doodle Candle" class="w-full h-full object-cover img-hover">
                     </div>
                     <p class="text-white font-semibold group-hover:text-accent transition-colors">Heart Doodle Candle</p>
                     <p class="text-gray-500 text-sm mt-1">Shop Now</p>
                 </a>
                 <a href="https://www.cumquatvibes.com/products/handwritten-marker-heart-quote-velveteen-plush-blanket-marker-scribble-design" target="_blank" rel="noopener noreferrer" class="group cursor-pointer">
-                    <div class="aspect-square overflow-hidden bg-surface-light mb-4">
+                    <div class="aspect-square overflow-hidden bg-white/[0.03] backdrop-blur-sm border border-white/[0.06] rounded-xl mb-4">
                         <img src="images/shop-2.jpg" alt="Handwritten Marker Heart Quote Plush Blanket" class="w-full h-full object-cover img-hover">
                     </div>
                     <p class="text-white font-semibold group-hover:text-accent transition-colors">Heart Quote Blanket</p>
                     <p class="text-gray-500 text-sm mt-1">Shop Now</p>
                 </a>
                 <a href="https://www.cumquatvibes.com/products/handwritten-marker-heart-tote-marker-scribble-design-doodle-quote" target="_blank" rel="noopener noreferrer" class="group cursor-pointer">
-                    <div class="aspect-square overflow-hidden bg-surface-light mb-4">
+                    <div class="aspect-square overflow-hidden bg-white/[0.03] backdrop-blur-sm border border-white/[0.06] rounded-xl mb-4">
                         <img src="images/shop-3.jpg" alt="Handwritten Marker Heart Tote Bag" class="w-full h-full object-cover img-hover">
                     </div>
                     <p class="text-white font-semibold group-hover:text-accent transition-colors">Heart Doodle Tote</p>
                     <p class="text-gray-500 text-sm mt-1">Shop Now</p>
                 </a>
                 <a href="https://www.cumquatvibes.com/products/we-dont-hate-we-love-sticker-handwritten-marker-aesthetic-doodle-scribble" target="_blank" rel="noopener noreferrer" class="group cursor-pointer">
-                    <div class="aspect-square overflow-hidden bg-surface-light mb-4">
+                    <div class="aspect-square overflow-hidden bg-white/[0.03] backdrop-blur-sm border border-white/[0.06] rounded-xl mb-4">
                         <img src="images/shop-4.jpg" alt="We Don't Hate We Love Sticker" class="w-full h-full object-cover img-hover">
                     </div>
                     <p class="text-white font-semibold group-hover:text-accent transition-colors">We Love Sticker</p>
@@ -409,15 +484,17 @@
             </div>
 
             <div class="text-center mt-12 reveal">
-                <a href="https://www.cumquatvibes.com/collections/all?sort_by=created-descending" target="_blank" rel="noopener noreferrer" class="inline-block bg-accent text-black px-10 py-4 font-bold text-sm tracking-wide uppercase hover:bg-accent/90 transition-all">
+                <a href="https://www.cumquatvibes.com/collections/all?sort_by=created-descending" target="_blank" rel="noopener noreferrer" class="inline-block bg-accent text-black px-10 py-4 font-bold text-sm tracking-wide uppercase hover:bg-accent/90 glow-accent transition-all">
                     Browse Full Store
                 </a>
             </div>
         </div>
     </section>
 
+    <div class="glass-divider"></div>
+
     <!-- YouTube -->
-    <section id="youtube" class="py-32 bg-surface">
+    <section id="youtube" class="py-32">
         <div class="max-w-7xl mx-auto px-6 lg:px-12">
             <div class="flex justify-between items-end mb-16 reveal">
                 <div>
@@ -430,7 +507,7 @@
                 </a>
             </div>
 
-            <div class="bg-surface-light border border-white/5 p-6 mb-10 flex flex-col sm:flex-row items-center justify-between gap-4 reveal">
+            <div class="glass p-6 mb-10 flex flex-col sm:flex-row items-center justify-between gap-4 reveal">
                 <div class="flex items-center gap-4">
                     <svg class="w-10 h-10 text-red-600 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.9 31.9 0 0 0 0 12a31.9 31.9 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.9 31.9 0 0 0 24 12a31.9 31.9 0 0 0-.5-5.8zM9.5 15.5V8.5l6.5 3.5-6.5 3.5z"/></svg>
                     <div>
@@ -501,8 +578,7 @@
     <!-- The Studio Signal Newsletter -->
     <section id="newsletter" class="py-32">
         <div class="max-w-3xl mx-auto px-6 lg:px-12">
-            <div class="border border-accent/20 bg-surface p-10 md:p-16 text-center reveal relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-full h-1 bg-accent"></div>
+            <div class="glass-accent p-10 md:p-16 text-center reveal">
                 <p class="text-accent text-sm font-bold tracking-[0.3em] uppercase mb-4">Newsletter</p>
                 <h2 class="text-4xl md:text-5xl font-display font-bold mb-6">Join The Studio Signal</h2>
                 <p class="text-gray-400 text-lg leading-relaxed max-w-xl mx-auto mb-10">
@@ -510,9 +586,9 @@
                 </p>
 
                 <form id="studioSignalForm" class="max-w-md mx-auto flex flex-col gap-4">
-                    <input type="text" placeholder="First Name" required class="w-full bg-surface-light border border-white/10 text-white text-sm px-6 py-4 focus:outline-none focus:border-accent transition-colors placeholder-gray-600"/>
-                    <input type="email" placeholder="Your Best Email" required class="w-full bg-surface-light border border-white/10 text-white text-sm px-6 py-4 focus:outline-none focus:border-accent transition-colors placeholder-gray-600"/>
-                    <button type="submit" class="bg-accent text-black px-10 py-4 font-bold text-sm tracking-wide uppercase hover:bg-accent/90 transition-all">
+                    <input type="text" placeholder="First Name" required class="w-full bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] text-white text-sm px-6 py-4 focus:outline-none focus:border-accent/50 transition-colors placeholder-gray-600"/>
+                    <input type="email" placeholder="Your Best Email" required class="w-full bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] text-white text-sm px-6 py-4 focus:outline-none focus:border-accent/50 transition-colors placeholder-gray-600"/>
+                    <button type="submit" class="bg-accent text-black px-10 py-4 font-bold text-sm tracking-wide uppercase hover:bg-accent/90 glow-accent transition-all">
                         Join the Mission
                     </button>
                 </form>
@@ -525,21 +601,23 @@
         </div>
     </section>
 
+    <div class="glass-divider"></div>
+
     <!-- Navy Wisdom -->
-    <section class="py-20 bg-surface">
+    <section class="py-20">
         <div class="max-w-5xl mx-auto px-6 lg:px-12 reveal">
-            <div class="grid md:grid-cols-3 gap-px">
-                <div class="bg-black p-8 md:p-10 text-center">
+            <div class="grid md:grid-cols-3 gap-4">
+                <div class="glass p-8 md:p-10 text-center">
                     <p class="text-accent text-4xl font-display font-bold mb-2">20+</p>
                     <p class="text-white font-bold text-sm tracking-wide uppercase mb-3">Years U.S. Navy</p>
                     <p class="text-gray-500 text-sm leading-relaxed">Two decades of discipline, leadership, and mission-critical execution.</p>
                 </div>
-                <div class="bg-black p-8 md:p-10 text-center">
+                <div class="glass p-8 md:p-10 text-center">
                     <p class="text-accent text-4xl font-display font-bold mb-2">Systems</p>
                     <p class="text-white font-bold text-sm tracking-wide uppercase mb-3">Built to Scale</p>
                     <p class="text-gray-500 text-sm leading-relaxed">The same operational mindset that runs a warship now runs my e-commerce and creative business.</p>
                 </div>
-                <div class="bg-black p-8 md:p-10 text-center">
+                <div class="glass p-8 md:p-10 text-center">
                     <p class="text-accent text-4xl font-display font-bold mb-2">Proven</p>
                     <p class="text-white font-bold text-sm tracking-wide uppercase mb-3">Proof of Discipline</p>
                     <p class="text-gray-500 text-sm leading-relaxed">Military precision meets creative freedom. If you trust the process, the results follow.</p>
@@ -557,17 +635,17 @@
             </div>
 
             <div class="grid md:grid-cols-3 gap-6 reveal">
-                <div class="bg-surface border border-white/5 p-8 hover:border-accent/30 transition-all group">
+                <div class="glass glass-hover p-8 group">
                     <p class="text-accent text-xs font-bold tracking-widest uppercase mb-3">Brand Identity</p>
                     <h3 class="text-xl font-bold mb-2 group-hover:text-accent transition-colors">Creation Lords</h3>
                     <p class="text-gray-500 text-sm leading-relaxed">Brand identity & creative direction for a community-driven creative collective.</p>
                 </div>
-                <a href="https://vibeconnectionlounge.com" target="_blank" rel="noopener noreferrer" class="bg-surface border border-white/5 p-8 hover:border-accent/30 transition-all group">
+                <a href="https://vibeconnectionlounge.com" target="_blank" rel="noopener noreferrer" class="glass glass-hover p-8 group">
                     <p class="text-accent text-xs font-bold tracking-widest uppercase mb-3">Web Design</p>
                     <h3 class="text-xl font-bold mb-2 group-hover:text-accent transition-colors">Vibe Connection Lounge</h3>
                     <p class="text-gray-500 text-sm leading-relaxed">Full website design & development for an event and community venue.</p>
                 </a>
-                <a href="https://www.cumquatvibes.com" target="_blank" rel="noopener noreferrer" class="bg-surface border border-white/5 p-8 hover:border-accent/30 transition-all group">
+                <a href="https://www.cumquatvibes.com" target="_blank" rel="noopener noreferrer" class="glass glass-hover p-8 group">
                     <p class="text-accent text-xs font-bold tracking-widest uppercase mb-3">E-Commerce</p>
                     <h3 class="text-xl font-bold mb-2 group-hover:text-accent transition-colors">Cumquat Vibes</h3>
                     <p class="text-gray-500 text-sm leading-relaxed">E-commerce store on Shopify — product design, branding, and full store management.</p>
@@ -576,8 +654,10 @@
         </div>
     </section>
 
+    <div class="glass-divider"></div>
+
     <!-- About -->
-    <section id="about" class="py-32 bg-surface">
+    <section id="about" class="py-32">
         <div class="max-w-7xl mx-auto px-6 lg:px-12">
             <div class="grid lg:grid-cols-2 gap-16 items-center reveal">
                 <div class="relative">
@@ -628,13 +708,13 @@
                 <p class="text-gray-400 text-lg max-w-xl mx-auto">Whether you need product design, brand strategy, or e-commerce systems built right -- let's talk. Start by telling me where you're stuck.</p>
             </div>
 
-            <form id="workWithUsForm" class="bg-surface border border-white/5 p-10 md:p-14 reveal">
+            <form id="workWithUsForm" class="glass p-10 md:p-14 reveal">
                 <div class="flex flex-col gap-5">
                     <div class="grid md:grid-cols-2 gap-5">
-                        <input type="text" placeholder="Your Name" required class="w-full bg-surface-light border border-white/10 text-white text-sm px-6 py-4 focus:outline-none focus:border-accent transition-colors placeholder-gray-600"/>
-                        <input type="email" placeholder="Your Email" required class="w-full bg-surface-light border border-white/10 text-white text-sm px-6 py-4 focus:outline-none focus:border-accent transition-colors placeholder-gray-600"/>
+                        <input type="text" placeholder="Your Name" required class="w-full bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] text-white text-sm px-6 py-4 focus:outline-none focus:border-accent/50 transition-colors placeholder-gray-600"/>
+                        <input type="email" placeholder="Your Email" required class="w-full bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] text-white text-sm px-6 py-4 focus:outline-none focus:border-accent/50 transition-colors placeholder-gray-600"/>
                     </div>
-                    <select class="w-full bg-surface-light border border-white/10 text-gray-400 text-sm px-6 py-4 focus:outline-none focus:border-accent transition-colors appearance-none">
+                    <select class="w-full bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] text-gray-400 text-sm px-6 py-4 focus:outline-none focus:border-accent/50 transition-colors appearance-none">
                         <option value="" disabled selected>What do you need help with?</option>
                         <option value="product-design">Product Design & Branding</option>
                         <option value="ecommerce">E-Commerce Setup & Systems</option>
@@ -642,14 +722,14 @@
                         <option value="automation">Automation & Workflows</option>
                         <option value="other">Something Else</option>
                     </select>
-                    <textarea placeholder="What's your biggest business bottleneck right now?" rows="4" required class="w-full bg-surface-light border border-white/10 text-white text-sm px-6 py-4 focus:outline-none focus:border-accent transition-colors placeholder-gray-600 resize-none"></textarea>
-                    <button type="submit" class="bg-accent text-black px-10 py-4 font-bold text-sm tracking-wide uppercase hover:bg-accent/90 transition-all">
+                    <textarea placeholder="What's your biggest business bottleneck right now?" rows="4" required class="w-full bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] text-white text-sm px-6 py-4 focus:outline-none focus:border-accent/50 transition-colors placeholder-gray-600 resize-none"></textarea>
+                    <button type="submit" class="bg-accent text-black px-10 py-4 font-bold text-sm tracking-wide uppercase hover:bg-accent/90 glow-accent transition-all">
                         Send It
                     </button>
                 </div>
                 <p class="text-gray-600 text-xs mt-4 text-center">I personally read every submission. Expect a response within 48 hours.</p>
             </form>
-            <div id="workWithUsSuccess" class="hidden bg-surface border border-accent/20 p-10 md:p-14 text-center">
+            <div id="workWithUsSuccess" class="hidden glass-accent p-10 md:p-14 text-center">
                 <p class="text-accent text-lg font-bold mb-2">Message Sent!</p>
                 <p class="text-gray-400 text-sm">I'll get back to you within 48 hours.</p>
             </div>
@@ -657,7 +737,9 @@
     </section>
 
     <!-- Systems Library -->
-    <section id="systems" class="py-32 bg-surface">
+    <div class="glass-divider"></div>
+
+    <section id="systems" class="py-32">
         <div class="max-w-7xl mx-auto px-6 lg:px-12">
             <div class="mb-16 reveal">
                 <p class="text-accent text-sm font-bold tracking-[0.3em] uppercase mb-3">Resources</p>
@@ -667,7 +749,7 @@
 
             <!-- Featured Partner -->
             <a href="https://marblism.link/richard-abreu-rich" target="_blank" rel="noopener noreferrer" class="block mb-8 reveal group">
-                <div class="bg-surface-light border border-accent/20 p-8 md:p-10 flex flex-col md:flex-row items-center gap-6 hover:border-accent/50 transition-all">
+                <div class="glass-accent p-8 md:p-10 flex flex-col md:flex-row items-center gap-6 hover:border-accent/50 transition-all">
                     <img src="images/marblism-logo.png" alt="Marblism" class="h-12 md:h-14 w-auto object-contain flex-shrink-0">
                     <div class="flex-1 text-center md:text-left">
                         <p class="text-accent text-xs font-bold tracking-widest uppercase mb-2">Featured Partner</p>
@@ -681,22 +763,22 @@
             </a>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 reveal">
-                <a href="https://www.shopify.com" target="_blank" rel="noopener noreferrer" class="group bg-surface-light border border-white/5 p-8 hover:border-accent/30 transition-all">
+                <a href="https://www.shopify.com" target="_blank" rel="noopener noreferrer" class="glass glass-hover p-8 group">
                     <p class="text-accent text-xs font-bold tracking-widest uppercase mb-3">E-Commerce</p>
                     <h3 class="text-xl font-bold mb-2 group-hover:text-accent transition-colors">Shopify</h3>
                     <p class="text-gray-500 text-sm leading-relaxed">The backbone of my online store. Product listings, payments, and fulfillment all in one place.</p>
                 </a>
-                <a href="https://n8n.io" target="_blank" rel="noopener noreferrer" class="group bg-surface-light border border-white/5 p-8 hover:border-accent/30 transition-all">
+                <a href="https://n8n.io" target="_blank" rel="noopener noreferrer" class="glass glass-hover p-8 group">
                     <p class="text-accent text-xs font-bold tracking-widest uppercase mb-3">Automation</p>
                     <h3 class="text-xl font-bold mb-2 group-hover:text-accent transition-colors">N8N</h3>
                     <p class="text-gray-500 text-sm leading-relaxed">Open-source workflow automation. Connects my store, email, social media, and analytics on autopilot.</p>
                 </a>
-                <a href="https://zapier.com" target="_blank" rel="noopener noreferrer" class="group bg-surface-light border border-white/5 p-8 hover:border-accent/30 transition-all">
+                <a href="https://zapier.com" target="_blank" rel="noopener noreferrer" class="glass glass-hover p-8 group">
                     <p class="text-accent text-xs font-bold tracking-widest uppercase mb-3">Integration</p>
                     <h3 class="text-xl font-bold mb-2 group-hover:text-accent transition-colors">Zapier</h3>
                     <p class="text-gray-500 text-sm leading-relaxed">Quick automations for the things N8N doesn't cover. Email sequences, form triggers, and more.</p>
                 </a>
-                <a href="https://www.etsy.com" target="_blank" rel="noopener noreferrer" class="group bg-surface-light border border-white/5 p-8 hover:border-accent/30 transition-all">
+                <a href="https://www.etsy.com" target="_blank" rel="noopener noreferrer" class="glass glass-hover p-8 group">
                     <p class="text-accent text-xs font-bold tracking-widest uppercase mb-3">Marketplace</p>
                     <h3 class="text-xl font-bold mb-2 group-hover:text-accent transition-colors">Etsy</h3>
                     <p class="text-gray-500 text-sm leading-relaxed">A second revenue stream. Handcrafted designs reaching customers who are actively searching.</p>
@@ -716,13 +798,13 @@
                         Event countdown and preparation app. Create custom countdowns with checklists, notes, and timelines. Includes free NYE Times Square survival guide template.
                     </p>
                     <div class="flex flex-wrap gap-3 mb-8">
-                        <span class="text-xs font-bold tracking-widest uppercase bg-surface-light border border-white/10 px-4 py-2 text-gray-300">Custom Events</span>
-                        <span class="text-xs font-bold tracking-widest uppercase bg-surface-light border border-white/10 px-4 py-2 text-gray-300">Checklists</span>
-                        <span class="text-xs font-bold tracking-widest uppercase bg-surface-light border border-white/10 px-4 py-2 text-gray-300">Offline Mode</span>
-                        <span class="text-xs font-bold tracking-widest uppercase bg-surface-light border border-white/10 px-4 py-2 text-gray-300">PRO Templates</span>
+                        <span class="text-xs font-bold tracking-widest uppercase bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] px-4 py-2 text-gray-300 rounded-full">Custom Events</span>
+                        <span class="text-xs font-bold tracking-widest uppercase bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] px-4 py-2 text-gray-300 rounded-full">Checklists</span>
+                        <span class="text-xs font-bold tracking-widest uppercase bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] px-4 py-2 text-gray-300 rounded-full">Offline Mode</span>
+                        <span class="text-xs font-bold tracking-widest uppercase bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] px-4 py-2 text-gray-300 rounded-full">PRO Templates</span>
                     </div>
                     <div class="flex flex-wrap gap-4">
-                        <a href="#" class="bg-accent text-black px-8 py-4 font-bold text-sm tracking-wide uppercase hover:bg-accent/90 transition-all">
+                        <a href="#" class="bg-accent text-black px-8 py-4 font-bold text-sm tracking-wide uppercase hover:bg-accent/90 glow-accent transition-all">
                             Coming Soon — $1.99
                         </a>
                         <span class="border border-accent/30 text-accent px-8 py-4 font-bold text-sm tracking-wide uppercase">
@@ -731,7 +813,7 @@
                     </div>
                 </div>
                 <div class="reveal">
-                    <div class="bg-surface border border-white/5 rounded-2xl p-8 relative overflow-hidden">
+                    <div class="glass p-8">
                         <!-- App Preview Mock -->
                         <div class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-xl p-6 border border-white/10">
                             <div class="flex items-center gap-3 mb-6">
@@ -796,7 +878,7 @@
         <div class="max-w-7xl mx-auto px-6 lg:px-12">
             <div class="grid lg:grid-cols-2 gap-12">
                 <!-- Donation -->
-                <div class="bg-surface border border-white/5 p-10 md:p-14 reveal">
+                <div class="glass p-10 md:p-14 reveal">
                     <p class="text-accent text-sm font-bold tracking-[0.3em] uppercase mb-3">Support</p>
                     <h2 class="text-3xl md:text-4xl font-display font-bold mb-4">Fuel the Vision</h2>
                     <p class="text-gray-400 leading-relaxed mb-8">
@@ -810,7 +892,7 @@
                         <button class="donate-btn border border-white/20 text-white px-8 py-3 font-bold text-sm hover:border-accent hover:text-accent transition-all" onclick="selectDonation(100, this)">$100</button>
                     </div>
                     <div class="flex gap-3">
-                        <input type="number" id="customDonation" placeholder="Custom amount" min="1" class="flex-1 bg-surface-light border border-white/10 text-white text-sm px-4 py-3 focus:outline-none focus:border-accent transition-colors placeholder-gray-600"/>
+                        <input type="number" id="customDonation" placeholder="Custom amount" min="1" class="flex-1 bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] text-white text-sm px-4 py-3 focus:outline-none focus:border-accent/50 transition-colors placeholder-gray-600"/>
                         <button id="donateBtn" class="bg-accent text-black px-8 py-3 font-bold text-sm tracking-wide uppercase hover:bg-accent/90 transition-all">
                             Donate
                         </button>
@@ -819,8 +901,8 @@
                 </div>
 
                 <!-- Members Only -->
-                <div class="bg-surface border border-accent/20 p-10 md:p-14 relative overflow-hidden reveal">
-                    <div class="absolute top-0 right-0 bg-accent text-black text-xs font-bold px-4 py-1 tracking-widest uppercase">Studio</div>
+                <div class="glass-accent p-10 md:p-14 reveal">
+                    <div class="absolute top-0 right-0 bg-accent text-black text-xs font-bold px-4 py-1 tracking-widest uppercase" style="z-index:2">Studio</div>
                     <p class="text-accent text-sm font-bold tracking-[0.3em] uppercase mb-3">Exclusive Access</p>
                     <h2 class="text-3xl md:text-4xl font-display font-bold mb-4">Cumquat Studio</h2>
                     <p class="text-gray-400 leading-relaxed mb-4">
@@ -850,7 +932,7 @@
                             <span class="text-accent font-bold">+</span> CountdownHQ PRO — Event countdown app (included free)
                         </li>
                     </ul>
-                    <button id="membershipBtn" class="w-full text-center bg-accent text-black px-10 py-4 font-bold text-sm tracking-wide uppercase hover:bg-accent/90 transition-all">
+                    <button id="membershipBtn" class="w-full text-center bg-accent text-black px-10 py-4 font-bold text-sm tracking-wide uppercase hover:bg-accent/90 glow-accent transition-all">
                         Join Cumquat Studio — $9.99/mo
                     </button>
                     <p class="text-gray-600 text-xs mt-4 text-center">Cancel anytime. Secure payment via Stripe.</p>
@@ -861,7 +943,7 @@
                     </button>
                     <div id="codeEntrySection" class="hidden mt-4">
                         <div class="flex gap-2">
-                            <input type="text" id="memberCodeInput" placeholder="Enter member code" class="flex-1 bg-surface-light border border-white/10 text-white text-sm px-4 py-3 focus:outline-none focus:border-accent transition-colors placeholder-gray-600"/>
+                            <input type="text" id="memberCodeInput" placeholder="Enter member code" class="flex-1 bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] text-white text-sm px-4 py-3 focus:outline-none focus:border-accent/50 transition-colors placeholder-gray-600"/>
                             <button id="activateCodeBtn" class="bg-accent text-black px-6 py-3 font-bold text-sm tracking-wide uppercase hover:bg-accent/90 transition-all">
                                 Activate
                             </button>
@@ -872,7 +954,7 @@
                 </div>
 
                 <!-- Member Dashboard (shown when verified) -->
-                <div id="memberDashboard" class="hidden lg:col-span-2 bg-surface border border-accent/20 p-10 md:p-14 relative overflow-hidden reveal">
+                <div id="memberDashboard" class="hidden lg:col-span-2 glass-accent p-10 md:p-14 reveal">
                     <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-400 to-cyan-400"></div>
                     <div class="text-center mb-8">
                         <span class="inline-flex items-center gap-2 px-4 py-1.5 bg-gradient-to-r from-emerald-400 to-cyan-400 text-white rounded-full text-sm font-bold mb-3">💎 STUDIO</span>
@@ -881,28 +963,28 @@
                     </div>
 
                     <!-- Member Code Display -->
-                    <div class="bg-surface-light border border-white/10 p-4 rounded-lg mb-6 max-w-md mx-auto">
+                    <div class="bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] p-4 rounded-lg mb-6 max-w-md mx-auto">
                         <p class="text-gray-500 text-xs uppercase tracking-wider mb-1">Your Member Code</p>
                         <div class="flex items-center gap-2">
                             <code id="dashboardCode" class="flex-1 text-accent font-mono font-bold"></code>
-                            <button id="copyCodeBtn" class="text-xs text-gray-400 hover:text-white bg-surface border border-white/10 px-3 py-1 rounded transition-colors">Copy</button>
+                            <button id="copyCodeBtn" class="text-xs text-gray-400 hover:text-white bg-white/[0.04] border border-white/[0.08] px-3 py-1 rounded transition-colors">Copy</button>
                         </div>
                         <p class="text-gray-600 text-xs mt-2">Use this code on CountdownHQ to sync your membership.</p>
                     </div>
 
                     <!-- Quick Links Grid -->
                     <div class="grid md:grid-cols-3 gap-4 max-w-3xl mx-auto">
-                        <a href="https://drive.google.com/drive/folders/1-r8_6jDxTDO2rR0roIoGCwylQVuwlppC?usp=sharing" target="_blank" rel="noopener noreferrer" id="dashboardDownloads" class="group bg-surface-light border border-white/5 p-6 text-center hover:border-accent/30 transition-all">
+                        <a href="https://drive.google.com/drive/folders/1-r8_6jDxTDO2rR0roIoGCwylQVuwlppC?usp=sharing" target="_blank" rel="noopener noreferrer" id="dashboardDownloads" class="group glass glass-hover p-6 text-center">
                             <span class="text-3xl block mb-3">📥</span>
                             <p class="text-white font-bold text-sm mb-1">Downloads</p>
                             <p class="text-gray-500 text-xs">Exclusive resource pack</p>
                         </a>
-                        <a href="https://discord.gg/6eHUktak" target="_blank" rel="noopener noreferrer" id="dashboardDiscord" class="group bg-surface-light border border-white/5 p-6 text-center hover:border-accent/30 transition-all">
+                        <a href="https://discord.gg/6eHUktak" target="_blank" rel="noopener noreferrer" id="dashboardDiscord" class="group glass glass-hover p-6 text-center">
                             <span class="text-3xl block mb-3">💬</span>
                             <p class="text-white font-bold text-sm mb-1">Discord</p>
                             <p class="text-gray-500 text-xs">Private community</p>
                         </a>
-                        <a href="#countdownhq" class="group bg-surface-light border border-white/5 p-6 text-center hover:border-accent/30 transition-all">
+                        <a href="#countdownhq" class="group glass glass-hover p-6 text-center">
                             <span class="text-3xl block mb-3">⏱</span>
                             <p class="text-white font-bold text-sm mb-1">CountdownHQ</p>
                             <p class="text-gray-500 text-xs">PRO access included</p>
@@ -919,10 +1001,10 @@
             <h2 class="text-5xl md:text-7xl font-display font-bold mb-6">Let's create<br/>something <span class="text-accent">great</span>.</h2>
             <p class="text-gray-400 text-xl mb-10 max-w-2xl mx-auto">Whether you need product design, illustration, or creative direction - I'd love to hear about your project.</p>
             <div class="flex flex-wrap justify-center gap-4">
-                <a href="mailto:hello@richardabreu.studio" class="bg-accent text-black px-10 py-4 font-bold text-sm tracking-wide uppercase hover:bg-accent/90 transition-all">
+                <a href="mailto:hello@richardabreu.studio" class="bg-accent text-black px-10 py-4 font-bold text-sm tracking-wide uppercase hover:bg-accent/90 glow-accent transition-all">
                     Get in Touch
                 </a>
-                <a href="https://www.cumquatvibes.com" target="_blank" rel="noopener noreferrer" class="border border-white/20 text-white px-10 py-4 font-bold text-sm tracking-wide uppercase hover:border-accent hover:text-accent transition-all">
+                <a href="https://www.cumquatvibes.com" target="_blank" rel="noopener noreferrer" class="bg-white/[0.05] backdrop-blur-sm border border-white/[0.12] text-white px-10 py-4 font-bold text-sm tracking-wide uppercase hover:bg-white/[0.1] hover:border-accent/30 transition-all">
                     View Shop
                 </a>
             </div>
@@ -976,7 +1058,7 @@
                     <h4 class="text-sm font-bold tracking-widest uppercase mb-6">Newsletter</h4>
                     <p class="text-gray-500 text-sm mb-4">Get updates on new work, shop drops, and videos.</p>
                     <form class="flex gap-2" id="newsletterForm">
-                        <input class="flex-1 bg-surface-light border border-white/10 text-white text-sm px-4 py-3 focus:outline-none focus:border-accent transition-colors placeholder-gray-600" placeholder="your@email.com" type="email" required/>
+                        <input class="flex-1 bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] text-white text-sm px-4 py-3 focus:outline-none focus:border-accent/50 transition-colors placeholder-gray-600" placeholder="your@email.com" type="email" required/>
                         <button type="submit" class="bg-accent text-black px-5 py-3 font-bold text-sm hover:bg-accent/90 transition-all">
                             Join
                         </button>
@@ -1230,11 +1312,11 @@
         const nav = document.querySelector('nav');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 100) {
-                nav.classList.add('bg-black/95');
-                nav.classList.remove('bg-black/80');
+                nav.classList.add('bg-white/[0.05]');
+                nav.classList.remove('bg-white/[0.03]');
             } else {
-                nav.classList.remove('bg-black/95');
-                nav.classList.add('bg-black/80');
+                nav.classList.remove('bg-white/[0.05]');
+                nav.classList.add('bg-white/[0.03]');
             }
         });
 
