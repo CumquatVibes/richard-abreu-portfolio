@@ -2105,8 +2105,52 @@
           "posting": "1 long-form loop/week + 2 Shorts/day"
         }
       },
-      "seasonal_holiday_loops": {
-        "note": "Holiday content gets MASSIVE spikes. Upload 2-4 weeks before each holiday for algorithm indexing. These videos earn year after year.",
+      "seasonal_and_evergreen_loops": {
+        "note": "Timeless content that earns year after year. Upload seasonal content 2-4 weeks before each event for algorithm indexing. Evergreen content earns 365 days a year.",
+        "seasons": {
+          "spring": {
+            "channels": ["rich_music", "rich_nature", "rich_travel", "eva_reyes"],
+            "content": [
+              {"title": "Spring Morning | {duration} of Fresh Acoustic Music & Bird Songs", "visual": "cherry blossoms, garden blooming, butterflies, morning dew", "genre": "acoustic folk, gentle piano, bird ambience", "duration": "3-4 hours"},
+              {"title": "Spring Rain on Flowers | {duration} of Gentle Rain Sounds & Soft Piano", "visual": "rain on petals, puddles reflecting flowers, green leaves", "genre": "soft piano + rain sounds", "duration": "4-6 hours"},
+              {"title": "Spring Cleaning Vibes | {duration} of Feel-Good Music for Tidying Up", "visual": "bright clean spaces, open windows, sunlight streaming in", "genre": "upbeat indie, feel-good pop instrumentals", "duration": "2-3 hours"},
+              {"title": "Sakura Season | {duration} of Japanese Spring Ambiance", "visual": "cherry blossom trees, temple gardens, koi ponds, lanterns", "genre": "Japanese ambient, koto, gentle wind chimes", "duration": "2-3 hours"}
+            ],
+            "upload_window": "February 20 - March 10"
+          },
+          "summer": {
+            "channels": ["rich_music", "rich_travel", "rich_nature", "rich_dance"],
+            "content": [
+              {"title": "Summer Vibes Mix | {duration} of Tropical House & Beach Music", "visual": "beach sunset, palm trees, ocean waves, pool party", "genre": "tropical house, summer pop instrumentals", "duration": "3-4 hours"},
+              {"title": "Summer Night Drive | {duration} of Chill Driving Music", "visual": "car driving at sunset, coastal highway, city lights", "genre": "synthwave, chillwave, indie electronic", "duration": "2-3 hours"},
+              {"title": "Pool Party Mix | {duration} of Summer Dance Music", "visual": "pool party, splashing water, cocktails, sunglasses", "genre": "house, dance pop, reggaeton", "duration": "3-4 hours"},
+              {"title": "Hot Summer Day | {duration} of Ice Cold Chill Beats", "visual": "ice melting, cold drinks, sprinklers, shade under trees", "genre": "downtempo, chill electronic, lo-fi", "duration": "2-3 hours"},
+              {"title": "Tropical Island Escape | {duration} of Caribbean Beach Sounds", "visual": "turquoise water, white sand, hammock, palm shade", "genre": "island vibes, steel drums, ocean waves", "duration": "4-6 hours"}
+            ],
+            "upload_window": "May 15 - June 1"
+          },
+          "fall_autumn": {
+            "channels": ["rich_music", "rich_nature", "rich_cooking", "rich_lifestyle"],
+            "content": [
+              {"title": "Cozy Autumn Afternoon | {duration} of Fall Jazz & Rain", "visual": "falling leaves, pumpkins, warm sweaters, rain on windows", "genre": "autumn jazz, warm piano, soft rain", "duration": "3-4 hours"},
+              {"title": "Fall Forest Walk | {duration} of Crunching Leaves & Ambient Music", "visual": "golden forest path, fog, red and orange trees", "genre": "ambient folk, acoustic guitar, nature sounds", "duration": "2-3 hours"},
+              {"title": "Pumpkin Spice Season | {duration} of Cozy Coffee Shop Fall Vibes", "visual": "café with fall decor, pumpkin latte, cinnamon, knit blankets", "genre": "café jazz, bossa nova, light acoustic", "duration": "3-4 hours"},
+              {"title": "Rainy Autumn Night | {duration} of Peaceful Rain & Soft Piano", "visual": "rain on window at night, candles, book open, tea steam", "genre": "soft piano + rain + distant thunder", "duration": "8-10 hours"},
+              {"title": "Harvest Moon | {duration} of Rustic Acoustic Evening Music", "visual": "harvest fields, golden hour, barn, fireflies, moonrise", "genre": "folk, americana, fingerpicked guitar", "duration": "2-3 hours"}
+            ],
+            "upload_window": "September 1 - September 15"
+          },
+          "winter": {
+            "channels": ["rich_music", "rich_nature", "rich_cooking", "how_to_meditate"],
+            "content": [
+              {"title": "Winter Wonderland | {duration} of Snowy Day Piano & Ambient Music", "visual": "snow falling, frozen lake, pine trees, footprints in snow", "genre": "gentle piano, ambient pads, soft wind", "duration": "3-4 hours"},
+              {"title": "Blizzard Outside, Cozy Inside | {duration} of Fireplace & Storm Sounds", "visual": "fireplace crackling, blizzard through window, blankets, hot cocoa", "genre": "crackling fire + blizzard sounds + soft ambient", "duration": "8-10 hours"},
+              {"title": "Frozen Lake Meditation | {duration} of Ice & Wind Soundscape", "visual": "frozen landscape, ice formations, northern lights, still water", "genre": "arctic ambient, crystalline sounds, deep drone", "duration": "2-3 hours"},
+              {"title": "Hygge Winter Evening | {duration} of Scandinavian Cozy Vibes", "visual": "candles everywhere, wool socks, reading nook, snowfall", "genre": "nordic folk, warm acoustic, gentle piano", "duration": "3-4 hours"}
+            ],
+            "upload_window": "November 1 - November 15"
+          }
+        },
         "holidays": {
           "christmas": {
             "channels": ["rich_music", "rich_cooking", "rich_nature", "rich_family"],
@@ -2114,7 +2158,9 @@
               {"title": "Christmas Fireplace | {duration} of Crackling Fire + Christmas Jazz", "visual": "fireplace with stockings, Christmas tree lights, falling snow outside window", "genre": "Christmas jazz, holiday instrumental, piano carols", "duration": "8-10 hours"},
               {"title": "Cozy Christmas Morning | {duration} of Holiday Music & Snow", "visual": "snowy cabin, hot cocoa, presents, warm lighting", "genre": "acoustic holiday covers, gentle Christmas music", "duration": "3-4 hours"},
               {"title": "Christmas Cooking Ambiance | Holiday Kitchen Sounds & Music", "visual": "baking cookies, Christmas kitchen, gingerbread", "genre": "holiday jazz + kitchen sounds", "duration": "2-3 hours"},
-              {"title": "Silent Night | {duration} of Peaceful Christmas Sleep Music", "visual": "starry night, nativity scene, gentle snow", "genre": "ambient Christmas, music box, soft choirs", "duration": "8-10 hours"}
+              {"title": "Silent Night | {duration} of Peaceful Christmas Sleep Music", "visual": "starry night, nativity scene, gentle snow", "genre": "ambient Christmas, music box, soft choirs", "duration": "8-10 hours"},
+              {"title": "Christmas Tree Glow | {duration} of Soft Holiday Piano", "visual": "close-up of tree ornaments, twinkling lights, soft bokeh", "genre": "solo piano, gentle strings, celesta", "duration": "3-4 hours"},
+              {"title": "Old Fashioned Christmas | {duration} of Vintage Holiday Classics Style", "visual": "vintage Christmas cards, classic decorations, toy train, nutcracker", "genre": "big band holiday style, crooner-era jazz (AI original)", "duration": "2-3 hours"}
             ],
             "upload_window": "November 15 - December 1"
           },
@@ -2122,39 +2168,209 @@
             "channels": ["rich_horror", "rich_music", "rich_nature"],
             "content": [
               {"title": "Haunted Mansion Ambiance | {duration} of Creepy Halloween Atmosphere", "visual": "haunted house interior, flickering candles, cobwebs, bats", "genre": "horror ambient, creepy music box, wind howling", "duration": "3-4 hours"},
-              {"title": "Halloween Night Sounds | Wolves, Wind & Eerie Music", "visual": "full moon, graveyard, fog, bare trees", "genre": "dark orchestral, wolf howls, thunder", "duration": "2-3 hours"}
+              {"title": "Halloween Night Sounds | Wolves, Wind & Eerie Music", "visual": "full moon, graveyard, fog, bare trees", "genre": "dark orchestral, wolf howls, thunder", "duration": "2-3 hours"},
+              {"title": "Witch's Cottage | {duration} of Potion Brewing & Dark Forest Ambiance", "visual": "bubbling cauldron, herbs hanging, dark forest outside, cats", "genre": "mystical ambient, subtle chimes, bubbling sounds", "duration": "3-4 hours"},
+              {"title": "Halloween Party Mix | {duration} of Spooky Dance Music", "visual": "jack-o-lanterns, costumes, cobweb decorations, purple lights", "genre": "dark EDM, spooky house, Halloween trap", "duration": "2-3 hours"}
             ],
             "upload_window": "October 1 - October 15"
           },
           "new_years": {
-            "channels": ["rich_music", "cumquat_motivation", "rich_lifestyle"],
+            "channels": ["rich_music", "cumquat_motivation", "rich_lifestyle", "rich_dance"],
             "content": [
               {"title": "New Year New You | {duration} of Motivational Music for {year}", "visual": "fireworks, sunrise, goal setting, fresh start imagery", "genre": "epic cinematic, uplifting orchestral", "duration": "2-3 hours"},
-              {"title": "NYE Party Mix | {duration} of Dance Music for New Year's Eve", "visual": "party lights, champagne, countdown, confetti", "genre": "house, EDM, party bangers", "duration": "3-4 hours"}
+              {"title": "NYE Party Mix | {duration} of Dance Music for New Year's Eve", "visual": "party lights, champagne, countdown, confetti", "genre": "house, EDM, party bangers", "duration": "3-4 hours"},
+              {"title": "New Year's Resolution Focus | {duration} of Productive Planning Music", "visual": "clean desk, new planner, fresh coffee, vision board", "genre": "lo-fi focus beats, ambient piano", "duration": "2-3 hours"}
             ],
             "upload_window": "December 15 - December 28"
           },
           "valentines": {
             "channels": ["rich_music", "eva_reyes", "rich_cooking"],
             "content": [
-              {"title": "Valentine's Day Jazz | {duration} of Romantic Dinner Music", "visual": "candlelit dinner, roses, wine, soft lighting", "genre": "smooth jazz, romantic piano, bossa nova", "duration": "2-3 hours"}
+              {"title": "Valentine's Day Jazz | {duration} of Romantic Dinner Music", "visual": "candlelit dinner, roses, wine, soft lighting", "genre": "smooth jazz, romantic piano, bossa nova", "duration": "2-3 hours"},
+              {"title": "Love Songs Instrumental | {duration} of Romantic Piano for Two", "visual": "couple silhouette, sunset, Paris, hearts", "genre": "romantic piano, gentle strings, soft guitar", "duration": "3-4 hours"},
+              {"title": "Self-Love Day | {duration} of Empowering Chill Music", "visual": "bubble bath, flowers for yourself, journaling, tea", "genre": "empowering ambient, gentle R&B instrumentals", "duration": "2-3 hours"}
             ],
             "upload_window": "February 1 - February 10"
           },
-          "summer": {
-            "channels": ["rich_music", "rich_travel", "rich_nature"],
+          "thanksgiving": {
+            "channels": ["rich_music", "rich_cooking", "rich_family", "rich_nature"],
             "content": [
-              {"title": "Summer Vibes Mix | {duration} of Tropical House & Beach Music", "visual": "beach sunset, palm trees, ocean waves, pool party", "genre": "tropical house, summer pop instrumentals", "duration": "2-3 hours"}
+              {"title": "Thanksgiving Dinner Music | {duration} of Warm Acoustic & Jazz", "visual": "turkey dinner table, autumn centerpiece, family gathering shots (stock)", "genre": "warm jazz, acoustic folk, gentle piano", "duration": "3-4 hours"},
+              {"title": "Thankful & Cozy | {duration} of Grateful Vibes & Fireplace", "visual": "fireplace, autumn leaves, gratitude journal, warm blankets", "genre": "acoustic guitar, soft piano, ambient warmth", "duration": "3-4 hours"},
+              {"title": "Thanksgiving Kitchen Ambiance | Cooking Sounds & Holiday Music", "visual": "kitchen prep, pie baking, oven glow, spices", "genre": "jazz + kitchen sounds + soft chatter", "duration": "2-3 hours"}
             ],
-            "upload_window": "May 15 - June 1"
+            "upload_window": "November 1 - November 15"
           },
-          "back_to_school": {
-            "channels": ["rich_education", "rich_music"],
+          "easter": {
+            "channels": ["rich_music", "rich_nature", "rich_family"],
             "content": [
-              {"title": "Back to School Study Music | {duration} for Focus & Productivity", "visual": "clean desk, notebooks, campus, library", "genre": "lo-fi study beats, ambient electronic", "duration": "3-4 hours"}
+              {"title": "Easter Morning | {duration} of Peaceful Spring Music & Bird Songs", "visual": "spring flowers, Easter eggs, garden, sunrise", "genre": "gentle piano, harp, bird sounds, choral ambient", "duration": "2-3 hours"},
+              {"title": "Easter Brunch Jazz | {duration} of Sunday Morning Music", "visual": "brunch table, pastries, mimosas, spring light", "genre": "Sunday jazz, bossa nova, light acoustic", "duration": "2-3 hours"}
             ],
-            "upload_window": "August 1 - August 20"
+            "upload_window": "March 15 - April 1"
+          },
+          "mothers_day": {
+            "channels": ["rich_music", "eva_reyes", "rich_family"],
+            "content": [
+              {"title": "For Mom | {duration} of Beautiful Piano Music for Mother's Day", "visual": "flowers, mother and child silhouettes, garden, soft light", "genre": "emotional piano, gentle strings, warm ambient", "duration": "2-3 hours"},
+              {"title": "Mother's Day Brunch | {duration} of Love & Gratitude Music", "visual": "breakfast in bed, flowers, handmade cards, sunny kitchen", "genre": "acoustic folk, soft pop instrumentals", "duration": "2-3 hours"}
+            ],
+            "upload_window": "April 25 - May 5"
+          },
+          "fathers_day": {
+            "channels": ["rich_music", "rich_family", "cumquat_motivation"],
+            "content": [
+              {"title": "For Dad | {duration} of Classic Rock & Blues Instrumentals", "visual": "workshop, tools, barbecue, fishing, father silhouette", "genre": "blues guitar, classic rock instrumentals, acoustic", "duration": "2-3 hours"},
+              {"title": "Father's Day BBQ Mix | {duration} of Grill & Chill Music", "visual": "barbecue, backyard, cold drinks, lawn chairs, sunset", "genre": "blues, country rock, classic summer vibes", "duration": "2-3 hours"}
+            ],
+            "upload_window": "June 1 - June 10"
+          },
+          "4th_of_july": {
+            "channels": ["rich_music", "rich_nature", "rich_family"],
+            "content": [
+              {"title": "4th of July Fireworks | {duration} of Patriotic Instrumental Music", "visual": "fireworks display, American flags, night sky, sparklers", "genre": "patriotic orchestral, Americana instrumental, marching bands style", "duration": "2-3 hours"},
+              {"title": "Summer BBQ & Fireworks | {duration} of Independence Day Party Mix", "visual": "backyard party, burgers, pool, red white blue decor", "genre": "country rock, classic rock, summer anthems style", "duration": "3-4 hours"}
+            ],
+            "upload_window": "June 20 - June 30"
+          },
+          "memorial_day_veterans_day": {
+            "channels": ["rich_music", "cumquat_motivation", "rich_history"],
+            "content": [
+              {"title": "Honoring Our Heroes | {duration} of Military Tribute Music", "visual": "flag at half-mast, military cemetery, dog tags, sunset silhouette", "genre": "patriotic orchestral, solo trumpet (taps style), emotional strings", "duration": "1-2 hours"},
+              {"title": "Veteran's Reflection | {duration} of Peaceful Tribute Ambiance", "visual": "memorial wall, wreaths, quiet reflection, American landscapes", "genre": "ambient piano, gentle strings, reflective", "duration": "2-3 hours"}
+            ],
+            "upload_window_memorial": "May 15 - May 25",
+            "upload_window_veterans": "October 25 - November 5"
+          },
+          "st_patricks_day": {
+            "channels": ["rich_music", "rich_cooking", "rich_dance"],
+            "content": [
+              {"title": "Irish Pub Session | {duration} of Celtic Music & Pub Ambiance", "visual": "cozy pub interior, pint of stout, fiddle, green decor", "genre": "Celtic folk, Irish fiddle, tin whistle, bodhran", "duration": "3-4 hours"}
+            ],
+            "upload_window": "March 1 - March 10"
+          },
+          "cinco_de_mayo": {
+            "channels": ["rich_music", "rich_cooking", "rich_dance"],
+            "content": [
+              {"title": "Fiesta Mix | {duration} of Mexican Party Music & Mariachi", "visual": "colorful papel picado, sombreros, tacos, margaritas", "genre": "mariachi style, Latin guitar, cumbia, regional", "duration": "2-3 hours"}
+            ],
+            "upload_window": "April 25 - May 1"
+          },
+          "black_friday_cyber_monday": {
+            "channels": ["rich_tech", "rich_reviews", "rich_business"],
+            "content": [
+              {"title": "Black Friday Shopping Focus | {duration} of Energizing Deal-Hunt Music", "visual": "shopping bags, price tags, tech products, countdown", "genre": "upbeat electronic, energizing lo-fi, focus beats", "duration": "2-3 hours"}
+            ],
+            "upload_window": "November 15 - November 25"
+          },
+          "super_bowl": {
+            "channels": ["rich_sports", "rich_music", "rich_cooking"],
+            "content": [
+              {"title": "Super Bowl Party Mix | {duration} of Game Day Pump-Up Music", "visual": "stadium lights, football, nachos, big screen, face paint", "genre": "hype music, stadium anthems, pump-up EDM", "duration": "3-4 hours"},
+              {"title": "Halftime Vibes | {duration} of Epic Performance Music", "visual": "concert stage, pyrotechnics, crowd, lights", "genre": "pop rock instrumentals, arena anthems", "duration": "1-2 hours"}
+            ],
+            "upload_window": "January 25 - February 5"
+          },
+          "graduation": {
+            "channels": ["rich_music", "rich_education", "cumquat_motivation", "rich_family"],
+            "content": [
+              {"title": "Graduation Day | {duration} of Proud & Emotional Celebration Music", "visual": "cap and gown, diplomas, confetti, families cheering, campus", "genre": "uplifting orchestral, proud piano, celebration", "duration": "1-2 hours"},
+              {"title": "You Made It | {duration} of Inspirational Music for Graduates", "visual": "sunrise, open road, achievement montage, future", "genre": "epic cinematic, motivational, triumphant", "duration": "1-2 hours"}
+            ],
+            "upload_window": "May 1 - May 15"
           }
+        },
+        "life_events": {
+          "wedding": {
+            "channels": ["rich_music", "rich_dance"],
+            "content": [
+              {"title": "Wedding Reception Music | {duration} of Elegant Dinner Jazz", "visual": "wedding venue, flowers, candles, champagne, rings", "genre": "smooth jazz, romantic piano, string quartet", "duration": "3-4 hours"},
+              {"title": "Wedding Dance Floor | {duration} of Love Songs & Party Mix", "visual": "first dance, dance floor lights, bouquet toss, celebration", "genre": "romantic to upbeat transition, pop dance, love songs style", "duration": "3-4 hours"},
+              {"title": "Wedding Ceremony | {duration} of Beautiful Processional Music", "visual": "aisle, flowers, arch, rings, vows, golden hour", "genre": "classical strings, harp, gentle piano", "duration": "1-2 hours"}
+            ]
+          },
+          "baby_nursery": {
+            "channels": ["rich_music", "rich_family", "rich_kids"],
+            "content": [
+              {"title": "Baby Sleep Music | {duration} of Gentle Lullabies for Newborns", "visual": "soft nursery, mobile spinning, stars, clouds, moonlight", "genre": "music box lullabies, gentle piano, soft pads", "duration": "8-10 hours"},
+              {"title": "Baby Shower Background Music | {duration} of Sweet & Gentle Vibes", "visual": "baby shower decor, pastel colors, gifts, balloons", "genre": "light acoustic, ukulele, gentle pop", "duration": "2-3 hours"},
+              {"title": "Nursery White Noise | {duration} of Soothing Sounds for Baby", "visual": "calm nursery, soft night light, sleeping baby animation", "genre": "white noise, heartbeat, gentle shushing, womb sounds", "duration": "10 hours"}
+            ]
+          },
+          "birthday": {
+            "channels": ["rich_music", "rich_family", "rich_kids"],
+            "content": [
+              {"title": "Birthday Party Mix | {duration} of Fun Celebration Music", "visual": "balloons, cake, confetti, party hats, streamers", "genre": "party pop, fun dance, celebration anthems", "duration": "2-3 hours"},
+              {"title": "Kids Birthday Party | {duration} of Fun Music for Children's Parties", "visual": "colorful decorations, bouncy castle, piñata, cupcakes", "genre": "playful, bouncy, kid-friendly instrumentals", "duration": "2-3 hours"},
+              {"title": "Elegant Birthday Dinner | {duration} of Classy Celebration Music", "visual": "fine dining, champagne, flowers, dim lighting", "genre": "jazz, bossa nova, sophisticated lounge", "duration": "2-3 hours"}
+            ]
+          },
+          "moving_new_home": {
+            "channels": ["rich_music", "rich_lifestyle", "rich_diy"],
+            "content": [
+              {"title": "New Home, New Start | {duration} of Fresh Beginnings Music", "visual": "empty rooms, sunlight through windows, first box opened, keys in hand", "genre": "uplifting acoustic, fresh indie, hopeful piano", "duration": "2-3 hours"},
+              {"title": "Unpacking & Organizing | {duration} of Productive Chill Beats", "visual": "boxes being unpacked, shelves being filled, home taking shape", "genre": "lo-fi beats, chill electronic, feel-good", "duration": "3-4 hours"}
+            ]
+          },
+          "retirement": {
+            "channels": ["rich_music", "rich_finance", "rich_lifestyle"],
+            "content": [
+              {"title": "Retirement Celebration | {duration} of Classic Jazz & Golden Years Music", "visual": "sunset beach, golf course, travel photos, garden", "genre": "classic jazz, smooth saxophone, piano lounge", "duration": "2-3 hours"}
+            ]
+          },
+          "funeral_memorial": {
+            "channels": ["rich_music"],
+            "content": [
+              {"title": "In Loving Memory | {duration} of Peaceful Memorial Music", "visual": "candles, flowers, gentle rain, sunset, dove", "genre": "gentle piano, soft strings, reflective ambient", "duration": "1-2 hours"},
+              {"title": "Celebration of Life | {duration} of Beautiful Remembrance Music", "visual": "photo frames, nature, light through clouds, peaceful garden", "genre": "uplifting piano, hopeful strings, warm ambient", "duration": "2-3 hours"}
+            ]
+          },
+          "date_night": {
+            "channels": ["rich_music", "rich_cooking"],
+            "content": [
+              {"title": "Date Night Jazz | {duration} of Romantic Evening Music", "visual": "candlelit table, wine glasses, city view, soft lighting", "genre": "smooth jazz, saxophone, romantic piano", "duration": "3-4 hours"},
+              {"title": "Cooking Together | {duration} of Romantic Kitchen Vibes", "visual": "couple cooking (silhouette), wine, pasta, laughter", "genre": "Italian café, bossa nova, light jazz", "duration": "2-3 hours"}
+            ]
+          },
+          "road_trip": {
+            "channels": ["rich_music", "rich_travel", "rich_cars"],
+            "content": [
+              {"title": "Road Trip Playlist | {duration} of Highway Driving Music", "visual": "open road, desert highway, mountains, sunset drive", "genre": "indie rock, classic rock style, Americana", "duration": "3-4 hours"},
+              {"title": "Night Drive | {duration} of Late Night Driving Synthwave", "visual": "neon city lights, rain on windshield, highway at night", "genre": "synthwave, retrowave, chillwave", "duration": "2-3 hours"},
+              {"title": "Scenic Country Drive | {duration} of Acoustic Road Trip Music", "visual": "rolling hills, farms, autumn trees, country roads", "genre": "acoustic folk, country, fingerpicked guitar", "duration": "2-3 hours"}
+            ]
+          },
+          "first_day_of_school": {
+            "channels": ["rich_education", "rich_family", "rich_kids"],
+            "content": [
+              {"title": "First Day of School | {duration} of Exciting & Encouraging Music", "visual": "backpack, school bus, notebooks, lockers, bright hallways", "genre": "upbeat indie, encouraging pop instrumentals", "duration": "1-2 hours"}
+            ]
+          }
+        },
+        "evergreen_moments": {
+          "note": "These have NO season \u2014 people search for them every single day of the year. Maximum passive income potential.",
+          "content": [
+            {"title": "Study With Me | {duration} of Focus Music for Deep Concentration", "visual": "clean desk, coffee, books, rain, soft lamp", "genre": "lo-fi beats, ambient piano, minimal electronic", "duration": "4-6 hours", "channels": ["rich_music", "rich_education"]},
+            {"title": "Sleep Music | {duration} of Deep Relaxation for Restful Sleep", "visual": "starry sky, moon, clouds, gentle waves", "genre": "ambient drone, soft pads, binaural beats", "duration": "8-10 hours", "channels": ["how_to_meditate", "rich_music"]},
+            {"title": "Work From Home | {duration} of Productive Background Music", "visual": "home office, laptop, coffee, plants, natural light", "genre": "chillhop, lo-fi, café jazz", "duration": "3-4 hours", "channels": ["rich_music", "rich_lifestyle", "rich_tech"]},
+            {"title": "Morning Coffee | {duration} of Gentle Wake-Up Music", "visual": "coffee being poured, sunrise, kitchen, newspaper", "genre": "acoustic morning, light jazz, soft piano", "duration": "1-2 hours", "channels": ["rich_music", "rich_cooking", "rich_lifestyle"]},
+            {"title": "Reading Ambiance | {duration} of Quiet Music for Book Lovers", "visual": "cozy reading nook, rain, fireplace, old books, tea", "genre": "classical ambient, soft piano, library silence + rain", "duration": "3-4 hours", "channels": ["rich_music", "rich_education"]},
+            {"title": "Cleaning & Organizing | {duration} of Upbeat Productive Music", "visual": "tidying up, sparkling surfaces, organized spaces", "genre": "upbeat pop instrumentals, feel-good indie", "duration": "2-3 hours", "channels": ["rich_music", "rich_lifestyle", "rich_diy"]},
+            {"title": "Rainy Day Indoors | {duration} of Rain Sounds & Cozy Music", "visual": "rain on window, blanket on couch, candles, book", "genre": "rain sounds + gentle piano + soft ambient", "duration": "4-6 hours", "channels": ["rich_nature", "rich_music"]},
+            {"title": "Sunday Morning | {duration} of Lazy Weekend Music", "visual": "breakfast in bed, sunlight, pajamas, fresh flowers", "genre": "bossa nova, light jazz, acoustic folk", "duration": "2-3 hours", "channels": ["rich_music", "rich_lifestyle"]},
+            {"title": "Late Night Coding | {duration} of Dark Mode Programming Music", "visual": "code on screen, dark room, RGB keyboard glow, dual monitors", "genre": "dark lo-fi, cyberpunk ambient, minimal techno", "duration": "3-4 hours", "channels": ["rich_music", "rich_tech", "how_to_use_ai"]},
+            {"title": "Dinner Party Background | {duration} of Elegant Evening Music", "visual": "dinner table set, wine, candles, friends gathering", "genre": "jazz, lounge, sophisticated instrumental", "duration": "3-4 hours", "channels": ["rich_music", "rich_cooking", "rich_food"]},
+            {"title": "Spa & Self-Care | {duration} of Relaxing Wellness Music", "visual": "spa stones, candles, essential oils, massage, water", "genre": "spa ambient, nature sounds, soft new age", "duration": "2-3 hours", "channels": ["how_to_meditate", "eva_reyes", "rich_beauty"]},
+            {"title": "Gardening in the Sun | {duration} of Peaceful Outdoor Music", "visual": "hands in soil, flowers, watering can, butterflies, sunshine", "genre": "acoustic folk, gentle country, bird sounds", "duration": "2-3 hours", "channels": ["rich_nature", "rich_lifestyle"]},
+            {"title": "Bath Time Relaxation | {duration} of Warm Soak Music", "visual": "bubble bath, candles, flower petals, steam, soft light", "genre": "ethereal ambient, gentle piano, water sounds", "duration": "1-2 hours", "channels": ["how_to_meditate", "eva_reyes"]},
+            {"title": "Journaling & Reflection | {duration} of Introspective Music", "visual": "open journal, pen, window light, tea, quiet room", "genre": "minimal piano, ambient, reflective strings", "duration": "1-2 hours", "channels": ["rich_mind", "eva_reyes", "how_to_meditate"]},
+            {"title": "Game Night Background | {duration} of Fun & Chill Board Game Music", "visual": "board games, card games, snacks, friends laughing", "genre": "playful jazz, light funk, quirky instrumentals", "duration": "2-3 hours", "channels": ["rich_music", "rich_family", "rich_comedy"]},
+            {"title": "Pet Cuddle Time | {duration} of Gentle Music for You & Your Pet", "visual": "sleeping dog, purring cat, cozy pet bed, gentle hands", "genre": "ultra-soft piano, music box, barely-there ambient", "duration": "2-3 hours", "channels": ["rich_pets", "rich_music"]},
+            {"title": "Yoga Flow | {duration} of Mindful Movement Music", "visual": "yoga poses, sunrise, nature, breathing, stretching", "genre": "world music, ambient, sitar, gentle percussion", "duration": "1-2 hours", "channels": ["rich_fitness", "how_to_meditate"]},
+            {"title": "Creative Studio Session | {duration} of Art & Design Background Music", "visual": "paint brushes, design screen, pottery, art studio", "genre": "art pop instrumentals, lo-fi, trip-hop", "duration": "3-4 hours", "channels": ["rich_design", "rich_music", "rich_photography"]},
+            {"title": "Focus Mode | {duration} of White Noise & Brown Noise for Concentration", "visual": "abstract flowing patterns, gentle color shifts", "genre": "white noise, brown noise, pink noise (no music)", "duration": "8-10 hours", "channels": ["rich_education", "how_to_meditate"]},
+            {"title": "Sunset Chill | {duration} of Golden Hour Vibes", "visual": "sunset timelapse, ocean, rooftop, silhouettes", "genre": "chillout, downtempo, sunset house", "duration": "2-3 hours", "channels": ["rich_music", "rich_travel", "rich_nature"]}
+          ]
         }
       },
       "copyright_compliance": {
