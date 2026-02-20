@@ -12,3 +12,6 @@ ebooks/
 portfolio/gallery/*.mp4
 portfolio/gallery/*.wav
 countdownHQ - Google Play package/
+video-pipeline/output/broll/
+video-pipeline/output/videos/
+video-pipeline/output/portraits/
