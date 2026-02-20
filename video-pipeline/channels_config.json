@@ -1821,6 +1821,132 @@
       "You won't believe what we found about {topic}."
     ]
   },
+  "emotion_engine": {
+    "description": "ElevenLabs v3 audio tag system for adding emotional expressiveness to voiceovers. Tags are injected into cleaned TTS text before sending to the API.",
+    "model_requirement": "eleven_multilingual_v2 or eleven_v3 (v3 has best audio tag support)",
+    "supported_tags": {
+      "emotions": ["[excited]", "[nervous]", "[frustrated]", "[sorrowful]", "[calm]", "[curious]", "[sarcastic]", "[mischievously]", "[crying]", "[angry]", "[cheerfully]", "[flatly]", "[deadpan]", "[playfully]", "[confident]", "[fearful]", "[disgusted]", "[awed]", "[tender]"],
+      "reactions": ["[sigh]", "[sighs]", "[laughs]", "[laughs harder]", "[wheezing]", "[gulps]", "[gasps]", "[exhales]", "[swallows]", "[clears throat]"],
+      "cognitive": ["[pauses]", "[hesitates]", "[stammers]", "[resigned tone]", "[trails off]"],
+      "delivery": ["[whispers]", "[shouts]", "[softly]", "[firmly]", "[slowly]", "[urgently]"]
+    },
+    "voice_emotion_profiles": {
+      "storyteller": {
+        "default_emotion": "calm authority with dramatic pauses",
+        "common_tags": ["[pauses]", "[whispers]", "[softly]", "[gasps]", "[sighs]", "[awed]"],
+        "avoid_tags": ["[laughs harder]", "[wheezing]", "[cheerfully]"],
+        "notes": "The storyteller voice works best with tension-building. Use [whispers] for reveals, [pauses] before key moments, ellipses for weight."
+      },
+      "neutral_male": {
+        "default_emotion": "confident and knowledgeable",
+        "common_tags": ["[excited]", "[curious]", "[pauses]", "[confident]", "[laughs]"],
+        "avoid_tags": ["[crying]", "[fearful]", "[whispers]"],
+        "notes": "Works best with enthusiastic delivery. Use [excited] for big reveals, [curious] for questions, CAPS for emphasis."
+      },
+      "calm_narrator": {
+        "default_emotion": "serene and measured",
+        "common_tags": ["[calm]", "[softly]", "[pauses]", "[exhales]", "[tender]"],
+        "avoid_tags": ["[shouts]", "[angry]", "[laughs harder]", "[sarcastic]"],
+        "notes": "Keep delivery gentle. Use [softly] and [calm] liberally. Ellipses create natural breathing pauses."
+      },
+      "energetic_male": {
+        "default_emotion": "high energy and excited",
+        "common_tags": ["[excited]", "[laughs]", "[gasps]", "[playfully]", "[shouts]"],
+        "avoid_tags": ["[sorrowful]", "[whispers]", "[resigned tone]"],
+        "notes": "Lean into excitement. Use [laughs] for humor, [shouts] for hype, exclamation marks for energy."
+      },
+      "friendly_casual": {
+        "default_emotion": "warm and approachable",
+        "common_tags": ["[laughs]", "[cheerfully]", "[excited]", "[curious]", "[playfully]"],
+        "avoid_tags": ["[angry]", "[disgusted]", "[deadpan]"],
+        "notes": "Keep it conversational. Use [laughs] and [cheerfully] to maintain warmth."
+      }
+    },
+    "niche_emotion_maps": {
+      "horror": {
+        "hook": ["[whispers]", "[pauses]"],
+        "build_tension": ["[softly]", "[pauses]", "..."],
+        "reveal": ["[gasps]", "[whispers]"],
+        "climax": ["[urgently]", "[fearful]"],
+        "resolution": ["[sighs]", "[calm]"],
+        "punctuation_style": "Heavy use of ellipses (...), rhetorical questions, CAPS for shock moments"
+      },
+      "psychology": {
+        "hook": ["[pauses]", "[curious]"],
+        "explanation": ["[calm]", "[confident]"],
+        "dark_reveal": ["[whispers]", "[pauses]"],
+        "example": ["[softly]", "[mischievously]"],
+        "defense_tip": ["[firmly]", "[confident]"],
+        "punctuation_style": "Strategic pauses before key insights, ellipses for dramatic effect"
+      },
+      "tech": {
+        "hook": ["[excited]"],
+        "product_intro": ["[curious]", "[excited]"],
+        "specs": ["[confident]"],
+        "verdict": ["[pauses]", "[excited]"],
+        "comparison": ["[curious]"],
+        "punctuation_style": "Exclamation marks for excitement, CAPS for standout features"
+      },
+      "ai_tutorial": {
+        "hook": ["[excited]", "[curious]"],
+        "step_intro": ["[confident]"],
+        "demo": ["[curious]"],
+        "result": ["[excited]", "[laughs]"],
+        "tip": ["[pauses]", "[firmly]"],
+        "punctuation_style": "Clear delivery, exclamation marks for results, CAPS for tool names"
+      },
+      "motivation": {
+        "hook": ["[firmly]", "[pauses]"],
+        "story": ["[softly]", "[tender]"],
+        "turning_point": ["[pauses]", "[awed]"],
+        "lesson": ["[confident]", "[firmly]"],
+        "call_to_action": ["[excited]", "[urgently]"],
+        "punctuation_style": "Short punchy sentences, ellipses for weight, CAPS for key words"
+      },
+      "meditation": {
+        "hook": ["[softly]", "[calm]"],
+        "guidance": ["[calm]", "[softly]", "[exhales]"],
+        "transition": ["[pauses]", "[exhales]"],
+        "closing": ["[tender]", "[calm]"],
+        "punctuation_style": "Long pauses (ellipses), gentle delivery, minimal exclamation marks"
+      },
+      "pets": {
+        "hook": ["[curious]", "[excited]"],
+        "info": ["[confident]"],
+        "cute_moment": ["[cheerfully]", "[laughs]", "[awed]"],
+        "warning": ["[pauses]", "[firmly]"],
+        "punctuation_style": "Warm and playful, exclamation marks for cute moments"
+      },
+      "finance": {
+        "hook": ["[pauses]", "[firmly]"],
+        "data": ["[confident]"],
+        "warning": ["[urgently]", "[pauses]"],
+        "advice": ["[confident]", "[calm]"],
+        "punctuation_style": "Authoritative delivery, strategic pauses before numbers"
+      },
+      "default": {
+        "hook": ["[pauses]"],
+        "body": ["[confident]"],
+        "reveal": ["[excited]"],
+        "closing": ["[cheerfully]"],
+        "punctuation_style": "Natural conversational flow"
+      }
+    },
+    "post_processing_rules": [
+      "Insert emotion tags at the START of sentences, not mid-sentence",
+      "Never stack more than one emotion tag per sentence",
+      "Use [pauses] before major reveals or list item transitions",
+      "Use ellipses (...) for natural breathing pauses instead of [pauses] in rapid sections",
+      "CAPITALIZE 1-2 key words per paragraph for natural emphasis",
+      "Match emotion intensity to voice profile — storyteller gets subtle tags, energetic gets bold ones",
+      "For horror/psychology: whisper the hook, build with calm, explode with urgency",
+      "For tech/AI: start curious, build excited, land confident",
+      "Never use emotion tags inside [VISUAL: ...] directions — those are stripped before TTS",
+      "Test with 1-2 tags per paragraph maximum — over-tagging sounds robotic"
+    ],
+    "gemini_prompt_addon": "IMPORTANT: Add ElevenLabs emotion audio tags to make the voiceover more expressive. Use tags like [whispers], [pauses], [excited], [curious], [gasps], [sighs], [confident], [softly], [firmly], [urgently] at the START of sentences to guide vocal delivery. Use ellipses (...) for dramatic pauses. Use CAPS for 1-2 key emphasis words per paragraph. Match the emotional arc: hook with intrigue, build tension/curiosity, deliver with confidence, close with energy. Maximum 1-2 tags per paragraph — don't over-tag.",
+    "integration_notes": "The gemini_prompt_addon should be appended to ALL script generation prompts. When scripts are cleaned for TTS, emotion tags [whispers], [excited], etc. should be PRESERVED (not stripped). Only [VISUAL: ...] and [CROSS-PROMO] markers get stripped. The emotion tags become part of the audio output via ElevenLabs v3."
+  },
   "ecosystem": {
     "niche_clusters": {
       "money_wealth": {

@@ -1,0 +1,112 @@
+```markdown
+# Channel: How to Use AI
+# Topic: ChatGPT Prompt Engineering: The Complete Beginner's Guide
+# Format: Tutorial
+# Words: ~1500
+# Est Duration: 12-15 minutes
+# Generated: 20260219_155540
+
+[SCENE START]
+
+**(Intro Music with upbeat, futuristic vibes. Animated channel logo: "How to Use AI")**
+
+**Narrator:** Hey everyone, and welcome back to How to Use AI! Are you ready to unlock the *true* potential of ChatGPT? Because let's face it, most people are leaving 90% of its power on the table. They're treating it like a glorified search engine, typing in basic questions and getting… well, basic results.
+
+[VISUAL: Screen recording showing a simple ChatGPT prompt like "Write a poem" followed by a generic output. Then, cut to a more complex prompt with a highly tailored output.]
+
+**Narrator:** The secret? It's all in the prompt. And today, we're diving deep into the art and science of *prompt engineering*. By the end of this video, you'll know how to craft prompts that transform ChatGPT from a simple chatbot into a powerful AI assistant. Let's get started!
+
+**(Transition to graphic: "What is Prompt Engineering?")**
+
+**Narrator:** So, what *is* prompt engineering? Simply put, it's the process of designing and refining your prompts to get the best possible results from large language models like ChatGPT. It's about understanding how these AI models think and communicating your needs in a way they can understand. Think of it like learning a new language – the language of AI.
+
+[VISUAL: Animated graphic showing a person talking to a computer, with gears and cogs representing prompt engineering translating the human's intent.]
+
+**Narrator:** Now, let's break down the anatomy of a perfect prompt. There are five key components:
+
+**(Transition to graphic: "Anatomy of a Perfect Prompt")**
+
+**Narrator:**
+*   **Role:** Who are you asking ChatGPT to be? A marketing expert? A historian? A software developer?
+*   **Context:** Provide background information and set the scene. What's the situation? What are the key details?
+*   **Task:** Clearly define what you want ChatGPT to do. What's the specific goal you want it to achieve?
+*   **Format:** Specify how you want the output to be presented. A list? A table? A blog post?
+*   **Constraints:** Set any limitations or rules. What should ChatGPT *not* do? What are the word count limits?
+
+[VISUAL: Each of the five components (Role, Context, Task, Format, Constraints) appear on screen one by one with a brief description and example.]
+
+**Narrator:** Let's put this into practice with some practical prompt frameworks. We'll look at five that you can start using *today*
+
+**(Transition to graphic: "Prompt Frameworks - Unlock ChatGPT's Potential")**
+
+**Narrator:**
+*   **1. The "Act As" Framework:** This is all about assigning a specific role to ChatGPT.
+
+[VISUAL: Split screen. Left side: "Write a description for a protein bar". Right side: "Act as a marketing expert specializing in health food. Write a compelling description for a protein bar targeting fitness enthusiasts." Highlight the difference in the prompts.]
+
+**Narrator:** Look at the difference between these prompts. One is generic, the other is targeted.
+
+[VISUAL: Side-by-side comparison of the outputs. The "Act As" prompt yields a more persuasive and engaging description.]
+
+**Narrator:** The "Act As" prompt provides context and direction, leading to a much better result.
+
+*   **2. The "Chain-of-Thought" Framework:** This is perfect for complex problems that require reasoning. You guide ChatGPT step-by-step.
+
+[VISUAL: Split screen. Left side: "What is the best strategy for increasing website traffic?". Right side: "First, identify the target audience. Second, research relevant keywords. Third, create engaging content. Fourth, optimize website for search engines. Fifth, promote content on social media. What is the best strategy for increasing website traffic?" Highlight the "First, Second, Third..." part.]
+
+**Narrator:** Instead of asking a broad question, break it down into smaller, more manageable steps.
+
+[VISUAL: Side-by-side comparison of the outputs. The Chain-of-Thought prompt provides a more structured and detailed response.]
+
+**Narrator:** This helps ChatGPT think through the problem logically and provide a more comprehensive answer.
+
+*   **3. The "Few-Shot Learning" Framework:** Provide a few examples of the desired output to guide ChatGPT.
+
+[VISUAL: Split screen. Left side: "Translate 'Hello, how are you?' into Spanish". Right side: "Translate the following phrases into Spanish: 'Hello, how are you?' - 'Hola, ¿cómo estás?' 'Good morning' - 'Buenos días'. Now translate: 'What is your name?'".]
+
+**Narrator:** By showing ChatGPT a couple of examples, you're teaching it the desired style and format.
+
+[VISUAL: Side-by-side comparison of the outputs. The Few-Shot Learning prompt produces a more accurate and contextually appropriate translation.]
+
+**Narrator:** This is especially useful for tasks like translation, code generation, and creative writing.
+
+*   **4. The "Question Refinement" Framework:** If you're not happy with the initial response, don't just give up. Refine your question.
+
+[VISUAL: Screen recording showing an initial ChatGPT response that's vague. Then, the user adds more specific details to the prompt and gets a better response.]
+
+**Narrator:** Add more context, specify the desired format, or clarify your goals. Iteration is key.
+
+*   **5. The "Output Evaluation" Framework:** This isn't about the prompt *itself*, but what you do with the output. Critically analyze what ChatGPT provides. Does it meet your needs? What's missing? What could be improved?
+
+[VISUAL: Example output from ChatGPT. The narrator points out specific areas that are good and areas that need improvement. Then, the prompt is adjusted based on the evaluation.]
+
+**Narrator:** Use this analysis to further refine your prompts and get even better results.
+
+**(Transition to graphic: "Common Prompt Engineering Mistakes")**
+
+**Narrator:** Now, let's talk about some common mistakes to avoid:
+
+*   **Being Too Vague:** The more specific you are, the better the results.
+*   **Ignoring Context:** Don't assume ChatGPT knows what you're talking about. Provide background information.
+*   **Failing to Specify Format:** Tell ChatGPT how you want the output to be presented.
+*   **Not Iterating:** Prompt engineering is an iterative process. Experiment and refine.
+*   **Expecting Perfection:** ChatGPT is a tool, not a magic wand. It still requires human oversight and editing.
+
+[VISUAL: Each mistake appears on screen with a simple animation and a brief explanation.]
+
+**(Transition to a neutral background)**
+
+**Narrator:** Mastering prompt engineering takes practice, but with these frameworks and tips, you're well on your way to unlocking the full power of ChatGPT. Remember to experiment, iterate, and most importantly, have fun!
+
+[CROSS-PROMO]
+
+**Narrator:** And hey, if you're looking to take your AI game even further, be sure to check out our sister channels! "RichTech" covers all the latest AI hardware, and "RichBusiness" explores how to leverage AI for business success. Links in the description below!
+
+**(Transition to outro screen)**
+
+**Narrator:** That's it for today's video. If you found this helpful, please give it a like, subscribe to the channel, and hit the notification bell so you don't miss our future AI tutorials. And as a special bonus, we've included a free prompt engineering cheat sheet in the description below. Thanks for watching, and we'll see you in the next video!
+
+**(Outro music fades in. End screen with social media links and channel branding.)**
+
+[SCENE END]
+```

@@ -17,7 +17,11 @@ Usage:
     python produce_video.py sfx "transition_whoosh"
     python produce_video.py upload ~/Downloads/video.mp4 --title "My Video" --pillar art
     python produce_video.py produce "Topic" --pillar art --format landscape
+    python produce_video.py produce "Topic" --pillar tech --skip-compose --no-music
     python produce_video.py thumbnail "Topic" --pillar art
+    python produce_video.py image broll --pillar tech --count 3 --model nano-banana
+    python produce_video.py image thumbnail "Topic" --text "GAME CHANGER" --model nano-banana-pro
+    python produce_video.py image models
     python produce_video.py setup-auth
 
 All API keys are read from the shopify-theme .env file.
@@ -29,6 +33,7 @@ import json
 import os
 import random
 import re
+import shutil
 import sys
 import textwrap
 import time
@@ -115,6 +120,7 @@ RETENTION_TACTICS = BRAND.get("retention_tactics", {})
 HEYGEN_GENERATE_URL = "https://api.heygen.com/v2/video/generate"
 HEYGEN_STATUS_URL = "https://api.heygen.com/v1/video_status.get"
 HEYGEN_AGENT_URL = "https://api.heygen.com/v1/video_agent/generate"
+HEYGEN_ASSET_UPLOAD_URL = "https://upload.heygen.com/v1/asset"
 
 # ElevenLabs endpoints
 ELEVENLABS_TTS_URL = "https://api.elevenlabs.io/v1/text-to-speech"
@@ -124,6 +130,20 @@ ELEVENLABS_SFX_URL = "https://api.elevenlabs.io/v1/sound-generation"
 # Music and SFX presets from brand config
 MUSIC_PRESETS = BRAND.get("music_presets", {})
 SFX_PRESETS = BRAND.get("sound_effects", {})
+
+# Composition settings from brand config
+_comp_cfg = BRAND.get("composition", {})
+COMP_MUSIC_VOLUME = _comp_cfg.get("background_music_volume", 0.15)
+COMP_BROLL_DURATION = _comp_cfg.get("broll_duration_each", 5)
+COMP_CROSSFADE = _comp_cfg.get("crossfade_duration", 0.5)
+COMP_TEXT_FONT = _comp_cfg.get("text_overlay_font", "Arial-Bold")
+COMP_TEXT_COLOR = _comp_cfg.get("text_overlay_color", "#FFFFFF")
+COMP_TEXT_BG = _comp_cfg.get("text_overlay_bg_color", "rgba(16, 25, 34, 0.7)")
+COMP_INTRO_DURATION = _comp_cfg.get("intro_card_duration", 3)
+COMP_OUTRO_DURATION = _comp_cfg.get("outro_card_duration", 5)
+
+# B-roll directory
+BROLL_DIR = PIPELINE_DIR / "broll"
 
 # Duration targets (approximate word counts -- ~150 words per minute for TTS)
 DURATION_WORD_TARGETS = {
@@ -162,6 +182,8 @@ def load_api_keys():
         "google_client_id": os.getenv("GOOGLE_CLIENT_ID"),
         "google_client_secret": os.getenv("GOOGLE_CLIENT_SECRET"),
         "youtube_channel_id": os.getenv("YOUTUBE_CHANNEL_ID"),
+        "gemini_api_key": os.getenv("GEMINI_API_KEY"),
+        "perplexity_api_key": os.getenv("PERPLEXITY_API_KEY"),
     }
 
     return keys
@@ -883,11 +905,140 @@ class HeyGenClient:
             "Accept": "application/json",
         }
 
+    def upload_audio(self, audio_path):
+        """
+        Upload an audio file to HeyGen's asset storage for lip-sync.
+
+        Args:
+            audio_path: Path to an .mp3 or .wav audio file.
+
+        Returns:
+            Asset URL string on success, None on failure.
+        """
+        audio_file = Path(audio_path)
+        if not audio_file.exists():
+            print(f"[HeyGen] Audio file not found: {audio_path}")
+            return None
+
+        content_type = "audio/mpeg" if audio_file.suffix == ".mp3" else "audio/wav"
+        size_mb = audio_file.stat().st_size / (1024 * 1024)
+        print(f"[HeyGen] Uploading audio asset: {audio_file.name} ({size_mb:.2f} MB)")
+
+        try:
+            with open(audio_file, "rb") as f:
+                resp = requests.post(
+                    HEYGEN_ASSET_UPLOAD_URL,
+                    headers={
+                        "X-Api-Key": self.api_key,
+                        "Content-Type": content_type,
+                    },
+                    data=f,
+                    timeout=120,
+                )
+                resp.raise_for_status()
+        except requests.RequestException as exc:
+            print(f"[HeyGen] Audio upload failed: {exc}")
+            if hasattr(exc, "response") and exc.response is not None:
+                print(f"[HeyGen] Response: {exc.response.text}")
+            return None
+
+        data = resp.json()
+        asset_url = data.get("data", {}).get("url") or data.get("url")
+        if not asset_url:
+            # Try alternate response formats
+            asset_url = data.get("data", {}).get("asset_url") or data.get("data", {}).get("file_url")
+
+        if asset_url:
+            print(f"[HeyGen] Audio asset uploaded: {asset_url[:80]}...")
+            return asset_url
+        else:
+            print(f"[HeyGen] Upload response (no URL found): {json.dumps(data, indent=2)}")
+            return None
+
+    def generate_video_with_audio(self, audio_path, title="video",
+                                  video_format="landscape", tone="professional",
+                                  test_mode=False):
+        """
+        Generate a lip-synced avatar video using pre-recorded audio.
+
+        This produces much more natural results than HeyGen's built-in TTS
+        because the audio comes from ElevenLabs voice clone.
+
+        Args:
+            audio_path: Path to .mp3 audio file (from ElevenLabs).
+            title: Used for the downloaded filename.
+            video_format: "landscape", "shorts", or "square".
+            tone: Tone (affects avatar emotion).
+            test_mode: If True, use HeyGen test mode.
+
+        Returns:
+            Path to the downloaded video file, or None on failure.
+        """
+        # Step 1: Upload audio to HeyGen
+        audio_url = self.upload_audio(audio_path)
+        if not audio_url:
+            print("[HeyGen] Cannot generate lip-sync video without audio upload.")
+            return None
+
+        # Step 2: Build single scene with audio mode
+        fmt = VIDEO_FORMATS.get(video_format, VIDEO_FORMATS["landscape"])
+        emotion = HEYGEN_EMOTION_BY_TONE.get(tone)
+
+        scene = self._make_scene(text=None, speed=None, emotion=emotion, audio_url=audio_url)
+
+        payload = {
+            "video_inputs": [scene],
+            "dimension": {
+                "width": fmt["width"],
+                "height": fmt["height"],
+            },
+            "test": test_mode,
+        }
+
+        if HEYGEN_CAPTION_ENABLED:
+            payload["caption"] = True
+
+        print(f"[HeyGen] Format: {video_format} ({fmt['width']}x{fmt['height']})")
+        print(f"[HeyGen] Mode: Audio lip-sync (ElevenLabs voice)")
+        if emotion:
+            print(f"[HeyGen] Emotion: {emotion}")
+        print(f"[HeyGen] Captions: {'ON' if HEYGEN_CAPTION_ENABLED else 'OFF'}")
+        print("[HeyGen] Submitting lip-sync video generation request...")
+
+        try:
+            resp = requests.post(
+                HEYGEN_GENERATE_URL,
+                headers=self.headers,
+                json=payload,
+                timeout=30,
+            )
+            resp.raise_for_status()
+        except requests.RequestException as exc:
+            print(f"[HeyGen] Request failed: {exc}")
+            if hasattr(exc, "response") and exc.response is not None:
+                print(f"[HeyGen] Response body: {exc.response.text}")
+            return None
+
+        data = resp.json()
+        if data.get("error"):
+            print(f"[HeyGen] API error: {data['error']}")
+            return None
+
+        video_id = data.get("data", {}).get("video_id")
+        if not video_id:
+            print(f"[HeyGen] No video_id in response: {json.dumps(data, indent=2)}")
+            return None
+
+        print(f"[HeyGen] Video ID: {video_id}")
+        print(f"[HeyGen] Polling for completion (max {self.MAX_POLL_TIME}s)...")
+
+        return self._poll_and_download(video_id, title)
+
     def generate_video(self, script_text, title="video",
                        video_format="landscape", tone="professional",
                        test_mode=False, is_shorts=False):
         """
-        Submit a video generation job to HeyGen.
+        Submit a video generation job to HeyGen (text-to-speech mode).
 
         Args:
             script_text: The plain-text script for TTS.
@@ -1003,14 +1154,22 @@ class HeyGenClient:
 
         return scenes if scenes else [self._make_scene(script_text[:MAX_SCENE_CHARS], speed, emotion)]
 
-    def _make_scene(self, text, speed, emotion=None, background=None):
-        """Create a single HeyGen scene dict with emotion and background."""
-        voice_config = {
-            "type": "text",
-            "input_text": text,
-            "voice_id": HEYGEN_VOICE_ID,
-            "speed": speed,
-        }
+    def _make_scene(self, text, speed, emotion=None, background=None, audio_url=None):
+        """Create a single HeyGen scene dict with text TTS or audio lip-sync."""
+        if audio_url:
+            # Audio lip-sync mode: avatar mouths along to pre-recorded audio
+            voice_config = {
+                "type": "audio",
+                "audio_url": audio_url,
+            }
+        else:
+            # Text-to-speech mode: HeyGen generates speech from text
+            voice_config = {
+                "type": "text",
+                "input_text": text,
+                "voice_id": HEYGEN_VOICE_ID,
+                "speed": speed,
+            }
         if emotion:
             voice_config["emotion"] = emotion
 
@@ -1340,7 +1499,7 @@ class ElevenLabsClient:
 class YouTubeUploader:
     """Handles YouTube video uploads via the YouTube Data API v3 with OAuth2."""
 
-    SCOPES = ["https://www.googleapis.com/auth/youtube.upload"]
+    SCOPES = ["https://www.googleapis.com/auth/youtube", "https://www.googleapis.com/auth/youtube.upload"]
     TOKEN_PATH = PIPELINE_DIR / "youtube_token.json"
     UPLOAD_URL = "https://www.googleapis.com/upload/youtube/v3/videos"
     MAX_RETRIES = 3
@@ -1569,6 +1728,726 @@ class YouTubeUploader:
         else:
             print(f"[YouTube] Upload response: {json.dumps(data, indent=2)}")
             return None
+
+
+# ---------------------------------------------------------------------------
+# B-Roll Management
+# ---------------------------------------------------------------------------
+
+class BRollManager:
+    """Manages a local library of B-roll video clips organized by content pillar."""
+
+    def __init__(self, broll_dir=None):
+        self.broll_dir = Path(broll_dir) if broll_dir else BROLL_DIR
+
+    def get_clips(self, pillar=None, count=3):
+        """
+        Get random B-roll clips for a content pillar.
+
+        Args:
+            pillar: Content pillar name (art, tech, business, etc.).
+            count: Number of clips to return.
+
+        Returns:
+            List of Path objects to video clips. May be empty if no clips exist.
+        """
+        search_dirs = []
+
+        if pillar:
+            pillar_dir = self.broll_dir / pillar
+            if pillar_dir.exists():
+                search_dirs.append(pillar_dir)
+
+        # Also check generic folder
+        generic_dir = self.broll_dir / "generic"
+        if generic_dir.exists():
+            search_dirs.append(generic_dir)
+
+        if not search_dirs:
+            return []
+
+        # Collect all video files
+        video_exts = {".mp4", ".mov", ".avi", ".mkv", ".webm"}
+        all_clips = []
+        for d in search_dirs:
+            for f in d.iterdir():
+                if f.is_file() and f.suffix.lower() in video_exts:
+                    all_clips.append(f)
+
+        if not all_clips:
+            return []
+
+        return random.sample(all_clips, min(count, len(all_clips)))
+
+    def list_clips(self, pillar=None):
+        """List all available B-roll clips, optionally filtered by pillar."""
+        if pillar:
+            target = self.broll_dir / pillar
+            if not target.exists():
+                return []
+            dirs = [target]
+        else:
+            dirs = [d for d in self.broll_dir.iterdir() if d.is_dir()]
+
+        video_exts = {".mp4", ".mov", ".avi", ".mkv", ".webm"}
+        clips = {}
+        for d in dirs:
+            pillar_name = d.name
+            pillar_clips = [f for f in d.iterdir() if f.is_file() and f.suffix.lower() in video_exts]
+            if pillar_clips:
+                clips[pillar_name] = pillar_clips
+
+        return clips
+
+    def has_clips(self, pillar=None):
+        """Check if any B-roll clips are available."""
+        return len(self.get_clips(pillar, count=1)) > 0
+
+
+# ---------------------------------------------------------------------------
+# Video Compositor (MoviePy-based)
+# ---------------------------------------------------------------------------
+
+class VideoCompositor:
+    """
+    Composites a final video from avatar footage, B-roll, text overlays,
+    and background music using MoviePy.
+    """
+
+    # Default intro/outro clip paths (set via brand_config or CLI)
+    ASSETS_DIR = PIPELINE_DIR / "assets"
+
+    def __init__(self, avatar_video_path, output_dir=None):
+        self.avatar_path = Path(avatar_video_path)
+        self.output_dir = Path(output_dir) if output_dir else DOWNLOADS_DIR
+        self._music_path = None
+        self._music_volume = COMP_MUSIC_VOLUME
+        self._broll_clips = []
+        self._broll_duration = COMP_BROLL_DURATION
+        self._text_overlays = []
+        self._intro_clip_path = None
+        self._outro_clip_path = None
+
+        # Auto-detect brand intro/outro from assets directory
+        # Priority: video clip > trimmed audio clips > full song
+        brand_intro_video = self.ASSETS_DIR / "brand_intro.mp4"
+        brand_intro_audio = self.ASSETS_DIR / "brand_intro_8s.mp3"
+        brand_outro_audio = self.ASSETS_DIR / "brand_outro_12s.mp3"
+
+        if brand_intro_video.exists():
+            self._intro_clip_path = brand_intro_video
+            self._outro_clip_path = brand_intro_video
+            print(f"[Compositor] Brand intro/outro video: {brand_intro_video.name}")
+        else:
+            if brand_intro_audio.exists():
+                self._intro_clip_path = brand_intro_audio
+                print(f"[Compositor] Brand intro: {brand_intro_audio.name}")
+            if brand_outro_audio.exists():
+                self._outro_clip_path = brand_outro_audio
+                print(f"[Compositor] Brand outro: {brand_outro_audio.name}")
+
+    def set_intro(self, clip_path):
+        """Set a custom intro clip (video or audio) to prepend."""
+        self._intro_clip_path = Path(clip_path) if clip_path else None
+        if self._intro_clip_path:
+            print(f"[Compositor] Intro clip: {self._intro_clip_path.name}")
+
+    def set_outro(self, clip_path):
+        """Set a custom outro clip (video or audio) to append."""
+        self._outro_clip_path = Path(clip_path) if clip_path else None
+        if self._outro_clip_path:
+            print(f"[Compositor] Outro clip: {self._outro_clip_path.name}")
+
+    def add_background_music(self, music_path, volume=None):
+        """Set background music track with optional volume override."""
+        self._music_path = Path(music_path)
+        if volume is not None:
+            self._music_volume = volume
+        print(f"[Compositor] Background music: {self._music_path.name} (volume: {self._music_volume})")
+
+    def add_broll(self, clips, duration_each=None):
+        """
+        Add B-roll clips to intercut with the avatar.
+
+        Args:
+            clips: List of file paths or Path objects to video clips.
+            duration_each: Seconds to show each B-roll clip.
+        """
+        if duration_each is not None:
+            self._broll_duration = duration_each
+        self._broll_clips = [Path(c) for c in clips if Path(c).exists()]
+        print(f"[Compositor] B-roll clips: {len(self._broll_clips)} ({self._broll_duration}s each)")
+
+    def add_text_overlay(self, text, position="bottom", start=0, duration=3, font_size=48):
+        """
+        Add a text overlay (lower-third, title card, etc.).
+
+        Args:
+            text: Text string to display.
+            position: "bottom", "top", or "center".
+            start: Start time in seconds.
+            duration: Duration in seconds.
+            font_size: Font size in pixels.
+        """
+        self._text_overlays.append({
+            "text": text,
+            "position": position,
+            "start": start,
+            "duration": duration,
+            "font_size": font_size,
+        })
+
+    def compose(self, output_title="final_video"):
+        """
+        Render the final composed video.
+
+        Steps:
+            1. Load avatar video as base track
+            2. If B-roll clips exist, insert them at evenly-spaced intervals
+            3. Layer text overlays at specified timestamps
+            4. Mix background music at low volume under voice audio
+            5. Export as MP4
+
+        Returns:
+            Path to the output video file, or None on failure.
+        """
+        try:
+            from moviepy import (
+                VideoFileClip, AudioFileClip, TextClip,
+                CompositeVideoClip, CompositeAudioClip,
+                concatenate_videoclips,
+            )
+        except ImportError:
+            try:
+                from moviepy.editor import (
+                    VideoFileClip, AudioFileClip, TextClip,
+                    CompositeVideoClip, CompositeAudioClip,
+                    concatenate_videoclips,
+                )
+            except ImportError:
+                print("[Compositor] moviepy not installed. Run: pip install moviepy")
+                return None
+
+        if not self.avatar_path.exists():
+            print(f"[Compositor] Avatar video not found: {self.avatar_path}")
+            return None
+
+        print(f"[Compositor] Loading avatar video: {self.avatar_path.name}")
+        avatar = VideoFileClip(str(self.avatar_path))
+        avatar_duration = avatar.duration
+
+        print(f"[Compositor] Avatar duration: {avatar_duration:.1f}s")
+
+        # --- B-roll intercutting ---
+        if self._broll_clips:
+            final_video = self._intercut_broll(avatar, VideoFileClip, concatenate_videoclips)
+        else:
+            final_video = avatar
+
+        # --- Text overlays ---
+        if self._text_overlays:
+            final_video = self._apply_text_overlays(final_video, TextClip, CompositeVideoClip)
+
+        # --- Background music mixing ---
+        if self._music_path and self._music_path.exists():
+            final_video = self._mix_background_music(final_video, AudioFileClip, CompositeAudioClip)
+
+        # --- Intro/Outro clips ---
+        if self._intro_clip_path or self._outro_clip_path:
+            final_video = self._attach_intro_outro(
+                final_video, VideoFileClip, AudioFileClip,
+                concatenate_videoclips, CompositeAudioClip,
+            )
+
+        # --- Export ---
+        safe_title = re.sub(r'[^\w\s-]', '', output_title).strip().replace(' ', '_')
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        output_path = self.output_dir / f"{safe_title}_composed_{timestamp}.mp4"
+
+        print(f"[Compositor] Rendering final video to {output_path}...")
+        final_video.write_videofile(
+            str(output_path),
+            codec="libx264",
+            audio_codec="aac",
+            fps=avatar.fps or 30,
+            logger="bar",
+        )
+
+        size_mb = output_path.stat().st_size / (1024 * 1024)
+        print(f"[Compositor] Final video: {output_path} ({size_mb:.1f} MB)")
+
+        # Cleanup
+        avatar.close()
+        final_video.close()
+
+        return str(output_path)
+
+    def _attach_intro_outro(self, video, VideoFileClip, AudioFileClip,
+                             concatenate_videoclips, CompositeAudioClip):
+        """Prepend intro clip and append outro clip to the main video."""
+        from moviepy import ColorClip
+        segments = []
+
+        for label, clip_path in [("Intro", self._intro_clip_path), ("Outro", self._outro_clip_path)]:
+            if not clip_path or not Path(clip_path).exists():
+                if label == "Intro":
+                    segments.append(("main", video))
+                continue
+
+            suffix = Path(clip_path).suffix.lower()
+            try:
+                if suffix in (".mp4", ".mov", ".avi", ".mkv", ".webm"):
+                    # Video file — resize to match main video dimensions
+                    clip = VideoFileClip(str(clip_path))
+                    clip = clip.resized((video.w, video.h))
+                    if label == "Intro":
+                        segments.append(("intro", clip))
+                        segments.append(("main", video))
+                    else:
+                        segments.append(("outro", clip))
+                    print(f"[Compositor] {label} video: {Path(clip_path).name} ({clip.duration:.1f}s)")
+
+                elif suffix in (".mp3", ".wav", ".m4a", ".aac"):
+                    # Audio-only — create a branded title card with the audio
+                    audio = AudioFileClip(str(clip_path))
+                    card = ColorClip(
+                        size=(video.w, video.h),
+                        color=(16, 25, 34),  # Brand dark background
+                        duration=audio.duration,
+                    )
+                    card = card.with_audio(audio)
+                    card = card.with_fps(video.fps or 30)
+                    if label == "Intro":
+                        segments.append(("intro", card))
+                        segments.append(("main", video))
+                    else:
+                        segments.append(("outro", card))
+                    print(f"[Compositor] {label} audio card: {Path(clip_path).name} ({audio.duration:.1f}s)")
+            except Exception as exc:
+                print(f"[Compositor] {label} clip failed: {exc}")
+                if label == "Intro" and ("main", video) not in segments:
+                    segments.append(("main", video))
+
+        # Ensure main video is included
+        if not any(s[0] == "main" for s in segments):
+            segments.append(("main", video))
+
+        ordered = [s[1] for s in segments]
+        if len(ordered) > 1:
+            return concatenate_videoclips(ordered, method="compose")
+        return video
+
+    def _intercut_broll(self, avatar, VideoFileClip, concatenate_videoclips):
+        """Insert B-roll clips at evenly-spaced intervals in the avatar video."""
+        num_broll = len(self._broll_clips)
+        avatar_duration = avatar.duration
+
+        # Calculate insertion points (evenly spaced)
+        interval = avatar_duration / (num_broll + 1)
+        segments = []
+        current_time = 0
+
+        for i, broll_path in enumerate(self._broll_clips):
+            insert_at = interval * (i + 1)
+
+            # Avatar segment before this B-roll
+            if insert_at > current_time:
+                seg = avatar.subclipped(current_time, min(insert_at, avatar_duration))
+                segments.append(seg)
+
+            # B-roll clip (trimmed to duration, resized to match avatar)
+            try:
+                broll = VideoFileClip(str(broll_path))
+                broll_dur = min(self._broll_duration, broll.duration)
+                broll = broll.subclipped(0, broll_dur)
+                broll = broll.resized((avatar.w, avatar.h))
+                # Remove B-roll's own audio (we keep avatar voice + music only)
+                broll = broll.with_effects([lambda c: c.without_audio()])
+                segments.append(broll)
+                print(f"[Compositor] B-roll #{i+1}: {broll_path.name} ({broll_dur:.1f}s)")
+            except Exception as exc:
+                print(f"[Compositor] B-roll #{i+1} failed: {exc}")
+
+            current_time = insert_at
+
+        # Remaining avatar footage after last B-roll
+        if current_time < avatar_duration:
+            segments.append(avatar.subclipped(current_time, avatar_duration))
+
+        if len(segments) > 1:
+            return concatenate_videoclips(segments, method="compose")
+        return avatar
+
+    def _apply_text_overlays(self, video, TextClip, CompositeVideoClip):
+        """Layer text overlays onto the video."""
+        clips = [video]
+
+        for overlay in self._text_overlays:
+            try:
+                pos_map = {
+                    "bottom": ("center", video.h - 100),
+                    "top": ("center", 50),
+                    "center": ("center", "center"),
+                }
+                position = pos_map.get(overlay["position"], ("center", "center"))
+
+                txt = TextClip(
+                    text=overlay["text"],
+                    font_size=overlay["font_size"],
+                    color=COMP_TEXT_COLOR,
+                    font="Arial",
+                    bg_color="black",
+                    size=(video.w - 100, None),
+                    text_align="center",
+                )
+                txt = txt.with_position(position)
+                txt = txt.with_start(overlay["start"])
+                txt = txt.with_duration(overlay["duration"])
+                clips.append(txt)
+                print(f"[Compositor] Text overlay: \"{overlay['text'][:40]}...\" at {overlay['start']}s")
+            except Exception as exc:
+                print(f"[Compositor] Text overlay failed: {exc}")
+
+        if len(clips) > 1:
+            return CompositeVideoClip(clips)
+        return video
+
+    def _mix_background_music(self, video, AudioFileClip, CompositeAudioClip):
+        """Mix background music at low volume under the video's existing audio."""
+        try:
+            music = AudioFileClip(str(self._music_path))
+
+            # Loop or trim music to match video duration
+            if music.duration < video.duration:
+                # Loop the music
+                loops_needed = int(video.duration / music.duration) + 1
+                from moviepy import concatenate_audioclips
+                music = concatenate_audioclips([music] * loops_needed)
+            music = music.subclipped(0, video.duration)
+
+            # Apply volume reduction
+            music = music.with_volume_scaled(self._music_volume)
+
+            if video.audio:
+                mixed = CompositeAudioClip([video.audio, music])
+                video = video.with_audio(mixed)
+                print(f"[Compositor] Background music mixed at {self._music_volume:.0%} volume")
+            else:
+                video = video.with_audio(music)
+                print(f"[Compositor] Background music added (no voice track to mix with)")
+
+        except ImportError:
+            # Fallback for older moviepy
+            try:
+                from moviepy.editor import concatenate_audioclips
+                music = AudioFileClip(str(self._music_path))
+                if music.duration < video.duration:
+                    loops_needed = int(video.duration / music.duration) + 1
+                    music = concatenate_audioclips([music] * loops_needed)
+                music = music.subclipped(0, video.duration)
+                music = music.volumex(self._music_volume)
+                if video.audio:
+                    mixed = CompositeAudioClip([video.audio, music])
+                    video = video.with_audio(mixed)
+                else:
+                    video = video.with_audio(music)
+            except Exception as exc:
+                print(f"[Compositor] Music mixing failed: {exc}")
+        except Exception as exc:
+            print(f"[Compositor] Music mixing failed: {exc}")
+
+        return video
+
+
+# ---------------------------------------------------------------------------
+# Image Generator  --  Gemini Nano Banana / Imagen for B-roll & thumbnails
+# ---------------------------------------------------------------------------
+
+class ImageGenerator:
+    """
+    Generates B-roll images and thumbnails using Google Gemini image models.
+    Supports Nano Banana (gemini-2.5-flash-image), Nano Banana Pro
+    (gemini-3-pro-image-preview), and Imagen 4 models.
+
+    COST NOTE: Image generation may consume API credits. All methods print
+    cost warnings before making API calls.
+    """
+
+    MODELS = {
+        "nano-banana": "gemini-2.5-flash-image",
+        "nano-banana-pro": "gemini-3-pro-image-preview",
+        "imagen-4": "imagen-4.0-generate-001",
+        "imagen-4-fast": "imagen-4.0-fast-generate-001",
+        "imagen-4-ultra": "imagen-4.0-ultra-generate-001",
+    }
+
+    DEFAULT_MODEL = "nano-banana"
+
+    # Pillar-specific prompt templates for B-roll generation
+    BROLL_PROMPTS = {
+        "art": [
+            "cinematic close-up of hands painting on a digital tablet, warm amber studio lighting, shallow depth of field, professional photography, 4K",
+            "wide shot of modern creative studio workspace with monitors showing colorful digital art, moody warm lighting, cinematic composition",
+            "close-up of art supplies and digital tools arranged on a dark desk, dramatic side lighting, editorial photography",
+            "overhead shot of a sketchbook with colorful illustrations next to a stylus and tablet, warm tones, lifestyle photography",
+        ],
+        "tech": [
+            "close-up of glowing code on a dark monitor screen, blue and amber light reflections, cinematic bokeh, 4K",
+            "futuristic minimal workspace with multiple screens showing dashboards and code, dark background, orange accent lighting, cinematic",
+            "close-up of a mechanical keyboard with ambient RGB lighting, shallow depth of field, moody tech aesthetic",
+            "abstract visualization of data flowing through circuits, dark background with amber and blue highlights, cinematic",
+        ],
+        "business": [
+            "cinematic shot of entrepreneur working at laptop in modern office, golden hour window light, shallow depth of field",
+            "flat lay of business tools on dark desk: laptop, notebook, coffee, phone with analytics, warm overhead lighting",
+            "close-up of hands typing on laptop with financial charts on screen, warm ambient lighting, professional photography",
+            "modern minimalist workspace with motivational elements, clean composition, warm natural lighting, editorial style",
+        ],
+        "wellness": [
+            "serene meditation scene with warm candlelight, minimal composition, calming earth tones, cinematic photography",
+            "close-up of hands in meditation pose, soft warm light, shallow depth of field, peaceful atmosphere",
+            "nature scene with morning sunlight through trees, peaceful trail, warm golden tones, cinematic landscape",
+            "minimalist wellness workspace with journal and tea, soft natural lighting, calm earth tone palette",
+        ],
+        "products": [
+            "product photography flat lay of art prints and apparel on dark textured surface, warm studio lighting, overhead shot, 4K",
+            "close-up of premium art print with visible texture and detail, dramatic side lighting, product photography",
+            "lifestyle shot of wall art in modern interior setting, warm ambient lighting, editorial home decor photography",
+            "creative flat lay of merchandise and packaging with brand elements, dark background, warm accent lighting",
+        ],
+        "generic": [
+            "cinematic abstract background with warm amber and dark blue tones, smooth gradient, 4K wallpaper",
+            "close-up of creative tools on a dark surface, dramatic lighting, shallow depth of field, editorial style",
+            "modern minimal desk setup from above, dark theme with warm accent lighting, lifestyle photography",
+        ],
+    }
+
+    def __init__(self, api_key):
+        self.api_key = api_key
+        self._client = None
+
+    def _get_client(self):
+        """Lazy-load the Gemini client."""
+        if self._client is None:
+            try:
+                from google import genai
+                self._client = genai.Client(api_key=self.api_key)
+            except ImportError:
+                import google.generativeai as genai
+                genai.configure(api_key=self.api_key)
+                self._client = genai
+        return self._client
+
+    def generate_broll(self, pillar="generic", count=3, model=None,
+                       custom_prompt=None, output_dir=None, confirm_cost=True):
+        """
+        Generate B-roll images for a content pillar.
+
+        Args:
+            pillar: Content pillar ID (art, tech, business, wellness, products, generic)
+            count: Number of images to generate (1-4)
+            model: Model key from MODELS dict (default: nano-banana)
+            custom_prompt: Override pillar prompts with a custom prompt
+            output_dir: Where to save images (default: broll/<pillar>/)
+            confirm_cost: Print cost warning before generating
+
+        Returns:
+            List of saved image file paths
+        """
+        model_key = model or self.DEFAULT_MODEL
+        model_id = self.MODELS.get(model_key, model_key)
+
+        if output_dir is None:
+            output_dir = BROLL_DIR / pillar
+        output_dir = Path(output_dir)
+        output_dir.mkdir(parents=True, exist_ok=True)
+
+        count = min(count, 4)
+
+        if confirm_cost:
+            print(f"[ImageGen] WARNING: About to generate {count} image(s) using {model_key}")
+            print(f"[ImageGen] Model: {model_id}")
+            print(f"[ImageGen] This may consume API credits on your Gemini account.")
+            print(f"[ImageGen] Proceed? (y/n) ", end="", flush=True)
+            answer = input().strip().lower()
+            if answer not in ("y", "yes"):
+                print("[ImageGen] Cancelled.")
+                return []
+
+        # Pick prompts
+        if custom_prompt:
+            prompts = [custom_prompt] * count
+        else:
+            pillar_prompts = self.BROLL_PROMPTS.get(pillar, self.BROLL_PROMPTS["generic"])
+            prompts = random.sample(pillar_prompts, min(count, len(pillar_prompts)))
+            # If we need more than available prompts, repeat
+            while len(prompts) < count:
+                prompts.append(random.choice(pillar_prompts))
+
+        saved_paths = []
+        client = self._get_client()
+        is_imagen = model_id.startswith("imagen-")
+
+        for i, prompt in enumerate(prompts):
+            print(f"[ImageGen] Generating image {i + 1}/{count}...")
+            print(f"[ImageGen] Prompt: {prompt[:80]}...")
+
+            try:
+                from google.genai import types
+
+                timestamp = int(time.time())
+                filename = f"broll_{pillar}_{timestamp}_{i + 1}.png"
+                filepath = output_dir / filename
+
+                if is_imagen:
+                    # Imagen models use generate_images API
+                    response = client.models.generate_images(
+                        model=model_id,
+                        prompt=prompt,
+                        config=types.GenerateImagesConfig(
+                            number_of_images=1,
+                        ),
+                    )
+                    if response.generated_images:
+                        response.generated_images[0].image.save(str(filepath))
+                    else:
+                        print(f"[ImageGen] No image returned for prompt {i + 1}")
+                        continue
+                else:
+                    # Nano Banana models use generate_content with IMAGE modality
+                    response = client.models.generate_content(
+                        model=model_id,
+                        contents=f"Generate an image: {prompt}",
+                        config=types.GenerateContentConfig(
+                            response_modalities=["TEXT", "IMAGE"],
+                        ),
+                    )
+                    image_saved = False
+                    for part in response.candidates[0].content.parts:
+                        if part.inline_data:
+                            with open(filepath, "wb") as f:
+                                f.write(part.inline_data.data)
+                            image_saved = True
+                            break
+                    if not image_saved:
+                        print(f"[ImageGen] No image returned for prompt {i + 1}")
+                        continue
+
+                size_kb = filepath.stat().st_size / 1024
+                print(f"[ImageGen] Saved: {filepath} ({size_kb:.0f} KB)")
+                saved_paths.append(filepath)
+
+            except Exception as exc:
+                print(f"[ImageGen] Generation failed for image {i + 1}: {exc}")
+
+        print(f"[ImageGen] Generated {len(saved_paths)}/{count} images")
+        return saved_paths
+
+    def generate_thumbnail(self, topic, pillar=None, text_overlay=None,
+                           model=None, output_dir=None, confirm_cost=True):
+        """
+        Generate a thumbnail image for a video.
+
+        Args:
+            topic: Video topic for prompt generation
+            pillar: Content pillar for style hints
+            text_overlay: Text to include in the image (YouTube thumbnail text)
+            model: Model key (default: nano-banana-pro for higher quality thumbnails)
+            output_dir: Save location (default: ~/Downloads)
+
+        Returns:
+            Path to saved thumbnail image, or None
+        """
+        model_key = model or "nano-banana-pro"
+        model_id = self.MODELS.get(model_key, model_key)
+
+        if output_dir is None:
+            output_dir = DOWNLOADS_DIR
+        output_dir = Path(output_dir)
+
+        # Build thumbnail prompt
+        brand_colors = "dark navy (#101922) background with orange (#e8941f) accents"
+        style = "YouTube thumbnail style, high contrast, bold, eye-catching, 16:9 aspect ratio"
+
+        if text_overlay:
+            prompt = (
+                f"{style}, {brand_colors}, featuring bold large text '{text_overlay}' "
+                f"as the focal point, related to {topic}, professional graphic design, 4K"
+            )
+        else:
+            prompt = (
+                f"{style}, {brand_colors}, cinematic visual related to {topic}, "
+                f"dramatic lighting, space for text overlay on the left side, 4K"
+            )
+
+        if confirm_cost:
+            print(f"[ImageGen] WARNING: About to generate 1 thumbnail image using {model_key}")
+            print(f"[ImageGen] This may consume API credits on your Gemini account.")
+            print(f"[ImageGen] Proceed? (y/n) ", end="", flush=True)
+            answer = input().strip().lower()
+            if answer not in ("y", "yes"):
+                print("[ImageGen] Cancelled.")
+                return None
+
+        print(f"[ImageGen] Generating thumbnail for: {topic}")
+        print(f"[ImageGen] Model: {model_id}")
+
+        try:
+            client = self._get_client()
+            from google.genai import types
+            is_imagen = model_id.startswith("imagen-")
+
+            safe_topic = re.sub(r'[^\w\s-]', '', topic).strip().replace(' ', '_')[:30]
+            timestamp = int(time.time())
+            filename = f"thumbnail_{safe_topic}_{timestamp}.png"
+            filepath = output_dir / filename
+
+            if is_imagen:
+                response = client.models.generate_images(
+                    model=model_id,
+                    prompt=prompt,
+                    config=types.GenerateImagesConfig(
+                        number_of_images=1,
+                    ),
+                )
+                if response.generated_images:
+                    response.generated_images[0].image.save(str(filepath))
+                else:
+                    print("[ImageGen] No thumbnail image returned")
+                    return None
+            else:
+                response = client.models.generate_content(
+                    model=model_id,
+                    contents=f"Generate an image: {prompt}",
+                    config=types.GenerateContentConfig(
+                        response_modalities=["TEXT", "IMAGE"],
+                    ),
+                )
+                image_saved = False
+                for part in response.candidates[0].content.parts:
+                    if part.inline_data:
+                        with open(filepath, "wb") as f:
+                            f.write(part.inline_data.data)
+                        image_saved = True
+                        break
+                if not image_saved:
+                    print("[ImageGen] No thumbnail image returned")
+                    return None
+
+            size_kb = filepath.stat().st_size / 1024
+            print(f"[ImageGen] Thumbnail saved: {filepath} ({size_kb:.0f} KB)")
+            return filepath
+
+        except Exception as exc:
+            print(f"[ImageGen] Thumbnail generation failed: {exc}")
+            return None
+
+    def list_models(self):
+        """List available image generation models."""
+        print("[ImageGen] Available models:")
+        for key, model_id in self.MODELS.items():
+            marker = " (default)" if key == self.DEFAULT_MODEL else ""
+            print(f"  {key}: {model_id}{marker}")
 
 
 # ---------------------------------------------------------------------------
@@ -2042,10 +2921,10 @@ def build_parser():
         help="Mark as YouTube Shorts",
     )
 
-    # -- produce ------------------------------------------------------------
+    # -- produce (V2 pipeline) -----------------------------------------------
     produce_parser = subparsers.add_parser(
         "produce",
-        help="Full pipeline: script -> video -> SEO -> upload (end-to-end)",
+        help="Full V2 pipeline: script -> ElevenLabs audio -> HeyGen lip-sync -> compose -> upload",
     )
     produce_parser.add_argument("topic", help="Video topic or title")
     add_common_args(produce_parser)
@@ -2063,6 +2942,56 @@ def build_parser():
         "--skip-upload", action="store_true",
         help="Skip YouTube upload (produce video + SEO only)",
     )
+    produce_parser.add_argument(
+        "--skip-compose", action="store_true",
+        help="Skip MoviePy composition (output raw HeyGen video)",
+    )
+    produce_parser.add_argument(
+        "--no-music", action="store_true",
+        help="Skip background music generation",
+    )
+    produce_parser.add_argument(
+        "--broll-dir",
+        type=str,
+        default=None,
+        help="Override B-roll clips directory (default: video-pipeline/broll/)",
+    )
+
+    # -- broll --------------------------------------------------------------
+    broll_parser = subparsers.add_parser(
+        "broll",
+        help="Manage the B-roll clip library (list, add, download)",
+    )
+    broll_sub = broll_parser.add_subparsers(dest="broll_action", required=True)
+
+    # broll list
+    broll_list_parser = broll_sub.add_parser("list", help="List all B-roll clips organized by pillar")
+    broll_list_parser.add_argument(
+        "--pillar",
+        choices=list(CONTENT_PILLARS.keys()) if CONTENT_PILLARS else None,
+        default=None,
+        help="Filter by content pillar",
+    )
+
+    # broll add
+    broll_add_parser = broll_sub.add_parser("add", help="Copy a video file into a pillar directory")
+    broll_add_parser.add_argument("file_path", help="Path to the video file to add")
+    broll_add_parser.add_argument(
+        "--pillar",
+        choices=list(CONTENT_PILLARS.keys()) if CONTENT_PILLARS else None,
+        required=True,
+        help="Content pillar directory to copy the clip into",
+    )
+
+    # broll download
+    broll_dl_parser = broll_sub.add_parser("download", help="Download a video from URL into a pillar directory")
+    broll_dl_parser.add_argument("url", help="Direct URL to the video file")
+    broll_dl_parser.add_argument(
+        "--pillar",
+        choices=list(CONTENT_PILLARS.keys()) if CONTENT_PILLARS else None,
+        required=True,
+        help="Content pillar directory to save the clip into",
+    )
 
     # -- thumbnail ----------------------------------------------------------
     thumbnail_parser = subparsers.add_parser(
@@ -2076,6 +3005,59 @@ def build_parser():
         default=None,
         help="Content pillar",
     )
+
+    # -- image (Gemini Nano Banana) -----------------------------------------
+    image_parser = subparsers.add_parser(
+        "image",
+        help="Generate images using Gemini (B-roll, thumbnails)",
+    )
+    image_sub = image_parser.add_subparsers(dest="image_action", required=True)
+
+    # image broll
+    image_broll_parser = image_sub.add_parser("broll", help="Generate B-roll images for a content pillar")
+    image_broll_parser.add_argument(
+        "--pillar",
+        choices=(list(CONTENT_PILLARS.keys()) + ["generic"]) if CONTENT_PILLARS else ["generic"],
+        default="generic",
+        help="Content pillar for style (default: generic)",
+    )
+    image_broll_parser.add_argument(
+        "--count", type=int, default=3,
+        help="Number of images to generate (1-4, default: 3)",
+    )
+    image_broll_parser.add_argument(
+        "--model",
+        choices=list(ImageGenerator.MODELS.keys()),
+        default=ImageGenerator.DEFAULT_MODEL,
+        help=f"Image model (default: {ImageGenerator.DEFAULT_MODEL})",
+    )
+    image_broll_parser.add_argument(
+        "--prompt", type=str, default=None,
+        help="Custom prompt (overrides pillar default prompts)",
+    )
+
+    # image thumbnail
+    image_thumb_parser = image_sub.add_parser("thumbnail", help="Generate a thumbnail image")
+    image_thumb_parser.add_argument("topic", help="Video topic")
+    image_thumb_parser.add_argument(
+        "--text", type=str, default=None,
+        help="Bold text overlay for the thumbnail",
+    )
+    image_thumb_parser.add_argument(
+        "--pillar",
+        choices=list(CONTENT_PILLARS.keys()) if CONTENT_PILLARS else None,
+        default=None,
+        help="Content pillar for style hints",
+    )
+    image_thumb_parser.add_argument(
+        "--model",
+        choices=list(ImageGenerator.MODELS.keys()),
+        default="nano-banana-pro",
+        help="Image model (default: nano-banana-pro for thumbnails)",
+    )
+
+    # image models
+    image_sub.add_parser("models", help="List available image generation models")
 
     # -- setup-auth ---------------------------------------------------------
     subparsers.add_parser(
@@ -2567,12 +3549,25 @@ def main():
         if not keys["heygen_api_key"]:
             print("[ERROR] HEYGEN_API_KEY not found in .env file.")
             sys.exit(1)
+        if not keys["elevenlabs_api_key"]:
+            print("[ERROR] ELEVENLABS_API_KEY not found in .env file.")
+            print("[ERROR] V2 pipeline requires ElevenLabs for natural voice audio.")
+            sys.exit(1)
 
         tone = resolve_tone(args)
         is_shorts = args.duration == "short" or args.video_format == "shorts"
         pillar = getattr(args, "pillar", None)
+        skip_compose = getattr(args, "skip_compose", False)
+        no_music = getattr(args, "no_music", False)
+        broll_dir_override = getattr(args, "broll_dir", None)
 
-        print(f"[Mode] FULL PIPELINE: Script -> Video -> SEO -> Upload")
+        total_steps = 6
+        if skip_compose:
+            total_steps = 4  # script, audio, video, SEO+upload
+        if no_music:
+            total_steps -= 1
+
+        print(f"[Mode] FULL PIPELINE V2: Script -> Audio -> Lip-Sync -> Music -> Compose -> Upload")
         print(f"[Topic] {args.topic}")
         print(f"[Tone] {tone}  |  [Duration] {args.duration}  |  [Format] {args.video_format}")
         if pillar:
@@ -2582,11 +3577,20 @@ def main():
             print("[Test Mode] ON")
         if args.skip_upload:
             print("[Upload] SKIPPED")
+        if skip_compose:
+            print("[Compose] SKIPPED (raw HeyGen video)")
+        if no_music:
+            print("[Music] SKIPPED")
         print()
 
+        step = 0
+
+        # ============================================================
         # Step 1: Generate script
+        # ============================================================
+        step += 1
         print("=" * 64)
-        print("  STEP 1/4: Generating Script")
+        print(f"  STEP {step}: Generating Script")
         print("=" * 64)
 
         writer = ScriptWriter(
@@ -2607,30 +3611,141 @@ def main():
             print(f"... ({script_data['metadata']['word_count']} words total)")
         print("-" * 40)
 
-        # Step 2: Generate video via HeyGen
+        # ============================================================
+        # Step 2: Generate voice audio via ElevenLabs
+        # ============================================================
+        step += 1
         print()
         print("=" * 64)
-        print("  STEP 2/4: Producing Video (HeyGen)")
+        print(f"  STEP {step}: Generating Voice Audio (ElevenLabs)")
+        print("=" * 64)
+
+        el_client = ElevenLabsClient(
+            api_key=keys["elevenlabs_api_key"],
+            voice_id=keys["elevenlabs_voice_id"],
+        )
+        audio_path = el_client.generate_audio(
+            text=script_data["annotated_text"],
+            title=args.topic,
+            tone=tone,
+        )
+
+        if not audio_path:
+            print("[WARN] ElevenLabs audio failed. Falling back to HeyGen TTS.")
+            audio_path = None
+
+        # ============================================================
+        # Step 3: Generate avatar video (lip-sync or TTS fallback)
+        # ============================================================
+        step += 1
+        print()
+        print("=" * 64)
+        if audio_path:
+            print(f"  STEP {step}: Producing Lip-Synced Avatar Video (HeyGen)")
+        else:
+            print(f"  STEP {step}: Producing Avatar Video (HeyGen TTS fallback)")
         print("=" * 64)
 
         heygen = HeyGenClient(keys["heygen_api_key"])
-        video_path = heygen.generate_video(
-            script_text=script_data["raw_text"],
-            title=args.topic,
-            video_format=args.video_format,
-            tone=tone,
-            test_mode=args.test,
-            is_shorts=is_shorts,
-        )
+
+        if audio_path:
+            # V2: Lip-sync mode with ElevenLabs audio
+            video_path = heygen.generate_video_with_audio(
+                audio_path=audio_path,
+                title=args.topic,
+                video_format=args.video_format,
+                tone=tone,
+                test_mode=args.test,
+            )
+        else:
+            # Fallback: HeyGen TTS mode (original behavior)
+            video_path = heygen.generate_video(
+                script_text=script_data["raw_text"],
+                title=args.topic,
+                video_format=args.video_format,
+                tone=tone,
+                test_mode=args.test,
+                is_shorts=is_shorts,
+            )
 
         if not video_path:
             print("[FAILED] Video generation failed. Pipeline stopped.")
             sys.exit(1)
 
-        # Step 3: Generate SEO metadata
+        # ============================================================
+        # Step 4: Generate background music (optional)
+        # ============================================================
+        music_path = None
+        if not no_music and not skip_compose:
+            step += 1
+            print()
+            print("=" * 64)
+            print(f"  STEP {step}: Generating Background Music (ElevenLabs)")
+            print("=" * 64)
+
+            # Pick music preset based on pillar
+            music_prompt = MUSIC_PRESETS.get(
+                f"{pillar}_tutorial" if pillar else "art_tutorial",
+                MUSIC_PRESETS.get("art_tutorial", "lo-fi chill instrumental background music")
+            )
+
+            music_path = el_client.generate_music(
+                prompt=music_prompt,
+                duration_ms=max(30000, script_data["metadata"]["estimated_seconds"] * 1000),
+                title=f"bgm_{args.topic[:30]}",
+            )
+
+            if not music_path:
+                print("[WARN] Music generation failed. Continuing without background music.")
+
+        # ============================================================
+        # Step 5: Compose final video (avatar + B-roll + music + text)
+        # ============================================================
+        final_video_path = video_path  # Default to raw HeyGen video
+
+        if not skip_compose:
+            step += 1
+            print()
+            print("=" * 64)
+            print(f"  STEP {step}: Compositing Final Video")
+            print("=" * 64)
+
+            compositor = VideoCompositor(video_path)
+
+            # Add background music
+            if music_path:
+                compositor.add_background_music(music_path)
+
+            # Add B-roll if available
+            broll_mgr = BRollManager(broll_dir_override)
+            broll_clips = broll_mgr.get_clips(pillar=pillar, count=3)
+            if broll_clips:
+                compositor.add_broll(broll_clips)
+            else:
+                print("[Compositor] No B-roll clips found. Avatar-only video.")
+
+            # Add intro text overlay (channel name + topic)
+            compositor.add_text_overlay(
+                text=f"Richard Abreu  |  {args.topic}",
+                position="bottom",
+                start=2,
+                duration=COMP_INTRO_DURATION,
+                font_size=36,
+            )
+
+            composed = compositor.compose(output_title=args.topic)
+            if composed:
+                final_video_path = composed
+            else:
+                print("[WARN] Composition failed. Using raw HeyGen video.")
+
+        # ============================================================
+        # Step N: Generate SEO metadata + Upload
+        # ============================================================
+        step += 1
         print()
         print("=" * 64)
-        print("  STEP 3/4: Generating SEO Metadata")
+        print(f"  STEP {step}: SEO Metadata + YouTube Upload")
         print("=" * 64)
 
         seo_gen = SEOGenerator(topic=args.topic, pillar=pillar, tone=tone)
@@ -2657,22 +3772,17 @@ def main():
         for i, text in enumerate(thumb_data["thumbnail_texts"], 1):
             print(f"  {i}. {text}")
 
-        # Step 4: Upload to YouTube
-        print()
-        print("=" * 64)
-        print("  STEP 4/4: Uploading to YouTube")
-        print("=" * 64)
-
+        # Upload to YouTube
         if args.skip_upload:
-            print("[Upload] Skipped (--skip-upload flag)")
+            print("\n[Upload] Skipped (--skip-upload flag)")
         elif not keys.get("google_client_id"):
-            print("[Upload] Skipped (no Google OAuth credentials)")
+            print("\n[Upload] Skipped (no Google OAuth credentials)")
         else:
             uploader = YouTubeUploader(keys["google_client_id"], keys["google_client_secret"])
             category_id = YouTubeUploader.CATEGORY_MAP.get(pillar, "22") if pillar else "22"
 
             video_id = uploader.upload(
-                video_path=video_path,
+                video_path=final_video_path,
                 title=best_title,
                 description=seo_data["description"],
                 tags=seo_data["tags"],
@@ -2687,14 +3797,102 @@ def main():
         # Print summary
         print()
         print("=" * 64)
-        print("  PIPELINE COMPLETE")
+        print("  PIPELINE V2 COMPLETE")
         print("=" * 64)
-        print(f"  Script:    {raw_path}")
-        print(f"  Annotated: {annotated_path}")
-        print(f"  Video:     {video_path}")
-        print(f"  SEO:       {seo_path}")
-        print(f"  Title:     {best_title}")
+        print(f"  Script:     {raw_path}")
+        print(f"  Annotated:  {annotated_path}")
+        if audio_path:
+            print(f"  Voice:      {audio_path}")
+        print(f"  Avatar:     {video_path}")
+        if music_path:
+            print(f"  Music:      {music_path}")
+        if final_video_path != video_path:
+            print(f"  Final:      {final_video_path}")
+        print(f"  SEO:        {seo_path}")
+        print(f"  Title:      {best_title}")
         print("=" * 64)
+
+    # -- Command: broll -----------------------------------------------------
+    elif args.command == "broll":
+        manager = BRollManager()
+
+        if args.broll_action == "list":
+            print("[BRoll] Listing clips...")
+            if args.pillar:
+                print(f"[BRoll] Filtering by pillar: {args.pillar}")
+            print()
+
+            clips = manager.list_clips(pillar=getattr(args, "pillar", None))
+            if not clips:
+                print("[BRoll] No clips found.")
+            else:
+                total = 0
+                for pillar_name, pillar_clips in sorted(clips.items()):
+                    print(f"  {pillar_name}/ ({len(pillar_clips)} clips)")
+                    for clip in sorted(pillar_clips, key=lambda c: c.name):
+                        size_mb = clip.stat().st_size / (1024 * 1024)
+                        print(f"    - {clip.name}  ({size_mb:.1f} MB)")
+                        total += 1
+                    print()
+                print(f"[BRoll] Total: {total} clip(s)")
+
+        elif args.broll_action == "add":
+            src = Path(args.file_path)
+            if not src.exists():
+                print(f"[BRoll] ERROR: File not found: {src}")
+                sys.exit(1)
+            if not src.is_file():
+                print(f"[BRoll] ERROR: Not a file: {src}")
+                sys.exit(1)
+
+            dest_dir = BROLL_DIR / args.pillar
+            dest_dir.mkdir(parents=True, exist_ok=True)
+            dest = dest_dir / src.name
+
+            print(f"[BRoll] Copying {src.name} -> {dest_dir}/")
+            shutil.copy2(str(src), str(dest))
+            print(f"[BRoll] Added: {dest}")
+
+        elif args.broll_action == "download":
+            dest_dir = BROLL_DIR / args.pillar
+            dest_dir.mkdir(parents=True, exist_ok=True)
+
+            # Extract filename from URL
+            url_path = args.url.split("?")[0]
+            filename = url_path.split("/")[-1]
+            if not filename or "." not in filename:
+                filename = f"broll_{args.pillar}_{int(time.time())}.mp4"
+            dest = dest_dir / filename
+
+            print(f"[BRoll] Downloading from: {args.url}")
+            print(f"[BRoll] Destination: {dest}")
+
+            try:
+                resp = requests.get(args.url, stream=True, timeout=120)
+                resp.raise_for_status()
+
+                total_size = int(resp.headers.get("content-length", 0))
+                downloaded = 0
+
+                with open(dest, "wb") as f:
+                    for chunk in resp.iter_content(chunk_size=8192):
+                        f.write(chunk)
+                        downloaded += len(chunk)
+                        if total_size:
+                            pct = (downloaded / total_size) * 100
+                            print(f"\r[BRoll] Progress: {pct:.0f}%", end="", flush=True)
+
+                if total_size:
+                    print()  # newline after progress
+
+                size_mb = dest.stat().st_size / (1024 * 1024)
+                print(f"[BRoll] Downloaded: {dest} ({size_mb:.1f} MB)")
+
+            except requests.RequestException as e:
+                print(f"[BRoll] ERROR: Download failed: {e}")
+                if dest.exists():
+                    dest.unlink()
+                sys.exit(1)
 
     # -- Command: thumbnail -------------------------------------------------
     elif args.command == "thumbnail":
@@ -2718,6 +3916,55 @@ def main():
         print(f"  Font size: {data['style_guide']['font_size']}")
         print(f"  Show face: {data['style_guide']['show_face']}")
         print(f"  Accent colors: {', '.join(data['style_guide']['accent_colors'])}")
+
+    # -- Command: image -----------------------------------------------------
+    elif args.command == "image":
+        gemini_key = keys.get("gemini_api_key")
+        if not gemini_key:
+            print("[ERROR] GEMINI_API_KEY not found in .env file.")
+            print("[ERROR] Add GEMINI_API_KEY=your_key to shopify-theme/.env")
+            sys.exit(1)
+
+        img_gen = ImageGenerator(api_key=gemini_key)
+
+        if args.image_action == "models":
+            img_gen.list_models()
+
+        elif args.image_action == "broll":
+            print(f"[Mode] B-roll image generation via Gemini")
+            print(f"[Pillar] {args.pillar}")
+            print(f"[Count] {args.count}")
+            print(f"[Model] {args.model}")
+            if args.prompt:
+                print(f"[Custom prompt] {args.prompt[:80]}...")
+            print()
+
+            paths = img_gen.generate_broll(
+                pillar=args.pillar,
+                count=args.count,
+                model=args.model,
+                custom_prompt=args.prompt,
+            )
+            if paths:
+                print()
+                print(f"[ImageGen] {len(paths)} image(s) saved to: {BROLL_DIR / args.pillar}/")
+
+        elif args.image_action == "thumbnail":
+            print(f"[Mode] AI thumbnail image generation via Gemini")
+            print(f"[Topic] {args.topic}")
+            print(f"[Model] {args.model}")
+            if args.text:
+                print(f"[Text overlay] {args.text}")
+            print()
+
+            path = img_gen.generate_thumbnail(
+                topic=args.topic,
+                pillar=getattr(args, "pillar", None),
+                text_overlay=args.text,
+                model=args.model,
+            )
+            if path:
+                print(f"\n[ImageGen] Thumbnail ready: {path}")
 
     # -- Command: setup-auth ------------------------------------------------
     elif args.command == "setup-auth":
