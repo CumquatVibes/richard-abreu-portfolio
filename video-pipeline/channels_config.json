@@ -1947,6 +1947,193 @@
     "gemini_prompt_addon": "IMPORTANT: Add ElevenLabs emotion audio tags to make the voiceover more expressive. Use tags like [whispers], [pauses], [excited], [curious], [gasps], [sighs], [confident], [softly], [firmly], [urgently] at the START of sentences to guide vocal delivery. Use ellipses (...) for dramatic pauses. Use CAPS for 1-2 key emphasis words per paragraph. Match the emotional arc: hook with intrigue, build tension/curiosity, deliver with confidence, close with energy. Maximum 1-2 tags per paragraph — don't over-tag.",
     "integration_notes": "The gemini_prompt_addon should be appended to ALL script generation prompts. When scripts are cleaned for TTS, emotion tags [whispers], [excited], etc. should be PRESERVED (not stripped). Only [VISUAL: ...] and [CROSS-PROMO] markers get stripped. The emotion tags become part of the audio output via ElevenLabs v3."
   },
+  "video_templates": {
+    "description": "Reusable video editing templates per niche. Each template defines pacing, transitions, color grading, text overlay styles, and Ken Burns effect parameters. New scripts slot into their channel's template — no starting from scratch.",
+    "templates": {
+      "dark_psychology": {
+        "channels": ["rich_mind"],
+        "segment_duration": 8,
+        "transition": "crossfade",
+        "transition_duration": 0.5,
+        "ken_burns_effects": ["zoom_in_center", "zoom_out_center", "pan_left", "pan_right", "zoom_corner_tl", "zoom_corner_br"],
+        "color_grade": "dark_moody",
+        "broll_prompt_prefix": "Cinematic 16:9 aspect ratio, dark moody aesthetic, high contrast, professional video B-roll shot.",
+        "broll_prompt_suffix": "Ultra-realistic, photographic quality, no text, no watermarks.",
+        "text_overlay": {
+          "font": "Montserrat-Bold",
+          "color": "#FFFFFF",
+          "shadow": true,
+          "position": "lower_third",
+          "show_key_points": true
+        },
+        "music": {
+          "style": "dark ambient, tension building",
+          "volume": 0.15,
+          "fade_in": 2,
+          "fade_out": 3
+        },
+        "hook_style": "Start with a provocative question or disturbing fact. Whisper delivery."
+      },
+      "horror_mystery": {
+        "channels": ["rich_horror", "rich_mystery", "rich_creepy"],
+        "segment_duration": 6,
+        "transition": "fade_black",
+        "transition_duration": 0.8,
+        "ken_burns_effects": ["zoom_in_center", "zoom_corner_tl", "zoom_corner_br"],
+        "color_grade": "desaturated_cold",
+        "broll_prompt_prefix": "Cinematic 16:9, horror atmosphere, desaturated colors, deep shadows, eerie lighting.",
+        "broll_prompt_suffix": "Photorealistic, unsettling, no text, no gore, psychological horror aesthetic.",
+        "text_overlay": {
+          "font": "Creepster",
+          "color": "#CC0000",
+          "shadow": true,
+          "position": "center",
+          "show_key_points": false
+        },
+        "music": {
+          "style": "horror ambient, suspense drones",
+          "volume": 0.2,
+          "fade_in": 3,
+          "fade_out": 5
+        },
+        "hook_style": "Start with a chilling statement. Long pause after hook."
+      },
+      "tech_ai": {
+        "channels": ["rich_tech", "how_to_use_ai", "rich_software"],
+        "segment_duration": 7,
+        "transition": "slide_left",
+        "transition_duration": 0.3,
+        "ken_burns_effects": ["zoom_in_center", "pan_left", "pan_right", "zoom_out_center"],
+        "color_grade": "clean_modern",
+        "broll_prompt_prefix": "Clean modern 16:9, tech aesthetic, neon accents, sleek minimalist design.",
+        "broll_prompt_suffix": "Professional product photography style, sharp focus, no text, no watermarks.",
+        "text_overlay": {
+          "font": "Inter-Bold",
+          "color": "#00D4FF",
+          "shadow": false,
+          "position": "lower_third",
+          "show_key_points": true
+        },
+        "music": {
+          "style": "upbeat electronic, corporate tech",
+          "volume": 0.12,
+          "fade_in": 1,
+          "fade_out": 2
+        },
+        "hook_style": "Start with a bold claim or surprising stat. Energetic delivery."
+      },
+      "pets_animals": {
+        "channels": ["rich_pets", "rich_aquarium"],
+        "segment_duration": 8,
+        "transition": "crossfade",
+        "transition_duration": 0.5,
+        "ken_burns_effects": ["zoom_in_center", "zoom_out_center", "pan_left", "pan_right"],
+        "color_grade": "warm_natural",
+        "broll_prompt_prefix": "Warm natural 16:9, soft lighting, friendly atmosphere, professional pet photography.",
+        "broll_prompt_suffix": "Photorealistic, heartwarming, cute, no text, no watermarks.",
+        "text_overlay": {
+          "font": "Nunito-Bold",
+          "color": "#FFD700",
+          "shadow": true,
+          "position": "lower_third",
+          "show_key_points": true
+        },
+        "music": {
+          "style": "light acoustic, happy background",
+          "volume": 0.1,
+          "fade_in": 1,
+          "fade_out": 2
+        },
+        "hook_style": "Start with a relatable pet owner question. Friendly, conversational tone."
+      },
+      "finance_wealth": {
+        "channels": ["rich_finance", "rich_crypto", "rich_business"],
+        "segment_duration": 7,
+        "transition": "crossfade",
+        "transition_duration": 0.4,
+        "ken_burns_effects": ["zoom_in_center", "zoom_out_center", "pan_left", "pan_right"],
+        "color_grade": "premium_dark",
+        "broll_prompt_prefix": "Premium 16:9, luxury aesthetic, dark background, gold accents, professional financial imagery.",
+        "broll_prompt_suffix": "Ultra-realistic, sophisticated, no text, no watermarks.",
+        "text_overlay": {
+          "font": "Playfair-Bold",
+          "color": "#C8A000",
+          "shadow": true,
+          "position": "lower_third",
+          "show_key_points": true
+        },
+        "music": {
+          "style": "corporate motivational, subtle piano",
+          "volume": 0.1,
+          "fade_in": 2,
+          "fade_out": 3
+        },
+        "hook_style": "Start with a money-related surprising fact or contrarian take."
+      },
+      "motivation_self_help": {
+        "channels": ["rich_motivation", "eva_reyes"],
+        "segment_duration": 8,
+        "transition": "crossfade",
+        "transition_duration": 0.6,
+        "ken_burns_effects": ["zoom_in_center", "zoom_out_center", "pan_left"],
+        "color_grade": "warm_cinematic",
+        "broll_prompt_prefix": "Cinematic 16:9, warm golden hour lighting, inspirational atmosphere, epic landscape.",
+        "broll_prompt_suffix": "Ultra-realistic, inspiring, no text, no watermarks.",
+        "text_overlay": {
+          "font": "Montserrat-Bold",
+          "color": "#FFFFFF",
+          "shadow": true,
+          "position": "center",
+          "show_key_points": true
+        },
+        "music": {
+          "style": "inspirational orchestral, uplifting piano",
+          "volume": 0.15,
+          "fade_in": 3,
+          "fade_out": 5
+        },
+        "hook_style": "Start with a powerful quote or life-changing realization."
+      }
+    },
+    "default_template": {
+      "segment_duration": 8,
+      "transition": "crossfade",
+      "transition_duration": 0.5,
+      "ken_burns_effects": ["zoom_in_center", "zoom_out_center", "pan_left", "pan_right"],
+      "color_grade": "neutral",
+      "broll_prompt_prefix": "Cinematic 16:9 aspect ratio, professional video B-roll shot.",
+      "broll_prompt_suffix": "Ultra-realistic, photographic quality, no text, no watermarks.",
+      "text_overlay": {
+        "font": "Inter-Bold",
+        "color": "#FFFFFF",
+        "shadow": true,
+        "position": "lower_third",
+        "show_key_points": true
+      },
+      "music": {
+        "style": "ambient background",
+        "volume": 0.1,
+        "fade_in": 2,
+        "fade_out": 3
+      },
+      "hook_style": "Start with a curiosity-driven question."
+    },
+    "production_best_practices": {
+      "hook": "First 3-5 seconds must create a curiosity gap. The viewer should NEED to keep watching.",
+      "pacing": "Visual change every 5-10 seconds. B-roll transitions, text popups, zoom cuts.",
+      "retention": "Pattern interrupts (sound effects, zoom cuts, text popups) every 15-20 seconds.",
+      "thumbnails": "Bold text + high contrast + emotional or curiosity gap. Title and thumbnail work together.",
+      "metadata": {
+        "title": "Include primary keyword naturally. Under 60 characters.",
+        "description": "Real paragraph with related keywords in first 2 lines. Links below.",
+        "tags": "Mix of broad and specific. 8-15 tags.",
+        "chapters": "Add timestamps for each section."
+      },
+      "posting_schedule": "1-2 videos per week per channel minimum. Consistency beats frequency.",
+      "evergreen_priority": "80% evergreen content (stays relevant), 20% trending (spikes views).",
+      "batch_workflow": "Write 4-5 scripts → Record all voiceovers → Generate all B-roll → Assemble all videos. Minimize context switching."
+    }
+  },
   "ecosystem": {
     "niche_clusters": {
       "money_wealth": {

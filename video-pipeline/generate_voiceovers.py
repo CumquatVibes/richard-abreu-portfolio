@@ -56,6 +56,7 @@ CHANNEL_VOICE = {
     "RichHorror": "storyteller",
     "RichMind": "storyteller",
     "HowToUseAI": "neutral_male",
+    "RichPets": "friendly_casual",
 }
 
 
@@ -95,12 +96,19 @@ def clean_script_for_tts(text):
         # Skip cross-promo markers
         if line.strip() == "[CROSS-PROMO]":
             continue
+        # Skip section timing headers like (Intro - 0:00 - 0:30)
+        if re.match(r'^\s*\(.*\d+:\d+.*\)\s*$', line):
+            continue
         # Remove markdown bold
         line = re.sub(r'\*\*(.*?)\*\*', r'\1', line)
         # Remove markdown italic
         line = re.sub(r'\*(.*?)\*', r'\1', line)
-        # Remove "Host:" prefix
-        line = re.sub(r'^Host:\s*', '', line.strip())
+        # Remove "Narrator:", "NARRATOR:", "Host:", "Voiceover:", "Speaker:" prefixes
+        line = re.sub(r'^(?:Narrator|NARRATOR|Host|HOST|Voiceover|VOICEOVER|Speaker|SPEAKER)\s*:\s*', '', line.strip())
+        # Remove stage directions in parentheses like (Deep, resonant voice) or (Calm, direct tone)
+        line = re.sub(r'\([A-Z][^)]{5,}\)', '', line)
+        # Clean up any double spaces left by removals
+        line = re.sub(r'  +', ' ', line).strip()
         # Skip empty bracket markers UNLESS they are emotion tags
         if line.strip().startswith("[") and line.strip().endswith("]"):
             if not is_emotion_tag(line):

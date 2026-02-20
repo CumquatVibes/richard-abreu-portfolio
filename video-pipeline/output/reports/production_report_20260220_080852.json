@@ -1,0 +1,430 @@
+{
+  "start_time": "2026-02-20T07:03:49.596967",
+  "videos": [
+    {
+      "name": "HowToUseAI_10_AI_Tools_That_Will_Save_You_10_Hours_Every_Week",
+      "channel": "HowToUseAI",
+      "script": "HowToUseAI_10_AI_Tools_That_Will_Save_You_10_Hours_Every_Week_20260219_155540",
+      "audio_size_kb": 6553.51171875,
+      "total_visuals": 12,
+      "generated_broll": 12,
+      "failed_broll": 0,
+      "status": "success",
+      "size_mb": 54.46921348571777,
+      "duration": 419.352381,
+      "assessment": {
+        "video": "HowToUseAI_10_AI_Tools_That_Will_Save_You_10_Hours_Every_Week",
+        "channel": "HowToUseAI",
+        "score": 90,
+        "max_score": 100,
+        "issues": [
+          "Slightly short (7.0 min)"
+        ],
+        "strengths": [
+          "Excellent B-roll coverage (12/12)",
+          "12 unique B-roll images \u2014 good visual variety",
+          "Good audio bitrate (125 kbps)",
+          "Good file size (54.5 MB) for YouTube upload"
+        ],
+        "improvements": [
+          "Ideal faceless video length is 8-12 min for ad mid-rolls"
+        ]
+      }
+    },
+    {
+      "name": "HowToUseAI_ChatGPT_Prompt_Engineering_The_Complete_Beginners_Guide",
+      "channel": "HowToUseAI",
+      "script": "HowToUseAI_ChatGPT_Prompt_Engineering_The_Complete_Beginners_Guide_20260219_155540",
+      "audio_size_kb": 4454.736328125,
+      "total_visuals": 12,
+      "generated_broll": 12,
+      "failed_broll": 0,
+      "status": "success",
+      "size_mb": 41.94829845428467,
+      "duration": 285.048163,
+      "assessment": {
+        "video": "HowToUseAI_ChatGPT_Prompt_Engineering_The_Complete_Beginners_Guide",
+        "channel": "HowToUseAI",
+        "score": 80,
+        "max_score": 100,
+        "issues": [
+          "Very short (4.8 min)"
+        ],
+        "strengths": [
+          "Excellent B-roll coverage (12/12)",
+          "12 unique B-roll images \u2014 good visual variety",
+          "Good audio bitrate (125 kbps)",
+          "Good file size (41.9 MB) for YouTube upload"
+        ],
+        "improvements": []
+      }
+    },
+    {
+      "name": "HowToUseAI_How_to_Build_an_AI_Automation_That_Makes_Money_While_You_Sleep",
+      "channel": "HowToUseAI",
+      "script": "HowToUseAI_How_to_Build_an_AI_Automation_That_Makes_Money_While_You_Sleep_20260219_155540",
+      "audio_size_kb": 10844.9404296875,
+      "total_visuals": 23,
+      "generated_broll": 23,
+      "failed_broll": 0,
+      "status": "success",
+      "size_mb": 108.05527782440186,
+      "duration": 693.998005,
+      "assessment": {
+        "video": "HowToUseAI_How_to_Build_an_AI_Automation_That_Makes_Money_While_You_Sleep",
+        "channel": "HowToUseAI",
+        "score": 100,
+        "max_score": 100,
+        "issues": [],
+        "strengths": [
+          "Excellent B-roll coverage (23/23)",
+          "Optimal duration (11.6 min) for algorithm",
+          "23 unique B-roll images \u2014 good visual variety",
+          "Good audio bitrate (125 kbps)",
+          "Good file size (108.1 MB) for YouTube upload"
+        ],
+        "improvements": []
+      }
+    },
+    {
+      "name": "RichHorror_3_true_horror_stories_that_will_keep_you_up_tonight",
+      "channel": "RichHorror",
+      "script": "RichHorror_3_true_horror_stories_that_will_keep_you_up_tonight_20260219_204954",
+      "audio_size_kb": 5723.3076171875,
+      "total_visuals": 14,
+      "generated_broll": 13,
+      "failed_broll": 1,
+      "status": "success",
+      "size_mb": 52.83156776428223,
+      "duration": 366.225125,
+      "assessment": {
+        "video": "RichHorror_3_true_horror_stories_that_will_keep_you_up_tonight",
+        "channel": "RichHorror",
+        "score": 90,
+        "max_score": 100,
+        "issues": [
+          "Slightly short (6.1 min)"
+        ],
+        "strengths": [
+          "Excellent B-roll coverage (13/14)",
+          "13 unique B-roll images \u2014 good visual variety",
+          "Good audio bitrate (125 kbps)",
+          "Good file size (52.8 MB) for YouTube upload"
+        ],
+        "improvements": [
+          "Ideal faceless video length is 8-12 min for ad mid-rolls"
+        ]
+      }
+    },
+    {
+      "name": "RichHorror_5_unsolved_mysteries_that_still_haunt_investigators",
+      "channel": "RichHorror",
+      "script": "RichHorror_5_unsolved_mysteries_that_still_haunt_investigators_20260219_204913",
+      "audio_size_kb": 6535.14453125,
+      "total_visuals": 17,
+      "generated_broll": 17,
+      "failed_broll": 0,
+      "status": "success",
+      "size_mb": 59.749183654785156,
+      "duration": 418.191383,
+      "assessment": {
+        "video": "RichHorror_5_unsolved_mysteries_that_still_haunt_investigators",
+        "channel": "RichHorror",
+        "score": 90,
+        "max_score": 100,
+        "issues": [
+          "Slightly short (7.0 min)"
+        ],
+        "strengths": [
+          "Excellent B-roll coverage (17/17)",
+          "17 unique B-roll images \u2014 good visual variety",
+          "Good audio bitrate (125 kbps)",
+          "Good file size (59.7 MB) for YouTube upload"
+        ],
+        "improvements": [
+          "Ideal faceless video length is 8-12 min for ad mid-rolls"
+        ]
+      }
+    },
+    {
+      "name": "RichHorror_the_most_haunted_places_on_earth_you_should_never_visit_alone",
+      "channel": "RichHorror",
+      "script": "RichHorror_the_most_haunted_places_on_earth_you_should_never_visit_alone_20260219_204933",
+      "audio_size_kb": 7475.14453125,
+      "total_visuals": 20,
+      "generated_broll": 18,
+      "failed_broll": 2,
+      "status": "success",
+      "size_mb": 72.51382637023926,
+      "duration": 478.331066,
+      "assessment": {
+        "video": "RichHorror_the_most_haunted_places_on_earth_you_should_never_visit_alone",
+        "channel": "RichHorror",
+        "score": 90,
+        "max_score": 100,
+        "issues": [
+          "Slightly short (8.0 min)"
+        ],
+        "strengths": [
+          "Excellent B-roll coverage (18/20)",
+          "18 unique B-roll images \u2014 good visual variety",
+          "Good audio bitrate (125 kbps)",
+          "Good file size (72.5 MB) for YouTube upload"
+        ],
+        "improvements": [
+          "Ideal faceless video length is 8-12 min for ad mid-rolls"
+        ]
+      }
+    },
+    {
+      "name": "RichMind_5_Body_Language_Signs_Someone_Is_Lying_to_Your_Face",
+      "channel": "RichMind",
+      "script": "RichMind_5_Body_Language_Signs_Someone_Is_Lying_to_Your_Face_20260219_155540",
+      "audio_size_kb": 7756.369140625,
+      "total_visuals": 12,
+      "generated_broll": 12,
+      "failed_broll": 0,
+      "status": "success",
+      "size_mb": 64.00300598144531,
+      "duration": 496.349751,
+      "assessment": {
+        "video": "RichMind_5_Body_Language_Signs_Someone_Is_Lying_to_Your_Face",
+        "channel": "RichMind",
+        "score": 100,
+        "max_score": 100,
+        "issues": [],
+        "strengths": [
+          "Excellent B-roll coverage (12/12)",
+          "Optimal duration (8.3 min) for algorithm",
+          "12 unique B-roll images \u2014 good visual variety",
+          "Good audio bitrate (125 kbps)",
+          "Good file size (64.0 MB) for YouTube upload"
+        ],
+        "improvements": []
+      }
+    },
+    {
+      "name": "RichMind_7_Dark_Psychology_Tricks_That_Manipulators_Use_on_You_Every_Day",
+      "channel": "RichMind",
+      "script": "RichMind_7_Dark_Psychology_Tricks_That_Manipulators_Use_on_You_Every_Day_20260219_155540",
+      "audio_size_kb": 8285.3486328125,
+      "total_visuals": 9,
+      "generated_broll": 9,
+      "failed_broll": 0,
+      "status": "success",
+      "size_mb": 67.7277193069458,
+      "duration": 530.204444,
+      "assessment": {
+        "video": "RichMind_7_Dark_Psychology_Tricks_That_Manipulators_Use_on_You_Every_Day",
+        "channel": "RichMind",
+        "score": 100,
+        "max_score": 100,
+        "issues": [],
+        "strengths": [
+          "Excellent B-roll coverage (9/9)",
+          "Optimal duration (8.8 min) for algorithm",
+          "9 unique B-roll images \u2014 good visual variety",
+          "Good audio bitrate (125 kbps)",
+          "Good file size (67.7 MB) for YouTube upload"
+        ],
+        "improvements": []
+      }
+    },
+    {
+      "name": "RichMind_Why_You_Cant_Stop_Overthinking_The_Psychology_Behind_It",
+      "channel": "RichMind",
+      "script": "RichMind_Why_You_Cant_Stop_Overthinking_The_Psychology_Behind_It_20260219_155540",
+      "audio_size_kb": 6030.2470703125,
+      "total_visuals": 0,
+      "generated_broll": 0,
+      "failed_broll": 0,
+      "status": "no_broll"
+    },
+    {
+      "name": "RichPets_5_Common_Pet_Health_Mistakes_Youre_Probably_Making",
+      "channel": "RichPets",
+      "script": "RichPets_5_Common_Pet_Health_Mistakes_Youre_Probably_Making_20260219_145545",
+      "audio_size_kb": 4335.14453125,
+      "total_visuals": 17,
+      "generated_broll": 17,
+      "failed_broll": 0,
+      "status": "success",
+      "size_mb": 42.144530296325684,
+      "duration": 277.385578,
+      "assessment": {
+        "video": "RichPets_5_Common_Pet_Health_Mistakes_Youre_Probably_Making",
+        "channel": "RichPets",
+        "score": 80,
+        "max_score": 100,
+        "issues": [
+          "Very short (4.6 min)"
+        ],
+        "strengths": [
+          "Excellent B-roll coverage (17/17)",
+          "17 unique B-roll images \u2014 good visual variety",
+          "Good audio bitrate (125 kbps)",
+          "Good file size (42.1 MB) for YouTube upload"
+        ],
+        "improvements": []
+      }
+    },
+    {
+      "name": "RichPets_5_Signs_Your_Dog_is_Secretly_Unhappy_And_How_to_Fix_It",
+      "channel": "RichPets",
+      "script": "RichPets_5_Signs_Your_Dog_is_Secretly_Unhappy_And_How_to_Fix_It_20260219_145524",
+      "audio_size_kb": 4982.4912109375,
+      "total_visuals": 12,
+      "generated_broll": 11,
+      "failed_broll": 1,
+      "status": "success",
+      "size_mb": 49.57792949676514,
+      "duration": 318.809977,
+      "assessment": {
+        "video": "RichPets_5_Signs_Your_Dog_is_Secretly_Unhappy_And_How_to_Fix_It",
+        "channel": "RichPets",
+        "score": 90,
+        "max_score": 100,
+        "issues": [
+          "Slightly short (5.3 min)"
+        ],
+        "strengths": [
+          "Excellent B-roll coverage (11/12)",
+          "11 unique B-roll images \u2014 good visual variety",
+          "Good audio bitrate (125 kbps)",
+          "Good file size (49.6 MB) for YouTube upload"
+        ],
+        "improvements": [
+          "Ideal faceless video length is 8-12 min for ad mid-rolls"
+        ]
+      }
+    },
+    {
+      "name": "RichPets_Top_7_Cat_Breeds_That_Act_Like_Dogs",
+      "channel": "RichPets",
+      "script": "RichPets_Top_7_Cat_Breeds_That_Act_Like_Dogs_20260219_145534",
+      "audio_size_kb": 5178.41015625,
+      "total_visuals": 18,
+      "generated_broll": 18,
+      "failed_broll": 0,
+      "status": "success",
+      "size_mb": 52.351362228393555,
+      "duration": 331.348753,
+      "assessment": {
+        "video": "RichPets_Top_7_Cat_Breeds_That_Act_Like_Dogs",
+        "channel": "RichPets",
+        "score": 90,
+        "max_score": 100,
+        "issues": [
+          "Slightly short (5.5 min)"
+        ],
+        "strengths": [
+          "Excellent B-roll coverage (18/18)",
+          "18 unique B-roll images \u2014 good visual variety",
+          "Good audio bitrate (125 kbps)",
+          "Good file size (52.4 MB) for YouTube upload"
+        ],
+        "improvements": [
+          "Ideal faceless video length is 8-12 min for ad mid-rolls"
+        ]
+      }
+    },
+    {
+      "name": "RichTech_5_Budget_Tech_Gadgets_Under_50_That_Are_Actually_Worth_It",
+      "channel": "RichTech",
+      "script": "RichTech_5_Budget_Tech_Gadgets_Under_50_That_Are_Actually_Worth_It_20260219_154931",
+      "audio_size_kb": 5307.3896484375,
+      "total_visuals": 8,
+      "generated_broll": 8,
+      "failed_broll": 0,
+      "status": "success",
+      "size_mb": 53.30179214477539,
+      "duration": 339.615057,
+      "assessment": {
+        "video": "RichTech_5_Budget_Tech_Gadgets_Under_50_That_Are_Actually_Worth_It",
+        "channel": "RichTech",
+        "score": 90,
+        "max_score": 100,
+        "issues": [
+          "Slightly short (5.7 min)"
+        ],
+        "strengths": [
+          "Excellent B-roll coverage (8/8)",
+          "8 unique B-roll images \u2014 good visual variety",
+          "Good audio bitrate (125 kbps)",
+          "Good file size (53.3 MB) for YouTube upload"
+        ],
+        "improvements": [
+          "Ideal faceless video length is 8-12 min for ad mid-rolls"
+        ]
+      }
+    },
+    {
+      "name": "RichTech_7_AI_Tools_That_Will_Replace_Your_Entire_Workflow_in_2026",
+      "channel": "RichTech",
+      "script": "RichTech_7_AI_Tools_That_Will_Replace_Your_Entire_Workflow_in_2026_20260219_154931",
+      "audio_size_kb": 5720.451171875,
+      "total_visuals": 9,
+      "generated_broll": 9,
+      "failed_broll": 0,
+      "status": "success",
+      "size_mb": 60.526201248168945,
+      "duration": 366.039365,
+      "assessment": {
+        "video": "RichTech_7_AI_Tools_That_Will_Replace_Your_Entire_Workflow_in_2026",
+        "channel": "RichTech",
+        "score": 90,
+        "max_score": 100,
+        "issues": [
+          "Slightly short (6.1 min)"
+        ],
+        "strengths": [
+          "Excellent B-roll coverage (9/9)",
+          "9 unique B-roll images \u2014 good visual variety",
+          "Good audio bitrate (125 kbps)",
+          "Good file size (60.5 MB) for YouTube upload"
+        ],
+        "improvements": [
+          "Ideal faceless video length is 8-12 min for ad mid-rolls"
+        ]
+      }
+    },
+    {
+      "name": "RichTech_Why_Everyone_Is_Wrong_About_the_New_iPhone",
+      "channel": "RichTech",
+      "script": "RichTech_Why_Everyone_Is_Wrong_About_the_New_iPhone_20260219_154931",
+      "audio_size_kb": 6263.3076171875,
+      "total_visuals": 9,
+      "generated_broll": 9,
+      "failed_broll": 0,
+      "status": "success",
+      "size_mb": 62.71592044830322,
+      "duration": 400.776417,
+      "assessment": {
+        "video": "RichTech_Why_Everyone_Is_Wrong_About_the_New_iPhone",
+        "channel": "RichTech",
+        "score": 90,
+        "max_score": 100,
+        "issues": [
+          "Slightly short (6.7 min)"
+        ],
+        "strengths": [
+          "Excellent B-roll coverage (9/9)",
+          "9 unique B-roll images \u2014 good visual variety",
+          "Good audio bitrate (125 kbps)",
+          "Good file size (62.7 MB) for YouTube upload"
+        ],
+        "improvements": [
+          "Ideal faceless video length is 8-12 min for ad mid-rolls"
+        ]
+      }
+    }
+  ],
+  "total_broll_generated": 182,
+  "total_broll_failed": 4,
+  "total_videos_assembled": 14,
+  "lessons_learned": [
+    "Ideal faceless video length is 8-12 min for ad mid-rolls"
+  ],
+  "api_rate_limits_hit": 0,
+  "end_time": "2026-02-20T08:08:52.509256"
+}

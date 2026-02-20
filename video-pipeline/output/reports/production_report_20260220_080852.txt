@@ -1,0 +1,197 @@
+OVERNIGHT PRODUCTION REPORT
+============================================================
+Started:  2026-02-20T07:03:49.596967
+Finished: 2026-02-20T08:08:52.509256
+
+Videos assembled: 14
+B-roll generated: 182
+B-roll failed:    4
+Rate limits hit:  0
+
+VIDEO DETAILS:
+────────────────────────────────────────────────────────────
+
+HowToUseAI: HowToUseAI_10_AI_Tools_That_Will_Save_You_10_Hours_Every_Week
+  Status: success
+  Size: 54.5 MB
+  Duration: 7.0 min
+  Visuals: 12/12
+  Quality Score: 90/100
+    + Excellent B-roll coverage (12/12)
+    + 12 unique B-roll images — good visual variety
+    + Good audio bitrate (125 kbps)
+    + Good file size (54.5 MB) for YouTube upload
+    - Slightly short (7.0 min)
+    > Ideal faceless video length is 8-12 min for ad mid-rolls
+
+HowToUseAI: HowToUseAI_ChatGPT_Prompt_Engineering_The_Complete_Beginners_Guide
+  Status: success
+  Size: 41.9 MB
+  Duration: 4.8 min
+  Visuals: 12/12
+  Quality Score: 80/100
+    + Excellent B-roll coverage (12/12)
+    + 12 unique B-roll images — good visual variety
+    + Good audio bitrate (125 kbps)
+    + Good file size (41.9 MB) for YouTube upload
+    - Very short (4.8 min)
+
+HowToUseAI: HowToUseAI_How_to_Build_an_AI_Automation_That_Makes_Money_While_You_Sleep
+  Status: success
+  Size: 108.1 MB
+  Duration: 11.6 min
+  Visuals: 23/23
+  Quality Score: 100/100
+    + Excellent B-roll coverage (23/23)
+    + Optimal duration (11.6 min) for algorithm
+    + 23 unique B-roll images — good visual variety
+    + Good audio bitrate (125 kbps)
+    + Good file size (108.1 MB) for YouTube upload
+
+RichHorror: RichHorror_3_true_horror_stories_that_will_keep_you_up_tonight
+  Status: success
+  Size: 52.8 MB
+  Duration: 6.1 min
+  Visuals: 13/14
+  Quality Score: 90/100
+    + Excellent B-roll coverage (13/14)
+    + 13 unique B-roll images — good visual variety
+    + Good audio bitrate (125 kbps)
+    + Good file size (52.8 MB) for YouTube upload
+    - Slightly short (6.1 min)
+    > Ideal faceless video length is 8-12 min for ad mid-rolls
+
+RichHorror: RichHorror_5_unsolved_mysteries_that_still_haunt_investigators
+  Status: success
+  Size: 59.7 MB
+  Duration: 7.0 min
+  Visuals: 17/17
+  Quality Score: 90/100
+    + Excellent B-roll coverage (17/17)
+    + 17 unique B-roll images — good visual variety
+    + Good audio bitrate (125 kbps)
+    + Good file size (59.7 MB) for YouTube upload
+    - Slightly short (7.0 min)
+    > Ideal faceless video length is 8-12 min for ad mid-rolls
+
+RichHorror: RichHorror_the_most_haunted_places_on_earth_you_should_never_visit_alone
+  Status: success
+  Size: 72.5 MB
+  Duration: 8.0 min
+  Visuals: 18/20
+  Quality Score: 90/100
+    + Excellent B-roll coverage (18/20)
+    + 18 unique B-roll images — good visual variety
+    + Good audio bitrate (125 kbps)
+    + Good file size (72.5 MB) for YouTube upload
+    - Slightly short (8.0 min)
+    > Ideal faceless video length is 8-12 min for ad mid-rolls
+
+RichMind: RichMind_5_Body_Language_Signs_Someone_Is_Lying_to_Your_Face
+  Status: success
+  Size: 64.0 MB
+  Duration: 8.3 min
+  Visuals: 12/12
+  Quality Score: 100/100
+    + Excellent B-roll coverage (12/12)
+    + Optimal duration (8.3 min) for algorithm
+    + 12 unique B-roll images — good visual variety
+    + Good audio bitrate (125 kbps)
+    + Good file size (64.0 MB) for YouTube upload
+
+RichMind: RichMind_7_Dark_Psychology_Tricks_That_Manipulators_Use_on_You_Every_Day
+  Status: success
+  Size: 67.7 MB
+  Duration: 8.8 min
+  Visuals: 9/9
+  Quality Score: 100/100
+    + Excellent B-roll coverage (9/9)
+    + Optimal duration (8.8 min) for algorithm
+    + 9 unique B-roll images — good visual variety
+    + Good audio bitrate (125 kbps)
+    + Good file size (67.7 MB) for YouTube upload
+
+RichMind: RichMind_Why_You_Cant_Stop_Overthinking_The_Psychology_Behind_It
+  Status: no_broll
+
+RichPets: RichPets_5_Common_Pet_Health_Mistakes_Youre_Probably_Making
+  Status: success
+  Size: 42.1 MB
+  Duration: 4.6 min
+  Visuals: 17/17
+  Quality Score: 80/100
+    + Excellent B-roll coverage (17/17)
+    + 17 unique B-roll images — good visual variety
+    + Good audio bitrate (125 kbps)
+    + Good file size (42.1 MB) for YouTube upload
+    - Very short (4.6 min)
+
+RichPets: RichPets_5_Signs_Your_Dog_is_Secretly_Unhappy_And_How_to_Fix_It
+  Status: success
+  Size: 49.6 MB
+  Duration: 5.3 min
+  Visuals: 11/12
+  Quality Score: 90/100
+    + Excellent B-roll coverage (11/12)
+    + 11 unique B-roll images — good visual variety
+    + Good audio bitrate (125 kbps)
+    + Good file size (49.6 MB) for YouTube upload
+    - Slightly short (5.3 min)
+    > Ideal faceless video length is 8-12 min for ad mid-rolls
+
+RichPets: RichPets_Top_7_Cat_Breeds_That_Act_Like_Dogs
+  Status: success
+  Size: 52.4 MB
+  Duration: 5.5 min
+  Visuals: 18/18
+  Quality Score: 90/100
+    + Excellent B-roll coverage (18/18)
+    + 18 unique B-roll images — good visual variety
+    + Good audio bitrate (125 kbps)
+    + Good file size (52.4 MB) for YouTube upload
+    - Slightly short (5.5 min)
+    > Ideal faceless video length is 8-12 min for ad mid-rolls
+
+RichTech: RichTech_5_Budget_Tech_Gadgets_Under_50_That_Are_Actually_Worth_It
+  Status: success
+  Size: 53.3 MB
+  Duration: 5.7 min
+  Visuals: 8/8
+  Quality Score: 90/100
+    + Excellent B-roll coverage (8/8)
+    + 8 unique B-roll images — good visual variety
+    + Good audio bitrate (125 kbps)
+    + Good file size (53.3 MB) for YouTube upload
+    - Slightly short (5.7 min)
+    > Ideal faceless video length is 8-12 min for ad mid-rolls
+
+RichTech: RichTech_7_AI_Tools_That_Will_Replace_Your_Entire_Workflow_in_2026
+  Status: success
+  Size: 60.5 MB
+  Duration: 6.1 min
+  Visuals: 9/9
+  Quality Score: 90/100
+    + Excellent B-roll coverage (9/9)
+    + 9 unique B-roll images — good visual variety
+    + Good audio bitrate (125 kbps)
+    + Good file size (60.5 MB) for YouTube upload
+    - Slightly short (6.1 min)
+    > Ideal faceless video length is 8-12 min for ad mid-rolls
+
+RichTech: RichTech_Why_Everyone_Is_Wrong_About_the_New_iPhone
+  Status: success
+  Size: 62.7 MB
+  Duration: 6.7 min
+  Visuals: 9/9
+  Quality Score: 90/100
+    + Excellent B-roll coverage (9/9)
+    + 9 unique B-roll images — good visual variety
+    + Good audio bitrate (125 kbps)
+    + Good file size (62.7 MB) for YouTube upload
+    - Slightly short (6.7 min)
+    > Ideal faceless video length is 8-12 min for ad mid-rolls
+
+
+LESSONS LEARNED:
+────────────────────────────────────────────────────────────
+  > Ideal faceless video length is 8-12 min for ad mid-rolls
