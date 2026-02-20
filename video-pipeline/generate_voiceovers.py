@@ -42,9 +42,16 @@ VOICES = {
         "speed": 0.95,
     },
     "friendly_casual": {
-        "voice_id": "EXAVITQu4vr4xnSDxMaL",
-        "stability": 0.5,
+        "voice_id": "iP95p4xoKVk53GoZ742B",
+        "stability": 0.4,
         "similarity_boost": 0.75,
+        "style": 0.35,
+        "speed": 1.0,
+    },
+    "warm_female": {
+        "voice_id": "21m00Tcm4TlvDq8ikWAM",
+        "stability": 0.45,
+        "similarity_boost": 0.78,
         "style": 0.35,
         "speed": 1.0,
     },
@@ -57,6 +64,28 @@ CHANNEL_VOICE = {
     "RichMind": "storyteller",
     "HowToUseAI": "neutral_male",
     "RichPets": "friendly_casual",
+    "EvaReyes": "warm_female",
+    "RichBeauty": "friendly_casual",
+    "RichCooking": "friendly_casual",
+    "RichFamily": "friendly_casual",
+    "RichFashion": "friendly_casual",
+    "RichReviews": "neutral_male",
+    "RichGaming": "energetic_male",
+    "RichHistory": "calm_narrator",
+    "RichNature": "calm_narrator",
+    "RichScience": "calm_narrator",
+    "RichFinance": "neutral_male",
+    "RichCrypto": "neutral_male",
+    "RichMovie": "storyteller",
+    "RichComedy": "energetic_male",
+    "RichSports": "energetic_male",
+    "RichMusic": "calm_narrator",
+    "RichTravel": "friendly_casual",
+    "RichFood": "friendly_casual",
+    "RichFitness": "energetic_male",
+    "RichEducation": "calm_narrator",
+    "RichLifestyle": "friendly_casual",
+    "HowToMeditate": "calm_narrator",
 }
 
 
@@ -82,13 +111,18 @@ def clean_script_for_tts(text):
             return match.group(1).lower().strip() in EMOTION_TAGS
         return False
 
+    # Strip markdown code fences
+    text = re.sub(r'^```\w*\s*\n?', '', text)
+    text = re.sub(r'\n?```\s*$', '', text)
+
     lines = text.split("\n")
     cleaned = []
     for line in lines:
         # Skip metadata header lines
         if line.startswith("# Channel:") or line.startswith("# Topic:") or \
            line.startswith("# Format:") or line.startswith("# Words:") or \
-           line.startswith("# Est Duration:") or line.startswith("# Generated:"):
+           line.startswith("# Est Duration:") or line.startswith("# Generated:") or \
+           line.startswith("# Voice:"):
             continue
         # Skip visual directions [VISUAL: ...]
         if re.match(r'\s*\[VISUAL:.*\]', line):
@@ -96,6 +130,12 @@ def clean_script_for_tts(text):
         # Skip cross-promo markers
         if line.strip() == "[CROSS-PROMO]":
             continue
+        # Skip standalone [CHAPTER: ...] lines
+        if re.match(r'^\s*\[CHAPTER:.*\]\s*$', line):
+            continue
+        # Remove inline timestamps [00:00:00] and [CHAPTER: ...] markers
+        line = re.sub(r'\[\d{2}:\d{2}:\d{2}\]\s*', '', line)
+        line = re.sub(r'\[CHAPTER:[^\]]*\]\s*', '', line)
         # Skip section timing headers like (Intro - 0:00 - 0:30)
         if re.match(r'^\s*\(.*\d+:\d+.*\)\s*$', line):
             continue

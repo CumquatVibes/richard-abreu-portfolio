@@ -34,23 +34,29 @@
 
 .youtube-tab {
   padding: 10px 24px;
-  border: 1px solid var(--color-border, #d4d4d4);
-  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px) saturate(1.2);
+  -webkit-backdrop-filter: blur(12px) saturate(1.2);
+  border-radius: 100px;
   cursor: pointer;
   font-family: var(--font-body-family, 'Quattrocento Sans', sans-serif);
   font-size: 0.9rem;
   transition: all 0.3s;
-  color: var(--color-foreground, #252525);
+  color: rgba(239, 236, 236, 0.6);
 }
 
 .youtube-tab:hover {
-  border-color: var(--color-foreground, #252525);
+  border-color: rgba(232, 148, 31, 0.4);
+  background: rgba(255, 255, 255, 0.08);
+  color: #efecec;
 }
 
 .youtube-tab.active {
-  background: var(--color-button, #2c332f);
-  color: var(--color-button-text, #fff);
-  border-color: var(--color-button, #2c332f);
+  background: #e8941f;
+  color: #fff;
+  border-color: #e8941f;
+  box-shadow: 0 0 20px rgba(232, 148, 31, 0.3);
 }
 
 .youtube-gallery__grid {
@@ -68,14 +74,31 @@
 }
 
 .youtube-card {
-  background: var(--color-background, #fff);
-  border: 1px solid var(--color-border, #e5e5e5);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px) saturate(1.3);
+  -webkit-backdrop-filter: blur(20px) saturate(1.3);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
   overflow: hidden;
-  transition: box-shadow 0.3s;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.youtube-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08) 20%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0.08) 80%, transparent);
+  pointer-events: none;
+  z-index: 1;
 }
 
 .youtube-card:hover {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4), 0 0 60px rgba(232, 148, 31, 0.04);
+  transform: translateY(-2px);
 }
 
 .youtube-card a {

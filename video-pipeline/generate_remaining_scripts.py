@@ -25,6 +25,23 @@ EMOTION_ADDON = """
 
 IMPORTANT: Add ElevenLabs emotion audio tags to make the voiceover more expressive. Use tags like [whispers], [pauses], [excited], [curious], [gasps], [sighs], [confident], [softly], [firmly], [urgently] at the START of sentences to guide vocal delivery. Use ellipses (...) for dramatic pauses. Use CAPS for 1-2 key emphasis words per paragraph. Match the emotional arc: hook with intrigue, build tension/curiosity, deliver with confidence, close with energy. Maximum 1-2 tags per paragraph — don't over-tag."""
 
+# Product-aware addon for channels that discuss tools/products
+PRODUCT_ADDON = """
+
+PRODUCT ACCURACY RULES (CRITICAL):
+- Use REAL, SPECIFIC product/tool names (e.g. "Jasper AI" not "an AI writing tool")
+- Include CURRENT pricing info (e.g. "starts at $39/month" or "free tier available")
+- Mention specific features and version numbers when relevant
+- Say "check the links in the description" when mentioning products or tools
+- Include [VISUAL: product screenshot of {exact tool name}] for each product
+- Do NOT classify non-AI tools as AI tools (e.g. Calendly is a scheduling tool, not AI)
+- If listing multiple products, briefly compare: what makes each unique vs alternatives
+- Add a brief "prices may vary — links in description for the latest" disclaimer near the end
+- Target 1500+ words for 8-12 minute optimal video length (mid-roll ad eligibility)"""
+
+# Channels that discuss products
+PRODUCT_CHANNELS = {"HowToUseAI", "RichTech", "RichReviews", "RichBeauty", "RichCooking"}
+
 SCRIPTS = [
     # RichMind scripts
     {
@@ -206,10 +223,12 @@ Requirements:
 ]
 
 
-def call_gemini(prompt, topic, timestamp):
+def call_gemini(prompt, topic, timestamp, channel=""):
     """Call Gemini API and return generated text."""
     prompt = prompt.replace("{timestamp}", timestamp).replace("{topic}", topic)
     prompt += EMOTION_ADDON
+    if channel in PRODUCT_CHANNELS:
+        prompt += PRODUCT_ADDON
 
     url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={API_KEY}"
 
@@ -255,7 +274,7 @@ def main():
 
         print(f"[{i}/{len(SCRIPTS)}] {channel}: {topic}")
 
-        text = call_gemini(script_cfg["prompt"], topic, TIMESTAMP)
+        text = call_gemini(script_cfg["prompt"], topic, TIMESTAMP, channel=channel)
 
         if text:
             with open(filepath, "w") as f:

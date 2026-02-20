@@ -16,6 +16,93 @@
   --cv-accent-cream: #fef5e7;
   --cv-border: rgba(255, 255, 255, 0.08);
   --cv-border-light: rgba(255, 255, 255, 0.05);
+
+  /* Liquid Glass tokens */
+  --cv-glass-bg: rgba(255, 255, 255, 0.03);
+  --cv-glass-bg-hover: rgba(255, 255, 255, 0.06);
+  --cv-glass-border: rgba(255, 255, 255, 0.06);
+  --cv-glass-border-hover: rgba(255, 255, 255, 0.12);
+  --cv-glass-accent-bg: rgba(232, 148, 31, 0.03);
+  --cv-glass-accent-border: rgba(232, 148, 31, 0.1);
+  --cv-glass-blur: blur(20px) saturate(1.3);
+  --cv-glass-blur-heavy: blur(24px) saturate(1.4);
+  --cv-glass-radius: 16px;
+}
+
+
+/* ============================================
+   LIQUID GLASS DESIGN SYSTEM
+   ============================================ */
+
+/* Base glass surface */
+.cv-glass {
+  background: var(--cv-glass-bg);
+  backdrop-filter: var(--cv-glass-blur);
+  -webkit-backdrop-filter: var(--cv-glass-blur);
+  border: 1px solid var(--cv-glass-border);
+  border-radius: var(--cv-glass-radius);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Top-edge highlight (light catching glass rim) */
+.cv-glass::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08) 20%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0.08) 80%, transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Accent-tinted glass (for CTAs, featured items) */
+.cv-glass-accent {
+  background: var(--cv-glass-accent-bg);
+  backdrop-filter: var(--cv-glass-blur-heavy);
+  -webkit-backdrop-filter: var(--cv-glass-blur-heavy);
+  border: 1px solid var(--cv-glass-accent-border);
+  border-radius: var(--cv-glass-radius);
+  position: relative;
+  overflow: hidden;
+}
+
+.cv-glass-accent::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(232,148,31,0.12) 20%, rgba(232,148,31,0.18) 50%, rgba(232,148,31,0.12) 80%, transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Interactive glass hover */
+.cv-glass-hover {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cv-glass-hover:hover {
+  background: var(--cv-glass-bg-hover);
+  border-color: var(--cv-glass-border-hover);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.4), 0 0 60px rgba(232,148,31,0.04);
+  transform: translateY(-2px);
+}
+
+/* Accent glow on buttons */
+.cv-glow-accent {
+  transition: box-shadow 0.3s ease;
+}
+
+.cv-glow-accent:hover {
+  box-shadow: 0 0 30px rgba(232,148,31,0.35), 0 0 60px rgba(232,148,31,0.12);
+}
+
+/* Section divider */
+.cv-glass-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06) 20%, rgba(232,148,31,0.1) 50%, rgba(255,255,255,0.06) 80%, transparent);
+  margin: 0 5%;
 }
 
 /* Force dark background on body */
@@ -39,18 +126,29 @@ html {
   color: var(--cv-text-primary) !important;
 }
 
-/* Header and footer dark */
+/* Header — frosted glass */
 .header-wrapper,
-.section-header,
+.section-header {
+  background: var(--cv-glass-bg) !important;
+  backdrop-filter: var(--cv-glass-blur-heavy) !important;
+  -webkit-backdrop-filter: var(--cv-glass-blur-heavy) !important;
+  border-bottom: 1px solid var(--cv-glass-border) !important;
+  color: var(--cv-text-primary) !important;
+}
+
+/* Footer dark */
 .footer,
 .section-footer {
   background-color: var(--cv-bg-primary) !important;
   color: var(--cv-text-primary) !important;
 }
 
-/* Announcement bar — subtle with accent */
+/* Announcement bar — glass with accent tint */
 .announcement-bar {
-  background: var(--cv-bg-card) !important;
+  background: var(--cv-glass-accent-bg) !important;
+  backdrop-filter: var(--cv-glass-blur) !important;
+  -webkit-backdrop-filter: var(--cv-glass-blur) !important;
+  border-bottom: 1px solid var(--cv-glass-accent-border) !important;
   color: var(--cv-accent-light) !important;
 }
 .announcement-bar a {
@@ -72,19 +170,36 @@ html {
   background-color: var(--cv-bg-primary) !important;
 }
 
-/* ----- Buttons — Pastel Orange Accent ----- */
+/* ----- Buttons — Pastel Orange Accent with Glow ----- */
 .button--primary,
 .shopify-challenge__button {
   background-color: var(--cv-accent) !important;
   color: #fff !important;
+  border-radius: 8px !important;
+  transition: all 0.3s ease !important;
+}
+
+.button--primary:hover,
+.shopify-challenge__button:hover {
+  box-shadow: 0 0 30px rgba(232,148,31,0.35), 0 0 60px rgba(232,148,31,0.12) !important;
 }
 
 .button--secondary {
-  border-color: var(--cv-accent-light) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border: 1px solid var(--cv-glass-border-hover) !important;
   color: var(--cv-accent-light) !important;
+  border-radius: 8px !important;
+  transition: all 0.3s ease !important;
 }
 
-/* ----- Cards — Dark ----- */
+.button--secondary:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: var(--cv-glass-accent-border) !important;
+}
+
+/* ----- Cards — Liquid Glass ----- */
 .card,
 .card--standard,
 .card--card,
@@ -93,9 +208,26 @@ html {
 .collection-card,
 .article-card,
 .blog-articles__article {
-  background-color: var(--cv-bg-card) !important;
+  background: var(--cv-glass-bg) !important;
+  backdrop-filter: var(--cv-glass-blur) !important;
+  -webkit-backdrop-filter: var(--cv-glass-blur) !important;
+  border: 1px solid var(--cv-glass-border) !important;
+  border-radius: var(--cv-glass-radius) !important;
   color: var(--cv-text-primary) !important;
-  border-color: var(--cv-border) !important;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  overflow: hidden;
+}
+
+.card:hover,
+.card--standard:hover,
+.card--card:hover,
+.product-card-wrapper:hover,
+.collection-card:hover,
+.article-card:hover {
+  background: var(--cv-glass-bg-hover) !important;
+  border-color: var(--cv-glass-border-hover) !important;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.4), 0 0 60px rgba(232,148,31,0.04) !important;
+  transform: translateY(-2px);
 }
 
 .card__heading a,
@@ -126,14 +258,21 @@ html {
   color: var(--cv-accent) !important;
 }
 
-/* ----- Cart ----- */
+/* ----- Cart / Drawer — Glass ----- */
 .cart,
 .cart__contents,
 .cart-items,
-.cart-item,
+.cart-item {
+  background-color: var(--cv-bg-primary) !important;
+  color: var(--cv-text-primary) !important;
+}
+
 .drawer,
 .cart-drawer {
-  background-color: var(--cv-bg-primary) !important;
+  background: rgba(26, 29, 28, 0.85) !important;
+  backdrop-filter: var(--cv-glass-blur-heavy) !important;
+  -webkit-backdrop-filter: var(--cv-glass-blur-heavy) !important;
+  border-left: 1px solid var(--cv-glass-border) !important;
   color: var(--cv-text-primary) !important;
 }
 
@@ -142,11 +281,13 @@ html {
    CUSTOM SECTIONS — Dark Theme Styles
    ============================================ */
 
-/* --- Value Proposition Bar --- */
+/* --- Value Proposition Bar — Glass --- */
 .value-proposition {
-  background-color: var(--cv-bg-card) !important;
-  border-top: 1px solid var(--cv-border) !important;
-  border-bottom: 1px solid var(--cv-border) !important;
+  background: var(--cv-glass-bg) !important;
+  backdrop-filter: var(--cv-glass-blur) !important;
+  -webkit-backdrop-filter: var(--cv-glass-blur) !important;
+  border-top: 1px solid var(--cv-glass-border) !important;
+  border-bottom: 1px solid var(--cv-glass-border) !important;
 }
 .value-proposition__heading,
 .value-proposition__text {
@@ -193,13 +334,29 @@ html {
   background: var(--cv-bg-card) !important;
 }
 
-/* --- Artist Spotlight --- */
+/* --- Artist Spotlight — Glass Accent --- */
 .artist-spotlight {
-  background-color: var(--cv-bg-card) !important;
+  background: var(--cv-glass-accent-bg) !important;
+  backdrop-filter: var(--cv-glass-blur-heavy) !important;
+  -webkit-backdrop-filter: var(--cv-glass-blur-heavy) !important;
+  border: 1px solid var(--cv-glass-accent-border) !important;
+  border-radius: var(--cv-glass-radius) !important;
+  position: relative;
+  overflow: hidden;
+}
+.artist-spotlight::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(232,148,31,0.12) 20%, rgba(232,148,31,0.18) 50%, rgba(232,148,31,0.12) 80%, transparent);
+  pointer-events: none;
+  z-index: 1;
 }
 .artist-spotlight__badge {
   background: var(--cv-accent) !important;
   color: #fff !important;
+  border-radius: 6px !important;
 }
 .artist-spotlight__heading {
   color: var(--cv-text-primary) !important;
@@ -211,6 +368,11 @@ html {
 .artist-spotlight__cta {
   background: var(--cv-accent) !important;
   color: #fff !important;
+  border-radius: 8px !important;
+  transition: box-shadow 0.3s ease !important;
+}
+.artist-spotlight__cta:hover {
+  box-shadow: 0 0 30px rgba(232,148,31,0.35), 0 0 60px rgba(232,148,31,0.12) !important;
 }
 
 /* --- Seasonal Highlight --- */
@@ -218,7 +380,7 @@ html {
   background-color: var(--cv-bg-primary) !important;
 }
 
-/* --- Testimonials --- */
+/* --- Testimonials — Glass Cards --- */
 .testimonials {
   background-color: var(--cv-bg-primary) !important;
 }
@@ -226,8 +388,28 @@ html {
   color: var(--cv-text-primary) !important;
 }
 .testimonials__card {
-  background: var(--cv-bg-card) !important;
-  border-color: var(--cv-border) !important;
+  background: var(--cv-glass-bg) !important;
+  backdrop-filter: var(--cv-glass-blur) !important;
+  -webkit-backdrop-filter: var(--cv-glass-blur) !important;
+  border: 1px solid var(--cv-glass-border) !important;
+  border-radius: var(--cv-glass-radius) !important;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative;
+  overflow: hidden;
+}
+.testimonials__card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08) 20%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0.08) 80%, transparent);
+  pointer-events: none;
+}
+.testimonials__card:hover {
+  background: var(--cv-glass-bg-hover) !important;
+  border-color: var(--cv-glass-border-hover) !important;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.4) !important;
+  transform: translateY(-2px);
 }
 .testimonials__stars {
   color: var(--cv-accent) !important;
@@ -236,7 +418,7 @@ html {
   color: var(--cv-text-secondary) !important;
 }
 .testimonials__footer {
-  border-color: var(--cv-border) !important;
+  border-color: var(--cv-glass-border) !important;
 }
 .testimonials__author {
   color: var(--cv-text-primary) !important;
@@ -260,9 +442,13 @@ html {
   color: var(--cv-text-primary) !important;
 }
 
-/* --- Blog Preview --- */
+/* --- Blog Preview — Glass --- */
 .blog-preview {
-  background-color: var(--cv-bg-card) !important;
+  background: var(--cv-glass-bg) !important;
+  backdrop-filter: var(--cv-glass-blur) !important;
+  -webkit-backdrop-filter: var(--cv-glass-blur) !important;
+  border: 1px solid var(--cv-glass-border) !important;
+  border-radius: var(--cv-glass-radius) !important;
 }
 .blog-preview__header h2 {
   color: var(--cv-text-primary) !important;
@@ -298,40 +484,59 @@ html {
   background: var(--cv-bg-card) !important;
 }
 
-/* --- Free Shipping Bar (in cart) --- */
+/* --- Free Shipping Bar (in cart) — Glass Accent --- */
 .free-shipping-bar {
-  background: var(--cv-bg-elevated) !important;
+  background: var(--cv-glass-accent-bg) !important;
+  backdrop-filter: var(--cv-glass-blur) !important;
+  -webkit-backdrop-filter: var(--cv-glass-blur) !important;
+  border: 1px solid var(--cv-glass-accent-border) !important;
+  border-radius: var(--cv-glass-radius) !important;
   color: var(--cv-text-primary) !important;
 }
 .free-shipping-bar p {
   color: var(--cv-text-primary) !important;
 }
 
-/* --- Exit Intent Popup --- */
+/* --- Exit Intent Popup — Glass --- */
 #cvExitPopup > div {
-  background: var(--cv-bg-card) !important;
+  background: rgba(26, 29, 28, 0.85) !important;
+  backdrop-filter: var(--cv-glass-blur-heavy) !important;
+  -webkit-backdrop-filter: var(--cv-glass-blur-heavy) !important;
+  border: 1px solid var(--cv-glass-border) !important;
+  border-radius: var(--cv-glass-radius) !important;
   color: var(--cv-text-primary) !important;
 }
 
-/* --- Purchase Notifications --- */
+/* --- Purchase Notifications — Glass --- */
 #cvPurchaseNotification {
-  background: var(--cv-bg-card) !important;
+  background: rgba(26, 29, 28, 0.8) !important;
+  backdrop-filter: var(--cv-glass-blur) !important;
+  -webkit-backdrop-filter: var(--cv-glass-blur) !important;
+  border: 1px solid var(--cv-glass-border) !important;
+  border-radius: var(--cv-glass-radius) !important;
   color: var(--cv-text-primary) !important;
-  border-color: var(--cv-border) !important;
 }
 
-/* --- Quick View Modal --- */
+/* --- Quick View Modal — Glass --- */
 #cvQuickViewInner {
-  background: var(--cv-bg-card) !important;
+  background: rgba(26, 29, 28, 0.9) !important;
+  backdrop-filter: var(--cv-glass-blur-heavy) !important;
+  -webkit-backdrop-filter: var(--cv-glass-blur-heavy) !important;
+  border: 1px solid var(--cv-glass-border) !important;
+  border-radius: var(--cv-glass-radius) !important;
   color: var(--cv-text-primary) !important;
 }
 
-/* --- Mobile Sticky CTA --- */
+/* --- Mobile Sticky CTA — Glass --- */
 .cv-mobile-sticky-cta {
-  background: var(--cv-bg-card) !important;
+  background: rgba(26, 29, 28, 0.8) !important;
+  backdrop-filter: var(--cv-glass-blur) !important;
+  -webkit-backdrop-filter: var(--cv-glass-blur) !important;
+  border-top: 1px solid var(--cv-glass-border) !important;
 }
 .cv-mobile-sticky-cta a {
   background: var(--cv-accent) !important;
+  border-radius: 8px !important;
 }
 
 
@@ -360,34 +565,55 @@ a:not(.button):not([class*="cta"]):not([class*="btn"]) {
   color: var(--cv-accent-light) !important;
 }
 
-/* Form inputs */
+/* Form inputs — Glass */
 input,
 textarea,
 select,
 .field__input {
-  background-color: var(--cv-bg-elevated) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
   color: var(--cv-text-primary) !important;
-  border-color: var(--cv-border) !important;
+  border: 1px solid var(--cv-glass-border) !important;
+  border-radius: 8px !important;
+  transition: border-color 0.3s ease !important;
 }
 
-/* Search */
+input:focus,
+textarea:focus,
+select:focus,
+.field__input:focus {
+  border-color: var(--cv-glass-accent-border) !important;
+  outline: none !important;
+}
+
+/* Search — Glass */
 .search-modal,
 .search-modal__content {
-  background-color: var(--cv-bg-primary) !important;
+  background: rgba(26, 29, 28, 0.9) !important;
+  backdrop-filter: var(--cv-glass-blur-heavy) !important;
+  -webkit-backdrop-filter: var(--cv-glass-blur-heavy) !important;
   color: var(--cv-text-primary) !important;
 }
 
-/* Newsletter */
+/* Newsletter — Glass Accent */
 .newsletter {
-  background-color: var(--cv-bg-card) !important;
+  background: var(--cv-glass-accent-bg) !important;
+  backdrop-filter: var(--cv-glass-blur-heavy) !important;
+  -webkit-backdrop-filter: var(--cv-glass-blur-heavy) !important;
+  border: 1px solid var(--cv-glass-accent-border) !important;
+  border-radius: var(--cv-glass-radius) !important;
 }
 
-/* Quantity selectors */
+/* Quantity selectors — Glass */
 .quantity,
 .quantity__button {
-  background-color: var(--cv-bg-elevated) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
   color: var(--cv-text-primary) !important;
-  border-color: var(--cv-border) !important;
+  border: 1px solid var(--cv-glass-border) !important;
+  border-radius: 8px !important;
 }
 
 /* Footer links */
@@ -411,14 +637,75 @@ select,
   color: var(--cv-text-secondary) !important;
 }
 
+/* --- Amazon Affiliate Footer Link --- */
+.cv-amazon-footer {
+  border-color: var(--cv-border) !important;
+}
+.cv-amazon-footer a {
+  color: var(--cv-accent-light) !important;
+}
+
+/* --- Amazon Picks Section — Glass Accent --- */
+.amazon-picks {
+  background-color: var(--cv-bg-primary) !important;
+}
+.amazon-picks__inner {
+  background: var(--cv-glass-accent-bg) !important;
+  backdrop-filter: var(--cv-glass-blur-heavy) !important;
+  -webkit-backdrop-filter: var(--cv-glass-blur-heavy) !important;
+  border: 1px solid var(--cv-glass-accent-border) !important;
+  border-radius: var(--cv-glass-radius) !important;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+.amazon-picks__inner::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(232,148,31,0.12) 20%, rgba(232,148,31,0.18) 50%, rgba(232,148,31,0.12) 80%, transparent);
+  pointer-events: none;
+}
+.amazon-picks__inner:hover {
+  border-color: rgba(232, 148, 31, 0.2) !important;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.4), 0 0 60px rgba(232,148,31,0.06) !important;
+}
+.amazon-picks__heading {
+  color: var(--cv-text-primary) !important;
+}
+.amazon-picks__subtext {
+  color: var(--cv-text-secondary) !important;
+}
+.amazon-picks__cta {
+  background: var(--cv-accent) !important;
+  color: #fff !important;
+  border-radius: 8px !important;
+  transition: box-shadow 0.3s ease !important;
+}
+.amazon-picks__cta:hover {
+  box-shadow: 0 0 30px rgba(232,148,31,0.35) !important;
+}
+.amazon-picks__disclosure {
+  color: var(--cv-text-muted) !important;
+}
+
 
 /* ============================================
    SMOOTH SECTION FLOW
    ============================================ */
 
-/* Subtle separator between sections instead of color jumps */
+/* Glass divider between sections */
 .shopify-section + .shopify-section {
-  border-top: 1px solid var(--cv-border-light);
+  border-top: none !important;
+  position: relative;
+}
+.shopify-section + .shopify-section::before {
+  content: '';
+  display: block;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06) 20%, rgba(232,148,31,0.1) 50%, rgba(255,255,255,0.06) 80%, transparent);
+  margin: 0 5%;
 }
 
 
@@ -460,7 +747,11 @@ select,
   margin: auto !important;
   padding: 24px !important;
   overflow-y: auto !important;
-  background-color: var(--cv-bg-card) !important;
+  background: rgba(26, 29, 28, 0.9) !important;
+  backdrop-filter: var(--cv-glass-blur-heavy) !important;
+  -webkit-backdrop-filter: var(--cv-glass-blur-heavy) !important;
+  border: 1px solid var(--cv-glass-border) !important;
+  border-radius: var(--cv-glass-radius) !important;
   color: var(--cv-text-primary) !important;
 }
 

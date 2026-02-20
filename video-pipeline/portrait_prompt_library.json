@@ -1,0 +1,60 @@
+{
+  "description": "Custom portrait & background prompt library for Richard Abreu — AI-generated professional content creator photos",
+  "reference_image": "../images/hero-portrait.png",
+  "reference_notes": "Green screen studio shot, clear facial features, dark suit with pocket square. Best ref for face consistency.",
+  "tools_supported": ["midjourney_cref", "leonardo_ai", "flux_ip_adapter", "stable_diffusion_faceswap", "gemini_imagen"],
+  "categories": {
+    "studio_backgrounds": {
+      "description": "Professional podcast/creator studio setups with full equipment visibility",
+      "prompt_ids": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25],
+      "count": 25
+    },
+    "house_backgrounds": {
+      "description": "Home/living room styled studio interiors with warm aesthetic",
+      "prompt_ids": [26, 27, 28, 29, 30, 31],
+      "count": 6
+    },
+    "plain_backgrounds": {
+      "description": "Solid color and gradient backdrops for editorial portraits",
+      "prompt_ids": [32, 33, 34, 35, 36],
+      "count": 5
+    },
+    "outdoor_backgrounds": {
+      "description": "Parks, nature paths, golden hour outdoor settings",
+      "prompt_ids": [37, 38, 39, 40, 41],
+      "count": 5
+    },
+    "busy_backgrounds": {
+      "description": "Motion blur city/street scenes with subject frozen sharp",
+      "prompt_ids": [42, 43, 44, 45, 46],
+      "count": 5
+    },
+    "christmas_backgrounds": {
+      "description": "Festive holiday office and interior settings",
+      "prompt_ids": [47, 48, 49, 50, 51, 52, 53, 54, 55],
+      "count": 9
+    },
+    "set_backgrounds": {
+      "description": "Color-themed podcast sets with gradient walls and tropical plants",
+      "prompt_ids": [56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66],
+      "count": 11
+    }
+  },
+  "total_prompts": 66,
+  "generation_workflow": {
+    "step_1": "Generate Prompt A (background only) to establish the scene",
+    "step_2": "Generate Prompt B (with person) using reference image for face consistency",
+    "step_3": "Quality check: verify facial features match reference exactly",
+    "step_4": "Upload to Google Drive portrait folder for backup",
+    "step_5": "Use across YouTube thumbnails, channel art, website, and social media"
+  },
+  "priority_prompts_for_channel_branding": {
+    "youtube_thumbnails": [1, 2, 6, 20, 32, 34],
+    "channel_banners": [3, 5, 24, 56],
+    "website_portfolio": [4, 7, 14, 28],
+    "social_media_profile": [33, 34, 35],
+    "christmas_seasonal": [47, 48, 50, 53],
+    "outdoor_lifestyle": [37, 38, 40]
+  },
+  "source_document": "https://docs.google.com/document/d/1k32_hbQCmybT5f4oeBBQeBtBMHebRi_ijgsmKBUgw8U/edit"
+}

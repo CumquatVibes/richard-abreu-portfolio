@@ -1,0 +1,178 @@
+{% comment %}
+  ============================================
+  Amazon Affiliate — Recommended Products Section
+  Paste into: sections/custom-amazon-picks.liquid
+
+  A subtle, on-brand banner linking to the Cumquat Vibes
+  Amazon storefront with the SiteStripe affiliate tag.
+  Includes required FTC disclosure.
+  ============================================
+{% endcomment %}
+
+<section class="amazon-picks section-{{ section.id }}-padding" style="background: {{ section.settings.bg_color }};">
+  <div class="page-width">
+    <div class="amazon-picks__inner">
+      <div class="amazon-picks__content">
+        {% if section.settings.icon != blank %}
+          <span class="amazon-picks__icon">{{ section.settings.icon }}</span>
+        {% endif %}
+        <div class="amazon-picks__text">
+          <h3 class="amazon-picks__heading">{{ section.settings.heading | default: 'Shop Recommended Products on Amazon' }}</h3>
+          {% if section.settings.subtext != blank %}
+            <p class="amazon-picks__subtext">{{ section.settings.subtext }}</p>
+          {% endif %}
+        </div>
+      </div>
+      <a href="{{ section.settings.amazon_url | default: 'https://www.amazon.com/shop/7193294712?tag=richstudio0f-20' }}"
+         target="_blank"
+         rel="noopener sponsored"
+         class="amazon-picks__cta">
+        {{ section.settings.cta_text | default: 'Browse Picks' }} &rarr;
+      </a>
+    </div>
+    <p class="amazon-picks__disclosure">
+      {{ section.settings.disclosure | default: 'As an Amazon Associate, I earn from qualifying purchases.' }}
+    </p>
+  </div>
+</section>
+
+<style>
+  .amazon-picks {
+    padding: 24px 0;
+  }
+  .amazon-picks__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 24px 28px;
+    background: var(--cv-bg-elevated, #2a2e2c);
+    border: 1px solid var(--cv-border, rgba(255, 255, 255, 0.08));
+    border-radius: 8px;
+  }
+  .amazon-picks__content {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex: 1;
+    min-width: 0;
+  }
+  .amazon-picks__icon {
+    font-size: 1.8rem;
+    flex-shrink: 0;
+  }
+  .amazon-picks__heading {
+    font-family: var(--font-heading-family, 'Trirong', serif);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.35;
+    color: var(--cv-text-primary, #efecec);
+  }
+  .amazon-picks__subtext {
+    font-size: 0.82rem;
+    color: var(--cv-text-secondary, rgba(239, 236, 236, 0.65));
+    margin: 4px 0 0;
+    line-height: 1.4;
+  }
+  .amazon-picks__cta {
+    display: inline-block;
+    padding: 10px 24px;
+    background: var(--cv-accent, #e8941f);
+    color: #fff !important;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    border-radius: 4px;
+    white-space: nowrap;
+    transition: opacity 0.3s;
+    flex-shrink: 0;
+  }
+  .amazon-picks__cta:hover {
+    opacity: 0.85;
+  }
+  .amazon-picks__disclosure {
+    font-size: 0.7rem;
+    color: var(--cv-text-muted, rgba(239, 236, 236, 0.4));
+    margin: 10px 0 0;
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  @media screen and (max-width: 749px) {
+    .amazon-picks__inner {
+      flex-direction: column;
+      text-align: center;
+      padding: 20px;
+    }
+    .amazon-picks__content {
+      flex-direction: column;
+      gap: 10px;
+    }
+    .amazon-picks__heading {
+      font-size: 1rem;
+    }
+    .amazon-picks__cta {
+      width: 100%;
+      text-align: center;
+      padding: 12px 24px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Amazon Picks",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Shop Recommended Products on Amazon"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Hand-picked supplies, tools, and inspiration from the artist's studio."
+    },
+    {
+      "type": "text",
+      "id": "icon",
+      "label": "Icon (emoji)",
+      "default": "📦"
+    },
+    {
+      "type": "url",
+      "id": "amazon_url",
+      "label": "Amazon Store URL",
+      "default": "https://www.amazon.com/shop/7193294712?tag=richstudio0f-20"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Button Text",
+      "default": "Browse Picks"
+    },
+    {
+      "type": "textarea",
+      "id": "disclosure",
+      "label": "FTC Disclosure Text",
+      "default": "As an Amazon Associate, I earn from qualifying purchases."
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#1a1d1c"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Amazon Picks"
+    }
+  ]
+}
+{% endschema %}

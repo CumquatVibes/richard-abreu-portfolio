@@ -207,15 +207,18 @@
   }
   .gift-guide__badge {
     display: inline-block;
-    background: #e8941f;
-    color: #fff;
+    background: rgba(232, 148, 31, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(232, 148, 31, 0.3);
+    color: #f4b88a;
     padding: 5px 16px;
     font-size: 0.7rem;
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     margin-bottom: 16px;
-    border-radius: 2px;
+    border-radius: 20px;
   }
   .gift-guide__heading {
     font-family: var(--font-heading-family, 'Trirong', serif);
@@ -280,11 +283,13 @@
     font-weight: 600;
     letter-spacing: 0.03em;
     color: rgba(239, 236, 236, 0.6);
-    background: #222725;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(12px) saturate(1.2);
+    -webkit-backdrop-filter: blur(12px) saturate(1.2);
+    border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: 100px;
     cursor: pointer;
-    transition: all 0.25s ease;
+    transition: all 0.3s ease;
     white-space: nowrap;
     font-family: inherit;
     line-height: 1.3;
@@ -292,12 +297,13 @@
   .gift-guide__tab:hover {
     color: #efecec;
     border-color: rgba(232, 148, 31, 0.4);
-    background: #2a2e2c;
+    background: rgba(255, 255, 255, 0.08);
   }
   .gift-guide__tab--active {
     color: #fff;
     background: #e8941f;
     border-color: #e8941f;
+    box-shadow: 0 0 20px rgba(232,148,31,0.3);
   }
   .gift-guide__tab--active:hover {
     background: #d17f14;
@@ -340,14 +346,28 @@
 
   /* ── Product Card ── */
   .gift-guide__card {
-    background: #222725;
-    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px) saturate(1.3);
+    -webkit-backdrop-filter: blur(20px) saturate(1.3);
+    border-radius: 16px;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.06);
-    transition: border-color 0.3s ease, transform 0.3s ease;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+  }
+  .gift-guide__card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08) 20%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0.08) 80%, transparent);
+    pointer-events: none;
+    z-index: 1;
   }
   .gift-guide__card:hover {
-    border-color: rgba(232, 148, 31, 0.3);
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.4), 0 0 60px rgba(232,148,31,0.04);
     transform: translateY(-4px);
   }
   .gift-guide__card-link {
@@ -384,14 +404,17 @@
     position: absolute;
     top: 10px;
     left: 10px;
-    background: #e8941f;
+    background: rgba(232, 148, 31, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     color: #fff;
     font-size: 0.7rem;
     font-weight: 700;
     padding: 3px 10px;
-    border-radius: 2px;
+    border-radius: 12px;
     letter-spacing: 0.04em;
     line-height: 1.4;
+    z-index: 2;
   }
 
   /* Card Body */
@@ -481,12 +504,13 @@
     font-size: 0.85rem;
     letter-spacing: 0.06em;
     text-decoration: none;
-    border-radius: 2px;
-    transition: background 0.25s ease, transform 0.25s ease;
+    border-radius: 8px;
+    transition: all 0.3s ease;
   }
   .gift-guide__cta:hover {
     background: #d17f14;
     transform: translateY(-1px);
+    box-shadow: 0 0 30px rgba(232,148,31,0.35), 0 0 60px rgba(232,148,31,0.12);
   }
   .gift-guide__cta:active {
     transform: translateY(0);

@@ -5,7 +5,7 @@
   ============================================
 {% endcomment %}
 
-<section class="value-prop section-{{ section.id }}-padding" style="background: var(--cv-bg-card, #222725);">
+<section class="value-prop section-{{ section.id }}-padding" style="background: var(--cv-glass-bg, rgba(255,255,255,0.03)); backdrop-filter: blur(20px) saturate(1.3); -webkit-backdrop-filter: blur(20px) saturate(1.3); border-top: 1px solid var(--cv-glass-border, rgba(255,255,255,0.06)); border-bottom: 1px solid var(--cv-glass-border, rgba(255,255,255,0.06));">
   <div class="page-width">
     <div class="value-prop__grid">
       {% for block in section.blocks %}

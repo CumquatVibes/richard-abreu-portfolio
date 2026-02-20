@@ -94,6 +94,7 @@ For each section below:
 | `custom-youtube-preview`     | `sections/custom-youtube-preview.liquid`             | YouTube Preview       |
 | `custom-blog-preview`        | `sections/custom-blog-preview.liquid`                | Blog Preview          |
 | `custom-recently-viewed`     | `sections/custom-recently-viewed.liquid`             | Recently Viewed       |
+| `custom-amazon-picks`        | `sections/custom-amazon-picks.liquid`                | Amazon Picks          |
 
 ### Additional CSS Files (Assets):
 | Create Asset Named               | Paste From                                    |
@@ -122,8 +123,9 @@ For each section below:
 12. Blog Preview ← select your "News" blog
 13. New Arrivals (built-in Featured Collection)
 14. Recently Viewed
-15. Newsletter (existing)
-16. Footer
+15. Amazon Picks ← links to your Amazon storefront (affiliate)
+16. Newsletter (existing)
+17. Footer
 
 ---
 
@@ -330,6 +332,10 @@ A tabbed interface letting shoppers browse gift ideas by category (For Her, For 
 - [ ] Purchase notifications appear periodically
 - [ ] Sticky "Shop Now" bar visible on mobile
 - [ ] richardabreu.studio link in announcement bar and footer
+- [ ] Amazon Picks section shows on homepage with affiliate link
+- [ ] Amazon affiliate link appears in footer above richardabreu.studio badge
+- [ ] FTC disclosure text ("As an Amazon Associate...") visible on Amazon Picks section and footer
+- [ ] Amazon links open in new tab with correct affiliate tag (richstudio0f-20)
 - [ ] All pages load without console errors
 
 ### Phase 5 Verification

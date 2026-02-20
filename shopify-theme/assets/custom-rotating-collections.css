@@ -43,7 +43,8 @@
 .rotating-collections__image {
   aspect-ratio: 4/3;
   overflow: hidden;
-  border-radius: 4px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .rotating-collections__image img {
@@ -87,15 +88,17 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  border: 1px solid var(--color-foreground, #252525);
-  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.06);
   cursor: pointer;
   transition: all 0.3s;
   padding: 0;
 }
 
 .rotating-collections__dots .dot.active {
-  background: var(--color-foreground, #252525);
+  background: #e8941f;
+  border-color: #e8941f;
+  box-shadow: 0 0 10px rgba(232, 148, 31, 0.4);
 }
 
 @media screen and (max-width: 749px) {

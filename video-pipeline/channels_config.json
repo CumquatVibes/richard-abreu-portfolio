@@ -87,6 +87,16 @@
       "style": 0.35,
       "speed": 1.0,
       "description": "Charming, down-to-earth \u2014 lifestyle, food, pets, family, kids"
+    },
+    "warm_female": {
+      "engine": "elevenlabs",
+      "voice_id": "21m00Tcm4TlvDq8ikWAM",
+      "model": "eleven_multilingual_v2",
+      "stability": 0.45,
+      "similarity_boost": 0.78,
+      "style": 0.35,
+      "speed": 1.0,
+      "description": "Warm, confident female narrator \u2014 empowerment, inspiration, self-care"
     }
   },
   "content_formats": {
@@ -1581,7 +1591,7 @@
         "shorts_story",
         "compilation"
       ],
-      "voice_profile": "friendly_casual",
+      "voice_profile": "warm_female",
       "youtube_category": "22",
       "visual_theme": {
         "primary": "#E040FB",
@@ -1860,6 +1870,12 @@
         "common_tags": ["[laughs]", "[cheerfully]", "[excited]", "[curious]", "[playfully]"],
         "avoid_tags": ["[angry]", "[disgusted]", "[deadpan]"],
         "notes": "Keep it conversational. Use [laughs] and [cheerfully] to maintain warmth."
+      },
+      "warm_female": {
+        "default_emotion": "confident and inspiring",
+        "common_tags": ["[cheerfully]", "[excited]", "[confident]", "[tender]", "[awed]", "[laughs]"],
+        "avoid_tags": ["[angry]", "[deadpan]", "[sarcastic]", "[disgusted]"],
+        "notes": "Warm, empowering tone. Use [confident] for affirmations, [tender] for emotional moments, [cheerfully] for uplifting sections. Always use female voice."
       }
     },
     "niche_emotion_maps": {

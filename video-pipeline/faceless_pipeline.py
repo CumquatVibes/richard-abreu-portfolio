@@ -469,7 +469,11 @@ class FacelessScriptWriter:
         return intro + steps + outro
 
     def _add_visual_cues(self, script):
-        """Add visual cue markers for video assembly automation."""
+        """Add visual cue markers for video assembly automation.
+
+        Detects products, places, people, and statistics for context-aware
+        b-roll generation. Shows the actual thing being discussed.
+        """
         lines = script.split("\n")
         cued = []
         for line in lines:
@@ -479,6 +483,20 @@ class FacelessScriptWriter:
             elif "here's" in stripped.lower() or "this is" in stripped.lower():
                 cued.append(f"[VISUAL: B-roll transition]\n{line}")
             else:
+                # Detect price mentions (likely product)
+                if re.search(r'\$[\d,]+', stripped):
+                    product_match = re.search(r'(?:the\s+)?([A-Z][A-Za-z0-9\s\-]+?)(?:\s*[\(\-—]|\s+is\b|\s+at\b|\s+for\b)', stripped)
+                    if product_match:
+                        product = product_match.group(1).strip()
+                        cued.append(f"[VISUAL: product photo of {product}, studio lighting, clean background]\n{line}")
+                        continue
+                # Detect place/location mentions
+                if re.search(r'\b(?:in|at|visit|located in|from)\s+([A-Z][a-z]+(?:\s+[A-Z][a-z]+)*)', stripped):
+                    place_match = re.search(r'\b(?:in|at|visit|located in|from)\s+([A-Z][a-z]+(?:\s+[A-Z][a-z]+){0,3})', stripped)
+                    if place_match:
+                        place = place_match.group(1).strip()
+                        cued.append(f"[VISUAL: photo of {place}, establishing shot]\n{line}")
+                        continue
                 cued.append(line)
         return "\n".join(cued)
 
@@ -486,6 +504,15 @@ class FacelessScriptWriter:
 # ---------------------------------------------------------------------------
 # Faceless Script Generator (AI-powered via Gemini)
 # ---------------------------------------------------------------------------
+
+def _is_product_channel(channel):
+    """Check if a channel discusses products that could include affiliate links."""
+    product_niches = {"tech", "gadget", "review", "beauty", "cooking", "kitchen",
+                      "fitness", "gaming", "car", "fashion", "diy", "photography", "food"}
+    niche_lower = channel.get("niche", "").lower()
+    name_lower = channel.get("name", "").lower()
+    return any(kw in niche_lower or kw in name_lower for kw in product_niches)
+
 
 def generate_ai_faceless_script(channel, topic, format_type, keys, research_data=None):
     """Generate a faceless script using Gemini AI."""
@@ -497,30 +524,74 @@ def generate_ai_faceless_script(channel, topic, format_type, keys, research_data
     niche = channel.get("niche", "general")
     voice_profile = get_voice_profile(channel)
     fmt = get_format_config(format_type)
+    is_product = _is_product_channel(channel)
 
     research_section = ""
     if research_data:
         research_section = f"\n\nResearch data to incorporate (use facts, cite when appropriate):\n{research_data[:2000]}"
+
+    # Product-specific rules for channels that discuss products
+    product_rules = ""
+    if is_product:
+        product_rules = """
+PRODUCT GUIDELINES (CRITICAL — this channel discusses products):
+- Use REAL, SPECIFIC product names (e.g. "Anker PowerCore 20000" not "a decent power bank")
+- Include CURRENT approximate prices (e.g. "$39.99 on Amazon" not "around $40")
+- Mention the brand and exact model for every product discussed
+- Say "check the links in the description" or "link in the description below" when mentioning products
+- Include a brief "prices may vary" disclaimer near the end
+- Compare products to alternatives when relevant (e.g. "unlike the cheaper options...")
+- Mention specific features and specs (e.g. "20,000mAh capacity" not "large battery")
+- Do NOT include products you cannot verify are real and currently available
+- If listing tools or software, include pricing tiers (free, pro, enterprise)
+
+PRODUCT B-ROLL (CRITICAL — show real products):
+- When introducing a product, ALWAYS add: [VISUAL: product photo of {exact product name}, clean white background, studio lighting]
+- After the product intro shot, add: [VISUAL: {exact product name} in use, lifestyle context, hands using the product]
+- For software/apps: [VISUAL: screenshot of {app name} interface, {specific feature} visible]
+- For comparisons, add: [VISUAL: side-by-side comparison of {product A} vs {product B}]
+- NEVER use generic stock footage when a specific product is being discussed
+"""
 
     prompt = f"""Write a YouTube video script for a FACELESS {niche} channel.
 
 Topic: {topic}
 Format: {format_type} ({fmt.get('structure', 'standard')})
 Target duration: {fmt.get('duration_target', '8-12 min')}
-Target word count: {fmt.get('word_count', 1200)}
+Target word count: {fmt.get('word_count', 1500)}
 Voice style: {voice_profile.get('description', 'neutral narrator')}
 
 RULES:
 - NO references to "me", "my face", "as you can see me", or any visual self-references
 - Use "we", "let's", or address the viewer directly with "you"
 - Include [VISUAL: description] cues for the editor/automation (stock footage, text overlays, charts)
-- Start with a STRONG hook (3-5 seconds to grab attention)
-- Include 2-3 retention hooks ("stay until the end", "but here's where it gets interesting")
+
+VISUAL CUE RULES (CRITICAL — makes videos feel real and professional):
+- When mentioning a SPECIFIC PLACE or LOCATION, ALWAYS add: [VISUAL: aerial/exterior photo of THE PLACE NAME, THE CITY/COUNTRY]
+- When mentioning a SPECIFIC PERSON, add: [VISUAL: photo portrait of THE PERSON NAME]
+- When mentioning a STATISTIC or NUMBER, add: [VISUAL: text overlay - "THE STATISTIC"]
+- When describing an EVENT, add: [VISUAL: historical/news photo of THE EVENT NAME, THE YEAR]
+- When mentioning a COUNTRY or CITY, add: [VISUAL: landmark or skyline of THE CITY/COUNTRY]
+- NEVER leave a product, place, or person mention without a corresponding VISUAL cue
+- Alternate between close-up details, wide establishing shots, and text overlays for visual variety
+
+HOOK & RETENTION (CRITICAL — this determines whether people stay or leave):
+- The FIRST 15 SECONDS must contain the most shocking/interesting fact or claim from the entire video
+- Do NOT start with slow atmospheric intros, greetings, or "welcome to..."
+- Pattern-interrupt immediately: open with a bold statement, surprising statistic, or controversial claim
+- Example: "This place has killed over 160,000 people... and tourists still visit every year."
+- After the hook, preview what's coming: "In the next 8 minutes, you'll discover..."
+- Include 2-3 retention hooks throughout ("but the next one is even more disturbing")
+- If it's a listicle, lead with the 2nd most interesting item, save #1 for last
+
+STRUCTURE:
+- Add [CHAPTER: section name] markers at each major section for YouTube chapter timestamps
 - End with a clear CTA (like, subscribe, comment)
 - Keep paragraphs short (2-3 sentences max) for natural voiceover pacing
 - Add a [PAUSE] marker between major sections for natural breathing room
 - Be factual and provide value — no fluff
-{research_section}
+- Target 1500+ words for optimal video length (8-12 minutes for mid-roll ad eligibility)
+{product_rules}{research_section}
 
 Write the complete script now. Return ONLY the script text."""
 

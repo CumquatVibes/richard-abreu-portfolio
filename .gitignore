@@ -6,6 +6,8 @@ node_modules/
 Site images/
 about_richard_abreu/
 video-pipeline/youtube_token.json
+video-pipeline/google_token.json
+video-pipeline/channel_tokens.json
 video-pipeline/__pycache__/
 media/
 ebooks/
