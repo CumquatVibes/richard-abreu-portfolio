@@ -295,18 +295,21 @@ CHANNEL_OPTIMIZATIONS = {
     },
     "RichMusic": {
         "description": (
-            "Feel the music. Understand the artistry.\n\n"
-            "RichMusic explores the stories behind the songs, the artists "
-            "who shaped genres, and the music that moves us.\n\n"
+            "What if your favorite pop song was a rap banger? What if today's biggest hit was made in the 80s?\n\n"
+            "RichMusic creates GENRE-SWAP covers and ERA-SWAP remakes that reimagine "
+            "famous songs in completely different styles. Plus music news, song analysis, "
+            "and the stories behind the artists who shaped music.\n\n"
             "What you'll find here:\n"
-            "- Music analysis and song breakdowns\n"
-            "- Artist stories and behind-the-scenes\n"
-            "- Genre deep dives and music history\n"
-            "- Best new music discoveries\n\n"
-            "Subscribe for your weekly music fix.\n\n"
-            "#Music #MusicAnalysis #Songs #Artists #MusicHistory"
+            "- Genre Swap: Pop songs turned into rap, rap turned into pop, and more\n"
+            "- Era Swap: Modern hits remade as 80s synth, 90s grunge, 70s disco\n"
+            "- Music news and industry updates\n"
+            "- Song analysis and music theory breakdowns\n"
+            "- Original music and AI-powered production\n\n"
+            "New genre swaps, era swaps, and music content every week.\n"
+            "Subscribe and pick a side — which version sounds better?\n\n"
+            "#Music #GenreSwap #EraSwap #MusicRemake #PopToRap #80sRemake #MusicAnalysis"
         ),
-        "keywords": "music music analysis song breakdown artists music history genre hip hop R&B pop rock best new music 2026 album review",
+        "keywords": "music genre swap era swap pop to rap rap to pop 80s remake 90s style music remix cover song reimagined music news song analysis 2026 AI music",
     },
     "RichTravel": {
         "description": (
@@ -651,6 +654,277 @@ CHANNEL_OPTIMIZATIONS = {
     },
 }
 
+# Playlist configurations per channel — organize videos into discoverable playlists
+CHANNEL_PLAYLISTS = {
+    "RichTech": [
+        {"title": "AI Tools & Tutorials", "description": "AI tools, ChatGPT tips, and automation guides that save you hours."},
+        {"title": "Budget Tech Gadgets", "description": "Best tech gadgets under $50, $100, and beyond — honest reviews."},
+        {"title": "Tech News & Trends", "description": "The latest in technology, future tech, and industry analysis."},
+    ],
+    "RichHorror": [
+        {"title": "True Horror Stories", "description": "Real horror stories that will keep you up at night."},
+        {"title": "Unsolved Mysteries", "description": "Cases that still haunt investigators to this day."},
+        {"title": "Haunted Places", "description": "The most haunted locations on Earth — explored and documented."},
+    ],
+    "RichMind": [
+        {"title": "Dark Psychology", "description": "Manipulation tactics, persuasion secrets, and the dark side of the mind."},
+        {"title": "Body Language Secrets", "description": "How to read anyone like a book — body language decoded."},
+        {"title": "Mental Health & Overthinking", "description": "Understanding anxiety, overthinking, and building mental clarity."},
+    ],
+    "HowToUseAI": [
+        {"title": "ChatGPT Masterclass", "description": "From beginner to expert — complete ChatGPT prompt engineering guides."},
+        {"title": "AI Automation Workflows", "description": "Build automations that make money while you sleep."},
+        {"title": "AI Tool Reviews", "description": "Honest reviews of the best AI tools available in 2026."},
+    ],
+    "RichPets": [
+        {"title": "Dog Care & Training", "description": "Everything dog owners need to know — health, training, behavior."},
+        {"title": "Cat Breeds & Care", "description": "Cat breed guides, behavior decoded, and care tips."},
+        {"title": "Pet Health Tips", "description": "Common pet health mistakes and how to avoid them."},
+    ],
+    "EvaReyes": [
+        {"title": "Confidence & Self-Worth", "description": "Building unshakeable confidence from the inside out."},
+        {"title": "Toxic Habits to Break", "description": "Recognizing and stopping toxic patterns in your life."},
+        {"title": "Women's Empowerment", "description": "Inspiration and strategies for strong, powerful women."},
+    ],
+    "RichReviews": [
+        {"title": "Best Products Under $50", "description": "Budget-friendly products that are actually worth your money."},
+        {"title": "Tech Reviews", "description": "In-depth tech reviews with real-world testing."},
+        {"title": "Is It Worth It?", "description": "Trending products put to the test — honest verdicts."},
+    ],
+    "RichGaming": [
+        {"title": "Game Reviews", "description": "Honest first impressions and deep-dive game reviews."},
+        {"title": "Gaming Tips & Strategies", "description": "Pro tips to level up your gameplay."},
+        {"title": "Best Gaming Gear", "description": "Gaming gear reviews and setup guides."},
+    ],
+    "RichHistory": [
+        {"title": "Forgotten History", "description": "Historical events and stories that deserve to be remembered."},
+        {"title": "Dark Chapters of History", "description": "The darker side of human history — explored honestly."},
+        {"title": "Historical Figures", "description": "The people who changed the course of history."},
+    ],
+    "RichNature": [
+        {"title": "Amazing Animal Behaviors", "description": "Mind-blowing animal facts and behaviors caught on camera."},
+        {"title": "Beautiful Places on Earth", "description": "The most stunning natural locations on our planet."},
+        {"title": "Conservation & Environment", "description": "Why nature matters and what we can do to protect it."},
+    ],
+    "RichScience": [
+        {"title": "Space & Astronomy", "description": "Space exploration, astronomy updates, and cosmic wonders."},
+        {"title": "Science Explained Simply", "description": "Complex science made simple — for everyone."},
+        {"title": "How Things Work", "description": "The science behind everyday life."},
+    ],
+    "RichFinance": [
+        {"title": "Investing for Beginners", "description": "Start investing today — guides for complete beginners."},
+        {"title": "Money Mistakes to Avoid", "description": "Financial mistakes that cost you thousands."},
+        {"title": "Passive Income Ideas", "description": "Realistic passive income strategies that actually work."},
+    ],
+    "RichCrypto": [
+        {"title": "Crypto for Beginners", "description": "Cryptocurrency explained in plain English."},
+        {"title": "Market Analysis", "description": "Weekly crypto market breakdowns and trend analysis."},
+        {"title": "DeFi & Web3", "description": "Decentralized finance, NFTs, and the future of the web."},
+    ],
+    "RichMovie": [
+        {"title": "Movie Breakdowns", "description": "Hidden details and analysis of your favorite films."},
+        {"title": "Best Movies You Haven't Seen", "description": "Underrated films that deserve your attention."},
+        {"title": "Film Analysis & Theory", "description": "Storytelling techniques that make movies unforgettable."},
+    ],
+    "RichComedy": [
+        {"title": "Relatable Comedy", "description": "The kind of comedy that makes you say 'that's so me.'"},
+        {"title": "Trending Topics", "description": "Funny commentary on what everyone's talking about."},
+    ],
+    "RichSports": [
+        {"title": "Game Analysis", "description": "Deep-dive breakdowns of the biggest games and moments."},
+        {"title": "Player Rankings", "description": "Who's the best? Rankings, comparisons, and debates."},
+        {"title": "Sports News & Hot Takes", "description": "The latest sports news with honest commentary."},
+    ],
+    "RichMusic": [
+        {"title": "Genre Swap Covers", "description": "Your favorite songs reimagined in completely different genres — pop to rap, rap to pop, and beyond."},
+        {"title": "Era Swap Remakes", "description": "Modern hits remade in the style of the 80s, 90s, and more. What would today's music sound like decades ago?"},
+        {"title": "Music News & Industry", "description": "The latest music news, album reviews, and industry analysis."},
+        {"title": "Song Analysis & Breakdowns", "description": "What makes hit songs work — music theory and production breakdowns."},
+        {"title": "Artist Stories", "description": "The stories behind the artists who shaped music."},
+    ],
+    "RichTravel": [
+        {"title": "Hidden Travel Gems", "description": "Places most tourists never find — secret destinations revealed."},
+        {"title": "Budget Travel Tips", "description": "Travel hacks that save you serious money."},
+        {"title": "Destination Guides", "description": "Complete guides to the world's best destinations."},
+    ],
+    "RichFood": [
+        {"title": "Quick & Easy Recipes", "description": "Delicious meals you can make in under 30 minutes."},
+        {"title": "Food Hacks", "description": "Kitchen hacks that save time and money."},
+        {"title": "Food Reviews & Taste Tests", "description": "Honest reviews of trending foods and restaurants."},
+    ],
+    "RichFitness": [
+        {"title": "Home Workouts", "description": "Effective workouts you can do at home — no gym required."},
+        {"title": "Nutrition & Diet", "description": "Nutrition tips backed by science."},
+        {"title": "Fitness Mistakes", "description": "Common workout mistakes that are holding you back."},
+    ],
+    "RichEducation": [
+        {"title": "Study Tips & Hacks", "description": "Learn faster, remember more — proven study strategies."},
+        {"title": "Life Skills", "description": "Essential skills they don't teach in school."},
+        {"title": "Fascinating Facts", "description": "Facts that will change how you see the world."},
+    ],
+    "RichLifestyle": [
+        {"title": "Morning Routines", "description": "Morning routines of successful people — decoded."},
+        {"title": "Productivity Hacks", "description": "Work smarter, not harder — productivity strategies."},
+        {"title": "Self Improvement", "description": "Daily habits that transform your life."},
+    ],
+    "HowToMeditate": [
+        {"title": "Guided Meditations", "description": "Follow-along meditation sessions for every level."},
+        {"title": "Meditation for Sleep", "description": "Calming meditations to help you fall asleep."},
+        {"title": "Mindfulness & Stress Relief", "description": "Techniques to reduce stress and find inner calm."},
+    ],
+    "RichBeauty": [
+        {"title": "Skincare Routines", "description": "Skincare routines that actually work — dermatologist-backed."},
+        {"title": "Makeup Tutorials", "description": "Makeup tutorials for every skill level."},
+        {"title": "Drugstore vs Luxury", "description": "Are expensive products worth it? We test them."},
+    ],
+    "RichCooking": [
+        {"title": "Recipes for Beginners", "description": "Step-by-step recipes anyone can follow."},
+        {"title": "Pro Cooking Techniques", "description": "Restaurant techniques you can use at home."},
+        {"title": "Meal Prep", "description": "Weekly meal prep guides that save time and money."},
+    ],
+    "RichFamily": [
+        {"title": "Parenting Tips", "description": "Real parenting advice from real experience."},
+        {"title": "Family Activities", "description": "Fun activities and adventures for the whole family."},
+    ],
+    "RichFashion": [
+        {"title": "Affordable Fashion Finds", "description": "Looking great without breaking the bank."},
+        {"title": "Style Tips", "description": "Style fundamentals that make anyone look put-together."},
+        {"title": "Trend Reports", "description": "What's trending and what's actually worth trying."},
+    ],
+    "RichCars": [
+        {"title": "Car Reviews", "description": "Honest reviews and comparisons of popular vehicles."},
+        {"title": "Maintenance Tips", "description": "Car maintenance tips that save you money at the shop."},
+        {"title": "Best Cars by Budget", "description": "The best cars you can buy at every price point."},
+    ],
+    "RichDIY": [
+        {"title": "Home Improvement", "description": "Step-by-step home improvement projects anyone can tackle."},
+        {"title": "DIY Crafts & Builds", "description": "Creative builds and crafts for your home."},
+        {"title": "Tool Reviews", "description": "The best tools for DIY projects — tested and reviewed."},
+    ],
+    "RichDesign": [
+        {"title": "Graphic Design Tutorials", "description": "Learn graphic design — from beginner to pro."},
+        {"title": "UI/UX Breakdowns", "description": "What makes great design work — real examples analyzed."},
+        {"title": "Design Tool Reviews", "description": "Adobe, Figma, Canva — which tools are worth it?"},
+    ],
+    "RichBusiness": [
+        {"title": "Business Strategies", "description": "Proven business strategies for entrepreneurs."},
+        {"title": "Side Hustle Ideas", "description": "Side hustles with real income potential."},
+        {"title": "Marketing & Sales", "description": "Marketing tactics that drive real results."},
+    ],
+    "CumquatMotivation": [
+        {"title": "Motivational Speeches", "description": "Powerful speeches for when life gets tough."},
+        {"title": "Mindset & Discipline", "description": "Building the mindset of a champion."},
+        {"title": "Success Stories", "description": "Stories of people who made the impossible happen."},
+    ],
+    "RichPhotography": [
+        {"title": "Photography Tips", "description": "Tips and techniques to take better photos."},
+        {"title": "Editing Tutorials", "description": "Lightroom, Photoshop, and mobile editing guides."},
+        {"title": "Camera & Gear Reviews", "description": "Camera gear reviews for every budget."},
+    ],
+    "RichAnimation": [
+        {"title": "Animation Tutorials", "description": "Learn animation — 2D, 3D, and motion graphics."},
+        {"title": "Tool Reviews", "description": "After Effects, Blender, Procreate — reviewed."},
+    ],
+    "RichDance": [
+        {"title": "Dance Tutorials", "description": "Step-by-step dance tutorials for every style."},
+        {"title": "Trending Moves", "description": "Learn the latest viral dance moves and challenges."},
+    ],
+    "RichKids": [
+        {"title": "Fun Facts & Science", "description": "Mind-blowing facts and science experiments for kids."},
+        {"title": "Stories & Adventures", "description": "Entertaining stories that kids love."},
+    ],
+    "RichMemes": [
+        {"title": "Daily Meme Compilations", "description": "The internet's funniest memes — curated daily."},
+        {"title": "Internet Culture Explained", "description": "Understanding the memes and trends everyone's talking about."},
+    ],
+    "RichVlogging": [
+        {"title": "Day in the Life", "description": "Real day-in-the-life vlogs from a content creator."},
+        {"title": "Behind the Scenes", "description": "How the content gets made — behind the scenes."},
+    ],
+}
+
+
+def create_playlist(title, description, access_token, privacy="public"):
+    """Create a YouTube playlist via the API.
+
+    Returns playlist ID on success, 'quota' on quota error, None on other error.
+    """
+    url = "https://www.googleapis.com/youtube/v3/playlists?part=snippet,status"
+    payload = json.dumps({
+        "snippet": {
+            "title": title,
+            "description": description,
+            "defaultLanguage": "en",
+        },
+        "status": {
+            "privacyStatus": privacy,
+        }
+    }).encode("utf-8")
+
+    req = Request(url, data=payload, headers={
+        "Authorization": f"Bearer {access_token}",
+        "Content-Type": "application/json",
+    }, method="POST")
+
+    try:
+        with urlopen(req) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+            return data.get("id")
+    except HTTPError as e:
+        err = e.read().decode("utf-8") if hasattr(e, "read") else str(e)
+        if "quota" in err.lower() or e.code == 403:
+            return "quota"
+        print(f"    Playlist create error: {err[:200]}")
+        return None
+
+
+def list_playlists(access_token):
+    """List existing playlists for a channel. Returns list of {id, title}."""
+    url = "https://www.googleapis.com/youtube/v3/playlists?part=snippet&mine=true&maxResults=50"
+    req = Request(url, headers={"Authorization": f"Bearer {access_token}"})
+    try:
+        with urlopen(req) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+            return [{"id": item["id"], "title": item["snippet"]["title"]}
+                    for item in data.get("items", [])]
+    except HTTPError as e:
+        err = e.read().decode("utf-8") if hasattr(e, "read") else str(e)
+        if "quota" in err.lower() or e.code == 403:
+            return "quota"
+        return []
+
+
+def ensure_playlists(channel_name, access_token):
+    """Create missing playlists for a channel. Returns 'quota' on quota error."""
+    playlists_config = CHANNEL_PLAYLISTS.get(channel_name, [])
+    if not playlists_config:
+        return []
+
+    existing = list_playlists(access_token)
+    if existing == "quota":
+        return "quota"
+
+    existing_titles = {p["title"] for p in existing} if existing else set()
+    created = []
+
+    for pl in playlists_config:
+        if pl["title"] in existing_titles:
+            print(f"    Playlist exists: {pl['title']}")
+            continue
+
+        print(f"    Creating playlist: {pl['title']}...")
+        result = create_playlist(pl["title"], pl["description"], access_token)
+        if result == "quota":
+            return "quota"
+        elif result:
+            print(f"    -> Created: {result}")
+            created.append({"id": result, "title": pl["title"]})
+        else:
+            print(f"    -> FAILED to create playlist")
+        time.sleep(0.5)
+
+    return created
+
 
 def refresh_channel_token(creds):
     """Refresh OAuth token for a channel."""
@@ -942,6 +1216,23 @@ def main():
                     save_progress(progress)
                 else:
                     print(f"  -> snippet.country update FAILED")
+
+            # Create playlists for this channel
+            if not quota_hit:
+                # Resolve the channel name key for playlists
+                playlist_key = opt_key if opt_key else token_name
+                if playlist_key not in CHANNEL_PLAYLISTS:
+                    playlist_key = token_name.replace(" ", "")
+                playlists_done = set(progress.get("playlists_created", []))
+                if playlist_key in CHANNEL_PLAYLISTS and playlist_key not in playlists_done:
+                    print(f"  Setting up playlists...")
+                    pl_result = ensure_playlists(playlist_key, access_token)
+                    if pl_result == "quota":
+                        print(f"  -> QUOTA LIMIT on playlist creation — stopping.")
+                        quota_hit = True
+                    else:
+                        progress.setdefault("playlists_created", []).append(playlist_key)
+                        save_progress(progress)
 
             time.sleep(1)  # Rate limit
 

@@ -444,6 +444,9 @@ def make_description(channel, title, script_path):
         "Portfolio: https://richardabreu.studio",
         "Community: https://vibeconnectionlounge.com",
         "",
+        "AI DISCLOSURE: This video was created with the assistance of AI tools",
+        "including AI-generated voiceover and visuals.",
+        "",
         "\u00a9 2026 Cumquat Vibes Media",
         "",
     ])
@@ -494,6 +497,7 @@ def upload_video(filepath, title, description, tags, category_id, access_token, 
         "status": {
             "privacyStatus": privacy,
             "selfDeclaredMadeForKids": False,
+            "containsSyntheticMedia": True,
         },
     }
 

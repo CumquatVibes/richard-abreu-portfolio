@@ -1110,17 +1110,83 @@
       "handle": "@richmusic99-q1d",
       "type": "rich_brand",
       "faceless": true,
-      "niche": "Music production, beat making, music theory, artist breakdowns",
+      "niche": "Music analysis, genre-swap covers, era-swap remakes, music news, artist breakdowns",
       "sub_topics": [
-        "beat making tutorials",
-        "music theory",
-        "producer tips",
-        "sample packs",
-        "mixing/mastering",
-        "artist breakdowns"
+        "genre swap covers — pop to rap, rap to pop, country to EDM, etc.",
+        "era swap remakes — modern songs remade in 80s, 90s, 70s styles",
+        "music news and industry updates",
+        "song analysis and music theory breakdowns",
+        "artist stories and career deep dives",
+        "AI music production and generation",
+        "original music creation and beat making"
       ],
+      "content_series": {
+        "genre_swap": {
+          "name": "Genre Swap",
+          "description": "Take a famous song from one genre and completely remake it in another. Pop songs become rap bangers, rap songs become pop anthems, country goes EDM, etc.",
+          "format": "music_production",
+          "examples": [
+            "What if 'Shape of You' by Ed Sheeran was a RAP song?",
+            "What if 'Lose Yourself' by Eminem was a POP ballad?",
+            "What if 'Old Town Road' was an 80s synth track?",
+            "What if 'Blinding Lights' by The Weeknd was a COUNTRY song?",
+            "What if 'Bohemian Rhapsody' was a TRAP beat?",
+            "What if 'Bad Guy' by Billie Eilish was a JAZZ standard?",
+            "What if 'Hotline Bling' by Drake was a REGGAE song?",
+            "What if 'Rolling in the Deep' by Adele was HIP-HOP?",
+            "What if 'Uptown Funk' was a PUNK ROCK song?",
+            "What if 'Levitating' by Dua Lipa was R&B?"
+          ],
+          "video_structure": "intro (original clip) → breakdown of genre elements → AI remake → side-by-side comparison → outro"
+        },
+        "era_swap": {
+          "name": "Era Swap",
+          "description": "Take modern hit songs and remake them as if they were produced in a completely different decade. What would today's hits sound like in the 80s? The 50s? The 2000s?",
+          "format": "music_production",
+          "examples": [
+            "What if 'As It Was' by Harry Styles was made in the 1980s?",
+            "What if 'Anti-Hero' by Taylor Swift was a 1960s doo-wop song?",
+            "What if 'Flowers' by Miley Cyrus was made in the 1990s?",
+            "What if 'Cruel Summer' was a 1970s disco track?",
+            "What if 'Paint the Town Red' by Doja Cat was from the 2000s?",
+            "What if 'Vampire' by Olivia Rodrigo was an 80s power ballad?",
+            "What if 'Espresso' by Sabrina Carpenter was a 50s swing song?",
+            "What if 'Greedy' by Tate McRae was made in the 1970s funk era?",
+            "What if 'Mockingbird' by Eminem was a 1940s big band song?",
+            "What if 'Seven Nation Army' was made in the synth-wave 80s?"
+          ],
+          "video_structure": "intro (original hit) → era context/history → AI remake in that era → reaction/comparison → outro"
+        },
+        "music_news": {
+          "name": "Music News",
+          "description": "Weekly roundup of music industry news, album drops, artist drama, chart analysis, and trending music topics.",
+          "format": "listicle",
+          "posting_frequency": "1x/week"
+        }
+      },
+      "music_generation": {
+        "engine": "elevenlabs",
+        "capabilities": [
+          "Generate full song remakes in different genres",
+          "Create era-appropriate instrumentals (80s synth, 90s grunge, etc.)",
+          "AI vocal generation for cover versions",
+          "Sound design for genre-specific production"
+        ],
+        "style_guides": {
+          "80s": "heavy reverb, gated drums, analog synths, DX7 electric piano, chorus effect on everything",
+          "90s": "grunge guitars, boom-bap drums, R&B slow jams, trip-hop, lo-fi aesthetic",
+          "70s": "funk bass, disco strings, wah guitar, analog warmth, Motown soul",
+          "60s": "surf rock, doo-wop harmonies, Motown, British invasion, psychedelic",
+          "50s": "rockabilly, swing, big band, doo-wop, early rock and roll",
+          "2000s": "crunk, emo pop-punk, R&B with heavy bass, Neptunes production, auto-tune era",
+          "pop_to_rap": "keep melody as hook, add 808s, trap hi-hats, write new verses in rap style",
+          "rap_to_pop": "simplify beat, add pop chord progression, melodic vocal, radio-friendly mix",
+          "country_to_edm": "replace acoustic with synth, add drops, keep storytelling in lyrics",
+          "rock_to_jazz": "reharmonize chords, swing rhythm, add jazz instrumentation"
+        }
+      },
       "formats": [
-        "tutorial",
+        "music_production",
         "explainer",
         "listicle",
         "shorts_facts"
@@ -1133,15 +1199,20 @@
         "bg": "#1A0A2A"
       },
       "posting": {
-        "long_form": "2x/week",
-        "shorts": "3x/week"
+        "long_form": "3x/week",
+        "shorts": "daily",
+        "genre_swap": "1x/week",
+        "era_swap": "1x/week",
+        "music_news": "1x/week"
       },
       "monetization": [
         "DAW/plugin affiliates",
         "sample pack affiliates",
-        "audio gear sponsors"
+        "audio gear sponsors",
+        "music streaming royalties",
+        "AI music tool affiliates"
       ],
-      "thumbnail_style": "waveform visuals + purple neon + studio aesthetic",
+      "thumbnail_style": "split-screen original vs remake + genre label + bold text + purple neon glow",
       "channel_id": "UCCI_ynXNuutXGrzWDYzUZiA"
     },
     "rich_finance": {

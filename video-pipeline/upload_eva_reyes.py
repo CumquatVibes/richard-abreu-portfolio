@@ -136,6 +136,7 @@ def upload_video(video_path, title, description, tags, cat_id, token):
         "status": {
             "privacyStatus": "public",
             "selfDeclaredMadeForKids": False,
+            "containsSyntheticMedia": True,
         },
     }
 

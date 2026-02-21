@@ -1648,6 +1648,7 @@ class YouTubeUploader:
             "status": {
                 "privacyStatus": privacy,
                 "selfDeclaredMadeForKids": False,
+                "containsSyntheticMedia": True,
                 "notifySubscribers": notify_subscribers,
             },
         }
