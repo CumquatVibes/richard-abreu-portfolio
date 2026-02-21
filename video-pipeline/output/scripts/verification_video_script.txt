@@ -1,0 +1,205 @@
+VIDEO CONTENT PIPELINE — Google OAuth Verification Video
+=========================================================
+
+PURPOSE: Demonstrate how the "Video Content Pipeline" app uses the YouTube
+Data API v3, what data it accesses, and how OAuth consent is obtained.
+
+TARGET: Google Trust & Safety verification team
+FORMAT: Screen recording with narration (3-5 minutes)
+RESOLUTION: 1080p minimum
+
+=========================================================
+SCRIPT
+=========================================================
+
+[SCREEN: Show richardabreu.studio scrolled to the "Video Content Pipeline" section]
+
+NARRATOR:
+This is the Video Content Pipeline — an internal automation tool built by
+Cumquat Vibes Media to manage our network of YouTube channels. I'm Richard
+Abreu, the sole owner and operator of this application. Let me walk you
+through exactly how it works and what YouTube data it accesses.
+
+---
+
+[CHAPTER 1: What the App Does]
+
+[SCREEN: Show the video-pipeline folder structure in a code editor or terminal]
+
+NARRATOR:
+The Video Content Pipeline is a Python-based command-line tool that runs
+locally on my machine. It is NOT a web application and is NOT publicly
+available. It is used exclusively by me to manage YouTube channels that I
+own through the Cumquat Vibes Media brand.
+
+The app handles four main tasks:
+1. Script generation for video content
+2. Video production with AI-assisted voiceover and visuals
+3. Uploading finished videos to the correct YouTube channels
+4. Optimizing channel metadata like descriptions, keywords, and playlists
+
+---
+
+[CHAPTER 2: OAuth Consent Flow]
+
+[SCREEN: Run "python3 setup_channel_auth.py" and show the OAuth flow]
+
+NARRATOR:
+Here's how authorization works. When I set up a new channel, I run the
+setup script which generates a Google OAuth consent URL. Let me show you.
+
+[SCREEN: Show the consent URL being generated in terminal]
+
+NARRATOR:
+The script generates an OAuth URL that I open in my browser. This takes me
+to Google's standard consent screen.
+
+[SCREEN: Show Google's OAuth consent screen in browser — highlight the app name
+"Video Content Pipeline" and the permissions being requested]
+
+NARRATOR:
+As you can see, it clearly shows the app name "Video Content Pipeline" and
+requests two specific permissions:
+- "Manage your YouTube account" — this allows the app to update channel
+  descriptions, keywords, country settings, and create playlists.
+- "Manage your YouTube videos" — this allows the app to upload videos with
+  titles, descriptions, and tags.
+
+I click "Allow" to grant access. This is the same Google consent screen
+every user would see.
+
+[SCREEN: Show the redirect back to localhost with the authorization code]
+
+NARRATOR:
+After I authorize, Google redirects back to localhost with an authorization
+code. The script exchanges this code for a refresh token, which is stored
+locally in a JSON file on my machine. No tokens are sent to any external
+server.
+
+---
+
+[CHAPTER 3: Uploading Videos (youtube.upload scope)]
+
+[SCREEN: Show running "python3 upload_to_youtube.py" in the terminal]
+
+NARRATOR:
+Let me demonstrate a video upload. When I run the upload script, it:
+
+1. Reads the video files from the local output directory
+2. Matches each video to the correct channel based on the filename prefix
+3. Refreshes the OAuth token for that specific channel
+4. Uploads the video using YouTube's resumable upload API
+
+[SCREEN: Show the upload in progress — the channel name, title, and status]
+
+NARRATOR:
+Each upload includes:
+- A title derived from the video filename
+- An SEO-optimized description with timestamps and relevant links
+- Tags relevant to the video topic
+- The correct YouTube category
+- An AI content disclosure label — because our videos use AI-generated
+  voiceover and visuals, we set "containsSyntheticMedia" to true on every
+  upload, as required by YouTube's policies.
+
+[SCREEN: Show a successfully uploaded video in YouTube Studio]
+
+NARRATOR:
+Here's the uploaded video in YouTube Studio. You can see the title,
+description, tags, and the AI-generated content disclosure are all set
+correctly.
+
+---
+
+[CHAPTER 4: Channel Optimization (youtube scope)]
+
+[SCREEN: Show running "python3 optimize_all_channels.py audit"]
+
+NARRATOR:
+Now let me show the channel optimization feature. This is what uses the
+"Manage your YouTube account" permission.
+
+When I run an audit, the tool checks each channel's current state:
+- Does it have a description?
+- Are keywords set?
+- Is the country configured for monetization?
+- Is the default language set?
+
+[SCREEN: Show the audit output with channel statuses]
+
+NARRATOR:
+For channels that need updates, I run the tool in update mode. It sets:
+- An SEO-optimized channel description
+- Relevant search keywords
+- Country set to "US" for monetization eligibility
+- Default language set to English
+- And creates organized playlists for the channel's content
+
+[SCREEN: Show a channel's updated About page in YouTube Studio]
+
+NARRATOR:
+Here's a channel after optimization. The description is filled in with
+relevant content, keywords are set, and playlists are organized by topic.
+
+---
+
+[CHAPTER 5: Data Privacy & Security]
+
+[SCREEN: Show the local file structure — channel_tokens.json, .gitignore]
+
+NARRATOR:
+All OAuth tokens are stored locally on my machine in a JSON file. They are
+listed in .gitignore and are never committed to version control or sent to
+any external service.
+
+[SCREEN: Show the .gitignore entries for sensitive files]
+
+NARRATOR:
+The app does not:
+- Collect any third-party user data
+- Share data with any external service beyond Google's YouTube API
+- Store any user data on remote servers
+- Allow any user other than the channel owner to authorize
+
+This is a single-user, locally-run tool for managing my own YouTube
+channels. No one else has access to it or the tokens it stores.
+
+---
+
+[CHAPTER 6: Summary]
+
+[SCREEN: Show richardabreu.studio with the Video Content Pipeline section visible]
+
+NARRATOR:
+To summarize — the Video Content Pipeline is an internal automation tool
+used exclusively by me, Richard Abreu, to manage YouTube channels owned by
+Cumquat Vibes Media. It uses the YouTube Data API to:
+
+1. Upload produced videos with proper metadata and AI disclosure labels
+2. Optimize channel descriptions, keywords, and settings
+3. Create and manage playlists
+
+All data stays local. No third-party data is collected. All usage complies
+with the YouTube API Services Terms of Service.
+
+Thank you for reviewing this application.
+
+=========================================================
+END OF SCRIPT
+=========================================================
+
+RECORDING INSTRUCTIONS:
+1. Use screen recording software (QuickTime, OBS, or Loom)
+2. Record at 1080p or higher
+3. Show real terminal output — Google wants to see the actual app running
+4. Show the OAuth consent screen in the browser
+5. Show YouTube Studio to verify uploads and channel settings
+6. Keep it under 5 minutes
+7. Upload as UNLISTED on YouTube, then paste the URL in the verification form
+
+GOOGLE VERIFICATION FORM NOTES:
+- In the "YouTube API use" section, paste the video URL
+- In the "Justification" field, explain: "This is a single-user internal
+  tool for managing YouTube channels owned by Cumquat Vibes Media. The
+  channel owner (Richard Abreu) is the sole user. The app runs locally
+  and does not collect third-party data."
