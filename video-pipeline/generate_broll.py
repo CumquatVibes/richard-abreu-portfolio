@@ -13,7 +13,7 @@ from urllib.error import HTTPError
 
 API_KEY = os.environ.get("GEMINI_API_KEY", "")
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-MODEL = "gemini-2.5-flash-preview-image-generation"
+MODEL = "gemini-2.5-flash-image"
 
 
 def extract_visuals(script_path):

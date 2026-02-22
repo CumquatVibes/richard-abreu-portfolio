@@ -1,5 +1,5 @@
 {
-  "uploaded": 5,
+  "uploaded": 11,
   "total": 21,
   "rate_limited": [],
   "results": [
@@ -288,6 +288,283 @@
       "file": "RichHorror_5_unsolved_mysteries_that_still_haunt_investigators.mp4",
       "channel": "RichHorror",
       "target_channel_id": "UCoWN7G6XuFBPgM-m3d1ZMvQ",
+      "video_id": null,
+      "status": "failed"
+    },
+    {
+      "file": "RichHorror_the_most_haunted_places_on_earth_you_should_never_visit_alone.mp4",
+      "channel": "RichHorror",
+      "target_channel_id": "UCoWN7G6XuFBPgM-m3d1ZMvQ",
+      "video_id": null,
+      "status": "failed"
+    },
+    {
+      "file": "RichMind_7_Dark_Psychology_Tricks_That_Manipulators_Use_on_You_Every_Day.mp4",
+      "channel": "RichMind",
+      "target_channel_id": "UCvrGunMx9dVfAeGYLQYoaLw",
+      "video_id": null,
+      "status": "failed"
+    },
+    {
+      "file": "RichMind_Why_You_Cant_Stop_Overthinking_The_Psychology_Behind_It.mp4",
+      "channel": "RichMind",
+      "target_channel_id": "UCvrGunMx9dVfAeGYLQYoaLw",
+      "video_id": null,
+      "status": "failed"
+    },
+    {
+      "file": "RichMusic_What_If_Blinding_Lights_by_The_Weeknd_Was_Made_in_the_1970s_Disco_Era.mp4",
+      "channel": "RichMusic",
+      "target_channel_id": "UCCI_ynXNuutXGrzWDYzUZiA",
+      "video_id": null,
+      "status": "failed"
+    },
+    {
+      "file": "RichMusic_What_If_Lose_Yourself_by_Eminem_Was_a_POP_Ballad.mp4",
+      "channel": "RichMusic",
+      "target_channel_id": "UCCI_ynXNuutXGrzWDYzUZiA",
+      "video_id": null,
+      "status": "failed"
+    },
+    {
+      "file": "RichMusic_What_If_Shape_of_You_by_Ed_Sheeran_Was_a_RAP_Song.mp4",
+      "channel": "RichMusic",
+      "target_channel_id": "UCCI_ynXNuutXGrzWDYzUZiA",
+      "video_id": null,
+      "status": "failed"
+    },
+    {
+      "file": "RichPets_5_Signs_Your_Dog_is_Secretly_Unhappy_And_How_to_Fix_It.mp4",
+      "channel": "RichPets",
+      "target_channel_id": "UCqPWKbwAGtKfiay4fB8bF1g",
+      "video_id": null,
+      "status": "failed"
+    },
+    {
+      "file": "RichPets_Top_7_Cat_Breeds_That_Act_Like_Dogs.mp4",
+      "channel": "RichPets",
+      "target_channel_id": "UCqPWKbwAGtKfiay4fB8bF1g",
+      "video_id": null,
+      "status": "failed"
+    },
+    {
+      "file": "RichTech_7_AI_Tools_That_Will_Replace_Your_Entire_Workflow_in_2026.mp4",
+      "channel": "RichTech",
+      "target_channel_id": "UCH7Om9fi1IA3SrRXmx2vApQ",
+      "video_id": null,
+      "status": "failed"
+    },
+    {
+      "file": "RichTech_Why_Everyone_Is_Wrong_About_the_New_iPhone.mp4",
+      "channel": "RichTech",
+      "target_channel_id": "UCH7Om9fi1IA3SrRXmx2vApQ",
+      "video_id": null,
+      "status": "failed"
+    },
+    {
+      "file": "EvaReyes_5_Toxic_Habits_Women_Need_to_Stop_Normalizing_in_2026.mp4",
+      "channel": "EvaReyes",
+      "target_channel_id": "UCsp5NIA6aeQmqdn7omBqkYg",
+      "video_id": "8Pv9SGBsGFg",
+      "url": "https://youtube.com/watch?v=8Pv9SGBsGFg",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true
+    },
+    {
+      "file": "EvaReyes_7_Signs_Youre_a_Stronger_Woman_Than_You_Think.mp4",
+      "channel": "EvaReyes",
+      "target_channel_id": "UCsp5NIA6aeQmqdn7omBqkYg",
+      "video_id": "E6aH3IS75iI",
+      "url": "https://youtube.com/watch?v=E6aH3IS75iI",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true
+    },
+    {
+      "file": "EvaReyes_How_to_Build_Unshakeable_Confidence_as_a_Woman_Even_If_You_Feel_Invisible.mp4",
+      "channel": "EvaReyes",
+      "target_channel_id": "UCsp5NIA6aeQmqdn7omBqkYg",
+      "video_id": "e5EgCIIEFYg",
+      "url": "https://youtube.com/watch?v=e5EgCIIEFYg",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true
+    },
+    {
+      "file": "HowToUseAI_ChatGPT_Prompt_Engineering_The_Complete_Beginners_Guide.mp4",
+      "channel": "HowToUseAI",
+      "target_channel_id": "UCkrCbfr9qQkfCYw1WkCILKQ",
+      "video_id": "WA8tB66loos",
+      "url": "https://youtube.com/watch?v=WA8tB66loos",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true
+    },
+    {
+      "file": "HowToUseAI_How_to_Build_an_AI_Automation_That_Makes_Money_While_You_Sleep.mp4",
+      "channel": "HowToUseAI",
+      "target_channel_id": "UCkrCbfr9qQkfCYw1WkCILKQ",
+      "video_id": "PMOyyNRzQWA",
+      "url": "https://youtube.com/watch?v=PMOyyNRzQWA",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true
+    },
+    {
+      "file": "RichHorror_5_unsolved_mysteries_that_still_haunt_investigators.mp4",
+      "channel": "RichHorror",
+      "target_channel_id": "UCoWN7G6XuFBPgM-m3d1ZMvQ",
+      "video_id": null,
+      "status": "failed"
+    },
+    {
+      "file": "RichHorror_the_most_haunted_places_on_earth_you_should_never_visit_alone.mp4",
+      "channel": "RichHorror",
+      "target_channel_id": "UCoWN7G6XuFBPgM-m3d1ZMvQ",
+      "video_id": null,
+      "status": "failed"
+    },
+    {
+      "file": "RichMind_7_Dark_Psychology_Tricks_That_Manipulators_Use_on_You_Every_Day.mp4",
+      "channel": "RichMind",
+      "target_channel_id": "UCvrGunMx9dVfAeGYLQYoaLw",
+      "video_id": null,
+      "status": "failed"
+    },
+    {
+      "file": "RichMind_Why_You_Cant_Stop_Overthinking_The_Psychology_Behind_It.mp4",
+      "channel": "RichMind",
+      "target_channel_id": "UCvrGunMx9dVfAeGYLQYoaLw",
+      "video_id": null,
+      "status": "failed"
+    },
+    {
+      "file": "RichMusic_What_If_Blinding_Lights_by_The_Weeknd_Was_Made_in_the_1970s_Disco_Era.mp4",
+      "channel": "RichMusic",
+      "target_channel_id": "UCCI_ynXNuutXGrzWDYzUZiA",
+      "video_id": null,
+      "status": "failed"
+    },
+    {
+      "file": "RichMusic_What_If_Lose_Yourself_by_Eminem_Was_a_POP_Ballad.mp4",
+      "channel": "RichMusic",
+      "target_channel_id": "UCCI_ynXNuutXGrzWDYzUZiA",
+      "video_id": null,
+      "status": "failed"
+    },
+    {
+      "file": "RichMusic_What_If_Shape_of_You_by_Ed_Sheeran_Was_a_RAP_Song.mp4",
+      "channel": "RichMusic",
+      "target_channel_id": "UCCI_ynXNuutXGrzWDYzUZiA",
+      "video_id": null,
+      "status": "failed"
+    },
+    {
+      "file": "RichPets_5_Signs_Your_Dog_is_Secretly_Unhappy_And_How_to_Fix_It.mp4",
+      "channel": "RichPets",
+      "target_channel_id": "UCqPWKbwAGtKfiay4fB8bF1g",
+      "video_id": null,
+      "status": "failed"
+    },
+    {
+      "file": "RichPets_Top_7_Cat_Breeds_That_Act_Like_Dogs.mp4",
+      "channel": "RichPets",
+      "target_channel_id": "UCqPWKbwAGtKfiay4fB8bF1g",
+      "video_id": null,
+      "status": "failed"
+    },
+    {
+      "file": "RichTech_7_AI_Tools_That_Will_Replace_Your_Entire_Workflow_in_2026.mp4",
+      "channel": "RichTech",
+      "target_channel_id": "UCH7Om9fi1IA3SrRXmx2vApQ",
+      "video_id": null,
+      "status": "failed"
+    },
+    {
+      "file": "RichTech_Why_Everyone_Is_Wrong_About_the_New_iPhone.mp4",
+      "channel": "RichTech",
+      "target_channel_id": "UCH7Om9fi1IA3SrRXmx2vApQ",
+      "video_id": null,
+      "status": "failed"
+    },
+    {
+      "file": "RichHorror_5_unsolved_mysteries_that_still_haunt_investigators.mp4",
+      "channel": "RichHorror",
+      "target_channel_id": "UCoWN7G6XuFBPgM-m3d1ZMvQ",
+      "video_id": "xFeLHsIssx8",
+      "url": "https://youtube.com/watch?v=xFeLHsIssx8",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true
+    },
+    {
+      "file": "RichHorror_the_most_haunted_places_on_earth_you_should_never_visit_alone.mp4",
+      "channel": "RichHorror",
+      "target_channel_id": "UCoWN7G6XuFBPgM-m3d1ZMvQ",
+      "video_id": null,
+      "status": "failed"
+    },
+    {
+      "file": "RichMind_7_Dark_Psychology_Tricks_That_Manipulators_Use_on_You_Every_Day.mp4",
+      "channel": "RichMind",
+      "target_channel_id": "UCvrGunMx9dVfAeGYLQYoaLw",
+      "video_id": null,
+      "status": "failed"
+    },
+    {
+      "file": "RichMind_Why_You_Cant_Stop_Overthinking_The_Psychology_Behind_It.mp4",
+      "channel": "RichMind",
+      "target_channel_id": "UCvrGunMx9dVfAeGYLQYoaLw",
+      "video_id": null,
+      "status": "failed"
+    },
+    {
+      "file": "RichMusic_What_If_Blinding_Lights_by_The_Weeknd_Was_Made_in_the_1970s_Disco_Era.mp4",
+      "channel": "RichMusic",
+      "target_channel_id": "UCCI_ynXNuutXGrzWDYzUZiA",
+      "video_id": null,
+      "status": "failed"
+    },
+    {
+      "file": "RichMusic_What_If_Lose_Yourself_by_Eminem_Was_a_POP_Ballad.mp4",
+      "channel": "RichMusic",
+      "target_channel_id": "UCCI_ynXNuutXGrzWDYzUZiA",
+      "video_id": null,
+      "status": "failed"
+    },
+    {
+      "file": "RichMusic_What_If_Shape_of_You_by_Ed_Sheeran_Was_a_RAP_Song.mp4",
+      "channel": "RichMusic",
+      "target_channel_id": "UCCI_ynXNuutXGrzWDYzUZiA",
+      "video_id": null,
+      "status": "failed"
+    },
+    {
+      "file": "RichPets_5_Signs_Your_Dog_is_Secretly_Unhappy_And_How_to_Fix_It.mp4",
+      "channel": "RichPets",
+      "target_channel_id": "UCqPWKbwAGtKfiay4fB8bF1g",
+      "video_id": null,
+      "status": "failed"
+    },
+    {
+      "file": "RichPets_Top_7_Cat_Breeds_That_Act_Like_Dogs.mp4",
+      "channel": "RichPets",
+      "target_channel_id": "UCqPWKbwAGtKfiay4fB8bF1g",
+      "video_id": null,
+      "status": "failed"
+    },
+    {
+      "file": "RichTech_7_AI_Tools_That_Will_Replace_Your_Entire_Workflow_in_2026.mp4",
+      "channel": "RichTech",
+      "target_channel_id": "UCH7Om9fi1IA3SrRXmx2vApQ",
+      "video_id": null,
+      "status": "failed"
+    },
+    {
+      "file": "RichTech_Why_Everyone_Is_Wrong_About_the_New_iPhone.mp4",
+      "channel": "RichTech",
+      "target_channel_id": "UCH7Om9fi1IA3SrRXmx2vApQ",
       "video_id": null,
       "status": "failed"
     },

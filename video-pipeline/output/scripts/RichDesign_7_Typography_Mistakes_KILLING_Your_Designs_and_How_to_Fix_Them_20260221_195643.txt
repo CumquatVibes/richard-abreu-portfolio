@@ -1,0 +1,159 @@
+---
+title: 7 Typography Mistakes KILLING Your Designs (and How to Fix Them)
+channel: RichDesign
+format: tutorial
+---
+
+## Hook (0:00-0:30)
+
+**[SOUND:** Dramatic sting, quick cuts of visually unpleasant typography examples flashing on screen]
+
+**[VISUAL:** Rapid montage of bad typography: overlapping text, illegible fonts, jarring color combinations. Each example flashes for less than a second.]
+
+**(Narrator):** Did you know that poor typography can reduce comprehension by up to 40%? FORTY PERCENT! That's like throwing away almost half your message.
+
+**[VISUAL:** Freeze frame on one particularly egregious example of bad typography, maybe text mashed up against the edge of the frame.]
+
+**(Narrator):** Are you unknowingly sabotaging your designs with common typography mistakes? Today, we're diving deep into 7 typography sins that are absolutely killing your work, and more importantly, exactly how to fix them. Let's get started!
+
+**[VISUAL:** RichDesign intro animation, logo, and title card: "7 Typography Mistakes KILLING Your Designs (and How to Fix Them)"]
+
+## Chapter 1: Ignoring Hierarchy (0:30-2:00)
+
+**(Narrator):** First up: Ignoring Hierarchy. This is the cardinal sin of typography. Without clear visual hierarchy, your audience doesn't know where to look first, and their eyes end up wandering aimlessly, leading to confusion and frustration.
+
+**[VISUAL:** Mockup of a website or poster with text all in the same size, weight, and color. It looks overwhelming and difficult to read. Add text overlay: "BAD HIERARCHY."]
+
+**(Narrator):** Think of your design like a map. Hierarchy guides the user through the information in a logical and digestible way. The most important element should be the most prominent, followed by supporting information.
+
+**[VISUAL:** The same mockup as before, but now with clear hierarchy: headline in large, bold font, subheadings in a smaller, but still distinct font, and body copy in a legible size. Add text overlay: "GOOD HIERARCHY."]
+
+**(Narrator):** How do we achieve this? It's all about contrast! Contrast in size, weight, color, and even spacing. Make your headlines significantly larger than your body copy. Use bold or heavier weights for emphasis. Introduce contrasting colors to draw attention to key elements. A simple rule: ask yourself, "What do I want the viewer to see FIRST?" Then, make that the most prominent element on the page. For example, headlines should be bigger and bolder, subheadings smaller, and body text the smallest.
+
+**[VISUAL:** Split screen. On one side, show a design with weak hierarchy. On the other side, show the same design with strong hierarchy. Zoom in on the differences in size, weight, and color.]
+
+**(Narrator):** Another key is spacing. Use whitespace strategically to separate different sections and create visual breathing room. Don’t let elements crowd each other out. Think about negative space – it’s just as important as the text itself!
+
+## Chapter 2: Font Pairing Fails (2:00-3:30)
+
+**(Narrator):** Next, let's talk about Font Pairing Fails. Choosing the wrong fonts to pair together is like wearing socks with sandals – it just doesn't work! A bad font pairing can make your design look amateurish and unprofessional.
+
+**[VISUAL:** Examples of terrible font pairings: Comic Sans with Times New Roman, Papyrus with Impact, two very similar sans-serif fonts next to each other. Add text overlay: "FONT PAIRING FAIL"]
+
+**(Narrator):** The key is to create contrast and harmony. You want fonts that complement each other without being too similar or clashing horribly. A safe bet is to pair a serif font with a sans-serif font.
+
+**[VISUAL:** Examples of good font pairings: Open Sans with Playfair Display, Roboto with Merriweather, Montserrat with Lora. Add text overlay: "FONT PAIRING SUCCESS"]
+
+**(Narrator):** Think about the personality of each font. Is it modern? Classic? Playful? Choose fonts that have contrasting but complementary personalities. Tools like Fontjoy or Typewolf can be great resources for finding harmonious pairings. They offer suggestions based on proven design principles.
+
+**[VISUAL:** Screenshot of Fontjoy's website showing its font pairing generator in action. Then, a screenshot of Typewolf showcasing examples of real-world typography designs.]
+
+**(Narrator):** Also, stick to a maximum of two or three fonts in most cases. Too many fonts can create a cluttered and confusing look. Keep it simple and elegant!
+
+## Chapter 3: Illegible Font Choices (3:30-5:00)
+
+**(Narrator):** Let's move onto Illegible Font Choices. This one should be obvious, but you'd be surprised how often it happens. Choosing a font that's difficult to read is a surefire way to turn off your audience. Remember, readability is paramount.
+
+**[VISUAL:** Examples of highly decorative or script fonts used for body text. Show how the letters run together and are difficult to distinguish. Add text overlay: "ILLEGIBLE"]
+
+**(Narrator):** Avoid overly decorative or script fonts for large blocks of text. These fonts are fine for headlines or short phrases, but they become tiresome to read in longer paragraphs. Opt for clean, legible fonts like Helvetica, Arial, Open Sans, or Roboto for body copy.
+
+**[VISUAL:** Examples of clean and legible sans-serif and serif fonts used for body text. Add text overlay: "LEGIBLE"]
+
+**(Narrator):** Consider the size of the font. Make sure it's large enough to be read comfortably. Line height is also crucial. Cramped lines make it difficult for the eye to track from one line to the next. Aim for a line height that's approximately 1.4 to 1.6 times the font size.
+
+**[VISUAL:** Comparison of text blocks with different line heights. One block has cramped line height and is difficult to read. The other block has ample line height and is easy to read.]
+
+**(Narrator):** Finally, pay attention to letter spacing (tracking) and word spacing. Too little spacing can make the text feel crowded, while too much spacing can make it feel disconnected. Experiment with these settings to find the sweet spot.
+
+## Chapter 4: Orphan and Widow Woes (5:00-6:30)
+
+**(Narrator):** Ah, Orphans and Widows. These typography terms might sound a bit morbid, but they refer to single words or short lines of text that appear at the end of a paragraph (widows) or at the top of a column (orphans). They disrupt the flow of reading and look unprofessional.
+
+**[VISUAL:** Examples of orphans and widows in text paragraphs. Circle or highlight the offending words.]
+
+**(Narrator):** There are several ways to fix these unsightly typography errors. The easiest is often to slightly adjust the tracking or word spacing of the paragraph. A subtle tweak can be enough to pull that lonely word back onto the previous line.
+
+**[VISUAL:** Show how adjusting the tracking or word spacing slightly can eliminate orphans and widows.]
+
+**(Narrator):** Another option is to rewrite the sentence or paragraph. Sometimes, a minor change in wording can eliminate the problem. You can also use a non-breaking space (usually achieved by pressing `Shift + Space`) to keep two words together on the same line. But be careful not to overuse it!
+
+**[VISUAL:** Show how to insert a non-breaking space and explain when it is appropriate to use it.]
+
+**(Narrator):** Most design software also has settings to control orphan and widow control directly. Explore your software's typography settings to see what options are available.
+
+## Chapter 5: Ignoring Kerning (6:30-8:00)
+
+**(Narrator):** Kerning is the adjustment of space between individual letters. Ignoring kerning can lead to awkward gaps between letters, making your text look uneven and unprofessional.
+
+**[VISUAL:** Examples of text with poor kerning. Highlight problem areas where the space between letters is too wide or too narrow. Add text overlay: "BAD KERNING"]
+
+**(Narrator):** While many fonts have built-in kerning, it's often not perfect. You may need to manually adjust the kerning to achieve a visually pleasing result, especially in headlines or logos where the typography is more prominent.
+
+**[VISUAL:** Show how to manually adjust the kerning of individual letters in a design program like Adobe Illustrator or Photoshop.]
+
+**(Narrator):** Pay close attention to letters with diagonal strokes, like "A," "V," and "W." These letters often require more kerning adjustment than letters with straight sides. Also, look out for letter combinations like "To" or "Va." These are notorious for kerning issues.
+
+**[VISUAL:** Close-up examples of common kerning problem areas, like "AV," "WA," "To," and "Ve." Show the before and after of kerning adjustments.]
+
+**(Narrator):** Take your time and be detail-oriented. Kerning is a subtle art, but it can make a big difference in the overall appearance of your design.
+
+## Chapter 6: Too Much Contrast (8:00-9:30)
+
+**(Narrator):** This might sound counter-intuitive after our discussion on hierarchy, but *too much* contrast can be just as bad as not enough. We’re specifically talking about color and value contrast between your text and background.
+
+**[VISUAL:** Examples of text on backgrounds with extremely low contrast, making the text difficult to read. Also show examples with extremely high contrast, like bright yellow text on a black background, which can be visually jarring.]
+
+**(Narrator):** Text with insufficient contrast against its background strains the eyes and makes reading difficult. On the other hand, excessively high contrast can also be tiring and uncomfortable to look at for extended periods.
+
+**[VISUAL:** Examples of text on backgrounds with ideal contrast. The text is easily readable without being visually overwhelming.]
+
+**(Narrator):** Use a color contrast checker tool to ensure your text meets accessibility standards, like those set by WCAG (Web Content Accessibility Guidelines). Aim for a contrast ratio of at least 4.5:1 for normal-sized text and 3:1 for large text. These guidelines help ensure readability for people with visual impairments.
+
+**[VISUAL:** Screenshot of a color contrast checker tool being used to analyze the contrast between text and background colors.]
+
+**(Narrator):** Experiment with different shades and tints of your chosen colors to find the perfect balance. Often, a slightly muted color palette is easier on the eyes than bright, saturated colors.
+
+## Chapter 7: Neglecting Responsiveness (9:30-11:00)
+
+**(Narrator):** In today's multi-device world, Neglecting Responsiveness is a major design flaw. Your typography needs to look good not just on a desktop computer, but also on tablets and smartphones.
+
+**[VISUAL:** Show examples of text that looks great on a desktop screen but is unreadable on a mobile device because it's too small.]
+
+**(Narrator):** Use relative units like ems or rems for font sizes instead of fixed units like pixels. This allows the text to scale proportionally with the screen size.
+
+**[VISUAL:** Comparison of font sizes specified in pixels versus ems/rems. Show how the em/rem sizes adjust automatically on different screen sizes.]
+
+**(Narrator):** Implement media queries to adjust font sizes, line heights, and letter spacing for different screen sizes. This ensures that your typography is always legible and visually appealing, regardless of the device.
+
+**[VISUAL:** Code example of a media query that adjusts font size for mobile devices.]
+
+**(Narrator):** Test your designs on multiple devices and browsers to ensure that the typography renders correctly. Don't assume that what looks good on your computer will look good everywhere else. Also consider line breaks and how text reflows on smaller screens.
+
+**[VISUAL:** Show examples of a responsive website design, demonstrating how the typography adapts to different screen sizes.]
+
+## Recap (11:00-12:00)
+
+**(Narrator):** Okay, let’s quickly recap the 7 typography mistakes we covered today:
+
+**[VISUAL:** Text on screen listing the 7 mistakes with quick icons for each:]
+
+*   Ignoring Hierarchy
+*   Font Pairing Fails
+*   Illegible Font Choices
+*   Orphan and Widow Woes
+*   Ignoring Kerning
+*   Too Much Contrast
+*   Neglecting Responsiveness
+
+**(Narrator):** By avoiding these common pitfalls and following the tips we've discussed, you can dramatically improve the quality of your designs and create typography that is both beautiful and effective. Remember, typography is more than just choosing a pretty font; it's about communication and creating a positive user experience.
+
+## Outro (12:00-12:30)
+
+**(Narrator):** So, there you have it! 7 typography mistakes that are killing your designs and how to fix them. Which of these mistakes have *you* been guilty of? Let me know in the comments below!
+
+**[VISUAL:** End screen with links to other relevant videos and a subscribe button. Text overlay: "SUBSCRIBE for more design tips and tutorials!"]**
+
+**(Narrator):** If you found this video helpful, please give it a thumbs up and subscribe to the RichDesign channel for more graphic design, UI/UX, and branding tips. Thanks for watching, and I'll see you in the next video!
+
+**[SOUND:** Upbeat outro music fades in.]

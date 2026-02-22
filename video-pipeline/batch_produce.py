@@ -22,7 +22,7 @@ from urllib.error import HTTPError
 
 API_KEY = os.environ.get("GEMINI_API_KEY", "")
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-MODEL = "gemini-2.0-flash-exp-image-generation"
+MODEL = "gemini-2.5-flash-image"
 
 SCRIPTS_DIR = os.path.join(BASE_DIR, "output", "scripts")
 AUDIO_DIR = os.path.join(BASE_DIR, "output", "audio")
