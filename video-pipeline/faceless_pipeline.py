@@ -590,7 +590,9 @@ STRUCTURE:
 - Keep paragraphs short (2-3 sentences max) for natural voiceover pacing
 - Add a [PAUSE] marker between major sections for natural breathing room
 - Be factual and provide value — no fluff
-- Target 1500+ words for optimal video length (8-12 minutes for mid-roll ad eligibility)
+- Target 1800+ words for optimal video length (8-12 minutes for mid-roll ad eligibility)
+- Include specific examples, mini-stories, or real-world case studies for each major point to naturally increase depth
+- Do NOT pad with filler — add genuine value with each additional example
 {product_rules}{research_section}
 
 Write the complete script now. Return ONLY the script text."""

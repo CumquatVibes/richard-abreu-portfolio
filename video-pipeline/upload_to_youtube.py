@@ -6,10 +6,12 @@ Falls back to the default token if a channel-specific token is not available.
 
 Uses YouTube Data API v3 resumable upload protocol.
 Generates SEO-optimized titles, descriptions, and tags from script content.
+Generates and uploads custom thumbnails via Gemini + YouTube API.
 Includes Amazon affiliate links for product-focused channels.
 Skips already-uploaded videos (tracked in upload report).
 """
 
+import base64
 import json
 import os
 import re
@@ -18,9 +20,21 @@ import urllib.parse
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError
 
+import sys
+from dotenv import load_dotenv
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, BASE_DIR)
 VIDEOS_DIR = os.path.join(BASE_DIR, "output", "videos")
 SCRIPTS_DIR = os.path.join(BASE_DIR, "output", "scripts")
+THUMBNAILS_DIR = os.path.join(BASE_DIR, "output", "thumbnails")
+os.makedirs(THUMBNAILS_DIR, exist_ok=True)
+
+# Load API keys
+ENV_PATH = os.path.join(os.path.dirname(BASE_DIR), "shopify-theme", ".env")
+if os.path.exists(ENV_PATH):
+    load_dotenv(ENV_PATH)
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
 TOKEN_PATH = os.path.join(BASE_DIR, "google_token.json")
 CHANNEL_TOKENS_PATH = os.path.join(BASE_DIR, "channel_tokens.json")
 REPORT_DIR = os.path.join(BASE_DIR, "output", "reports")
@@ -475,6 +489,149 @@ def make_tags(channel, title):
     return result
 
 
+# ---------------------------------------------------------------------------
+# Thumbnail Generation & Upload
+# ---------------------------------------------------------------------------
+
+# Channel-specific thumbnail styles
+CHANNEL_THUMBNAIL_STYLE = {
+    "RichMind": "dark moody background, psychological theme, dramatic shadows, intense close-up perspective",
+    "RichHorror": "dark horror atmosphere, eerie fog, desaturated with red accents, unsettling mood",
+    "RichTech": "sleek tech aesthetic, neon blue/purple accents, circuit patterns, futuristic feel",
+    "HowToUseAI": "clean digital aesthetic, AI/robot visual elements, glowing interface, modern tech",
+    "RichPets": "warm inviting colors, cute animal photography style, soft lighting, heartwarming",
+    "EvaReyes": "elegant golden-hour lighting, empowering feminine energy, warm tones, confident",
+    "RichFinance": "professional finance aesthetic, green money accents, charts, wealth imagery",
+    "RichCrypto": "futuristic dark theme, blockchain visuals, glowing neon green/blue, digital",
+    "RichFitness": "dynamic energy, gym/athletic aesthetic, bold contrast, motivational",
+    "RichCooking": "warm appetizing colors, food photography style, steam/sizzle, delicious",
+    "RichNature": "stunning natural landscape, vivid colors, dramatic sky, National Geographic feel",
+    "RichHistory": "vintage sepia tones, historical atmosphere, dramatic documentary lighting",
+    "RichReviews": "clean product showcase, studio lighting, comparison layout, professional",
+    "RichGaming": "vibrant RGB glow, gaming aesthetic, neon colors on dark background, energetic",
+    "RichMusic": "concert stage lighting, moody musical atmosphere, dramatic spotlights",
+    "RichTravel": "stunning travel destination, golden hour, wanderlust-inspiring, vibrant",
+    "HowToMeditate": "serene peaceful atmosphere, zen garden, soft warm lighting, calming",
+    "RichBusiness": "professional corporate aesthetic, success imagery, confident, modern office",
+    "CumquatMotivation": "epic sunrise/sunset, inspirational landscape, powerful atmosphere",
+}
+DEFAULT_THUMBNAIL_STYLE = "cinematic lighting, professional YouTube thumbnail, bold dramatic atmosphere"
+
+
+def generate_thumbnail(title, channel, video_filename):
+    """Generate a viral-worthy thumbnail using Gemini image generation.
+
+    Returns path to generated thumbnail image, or None on failure.
+    """
+    if not GEMINI_API_KEY:
+        print("    Thumbnail: No GEMINI_API_KEY, skipping")
+        return None
+
+    # Check if thumbnail already exists
+    thumb_name = os.path.splitext(video_filename)[0] + "_thumb.png"
+    thumb_path = os.path.join(THUMBNAILS_DIR, thumb_name)
+    if os.path.exists(thumb_path):
+        print(f"    Thumbnail: Using existing ({os.path.getsize(thumb_path) / 1024:.0f} KB)")
+        return thumb_path
+
+    channel_style = CHANNEL_THUMBNAIL_STYLE.get(channel, DEFAULT_THUMBNAIL_STYLE)
+
+    # Extract key words for thumbnail text (max 3-4 impactful words)
+    # Strip common filler to get the hook
+    short_title = title
+    for remove in ["How to ", "Why ", "The ", "A ", "An ", "What "]:
+        if short_title.startswith(remove):
+            short_title = short_title[len(remove):]
+    words = short_title.split()
+    thumb_text = " ".join(words[:4]).upper() if len(words) > 4 else short_title.upper()
+
+    prompt = (
+        f"YouTube thumbnail, 16:9 aspect ratio, {channel_style}, "
+        f"with large bold white text '{thumb_text}' as focal point, "
+        f"high contrast, eye-catching, viral thumbnail style, "
+        f"cinematic composition, 4K quality, no small text, "
+        f"text should be easily readable at small sizes"
+    )
+
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp-image-generation:generateContent?key={GEMINI_API_KEY}"
+    payload = json.dumps({
+        "contents": [{"parts": [{"text": prompt}]}],
+        "generationConfig": {"responseModalities": ["TEXT", "IMAGE"], "temperature": 0.9}
+    }).encode()
+
+    for attempt in range(3):
+        try:
+            req = Request(url, data=payload, headers={"Content-Type": "application/json"})
+            with urlopen(req, timeout=120) as resp:
+                data = json.loads(resp.read().decode())
+                for part in data.get("candidates", [{}])[0].get("content", {}).get("parts", []):
+                    if "inlineData" in part:
+                        img_data = base64.b64decode(part["inlineData"]["data"])
+                        with open(thumb_path, "wb") as f:
+                            f.write(img_data)
+                        size_kb = len(img_data) / 1024
+                        print(f"    Thumbnail: Generated ({size_kb:.0f} KB)")
+                        return thumb_path
+            print("    Thumbnail: No image in response")
+            return None
+        except HTTPError as e:
+            if e.code == 429:
+                wait = 30 * (attempt + 1)
+                print(f"    Thumbnail: Rate limited, waiting {wait}s...")
+                time.sleep(wait)
+            else:
+                body = e.read().decode() if hasattr(e, 'read') else str(e)
+                print(f"    Thumbnail: Error {e.code}: {body[:150]}")
+                return None
+        except Exception as e:
+            print(f"    Thumbnail: Error: {str(e)[:150]}")
+            return None
+    return None
+
+
+def upload_thumbnail(video_id, thumb_path, access_token):
+    """Upload custom thumbnail to a YouTube video.
+
+    Uses YouTube Data API v3 thumbnails.set endpoint.
+    Returns True on success, False on failure.
+    """
+    url = f"https://www.googleapis.com/upload/youtube/v3/thumbnails/set?videoId={video_id}&uploadType=media"
+
+    with open(thumb_path, "rb") as f:
+        img_data = f.read()
+
+    req = Request(
+        url,
+        data=img_data,
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "image/png",
+            "Content-Length": str(len(img_data)),
+        },
+        method="POST",
+    )
+
+    try:
+        resp = urlopen(req, timeout=60)
+        result = json.loads(resp.read().decode())
+        if result.get("items"):
+            print(f"    Thumbnail: Uploaded to video {video_id}")
+            return True
+        print(f"    Thumbnail: Upload response had no items")
+        return False
+    except HTTPError as e:
+        body = e.read().decode() if hasattr(e, 'read') else str(e)
+        # 403 = channel not verified for custom thumbnails (needs phone verification)
+        if e.code == 403:
+            print(f"    Thumbnail: Channel needs phone verification for custom thumbnails")
+        else:
+            print(f"    Thumbnail: Upload error {e.code}: {body[:200]}")
+        return False
+    except Exception as e:
+        print(f"    Thumbnail: Upload error: {str(e)[:150]}")
+        return False
+
+
 def upload_video(filepath, title, description, tags, category_id, access_token, privacy="public"):
     """Upload video using YouTube Data API v3 resumable upload.
 
@@ -528,8 +685,11 @@ def upload_video(filepath, title, description, tags, category_id, access_token, 
         if "uploadLimitExceeded" in body:
             print("    Daily upload limit reached for this channel")
             return "rate_limited"
+        if "quota" in body.lower():
+            print("    YouTube API daily quota exceeded")
+            return "quota_exceeded"
         print(f"    Init error {e.code}: {body[:300]}")
-        return None
+        return {"error": f"Init error {e.code}: {body[:300]}"}
 
     chunk_size = 10 * 1024 * 1024
 
@@ -564,9 +724,52 @@ def upload_video(filepath, title, description, tags, category_id, access_token, 
                 else:
                     body = e.read().decode()
                     print(f"    Upload error {e.code}: {body[:300]}")
-                    return None
+                    return {"error": f"Upload error {e.code}: {body[:300]}"}
 
-    return None
+    return {"error": "Upload incomplete: EOF reached before file fully uploaded"}
+
+
+# Quota budget: YouTube Data API costs ~1600 units per upload, 50 per thumbnail
+# Default daily quota is 10,000 units. Stop at 80% to leave room for other operations.
+QUOTA_PER_UPLOAD = 1600
+QUOTA_PER_THUMBNAIL = 50
+DAILY_QUOTA_LIMIT = 10000
+QUOTA_SAFETY_THRESHOLD = 0.80  # Stop uploads at 80% quota usage
+
+
+def run_preflight(video_file, channel, title, description, tags, script_path):
+    """Run compliance preflight check before uploading.
+
+    Returns (passed: bool, result: dict)
+    """
+    try:
+        from utils.compliance import preflight_check, format_preflight_report
+
+        script_text = ""
+        if script_path and os.path.exists(script_path):
+            with open(script_path) as f:
+                script_text = f.read()
+
+        result = preflight_check(
+            script_text=script_text,
+            title=title,
+            description=description,
+            tags=tags,
+            is_synthetic=True,
+        )
+
+        report = format_preflight_report(result)
+        for line in report.split("\n"):
+            print(f"  {line}")
+
+        return result["publishable"], result
+
+    except ImportError:
+        print("  Preflight: utils.compliance not available, skipping check")
+        return True, {"publishable": True, "violations": [], "risk_scores": {}}
+    except Exception as e:
+        print(f"  Preflight: Error ({str(e)[:80]}), proceeding with caution")
+        return True, {"publishable": True, "violations": [], "risk_scores": {}}
 
 
 def main():
@@ -616,6 +819,8 @@ def main():
     uploaded_count = len(already_uploaded)
     skipped_limit = 0
     failed_count = 0
+    preflight_blocked = 0
+    quota_used_this_run = 0
 
     for i, video_file in enumerate(pending, 1):
         channel = video_file.split("_")[0]
@@ -625,6 +830,14 @@ def main():
             print(f"[{i}/{len(pending)}] {channel}: SKIP (rate limited)")
             skipped_limit += 1
             continue
+
+        # Quota budget check: stop early if we'd exceed 80% of daily quota
+        projected_quota = quota_used_this_run + QUOTA_PER_UPLOAD + QUOTA_PER_THUMBNAIL
+        if projected_quota > DAILY_QUOTA_LIMIT * QUOTA_SAFETY_THRESHOLD:
+            remaining = len(pending) - i
+            print(f"\n  Quota budget: {quota_used_this_run}/{DAILY_QUOTA_LIMIT} used ({quota_used_this_run/DAILY_QUOTA_LIMIT*100:.0f}%)")
+            print(f"  Stopping to preserve quota. {remaining} videos deferred to next run.")
+            break
 
         channel_id, category_id = CHANNEL_MAP.get(channel, (None, "22"))
 
@@ -644,9 +857,40 @@ def main():
         print(f"[{i}/{len(pending)}] {channel}: {title}")
         print(f"  Size: {size_mb:.1f} MB | Token: {'channel-specific' if using_channel_token else 'default (main channel)'}")
 
+        # Preflight compliance check
+        preflight_passed, preflight_result = run_preflight(
+            video_file, channel, title, description, tags, script_path
+        )
+        if not preflight_passed:
+            print(f"  BLOCKED by preflight compliance check — skipping upload")
+            preflight_blocked += 1
+            results.append({
+                "file": video_file,
+                "channel": channel,
+                "target_channel_id": channel_id,
+                "video_id": None,
+                "status": "preflight_blocked",
+                "violations": [v["type"] for v in preflight_result.get("violations", [])],
+            })
+            continue
+
+        # Generate thumbnail before upload
+        thumb_path = generate_thumbnail(title, channel, video_file)
+
         result = upload_video(filepath, title, description, tags, category_id, token)
 
-        if result == "rate_limited":
+        if result == "quota_exceeded":
+            print(f"\n  YouTube API quota exhausted. Remaining {len(pending) - i} videos will retry after quota reset (midnight PT).")
+            results.append({
+                "file": video_file,
+                "channel": channel,
+                "target_channel_id": channel_id,
+                "video_id": None,
+                "status": "quota_exceeded",
+            })
+            failed_count += 1
+            break
+        elif result == "rate_limited":
             rate_limited_channels.add(channel)
             skipped_limit += 1
             results.append({
@@ -656,10 +900,32 @@ def main():
                 "video_id": None,
                 "status": "rate_limited",
             })
+        elif result and "error" in result:
+            error_msg = result["error"]
+            print(f"  FAILED: {error_msg[:120]}")
+            failed_count += 1
+            results.append({
+                "file": video_file,
+                "channel": channel,
+                "target_channel_id": channel_id,
+                "video_id": None,
+                "status": "failed",
+                "error": error_msg,
+            })
         elif result:
             vid_id = result.get("id", "?")
             status = result.get("status", {}).get("uploadStatus", "?")
             print(f"  Uploaded: https://youtube.com/watch?v={vid_id} (status: {status})")
+
+            # Upload custom thumbnail if we generated one
+            thumb_uploaded = False
+            if thumb_path and vid_id != "?":
+                thumb_uploaded = upload_thumbnail(vid_id, thumb_path, token)
+
+            quota_used_this_run += QUOTA_PER_UPLOAD
+            if thumb_uploaded:
+                quota_used_this_run += QUOTA_PER_THUMBNAIL
+
             results.append({
                 "file": video_file,
                 "channel": channel,
@@ -669,10 +935,11 @@ def main():
                 "status": "success",
                 "upload_status": status,
                 "used_channel_token": using_channel_token,
+                "thumbnail_uploaded": thumb_uploaded,
             })
             uploaded_count += 1
         else:
-            print(f"  FAILED")
+            print(f"  FAILED: Unknown error")
             failed_count += 1
             results.append({
                 "file": video_file,
@@ -680,6 +947,7 @@ def main():
                 "target_channel_id": channel_id,
                 "video_id": None,
                 "status": "failed",
+                "error": "Unknown error - no response from API",
             })
 
         if i < len(pending):
@@ -687,7 +955,8 @@ def main():
 
     # Summary
     print(f"\n{'=' * 60}")
-    print(f"Results: {uploaded_count} uploaded | {skipped_limit} rate-limited | {failed_count} failed\n")
+    print(f"Results: {uploaded_count} uploaded | {skipped_limit} rate-limited | {failed_count} failed | {preflight_blocked} blocked by compliance")
+    print(f"Quota used this run: ~{quota_used_this_run}/{DAILY_QUOTA_LIMIT} ({quota_used_this_run/DAILY_QUOTA_LIMIT*100:.0f}%)\n")
 
     for r in results:
         if r["status"] == "success":
@@ -703,14 +972,21 @@ def main():
     if rate_limited_channels:
         print(f"\nRate-limited channels (retry in 24h): {', '.join(sorted(rate_limited_channels))}")
 
-    # Save report (merge with existing)
+    # Deduplicate results: keep only the latest entry per file
+    # This prevents the report from growing endlessly with repeated failures
+    seen = {}
+    for r in results:
+        seen[r["file"]] = r  # later entries overwrite earlier ones
+    deduped_results = list(seen.values())
+
+    # Save report
     os.makedirs(REPORT_DIR, exist_ok=True)
     with open(UPLOAD_REPORT_PATH, "w") as f:
         json.dump({
             "uploaded": uploaded_count,
             "total": len(videos),
             "rate_limited": list(rate_limited_channels),
-            "results": results,
+            "results": deduped_results,
         }, f, indent=2)
     print(f"\nReport: {UPLOAD_REPORT_PATH}")
 

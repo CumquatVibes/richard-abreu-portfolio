@@ -95,13 +95,16 @@ def main():
     videos_folder = get_or_create_folder("Videos", ROOT_FOLDER_ID)
     print(f"Videos folder: {videos_folder}\n")
 
-    # Create per-channel subfolders
+    # Create per-channel subfolders (auto-detect from video filenames)
     channel_folders = {}
-    for channel in ["HowToUseAI", "RichHorror", "RichMind", "RichPets", "RichTech"]:
+    all_videos = sorted([f for f in os.listdir(VIDEOS_DIR) if f.endswith(".mp4")])
+    channels_found = sorted(set(v.split("_")[0] for v in all_videos))
+    for channel in channels_found:
         channel_folders[channel] = get_or_create_folder(channel, videos_folder)
+    print(f"Channel folders: {', '.join(channels_found)}\n")
 
     # Upload each video
-    videos = sorted([f for f in os.listdir(VIDEOS_DIR) if f.endswith(".mp4")])
+    videos = all_videos
     uploaded = 0
 
     for v in videos:
@@ -132,6 +135,20 @@ def main():
         link, existed = upload_file(filepath, folder_id)
         if not existed and link:
             print(f"  Uploaded voiceover: {a}")
+
+    # Also upload thumbnails
+    thumbs_dir = os.path.join(BASE_DIR, "output", "thumbnails")
+    if os.path.exists(thumbs_dir):
+        thumbs = sorted([f for f in os.listdir(thumbs_dir) if f.endswith(".png")])
+        if thumbs:
+            thumbs_folder = get_or_create_folder("Thumbnails", ROOT_FOLDER_ID)
+            for t in thumbs:
+                channel = t.split("_")[0]
+                folder_id = get_or_create_folder(channel, thumbs_folder)
+                filepath = os.path.join(thumbs_dir, t)
+                link, existed = upload_file(filepath, folder_id)
+                if not existed and link:
+                    print(f"  Uploaded thumbnail: {t}")
 
     print(f"\nDone! {uploaded} new videos uploaded.")
     print(f"Drive folder: https://drive.google.com/drive/folders/{ROOT_FOLDER_ID}")

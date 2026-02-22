@@ -101,21 +101,21 @@
   },
   "content_formats": {
     "listicle": {
-      "structure": "hook \u2192 numbered items \u2192 recap \u2192 CTA",
+      "structure": "hook \u2192 numbered items (with examples and stories per item) \u2192 recap \u2192 CTA",
       "duration_target": "8-12 min",
-      "word_count": 1200,
+      "word_count": 1800,
       "visual_style": "image slideshow with text overlays per item"
     },
     "explainer": {
-      "structure": "hook \u2192 problem \u2192 deep dive \u2192 solution \u2192 CTA",
+      "structure": "hook \u2192 problem \u2192 deep dive with examples \u2192 solution \u2192 CTA",
       "duration_target": "10-15 min",
-      "word_count": 1500,
+      "word_count": 2000,
       "visual_style": "mixed footage + diagrams + text"
     },
     "compilation": {
       "structure": "hook \u2192 clip montage with narration \u2192 CTA",
       "duration_target": "12-20 min",
-      "word_count": 1800,
+      "word_count": 2200,
       "visual_style": "stock footage montage with transitions"
     },
     "shorts_facts": {
@@ -131,9 +131,9 @@
       "visual_style": "dramatic visuals with captions"
     },
     "tutorial": {
-      "structure": "hook \u2192 step-by-step \u2192 recap \u2192 CTA",
+      "structure": "hook \u2192 step-by-step with real examples \u2192 recap \u2192 CTA",
       "duration_target": "8-15 min",
-      "word_count": 1200,
+      "word_count": 1800,
       "visual_style": "screen recordings + overlay graphics"
     },
     "looping_ambient": {
@@ -145,7 +145,7 @@
     "news_recap": {
       "structure": "hook \u2192 top stories \u2192 analysis \u2192 CTA",
       "duration_target": "8-12 min",
-      "word_count": 1200,
+      "word_count": 1800,
       "visual_style": "news-style graphics + source screenshots"
     }
   },
