@@ -84,7 +84,12 @@ CHANNEL_MAP = {
     "HowToMeditate": ("UCbd6kzX3giNYyAeLaMPdgAA", "22"),
     "RichBusiness": ("UCPQ8N53EgcqEKR4SfQ1DcXQ", "28"),
     "CumquatMotivation": ("UCtrCefKinhom7LFBV8rnfpQ", "22"),
+    "CumquatVibes": ("UCThXDUhXqcui2HqBv4MUBBA", "22"),
 }
+
+# Avatar-based channels (use produce_video.py / HeyGen, NOT faceless B-roll pipeline)
+# These channels use Richard's digital avatar instead of faceless voiceover + stock footage.
+AVATAR_CHANNELS = {"CumquatVibes"}
 
 # Map video filename prefix -> channel_tokens.json key name
 TOKEN_KEY_MAP = {
@@ -93,6 +98,7 @@ TOKEN_KEY_MAP = {
     "EvaReyes": "Eva Reyes",
     "RichBusiness": "Rich Business",
     "CumquatMotivation": "Cumquat Motivation",
+    "CumquatVibes": "Cumquat Vibes",
 }
 
 CHANNEL_NICHE = {
@@ -107,6 +113,7 @@ CHANNEL_NICHE = {
     "EvaReyes": "women's empowerment, inspiration, and self-improvement",
     "RichFitness": "fitness, workouts, and healthy living",
     "RichCooking": "cooking, recipes, and kitchen hacks",
+    "CumquatVibes": "art, design, tech, entrepreneurship, and creator lifestyle",
 }
 
 CHANNEL_TAGS = {
@@ -139,6 +146,11 @@ CHANNEL_TAGS = {
     "EvaReyes": [
         "women empowerment", "self improvement", "confidence", "inspiration",
         "mindset", "self care", "career growth", "motivational", "affirmations",
+    ],
+    "CumquatVibes": [
+        "Richard Abreu", "Cumquat Vibes", "digital art", "design tutorial",
+        "AI tools", "creator economy", "entrepreneur", "veteran creator",
+        "art process", "tech review", "side hustle", "Affinity Designer",
     ],
 }
 
@@ -402,8 +414,11 @@ def make_description(channel, title, script_path):
     4. CTA + links
     """
     intro = extract_intro(script_path)
-    is_affiliate = channel in AFFILIATE_CHANNELS
     chapters = extract_chapters_from_script(script_path)
+
+    # CumquatVibes gets a personal brand description (first-person, avatar channel)
+    is_avatar = channel in AVATAR_CHANNELS
+    is_affiliate = channel in AFFILIATE_CHANNELS
 
     # First 2 lines are critical — visible in search results and suggestions
     parts = [title]
@@ -445,25 +460,48 @@ def make_description(channel, title, script_path):
             "",
         ])
 
-    parts.extend([
-        "---",
-        "",
-        "Subscribe and hit the bell for new videos!",
-        "Like this video if you found it helpful.",
-        "Drop a comment and let us know what you think!",
-        "",
-        "---",
-        "",
-        "Shop: https://cumquatvibes.com",
-        "Portfolio: https://richardabreu.studio",
-        "Community: https://vibeconnectionlounge.com",
-        "",
-        "AI DISCLOSURE: This video was created with the assistance of AI tools",
-        "including AI-generated voiceover and visuals.",
-        "",
-        "\u00a9 2026 Cumquat Vibes Media",
-        "",
-    ])
+    if is_avatar:
+        # Personal brand CTA for CumquatVibes (Richard's main channel)
+        parts.extend([
+            "---",
+            "",
+            "Subscribe and hit the bell — I drop new videos every week!",
+            "Like this video if it helped you out.",
+            "Drop a comment and let me know what you think!",
+            "",
+            "---",
+            "",
+            "CONNECT WITH ME:",
+            "Shop: https://cumquatvibes.com",
+            "Portfolio: https://richardabreu.studio",
+            "Community: https://vibeconnectionlounge.com",
+            "Instagram: @cumquatvibes",
+            "",
+            "AI DISCLOSURE: This video features my digital avatar created with AI assistance.",
+            "",
+            "\u00a9 2026 Cumquat Vibes Media",
+            "",
+        ])
+    else:
+        parts.extend([
+            "---",
+            "",
+            "Subscribe and hit the bell for new videos!",
+            "Like this video if you found it helpful.",
+            "Drop a comment and let us know what you think!",
+            "",
+            "---",
+            "",
+            "Shop: https://cumquatvibes.com",
+            "Portfolio: https://richardabreu.studio",
+            "Community: https://vibeconnectionlounge.com",
+            "",
+            "AI DISCLOSURE: This video was created with the assistance of AI tools",
+            "including AI-generated voiceover and visuals.",
+            "",
+            "\u00a9 2026 Cumquat Vibes Media",
+            "",
+        ])
 
     tag_prefix = channel.lower()
     niche_tag = CHANNEL_NICHE.get(channel, "").split(",")[0].strip().replace(" ", "")
@@ -514,6 +552,7 @@ CHANNEL_THUMBNAIL_STYLE = {
     "HowToMeditate": "serene peaceful atmosphere, zen garden, soft warm lighting, calming",
     "RichBusiness": "professional corporate aesthetic, success imagery, confident, modern office",
     "CumquatMotivation": "epic sunrise/sunset, inspirational landscape, powerful atmosphere",
+    "CumquatVibes": "dark matte studio aesthetic #101922 background, orange #e8941f accent, Richard Abreu digital avatar, bold creator energy, premium personal brand feel",
 }
 DEFAULT_THUMBNAIL_STYLE = "cinematic lighting, professional YouTube thumbnail, bold dramatic atmosphere"
 

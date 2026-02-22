@@ -146,6 +146,11 @@ CHANNEL_BROLL_TEMPLATES = {
         "suffix": "Energetic, entertaining, sharp focus, no text, no watermarks.",
         "segment_duration": 6,
     },
+    "CumquatVibes": {
+        "prefix": "Cinematic 16:9, dark matte studio #101922 background, orange #e8941f accent lighting, premium creator brand aesthetic, art and design focus.",
+        "suffix": "Personal brand quality, artistic, bold creator energy, sharp focus, no text, no watermarks.",
+        "segment_duration": 8,
+    },
 }
 
 DEFAULT_TEMPLATE = {
