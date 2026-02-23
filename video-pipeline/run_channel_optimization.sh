@@ -44,6 +44,19 @@ print('Analytics pull complete.')
 echo "--- Channel Optimization ---" >> "$LOG_FILE"
 python3 optimize_all_channels.py update >> "$LOG_FILE" 2>&1
 
+# 6. Drift detection and alerting
+echo "--- Drift Detection & Alerts ---" >> "$LOG_FILE"
+python3 -c "
+import sys; sys.path.insert(0, '.')
+from utils.alerts import check_and_alert_drift, check_quota_status
+print('Running drift detection...')
+result = check_and_alert_drift()
+print(f'Drift result: {result}')
+print('Checking quota status...')
+quota = check_quota_status()
+print(f'Quota status: {quota}')
+" >> "$LOG_FILE" 2>&1
+
 echo "=== Nightly Pipeline Done: $(date) ===" >> "$LOG_FILE"
 
 # Check if all channels are optimized
@@ -55,3 +68,18 @@ if [ -f "$PROGRESS_FILE" ]; then
         echo "Optimization progress: $UPDATED_COUNT/38 channels." >> "$LOG_FILE"
     fi
 fi
+
+# Check and execute retraining triggers
+echo ""
+echo "Checking retraining triggers..."
+python3 -c "
+from utils.alerts import check_retraining_triggers, execute_retraining
+triggers = check_retraining_triggers()
+if triggers:
+    print(f'Found {len(triggers)} trigger(s)')
+    actions = execute_retraining(triggers)
+    for a in actions:
+        print(f'  -> {a}')
+else:
+    print('No retraining triggers active')
+"

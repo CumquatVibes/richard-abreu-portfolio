@@ -2,12 +2,22 @@
 
 import os
 
+try:
+    from dotenv import load_dotenv
+    _base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    _local_env = os.path.join(_base, ".env")
+    _shopify_env = os.path.join(os.path.dirname(_base), "shopify-theme", ".env")
+    load_dotenv(_local_env if os.path.exists(_local_env) else _shopify_env)
+except ImportError:
+    pass
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SCRIPTS_DIR = os.path.join(BASE_DIR, "output", "scripts")
 AUDIO_DIR = os.path.join(BASE_DIR, "output", "audio")
 BROLL_DIR = os.path.join(BASE_DIR, "output", "broll")
 VIDEOS_DIR = os.path.join(BASE_DIR, "output", "videos")
 REPORT_DIR = os.path.join(BASE_DIR, "output", "reports")
+SHORTS_DIR = os.path.join(BASE_DIR, "output", "shorts")
 
 
 def find_audio_for_script(script_basename):

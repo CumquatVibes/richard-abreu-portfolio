@@ -1,6 +1,6 @@
 {
-  "uploaded": 11,
-  "total": 21,
+  "uploaded": 59,
+  "total": 59,
   "rate_limited": [],
   "results": [
     {
@@ -57,9 +57,12 @@
       "file": "RichHorror_the_most_haunted_places_on_earth_you_should_never_visit_alone.mp4",
       "channel": "RichHorror",
       "target_channel_id": "UCoWN7G6XuFBPgM-m3d1ZMvQ",
-      "video_id": null,
-      "status": "failed",
-      "error": "Init error 403: {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The request cannot be completed because you have exceeded your \\u003ca href=\\\"/youtube/v3/getting-started#quota\\\"\\u003equota\\u003c/a\\u003e.\",\n    \"errors\": [\n      {\n        \"message\": \"The request cannot be completed because you have exceeded your \\u0"
+      "video_id": "kE2aks7-gG0",
+      "url": "https://youtube.com/watch?v=kE2aks7-gG0",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": true
     },
     {
       "file": "RichMind_5_Body_Language_Signs_Someone_Is_Lying_to_Your_Face.mp4",
@@ -75,17 +78,23 @@
       "file": "RichMind_7_Dark_Psychology_Tricks_That_Manipulators_Use_on_You_Every_Day.mp4",
       "channel": "RichMind",
       "target_channel_id": "UCvrGunMx9dVfAeGYLQYoaLw",
-      "video_id": null,
-      "status": "failed",
-      "error": "Init error 403: {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The request cannot be completed because you have exceeded your \\u003ca href=\\\"/youtube/v3/getting-started#quota\\\"\\u003equota\\u003c/a\\u003e.\",\n    \"errors\": [\n      {\n        \"message\": \"The request cannot be completed because you have exceeded your \\u0"
+      "video_id": "Ii7R_GHs8ac",
+      "url": "https://youtube.com/watch?v=Ii7R_GHs8ac",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
     },
     {
       "file": "RichMind_Why_You_Cant_Stop_Overthinking_The_Psychology_Behind_It.mp4",
       "channel": "RichMind",
       "target_channel_id": "UCvrGunMx9dVfAeGYLQYoaLw",
-      "video_id": null,
-      "status": "failed",
-      "error": "Init error 403: {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The request cannot be completed because you have exceeded your \\u003ca href=\\\"/youtube/v3/getting-started#quota\\\"\\u003equota\\u003c/a\\u003e.\",\n    \"errors\": [\n      {\n        \"message\": \"The request cannot be completed because you have exceeded your \\u0"
+      "video_id": "80satCov12Q",
+      "url": "https://youtube.com/watch?v=80satCov12Q",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
     },
     {
       "file": "RichPets_5_Common_Pet_Health_Mistakes_Youre_Probably_Making.mp4",
@@ -101,17 +110,23 @@
       "file": "RichPets_5_Signs_Your_Dog_is_Secretly_Unhappy_And_How_to_Fix_It.mp4",
       "channel": "RichPets",
       "target_channel_id": "UCqPWKbwAGtKfiay4fB8bF1g",
-      "video_id": null,
-      "status": "failed",
-      "error": "Init error 403: {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The request cannot be completed because you have exceeded your \\u003ca href=\\\"/youtube/v3/getting-started#quota\\\"\\u003equota\\u003c/a\\u003e.\",\n    \"errors\": [\n      {\n        \"message\": \"The request cannot be completed because you have exceeded your \\u0"
+      "video_id": "UjFiljww25Y",
+      "url": "https://youtube.com/watch?v=UjFiljww25Y",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
     },
     {
       "file": "RichPets_Top_7_Cat_Breeds_That_Act_Like_Dogs.mp4",
       "channel": "RichPets",
       "target_channel_id": "UCqPWKbwAGtKfiay4fB8bF1g",
-      "video_id": null,
-      "status": "failed",
-      "error": "Init error 403: {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The request cannot be completed because you have exceeded your \\u003ca href=\\\"/youtube/v3/getting-started#quota\\\"\\u003equota\\u003c/a\\u003e.\",\n    \"errors\": [\n      {\n        \"message\": \"The request cannot be completed because you have exceeded your \\u0"
+      "video_id": "-ELs_anPzmA",
+      "url": "https://youtube.com/watch?v=-ELs_anPzmA",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
     },
     {
       "file": "RichTech_5_Budget_Tech_Gadgets_Under_50_That_Are_Actually_Worth_It.mp4",
@@ -127,17 +142,23 @@
       "file": "RichTech_7_AI_Tools_That_Will_Replace_Your_Entire_Workflow_in_2026.mp4",
       "channel": "RichTech",
       "target_channel_id": "UCH7Om9fi1IA3SrRXmx2vApQ",
-      "video_id": null,
-      "status": "failed",
-      "error": "Init error 403: {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The request cannot be completed because you have exceeded your \\u003ca href=\\\"/youtube/v3/getting-started#quota\\\"\\u003equota\\u003c/a\\u003e.\",\n    \"errors\": [\n      {\n        \"message\": \"The request cannot be completed because you have exceeded your \\u0"
+      "video_id": "Ac6aQjVWgXE",
+      "url": "https://youtube.com/watch?v=Ac6aQjVWgXE",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
     },
     {
       "file": "RichTech_Why_Everyone_Is_Wrong_About_the_New_iPhone.mp4",
       "channel": "RichTech",
       "target_channel_id": "UCH7Om9fi1IA3SrRXmx2vApQ",
-      "video_id": null,
-      "status": "failed",
-      "error": "Init error 403: {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The request cannot be completed because you have exceeded your \\u003ca href=\\\"/youtube/v3/getting-started#quota\\\"\\u003equota\\u003c/a\\u003e.\",\n    \"errors\": [\n      {\n        \"message\": \"The request cannot be completed because you have exceeded your \\u0"
+      "video_id": "ZBy6-8qro08",
+      "url": "https://youtube.com/watch?v=ZBy6-8qro08",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
     },
     {
       "file": "EvaReyes_5_Toxic_Habits_Women_Need_to_Stop_Normalizing_in_2026.mp4",
@@ -173,25 +194,452 @@
       "file": "RichMusic_What_If_Blinding_Lights_by_The_Weeknd_Was_Made_in_the_1970s_Disco_Era.mp4",
       "channel": "RichMusic",
       "target_channel_id": "UCCI_ynXNuutXGrzWDYzUZiA",
-      "video_id": null,
-      "status": "failed",
-      "error": "Init error 403: {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The request cannot be completed because you have exceeded your \\u003ca href=\\\"/youtube/v3/getting-started#quota\\\"\\u003equota\\u003c/a\\u003e.\",\n    \"errors\": [\n      {\n        \"message\": \"The request cannot be completed because you have exceeded your \\u0"
+      "video_id": "I2JLlC9v21w",
+      "url": "https://youtube.com/watch?v=I2JLlC9v21w",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
     },
     {
       "file": "RichMusic_What_If_Lose_Yourself_by_Eminem_Was_a_POP_Ballad.mp4",
       "channel": "RichMusic",
       "target_channel_id": "UCCI_ynXNuutXGrzWDYzUZiA",
-      "video_id": null,
-      "status": "failed",
-      "error": "Init error 403: {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The request cannot be completed because you have exceeded your \\u003ca href=\\\"/youtube/v3/getting-started#quota\\\"\\u003equota\\u003c/a\\u003e.\",\n    \"errors\": [\n      {\n        \"message\": \"The request cannot be completed because you have exceeded your \\u0"
+      "video_id": "Z0kCiiDXwAo",
+      "url": "https://youtube.com/watch?v=Z0kCiiDXwAo",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
     },
     {
       "file": "RichMusic_What_If_Shape_of_You_by_Ed_Sheeran_Was_a_RAP_Song.mp4",
       "channel": "RichMusic",
       "target_channel_id": "UCCI_ynXNuutXGrzWDYzUZiA",
-      "video_id": null,
-      "status": "failed",
-      "error": "Init error 403: {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The request cannot be completed because you have exceeded your \\u003ca href=\\\"/youtube/v3/getting-started#quota\\\"\\u003equota\\u003c/a\\u003e.\",\n    \"errors\": [\n      {\n        \"message\": \"The request cannot be completed because you have exceeded your \\u0"
+      "video_id": "l6ywWgJjdQ4",
+      "url": "https://youtube.com/watch?v=l6ywWgJjdQ4",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
+    },
+    {
+      "file": "CumquatVibes_Apple_Creator_Studio_vs_Adobe_vs_Affinity_The_REAL_Cost_Breakdown.mp4",
+      "channel": "CumquatVibes",
+      "target_channel_id": "UCThXDUhXqcui2HqBv4MUBBA",
+      "video_id": "yhUakdqzwao",
+      "url": "https://youtube.com/watch?v=yhUakdqzwao",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": false,
+      "thumbnail_uploaded": true
+    },
+    {
+      "file": "Google_API_Key_Tutorial.mp4",
+      "channel": "Google",
+      "target_channel_id": null,
+      "video_id": "MC87toP_gQA",
+      "url": "https://youtube.com/watch?v=MC87toP_gQA",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": false,
+      "thumbnail_uploaded": true
+    },
+    {
+      "file": "Google_API_Key_Tutorial_v2.mp4",
+      "channel": "Google",
+      "target_channel_id": null,
+      "video_id": "YD95-_eAnNg",
+      "url": "https://youtube.com/watch?v=YD95-_eAnNg",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": false,
+      "thumbnail_uploaded": true
+    },
+    {
+      "file": "How to Find Your Google API Key - Step by Step.mp4",
+      "channel": "How to Find Your Google API Key - Step by Step.mp4",
+      "target_channel_id": null,
+      "video_id": "aCP69m9DsvQ",
+      "url": "https://youtube.com/watch?v=aCP69m9DsvQ",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": false,
+      "thumbnail_uploaded": true
+    },
+    {
+      "file": "CumquatGaming_5_NEW_Indie_Games_to_Watch_in_February_2026.mp4",
+      "channel": "CumquatGaming",
+      "target_channel_id": null,
+      "video_id": "V4IVp9Zx5iM",
+      "url": "https://youtube.com/watch?v=V4IVp9Zx5iM",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": false,
+      "thumbnail_uploaded": true
+    },
+    {
+      "file": "CumquatGaming_Hidden_Nintendo_Game_Boy_Games_You_Missed_Retro_Gems.mp4",
+      "channel": "CumquatGaming",
+      "target_channel_id": null,
+      "video_id": "wngM8KLX634",
+      "url": "https://youtube.com/watch?v=wngM8KLX634",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": false,
+      "thumbnail_uploaded": true
+    },
+    {
+      "file": "CumquatGaming_Top_7_Forgotten_PS_Vita_Games_You_NEED_To_Play_in_2026.mp4",
+      "channel": "CumquatGaming",
+      "target_channel_id": null,
+      "video_id": "n2mafDiTa6s",
+      "url": "https://youtube.com/watch?v=n2mafDiTa6s",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": false,
+      "thumbnail_uploaded": true
+    },
+    {
+      "file": "HowToMeditate_5-Minute_Morning_Meditation_for_Instant_Calm_Beginner-Friendly.mp4",
+      "channel": "HowToMeditate",
+      "target_channel_id": "UCbd6kzX3giNYyAeLaMPdgAA",
+      "video_id": "K-uXiZi7RKA",
+      "url": "https://youtube.com/watch?v=K-uXiZi7RKA",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
+    },
+    {
+      "file": "RichArt_Impressionist_Masters_Monet_Renoir_Degas_1Hr_4K.mp4",
+      "channel": "RichArt",
+      "target_channel_id": null,
+      "video_id": "T9BgTPUSnFo",
+      "url": "https://youtube.com/watch?v=T9BgTPUSnFo",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": false,
+      "thumbnail_uploaded": true
+    },
+    {
+      "file": "RichArt_Impressionist_Masters_Monet_Renoir_Degas_6min_1080p.mp4",
+      "channel": "RichArt",
+      "target_channel_id": null,
+      "video_id": "dYPlnFDtU04",
+      "url": "https://youtube.com/watch?v=dYPlnFDtU04",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": false,
+      "thumbnail_uploaded": true
+    },
+    {
+      "file": "RichArt_Japanese_Woodblock_Prints_Hokusai_Hiroshige_6min_1080p.mp4",
+      "channel": "RichArt",
+      "target_channel_id": null,
+      "video_id": "ERnYsUxeS6Y",
+      "url": "https://youtube.com/watch?v=ERnYsUxeS6Y",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": false,
+      "thumbnail_uploaded": true
+    },
+    {
+      "file": "RichArt_Van_Gogh_Complete_Collection_7min_1080p.mp4",
+      "channel": "RichArt",
+      "target_channel_id": null,
+      "video_id": "PF8xkjFE27w",
+      "url": "https://youtube.com/watch?v=PF8xkjFE27w",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": false,
+      "thumbnail_uploaded": true
+    },
+    {
+      "file": "RichCrypto_DeFi_Lending_Protocol_Wars_2026_New_Strategies_Which_Platforms_Will_Win.mp4",
+      "channel": "RichCrypto",
+      "target_channel_id": "UCc5XhfHIkEp5WwG9CRZm_6w",
+      "video_id": "gR62sBNN1RU",
+      "url": "https://youtube.com/watch?v=gR62sBNN1RU",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
+    },
+    {
+      "file": "RichCrypto_Top_5_Undervalued_Altcoins_Ready_to_Explode_in_February_2026_Dont_Miss_These.mp4",
+      "channel": "RichCrypto",
+      "target_channel_id": "UCc5XhfHIkEp5WwG9CRZm_6w",
+      "video_id": "hIgMChl3AIc",
+      "url": "https://youtube.com/watch?v=hIgMChl3AIc",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
+    },
+    {
+      "file": "RichCrypto_Web3_Gamings_Next_Evolution_7_Blockchain_Games_Redefining_Play-to-Earn_2026.mp4",
+      "channel": "RichCrypto",
+      "target_channel_id": "UCc5XhfHIkEp5WwG9CRZm_6w",
+      "video_id": "noBj9QEmKdo",
+      "url": "https://youtube.com/watch?v=noBj9QEmKdo",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
+    },
+    {
+      "file": "RichFinance_5_Smart_Tax_Moves_You_NEED_to_Make_Before_the_2026_Deadline.mp4",
+      "channel": "RichFinance",
+      "target_channel_id": "UCJwfAudM4c4rWSk3P8iib8g",
+      "video_id": "OY7qWw0O7M8",
+      "url": "https://youtube.com/watch?v=OY7qWw0O7M8",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
+    },
+    {
+      "file": "RichFinance_Budgeting_for_Beginners_The_Ultimate_Guide_to_Mastering_Your_Money_in_2026.mp4",
+      "channel": "RichFinance",
+      "target_channel_id": "UCJwfAudM4c4rWSk3P8iib8g",
+      "video_id": "1mDs_t_Ud_0",
+      "url": "https://youtube.com/watch?v=1mDs_t_Ud_0",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
+    },
+    {
+      "file": "RichFinance_Top_7_Stocks_to_Buy_in_February_2026_Expert_Picks.mp4",
+      "channel": "RichFinance",
+      "target_channel_id": "UCJwfAudM4c4rWSk3P8iib8g",
+      "video_id": "MoO48R0AUTI",
+      "url": "https://youtube.com/watch?v=MoO48R0AUTI",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
+    },
+    {
+      "file": "RichReviews_Amazon_Hidden_Gems_7_Genius_Products_Under_25_You_Wont_Believe_3.mp4",
+      "channel": "RichReviews",
+      "target_channel_id": "UCQZAmWq2Y_1W09mIOSRSrFw",
+      "video_id": "0vm8rEWg9Is",
+      "url": "https://youtube.com/watch?v=0vm8rEWg9Is",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
+    },
+    {
+      "file": "RichReviews_Budget_vs_Premium_Noise-Canceling_Headphones_Which_Wins_in_2026_HONEST_Review.mp4",
+      "channel": "RichReviews",
+      "target_channel_id": "UCQZAmWq2Y_1W09mIOSRSrFw",
+      "video_id": "zlRCz9SCG0c",
+      "url": "https://youtube.com/watch?v=zlRCz9SCG0c",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
+    },
+    {
+      "file": "RichReviews_Top_5_Smart_Home_Gadgets_You_NEED_in_February_2026_Future_Tech.mp4",
+      "channel": "RichReviews",
+      "target_channel_id": "UCQZAmWq2Y_1W09mIOSRSrFw",
+      "video_id": "P_peoWQSMbc",
+      "url": "https://youtube.com/watch?v=P_peoWQSMbc",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
+    },
+    {
+      "file": "RichScience_7_Mind-Blowing_Biology_Facts_That_Will_Make_You_Question_Everything.mp4",
+      "channel": "RichScience",
+      "target_channel_id": "UC0ODvK8Hvrd9Bd3QWIWPecA",
+      "video_id": "jApS6FAWVrA",
+      "url": "https://youtube.com/watch?v=jApS6FAWVrA",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
+    },
+    {
+      "file": "RichScience_James_Webb_Telescope_SHOCKS_Scientists_Top_5_New_Discoveries_of_2026.mp4",
+      "channel": "RichScience",
+      "target_channel_id": "UC0ODvK8Hvrd9Bd3QWIWPecA",
+      "video_id": "hZaxEohoOks",
+      "url": "https://youtube.com/watch?v=hZaxEohoOks",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
+    },
+    {
+      "file": "RichScience_Quantum_Entanglement_How_Scientists_Are_Harnessing_This_Weird_Physics_Phenomenon.mp4",
+      "channel": "RichScience",
+      "target_channel_id": "UC0ODvK8Hvrd9Bd3QWIWPecA",
+      "video_id": "q99naxFiFY4",
+      "url": "https://youtube.com/watch?v=q99naxFiFY4",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
+    },
+    {
+      "file": "RichSports_From_Broke_to_Billionaire_The_Untold_Story_of_Giannis_Antetokounmpos_Rise.mp4",
+      "channel": "RichSports",
+      "target_channel_id": "UCE33LOzIvklXaPbH1920vqQ",
+      "video_id": "Nk7BOnP-TaU",
+      "url": "https://youtube.com/watch?v=Nk7BOnP-TaU",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
+    },
+    {
+      "file": "RichSports_NFL_Draft_2026_5_Underrated_Prospects_Who_Will_Dominate_The_League.mp4",
+      "channel": "RichSports",
+      "target_channel_id": "UCE33LOzIvklXaPbH1920vqQ",
+      "video_id": "vFJhZE0SP10",
+      "url": "https://youtube.com/watch?v=vFJhZE0SP10",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
+    },
+    {
+      "file": "RichSports_Patrick_Mahomes_Secret_Weapon_How_Sports_Science_Made_Him_Unstoppable_2026_Super.mp4",
+      "channel": "RichSports",
+      "target_channel_id": "UCE33LOzIvklXaPbH1920vqQ",
+      "video_id": "2YPLLFNGjZM",
+      "url": "https://youtube.com/watch?v=2YPLLFNGjZM",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
+    },
+    {
+      "file": "RichArt_Impressionist_Masters_1Hr_4K_Slideshow.mp4",
+      "channel": "RichArt",
+      "target_channel_id": null,
+      "video_id": "qiztD7i9Gw0",
+      "url": "https://youtube.com/watch?v=qiztD7i9Gw0",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": false,
+      "thumbnail_uploaded": true
+    },
+    {
+      "file": "RichArt_Japanese_Woodblock_Prints_1Hr_4K_Slideshow.mp4",
+      "channel": "RichArt",
+      "target_channel_id": null,
+      "video_id": "BYl9eaSCEJI",
+      "url": "https://youtube.com/watch?v=BYl9eaSCEJI",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": false,
+      "thumbnail_uploaded": true
+    },
+    {
+      "file": "RichArt_Monet_Water_Lilies_Gardens_1Hr_4K_Slideshow.mp4",
+      "channel": "RichArt",
+      "target_channel_id": null,
+      "video_id": "OMlWMp2EoEw",
+      "url": "https://youtube.com/watch?v=OMlWMp2EoEw",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": false,
+      "thumbnail_uploaded": true
+    },
+    {
+      "file": "RichArt_Ocean_Seascapes_Maritime_Masters_1Hr_4K_Slideshow.mp4",
+      "channel": "RichArt",
+      "target_channel_id": null,
+      "video_id": "BTmfsX4GW_U",
+      "url": "https://youtube.com/watch?v=BTmfsX4GW_U",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": false,
+      "thumbnail_uploaded": true
+    },
+    {
+      "file": "RichArt_Van_Gogh_Complete_Collection_1Hr_4K_Slideshow.mp4",
+      "channel": "RichArt",
+      "target_channel_id": null,
+      "video_id": "W5roqmVPkuY",
+      "url": "https://youtube.com/watch?v=W5roqmVPkuY",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": false,
+      "thumbnail_uploaded": true
+    },
+    {
+      "file": "RichArt_Vintage_Garden_Paintings_1hr_4K_Slideshow.mp4",
+      "channel": "RichArt",
+      "target_channel_id": null,
+      "video_id": "jgQet53UTb4",
+      "url": "https://youtube.com/watch?v=jgQet53UTb4",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": false,
+      "thumbnail_uploaded": true
+    },
+    {
+      "file": "RichMusic_Ambient_Meditation_Deep_Relaxation_1Hr_Background_Music.mp4",
+      "channel": "RichMusic",
+      "target_channel_id": "UCCI_ynXNuutXGrzWDYzUZiA",
+      "video_id": "DKCA5JxdV6I",
+      "url": "https://youtube.com/watch?v=DKCA5JxdV6I",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
+    },
+    {
+      "file": "RichMusic_Blues_Soul_Timeless_Classics_1Hr_Background_Music.mp4",
+      "channel": "RichMusic",
+      "target_channel_id": "UCCI_ynXNuutXGrzWDYzUZiA",
+      "video_id": "xFFU5FSIXQY",
+      "url": "https://youtube.com/watch?v=xFFU5FSIXQY",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
+    },
+    {
+      "file": "RichMusic_Chill_Acoustic_Study_Vibes_1Hr_Background_Music.mp4",
+      "channel": "RichMusic",
+      "target_channel_id": "UCCI_ynXNuutXGrzWDYzUZiA",
+      "video_id": "Jit8Em32AwY",
+      "url": "https://youtube.com/watch?v=Jit8Em32AwY",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
+    },
+    {
+      "file": "RichMusic_Cinematic_Epic_Instrumental_1Hr_Background_Music.mp4",
+      "channel": "RichMusic",
+      "target_channel_id": "UCCI_ynXNuutXGrzWDYzUZiA",
+      "video_id": "D2LxnY72eeg",
+      "url": "https://youtube.com/watch?v=D2LxnY72eeg",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
+    },
+    {
+      "file": "RichMusic_Jazz_Cafe_Smooth_Jazz_1Hr_Background_Music.mp4",
+      "channel": "RichMusic",
+      "target_channel_id": "UCCI_ynXNuutXGrzWDYzUZiA",
+      "video_id": "-Raov8sGSnY",
+      "url": "https://youtube.com/watch?v=-Raov8sGSnY",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
     }
   ]
 }

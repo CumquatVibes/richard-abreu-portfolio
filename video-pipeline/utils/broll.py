@@ -15,9 +15,17 @@ from urllib.error import HTTPError
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BROLL_DIR = os.path.join(BASE_DIR, "output", "broll")
 
-# API config
+# API config — read lazily so .env has time to load via utils.common
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
 DEFAULT_MODEL = "gemini-2.5-flash-image"
+
+
+def _get_api_key():
+    """Get Gemini API key, re-reading from env if module-level var is empty."""
+    global GEMINI_API_KEY
+    if not GEMINI_API_KEY:
+        GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
+    return GEMINI_API_KEY
 
 # Rate limiting
 _last_api_call = 0
@@ -151,6 +159,11 @@ CHANNEL_BROLL_TEMPLATES = {
         "suffix": "Personal brand quality, artistic, bold creator energy, sharp focus, no text, no watermarks.",
         "segment_duration": 8,
     },
+    "RichArt": {
+        "prefix": "Museum-quality 16:9, classical fine art reproduction, rich warm tones, gallery lighting, elegant dark background.",
+        "suffix": "Oil painting texture, masterpiece quality, historically accurate, no text, no watermarks, art museum presentation.",
+        "segment_duration": 10,
+    },
 }
 
 DEFAULT_TEMPLATE = {
@@ -159,13 +172,33 @@ DEFAULT_TEMPLATE = {
     "segment_duration": 7,
 }
 
+# Vertical (9:16) templates for shorts — same channels with portrait orientation
+DEFAULT_TEMPLATE_VERTICAL = {
+    "prefix": "Portrait 9:16 aspect ratio, cinematic composition, vertical framing optimized for mobile viewing.",
+    "suffix": "Sharp focus, no text, no watermarks, portrait orientation, mobile-friendly composition.",
+    "segment_duration": 4,
+}
 
-def get_broll_template(channel):
+
+def get_broll_template(channel, orientation="landscape"):
     """Get B-roll template config for a channel.
 
     Returns dict with keys: prefix, suffix, segment_duration
+
+    Args:
+        channel: Channel name for template lookup.
+        orientation: "landscape" (default 16:9) or "vertical" (9:16 for shorts).
     """
-    return CHANNEL_BROLL_TEMPLATES.get(channel, DEFAULT_TEMPLATE)
+    template = CHANNEL_BROLL_TEMPLATES.get(channel, DEFAULT_TEMPLATE)
+
+    if orientation == "vertical":
+        template = dict(template)  # Copy so original isn't modified
+        template["prefix"] = "Portrait 9:16 aspect ratio, " + template["prefix"]
+        template["suffix"] = template["suffix"].rstrip(".") + ", portrait orientation."
+        template["segment_duration"] = min(template["segment_duration"], 5)
+        return template
+
+    return template
 
 
 def extract_visuals(script_path):
@@ -213,7 +246,7 @@ def generate_image(prompt, output_path, channel=None, model=None,
     Returns:
         float: Image size in KB, or 0 on failure
     """
-    key = api_key or GEMINI_API_KEY
+    key = api_key or _get_api_key()
     mdl = model or DEFAULT_MODEL
     backoff = delay_on_429 or BACKOFF_429
 

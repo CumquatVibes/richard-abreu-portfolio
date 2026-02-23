@@ -28,6 +28,7 @@ CORE_METRICS = [
     "estimatedMinutesWatched",
     "averageViewDuration",
     "averageViewPercentage",
+    "engagedViews",
     "likes",
     "comments",
     "shares",
@@ -173,6 +174,90 @@ def query_video_metrics(video_id, start_date=None, end_date=None, access_token=N
         return None
 
 
+def query_traffic_sources(video_id, start_date=None, end_date=None, access_token=None):
+    """Query traffic source breakdown for a video.
+
+    Returns dict with views by source type (e.g., SHORTS, SEARCH, SUGGESTED).
+    """
+    token = access_token or _get_access_token()
+    if not token:
+        return None
+
+    if not start_date:
+        start_date = "2020-01-01"
+    if not end_date:
+        end_date = datetime.now().strftime("%Y-%m-%d")
+
+    url = (f"{ANALYTICS_API}?ids=channel==MINE"
+           f"&startDate={start_date}&endDate={end_date}"
+           f"&metrics=views"
+           f"&dimensions=insightTrafficSourceType"
+           f"&filters=video=={video_id}")
+
+    headers = {"Authorization": f"Bearer {token}"}
+    try:
+        req = Request(url, headers=headers)
+        with urlopen(req, timeout=30) as resp:
+            data = json.loads(resp.read().decode())
+            rows = data.get("rows", [])
+            sources = {}
+            total_views = 0
+            for row in rows:
+                source_type = row[0]
+                views = row[1]
+                sources[source_type] = views
+                total_views += views
+
+            shorts_views = sources.get("SHORTS", 0)
+            shorts_share = shorts_views / total_views if total_views > 0 else 0
+
+            return {
+                "sources": sources,
+                "total_views": total_views,
+                "shorts_feed_views": shorts_views,
+                "shorts_feed_share": shorts_share,
+            }
+    except Exception as e:
+        print(f"  [analytics] Traffic source query failed: {e}")
+        return None
+
+
+def query_audience_retention(video_id, access_token=None):
+    """Query per-video audience retention curve.
+
+    Returns list of {elapsed_pct, watch_ratio, relative_perf} dicts.
+    Segments where watch_ratio > 1 indicate rewatching.
+    """
+    token = access_token or _get_access_token()
+    if not token:
+        return None
+
+    url = (f"{ANALYTICS_API}?ids=channel==MINE"
+           f"&startDate=2020-01-01"
+           f"&endDate={datetime.now().strftime('%Y-%m-%d')}"
+           f"&metrics=audienceWatchRatio,relativeRetentionPerformance"
+           f"&dimensions=elapsedVideoTimeRatio"
+           f"&filters=video=={video_id}")
+
+    headers = {"Authorization": f"Bearer {token}"}
+    try:
+        req = Request(url, headers=headers)
+        with urlopen(req, timeout=30) as resp:
+            data = json.loads(resp.read().decode())
+            rows = data.get("rows", [])
+            return [
+                {
+                    "elapsed_pct": row[0],
+                    "watch_ratio": row[1],
+                    "relative_perf": row[2] if len(row) > 2 else 0,
+                }
+                for row in rows
+            ]
+    except Exception as e:
+        print(f"  [analytics] Retention query failed: {e}")
+        return None
+
+
 def query_channel_overview(days=28, access_token=None):
     """Get channel-level performance overview."""
     token = access_token or _get_access_token()
@@ -262,6 +347,14 @@ def compute_reward(metrics, costs=None, risk_scores=None):
     engagement_score = min(engagement_rate / 0.1, 1.0) * 15  # 10% engagement = max
     components["engagement"] = engagement_score
 
+    # CTR value (0-10 points) — packaging effectiveness
+    ctr = metrics.get("ctr", 0)
+    if ctr > 0:
+        ctr_score = min(ctr / 10.0, 1.0) * 10
+    else:
+        ctr_score = 0
+    components["ctr"] = ctr_score
+
     # Subscriber efficiency
     net_subs = subs_gained - subs_lost
     sub_score = min(max(net_subs, 0) / 10, 1.0) * 15  # 10+ net subs = max
@@ -294,6 +387,75 @@ def compute_reward(metrics, costs=None, risk_scores=None):
         confidence = "medium"
     else:
         confidence = "high"
+
+    return {
+        "total_reward": round(total, 2),
+        "components": {k: round(v, 2) for k, v in components.items()},
+        "confidence": confidence,
+    }
+
+
+def compute_shorts_reward(metrics, costs=None, risk_scores=None):
+    """Shorts-specific reward function with different weights.
+
+    Shorts prioritize retention and engagement rate over raw watch time.
+    Range: [-25, 75], normalized separately from long-form.
+    """
+    if not metrics or not metrics.get("data_available"):
+        return {"total_reward": 0, "components": {}, "confidence": "no_data"}
+
+    components = {}
+    views = max(metrics.get("views", 1), 1)
+
+    # Retention (0-30 points) — most important for shorts
+    avg_pct = metrics.get("averageViewPercentage", 0)
+    retention_score = min(avg_pct / 70, 1.0) * 30  # 70%+ = max
+    components["retention"] = retention_score
+
+    # Engaged view rate (0-20 points)
+    engaged = metrics.get("engagedViews", 0)
+    if engaged > 0:
+        engaged_rate = engaged / views
+        engaged_score = min(engaged_rate / 0.5, 1.0) * 20  # 50%+ engaged = max
+    else:
+        engaged_score = 0
+    components["engaged_view_rate"] = engaged_score
+
+    # Shares (0-15 points) — virality signal
+    shares = metrics.get("shares", 0)
+    share_rate = shares / views
+    share_score = min(share_rate / 0.02, 1.0) * 15  # 2%+ share rate = max
+    components["shares"] = share_score
+
+    # Subscriber conversion (0-10 points)
+    subs_gained = metrics.get("subscribersGained", 0)
+    subs_lost = metrics.get("subscribersLost", 0)
+    net_subs = subs_gained - subs_lost
+    sub_score = min(max(net_subs, 0) / 5, 1.0) * 10  # 5+ net subs = max
+    components["subscriber_growth"] = sub_score
+
+    # Cost penalty (0 to -5) — shorts are cheaper
+    if costs:
+        total_cost = costs.get("total_cost_usd", 0)
+        cost_penalty = -min(total_cost / 2, 5)
+        components["cost_penalty"] = cost_penalty
+    else:
+        components["cost_penalty"] = 0
+
+    # Risk penalty (0 to -20)
+    if risk_scores:
+        max_risk = max(risk_scores.values()) if risk_scores else 0
+        risk_penalty = -max_risk * 20
+        components["risk_penalty"] = risk_penalty
+    else:
+        components["risk_penalty"] = 0
+
+    total = sum(components.values())
+
+    if views < 10:     confidence = "very_low"
+    elif views < 100:  confidence = "low"
+    elif views < 1000: confidence = "medium"
+    else:              confidence = "high"
 
     return {
         "total_reward": round(total, 2),
@@ -342,8 +504,29 @@ def pull_metrics_and_store(video_name, youtube_video_id, window="7d"):
         subscribers_lost=metrics.get("subscribersLost"),
     )
 
-    # Compute and store reward
-    reward = compute_reward(metrics)
+    # Look up video row for is_short and cost/risk context
+    from utils.telemetry import _get_db
+    video_row = None
+    costs = None
+    risk_scores = None
+    try:
+        conn = _get_db()
+        video_row = conn.execute(
+            "SELECT * FROM videos WHERE video_name = ?", (video_name,)
+        ).fetchone()
+        conn.close()
+    except Exception:
+        pass
+
+    # Use shorts-specific reward for shorts
+    metrics_data = metrics
+    is_short = video_row["is_short"] if video_row and "is_short" in video_row.keys() else 0
+    if is_short:
+        reward_result = compute_shorts_reward(metrics_data, costs, risk_scores)
+    else:
+        reward_result = compute_reward(metrics_data, costs, risk_scores)
+
+    reward = reward_result
     log_metrics(
         video_name=video_name,
         youtube_video_id=youtube_video_id,
@@ -356,6 +539,46 @@ def pull_metrics_and_store(video_name, youtube_video_id, window="7d"):
     print(f"  Analytics: {video_name} ({window}): {metrics.get('views', 0)} views, "
           f"{metrics.get('estimatedMinutesWatched', 0):.0f} min watched, "
           f"reward={reward['total_reward']:.1f} ({reward['confidence']})")
+
+    # Store traffic source data
+    try:
+        traffic = query_traffic_sources(youtube_video_id)
+        if traffic:
+            conn = _get_db()
+            conn.execute("""
+                UPDATE metrics SET shorts_feed_share = ?
+                WHERE video_name = ? AND window = ?
+            """, (traffic.get("shorts_feed_share", 0), video_name, window))
+            conn.commit()
+            conn.close()
+    except Exception:
+        pass
+
+    # Update bandit arm if this video has one assigned
+    try:
+        from utils.bandits import update_arm
+        conn = _get_db()
+        row = conn.execute(
+            "SELECT template_arm FROM videos WHERE video_name = ?", (video_name,)
+        ).fetchone()
+        conn.close()
+        if row and row["template_arm"]:
+            update_arm(row["template_arm"], reward["total_reward"], video_name)
+            print(f"  Bandit: Updated arm {row['template_arm']} with reward {reward['total_reward']:.1f}")
+    except Exception:
+        pass  # Bandits not critical path
+
+    # Update shorts-specific arm if applicable
+    if is_short and video_row:
+        shorts_arm = video_row.get("shorts_arm")
+        if shorts_arm:
+            try:
+                from utils.bandits import update_arm
+                normalized = (reward_result["total_reward"] - (-25)) / (75 - (-25))
+                normalized = max(0, min(1, normalized))
+                update_arm(shorts_arm, normalized, video_name)
+            except Exception:
+                pass
 
     return metrics
 

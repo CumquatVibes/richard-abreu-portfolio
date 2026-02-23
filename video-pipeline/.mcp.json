@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "video-pipeline": {
+      "command": "/Users/richardabreu/Projects/RichardAbreuPortfolio/video-pipeline/.venv-mcp/bin/python3.13",
+      "args": ["/Users/richardabreu/Projects/RichardAbreuPortfolio/video-pipeline/mcp_server.py"]
+    }
+  }
+}

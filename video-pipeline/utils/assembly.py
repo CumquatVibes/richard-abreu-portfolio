@@ -147,6 +147,13 @@ def assemble_video(audio_path, broll_dir, output_path, segment_duration=8,
             print(f"  Video: {size_mb:.1f} MB, {duration/60:.1f} min")
         return True, size_mb, duration
 
+    if verbose:
+        print(f"  Audio merge failed (returncode {result.returncode})")
+        if result.stderr:
+            # Print last few lines of stderr for debugging
+            lines = result.stderr.strip().split('\n')
+            for line in lines[-5:]:
+                print(f"    {line}")
     return False, 0, 0
 
 
@@ -155,7 +162,7 @@ def _concat_simple(segment_files, temp_dir):
     concat_file = os.path.join(temp_dir, "concat.txt")
     with open(concat_file, "w") as f:
         for sf in segment_files:
-            f.write(f"file '{sf}'\n")
+            f.write(f"file '{os.path.abspath(sf)}'\n")
 
     concat_output = os.path.join(temp_dir, "video_only.mp4")
     cmd = [
@@ -164,6 +171,10 @@ def _concat_simple(segment_files, temp_dir):
         "-pix_fmt", "yuv420p", concat_output
     ]
     result = subprocess.run(cmd, capture_output=True, text=True)
+    if result.returncode != 0:
+        lines = result.stderr.strip().split('\n') if result.stderr else []
+        for line in lines[-3:]:
+            print(f"    concat error: {line}")
     return concat_output if result.returncode == 0 else None
 
 

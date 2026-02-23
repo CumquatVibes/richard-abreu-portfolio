@@ -25,6 +25,9 @@ from dotenv import load_dotenv
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, BASE_DIR)
+
+from utils.telemetry import log_video_published
+
 VIDEOS_DIR = os.path.join(BASE_DIR, "output", "videos")
 SCRIPTS_DIR = os.path.join(BASE_DIR, "output", "scripts")
 THUMBNAILS_DIR = os.path.join(BASE_DIR, "output", "thumbnails")
@@ -114,7 +117,12 @@ CHANNEL_NICHE = {
     "RichFitness": "fitness, workouts, and healthy living",
     "RichCooking": "cooking, recipes, and kitchen hacks",
     "CumquatVibes": "art, design, tech, entrepreneurship, and creator lifestyle",
+    "RichArt": "4K art slideshows, art for your TV, ambient art, art essays",
+    "RichMusic": "curated music playlists, lo-fi beats, jazz, blues, ambient music",
 }
+
+# Channels that use the "Turn Your TV Into Art" template
+ART_SLIDESHOW_CHANNELS = {"RichArt"}
 
 CHANNEL_TAGS = {
     "RichTech": [
@@ -151,6 +159,17 @@ CHANNEL_TAGS = {
         "Richard Abreu", "Cumquat Vibes", "digital art", "design tutorial",
         "AI tools", "creator economy", "entrepreneur", "veteran creator",
         "art process", "tech review", "side hustle", "Affinity Designer",
+    ],
+    "RichArt": [
+        "art for tv", "tv wall art", "4k art", "4k slideshow", "art background",
+        "living room tv art", "frame tv art", "ambient video", "relaxing art",
+        "art slideshow", "wall art video", "background art", "turn your tv into art",
+        "samsung frame tv art", "art screensaver",
+    ],
+    "RichMusic": [
+        "music playlist", "lo-fi beats", "study music", "chill music",
+        "jazz playlist", "blues music", "ambient music", "relaxing music",
+        "background music", "focus music", "cafe music", "work music",
     ],
 }
 
@@ -263,11 +282,37 @@ def make_title(filename):
     """
     name = os.path.splitext(filename)[0]
     parts = name.split("_", 1)
+    channel_prefix = parts[0] if len(parts) > 1 else ""
     title_raw = parts[1] if len(parts) > 1 else name
     title = title_raw.replace("_", " ")
 
     # Strip trailing timestamp patterns like "20260219 155540"
     title = re.sub(r'\s*\d{8}\s*\d{6}\s*$', '', title)
+
+    # RichArt: Use "Turn Your TV Into Art" title format
+    # Format: "{Theme} | Turn Your TV Into Art | {Duration} 4K Slideshow"
+    if channel_prefix == "RichArt":
+        # Clean up the theme part
+        theme = title
+        for strip in ["Turn Your TV Into Art", "4K", "Slideshow", "|"]:
+            theme = theme.replace(strip, "")
+        # Strip duration patterns (case-insensitive)
+        theme = re.sub(r'\b\d+\s*(?:hr|hour|min)\b', '', theme, flags=re.IGNORECASE)
+        theme = re.sub(r'\s+', ' ', theme).strip(" -–—")
+        # Detect duration from filename
+        duration = "1Hr"
+        if "2hr" in name.lower() or "2hour" in name.lower():
+            duration = "2Hr"
+        elif "30min" in name.lower():
+            duration = "30min"
+        elif "6min" in name.lower() or "7min" in name.lower():
+            # Short preview videos — don't use the art template
+            pass
+        else:
+            # Build the art title format
+            art_title = f"{theme} | Turn Your TV Into Art | {duration} 4K Slideshow"
+            if len(art_title) <= 100:  # YouTube max is 100
+                return art_title
 
     # Title case but preserve fully uppercase words (AI, DIY, etc.)
     words = title.split()
@@ -404,6 +449,80 @@ def extract_products_from_script(script_path):
     return products[:10]
 
 
+def _make_art_description(title, script_path):
+    """Generate 'Turn Your TV Into Art' description template for RichArt videos."""
+    # Extract theme from title (e.g. "Impressionist Masters Monet Renoir Degas")
+    theme = title
+    for strip in ["Turn Your TV Into Art", "4K", "Slideshow", "1Hr", "2Hr", "30min", "|"]:
+        theme = theme.replace(strip, "")
+    theme = re.sub(r'\s+', ' ', theme).strip(" -–—")
+    if not theme:
+        theme = "curated artwork"
+
+    # Detect duration from title
+    duration = "1 hour"
+    if "2Hr" in title or "2 Hour" in title:
+        duration = "2 hours"
+    elif "30min" in title or "30 Min" in title:
+        duration = "30 minutes"
+
+    # Try to extract artist/style info from script
+    artists = ""
+    style = "Fine art"
+    if script_path and os.path.exists(script_path):
+        with open(script_path) as f:
+            content = f.read()
+        # Look for artist names in script
+        artist_matches = re.findall(r'(?:by|Artist:|Featuring:)\s*([A-Z][a-zA-Z\s,&]+)', content)
+        if artist_matches:
+            artists = artist_matches[0].strip()
+
+    parts = [
+        f"Transform your space with this {theme.lower()} collection in stunning 4K,",
+        f"perfect as ambient art for your TV, living room, office, cafe, or studio background.",
+        "",
+        "\u25b6 What you get",
+        f"- {duration} of continuous {theme.lower()} artwork",
+        "- Optimized for 4K TVs and smart displays",
+        "- Ideal for relaxing, studying, working, or entertaining guests",
+        "",
+        "\u25b6 Featuring",
+    ]
+    if artists:
+        parts.append(f"- Artists: {artists}")
+    parts.extend([
+        f"- Style: {style}",
+        "",
+        "\u25b6 Get matching prints and merch",
+        "Bring this art off the screen and into your home with high-quality prints,",
+        "apparel, and accessories:",
+        "https://www.cumquatvibes.com",
+        "",
+        "Browse more of my artwork and projects:",
+        "Portfolio: https://richardabreu.studio",
+        "Community & updates: https://vibeconnectionlounge.com",
+        "",
+        "\u25b6 How to use this video",
+        "- Set as background art while you relax, read, or host guests",
+        "- Use on a second monitor while working or studying",
+        "- Play in lobbies, cafes, salons, or offices for a calm, creative vibe",
+        "",
+        "\u25b6 About this project",
+        "This video was created using curated and AI-assisted artwork, edited and",
+        "compiled by a human artist to deliver a unique viewing experience.",
+        "",
+        "Thank you for watching and supporting independent creators!",
+        "",
+        "AI DISCLOSURE: This video was created with the assistance of AI tools",
+        "including AI-upscaled artwork and automated compilation.",
+        "",
+        "\u00a9 2026 Cumquat Vibes Media",
+        "",
+        "#artfortv #4kart #turnyourtvintart #artslideshow #ambientvideo",
+    ])
+    return "\n".join(parts)
+
+
 def make_description(channel, title, script_path):
     """Generate SEO-optimized YouTube description with timestamps and affiliate links.
 
@@ -413,6 +532,10 @@ def make_description(channel, title, script_path):
     3. Affiliate links (if product channel)
     4. CTA + links
     """
+    # RichArt uses the "Turn Your TV Into Art" template
+    if channel in ART_SLIDESHOW_CHANNELS:
+        return _make_art_description(title, script_path)
+
     intro = extract_intro(script_path)
     chapters = extract_chapters_from_script(script_path)
 
@@ -977,6 +1100,13 @@ def main():
                 "thumbnail_uploaded": thumb_uploaded,
             })
             uploaded_count += 1
+
+            # Log to telemetry DB
+            try:
+                video_name = os.path.splitext(video_file)[0]
+                log_video_published(video_name, vid_id, quota_used=QUOTA_PER_UPLOAD)
+            except Exception:
+                pass
         else:
             print(f"  FAILED: Unknown error")
             failed_count += 1

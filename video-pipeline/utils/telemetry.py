@@ -154,8 +154,51 @@ def _create_tables(conn):
         CREATE INDEX IF NOT EXISTS idx_metrics_window ON metrics(window);
         CREATE INDEX IF NOT EXISTS idx_decisions_video ON decisions(video_name);
         CREATE INDEX IF NOT EXISTS idx_incidents_type ON incidents(incident_type);
+
+        CREATE TABLE IF NOT EXISTS retention_curves (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            video_name TEXT NOT NULL,
+            youtube_video_id TEXT,
+            pulled_at TEXT DEFAULT (datetime('now')),
+            elapsed_pct REAL,
+            audience_watch_ratio REAL,
+            relative_retention REAL
+        );
+        CREATE INDEX IF NOT EXISTS idx_retention_video ON retention_curves(video_name);
     """)
     conn.commit()
+
+    # Shorts-specific columns (added for shorts module)
+    for col_def in [
+        "is_short INTEGER DEFAULT 0",
+        "source_video TEXT",
+        "platform TEXT DEFAULT 'youtube'",
+        "caption_style TEXT",
+    ]:
+        col_name = col_def.split()[0]
+        try:
+            conn.execute(f"ALTER TABLE videos ADD COLUMN {col_def}")
+        except Exception:
+            pass  # Column already exists
+
+    # Learning loop columns
+    for col_def in [
+        ("videos", "caption_position TEXT"),
+        ("videos", "crop_strategy TEXT"),
+        ("videos", "hook_duration REAL"),
+        ("videos", "hook_category TEXT"),
+        ("videos", "title_formula TEXT"),
+        ("videos", "voice_params TEXT"),
+        ("videos", "segment_duration REAL"),
+        ("videos", "shorts_arm TEXT"),
+        ("videos", "posting_slot TEXT"),
+        ("metrics", "engaged_views INTEGER"),
+        ("metrics", "shorts_feed_share REAL"),
+    ]:
+        try:
+            conn.execute(f"ALTER TABLE {col_def[0]} ADD COLUMN {col_def[1]}")
+        except sqlite3.OperationalError:
+            pass
 
 
 # ── Video lifecycle tracking ──
@@ -260,6 +303,24 @@ def log_video_quality(video_name, score, details=None):
     conn.close()
 
 
+def log_short_produced(video_name, channel, source_video=None, platform="youtube",
+                       caption_style=None, video_duration_sec=None, video_size_mb=None,
+                       shorts_arm=None, crop_strategy=None, caption_position=None):
+    """Log a short video production with parent lineage."""
+    conn = _get_db()
+    conn.execute("""
+        INSERT OR IGNORE INTO videos (video_name, channel, status, is_short,
+                                       source_video, platform, caption_style,
+                                       video_duration_sec, video_size_mb,
+                                       shorts_arm, crop_strategy, caption_position)
+        VALUES (?, ?, 'produced', 1, ?, ?, ?, ?, ?, ?, ?, ?)
+    """, (video_name, channel, source_video, platform, caption_style,
+          video_duration_sec, video_size_mb, shorts_arm, crop_strategy,
+          caption_position))
+    conn.commit()
+    conn.close()
+
+
 # ── Cost tracking ──
 
 def update_costs(video_name, **cost_kwargs):
@@ -336,6 +397,47 @@ def log_incident(video_name, incident_type, severity, description):
     """, (video_name, incident_type, severity, description))
     conn.commit()
     conn.close()
+
+
+# ── Retention curves ──
+
+def log_retention_curve(video_name, youtube_video_id, retention_data):
+    """Store audience retention curve data for a video.
+
+    Args:
+        retention_data: list of {elapsed_pct, watch_ratio, relative_perf} dicts
+    """
+    if not retention_data:
+        return
+    conn = _get_db()
+    try:
+        for point in retention_data:
+            conn.execute("""
+                INSERT INTO retention_curves (video_name, youtube_video_id,
+                    elapsed_pct, audience_watch_ratio, relative_retention)
+                VALUES (?, ?, ?, ?, ?)
+            """, (video_name, youtube_video_id,
+                  point.get("elapsed_pct", 0),
+                  point.get("watch_ratio", 0),
+                  point.get("relative_perf", 0)))
+        conn.commit()
+    finally:
+        conn.close()
+
+
+def get_retention_curve(video_name):
+    """Retrieve stored retention curve for a video."""
+    conn = _get_db()
+    try:
+        rows = conn.execute("""
+            SELECT elapsed_pct, audience_watch_ratio, relative_retention
+            FROM retention_curves
+            WHERE video_name = ?
+            ORDER BY elapsed_pct
+        """, (video_name,)).fetchall()
+        return [dict(r) for r in rows]
+    finally:
+        conn.close()
 
 
 # ── Queries for learning loop ──

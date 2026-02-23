@@ -17,6 +17,8 @@ sys.path.insert(0, BASE_DIR)
 from utils.assembly import assemble_video
 from utils.broll import generate_broll, get_broll_template
 from utils.common import find_audio_for_script, strip_timestamp, SCRIPTS_DIR, VIDEOS_DIR
+from utils.telemetry import log_video_planned, log_video_produced
+from utils.bandits import select_arm
 
 os.makedirs(VIDEOS_DIR, exist_ok=True)
 
@@ -39,6 +41,12 @@ def main():
         basename = os.path.splitext(os.path.basename(script_path))[0]
         video_name = strip_timestamp(basename)
         channel = basename.split("_")[0]
+
+        # Consult bandit for optimal production settings
+        channel_key = channel.lower()
+        arm_result = select_arm(channel_key)
+        arm_name = arm_result.get("arm_name") if not arm_result.get("error") else None
+
         output_path = os.path.join(VIDEOS_DIR, f"{video_name}.mp4")
 
         print(f"\n[{i}/{len(scripts)}] {video_name}")
@@ -49,6 +57,12 @@ def main():
             print(f"  SKIP (exists): {size_mb:.1f} MB")
             results["skipped"].append(video_name)
             continue
+
+        # Log planned video with bandit arm
+        try:
+            log_video_planned(video_name, channel, topic=video_name, template_arm=arm_name)
+        except Exception:
+            pass  # telemetry should never block production
 
         audio_path, _ = find_audio_for_script(basename)
         if not audio_path:
@@ -76,6 +90,16 @@ def main():
 
         if success:
             results["success"].append(video_name)
+            try:
+                log_video_produced(video_name, channel=channel,
+                                   video_path=output_path,
+                                   video_duration_sec=duration,
+                                   video_size_mb=size_mb,
+                                   broll_generated=broll_count,
+                                   segment_duration=seg_dur,
+                                   template_arm=arm_name)
+            except Exception:
+                pass
         else:
             results["failed"].append(video_name)
 
