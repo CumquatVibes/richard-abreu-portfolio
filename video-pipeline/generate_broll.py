@@ -27,7 +27,7 @@ def main():
     print(f"Generating B-roll for: {basename}")
     print(f"Channel: {channel}\n")
 
-    broll_dir, generated, failed = generate_broll(script_path, channel=channel)
+    broll_dir, generated, failed, _ = generate_broll(script_path, channel=channel)
 
     print(f"\nDone! {generated} generated, {failed} failed.")
     print(f"Output: {broll_dir}")

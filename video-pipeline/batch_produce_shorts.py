@@ -378,7 +378,7 @@ def produce_native_shorts(results, channel_filter=None, dry_run=False,
             print(f"  B-roll: {broll_count} images (existing)")
         else:
             print(f"  Generating B-roll...")
-            broll_dir, broll_count, broll_failed = generate_broll(
+            broll_dir, broll_count, broll_failed, _ = generate_broll(
                 script_path, channel=channel,
             )
             if broll_count == 0:

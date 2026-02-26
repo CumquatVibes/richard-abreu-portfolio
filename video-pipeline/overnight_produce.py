@@ -21,6 +21,11 @@ sys.path.insert(0, BASE_DIR)
 from utils.assembly import assemble_video
 from utils.broll import generate_broll, get_broll_template, extract_visuals
 from utils.common import find_audio_for_script, strip_timestamp, SCRIPTS_DIR, VIDEOS_DIR, REPORT_DIR
+from utils.telemetry import log_video_produced, update_costs
+
+# Cost rates (USD)
+TTS_COST_PER_CHAR = 0.30 / 1000   # ElevenLabs Scale: $0.30 per 1K chars
+BROLL_COST_PER_CALL = 0.0          # Gemini Flash free tier; update if on paid plan
 
 os.makedirs(VIDEOS_DIR, exist_ok=True)
 os.makedirs(REPORT_DIR, exist_ok=True)
@@ -174,7 +179,7 @@ def main():
 
         # Generate B-roll with overnight settings (more retries, longer backoff)
         print(f"  Generating B-roll...")
-        broll_dir, generated, failed = generate_broll(
+        broll_dir, generated, failed, broll_api_calls = generate_broll(
             script_path, channel=channel,
             model="gemini-2.0-flash-exp-image-generation",
             retries=5, delay_on_429=60
@@ -206,6 +211,27 @@ def main():
             video_info["duration"] = duration
             report["total_videos_assembled"] += 1
             print(f"  VIDEO COMPLETE: {size_mb:.1f} MB, {duration/60:.1f} min")
+
+            # Log to telemetry + cost tracking
+            tts_chars = 0
+            try:
+                with open(script_path) as sf:
+                    tts_chars = len(sf.read())
+            except Exception:
+                pass
+            try:
+                log_video_produced(video_name, channel=channel,
+                                   video_path=output_path,
+                                   video_duration_sec=duration,
+                                   video_size_mb=size_mb,
+                                   broll_generated=generated)
+                update_costs(video_name,
+                             tts_characters=tts_chars,
+                             tts_cost_usd=round(tts_chars * TTS_COST_PER_CHAR, 4),
+                             broll_api_calls=broll_api_calls,
+                             broll_cost_usd=round(broll_api_calls * BROLL_COST_PER_CALL, 4))
+            except Exception:
+                pass
 
             assessment = self_assess_video(video_info)
             video_info["assessment"] = assessment

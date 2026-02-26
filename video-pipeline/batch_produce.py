@@ -17,8 +17,12 @@ sys.path.insert(0, BASE_DIR)
 from utils.assembly import assemble_video
 from utils.broll import generate_broll, get_broll_template
 from utils.common import find_audio_for_script, strip_timestamp, SCRIPTS_DIR, VIDEOS_DIR
-from utils.telemetry import log_video_planned, log_video_produced
+from utils.telemetry import log_video_planned, log_video_produced, update_costs
 from utils.bandits import select_arm
+
+# Cost rates (USD)
+TTS_COST_PER_CHAR = 0.30 / 1000   # ElevenLabs Scale: $0.30 per 1K chars
+BROLL_COST_PER_CALL = 0.0          # Gemini Flash free tier; update if on paid plan
 
 os.makedirs(VIDEOS_DIR, exist_ok=True)
 
@@ -72,12 +76,20 @@ def main():
 
         # Generate B-roll
         print(f"  Generating B-roll...")
-        broll_dir, broll_count, _ = generate_broll(script_path, channel=channel)
+        broll_dir, broll_count, _, broll_api_calls = generate_broll(script_path, channel=channel)
 
         if broll_count == 0:
             print(f"  SKIP: No B-roll generated")
             results["failed"].append(video_name)
             continue
+
+        # Count TTS characters from the audio's source script
+        tts_chars = 0
+        try:
+            with open(script_path) as f:
+                tts_chars = len(f.read())
+        except Exception:
+            pass
 
         # Assemble video with channel-specific segment duration + crossfade
         print(f"  Assembling video...")
@@ -98,6 +110,11 @@ def main():
                                    broll_generated=broll_count,
                                    segment_duration=seg_dur,
                                    template_arm=arm_name)
+                update_costs(video_name,
+                             tts_characters=tts_chars,
+                             tts_cost_usd=round(tts_chars * TTS_COST_PER_CHAR, 4),
+                             broll_api_calls=broll_api_calls,
+                             broll_cost_usd=round(broll_api_calls * BROLL_COST_PER_CALL, 4))
             except Exception:
                 pass
         else:

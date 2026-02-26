@@ -306,7 +306,8 @@ def generate_broll(script_path, channel=None, model=None, api_key=None,
         on_progress: Callback(i, total, visual, success) for progress tracking
 
     Returns:
-        tuple: (broll_dir, generated_count, failed_count)
+        tuple: (broll_dir, generated_count, failed_count, api_calls)
+            api_calls: number of fresh Gemini API calls made (excludes cached)
     """
     basename = os.path.splitext(os.path.basename(script_path))[0]
     if channel is None:
@@ -318,10 +319,11 @@ def generate_broll(script_path, channel=None, model=None, api_key=None,
     visuals = extract_visuals(script_path)
     if not visuals:
         print(f"    No visual directions found")
-        return broll_out, 0, 0
+        return broll_out, 0, 0, 0
 
     generated = 0
     failed = 0
+    api_calls = 0
 
     for i, visual in enumerate(visuals, 1):
         filepath = os.path.join(broll_out, f"broll_{i:02d}.png")
@@ -332,6 +334,7 @@ def generate_broll(script_path, channel=None, model=None, api_key=None,
             continue
 
         print(f"    [{i}/{len(visuals)}] {visual[:55]}...")
+        api_calls += 1
         size_kb = generate_image(
             visual, filepath,
             channel=channel, model=model, api_key=api_key,
@@ -347,7 +350,7 @@ def generate_broll(script_path, channel=None, model=None, api_key=None,
         if on_progress:
             on_progress(i, len(visuals), visual, bool(size_kb))
 
-    return broll_out, generated, failed
+    return broll_out, generated, failed, api_calls
 
 
 def generate_broll_parallel(script_path, channel=None, model=None, api_key=None,
@@ -367,7 +370,8 @@ def generate_broll_parallel(script_path, channel=None, model=None, api_key=None,
         on_progress: Callback(i, total, visual, success)
 
     Returns:
-        tuple: (broll_dir, generated_count, failed_count)
+        tuple: (broll_dir, generated_count, failed_count, api_calls)
+            api_calls: number of fresh Gemini API calls made (excludes cached)
     """
     basename = os.path.splitext(os.path.basename(script_path))[0]
     if channel is None:
@@ -379,7 +383,7 @@ def generate_broll_parallel(script_path, channel=None, model=None, api_key=None,
     visuals = extract_visuals(script_path)
     if not visuals:
         print(f"    No visual directions found")
-        return broll_out, 0, 0
+        return broll_out, 0, 0, 0
 
     # Filter to only visuals that need generation
     tasks = []
@@ -393,8 +397,9 @@ def generate_broll_parallel(script_path, channel=None, model=None, api_key=None,
 
     if not tasks:
         print(f"    All {len(visuals)} B-roll images already exist")
-        return broll_out, already_generated, 0
+        return broll_out, already_generated, 0, 0
 
+    api_calls = len(tasks)  # each task = 1 API call attempt
     print(f"    Generating {len(tasks)} images in parallel (workers={max_workers})...")
 
     generated = already_generated
@@ -429,4 +434,4 @@ def generate_broll_parallel(script_path, channel=None, model=None, api_key=None,
             if on_progress:
                 on_progress(idx, len(visuals), visual, bool(size_kb))
 
-    return broll_out, generated, failed
+    return broll_out, generated, failed, api_calls
