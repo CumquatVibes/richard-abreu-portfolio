@@ -103,6 +103,8 @@ TOKEN_KEY_MAP = {
     "RichBusiness": "Rich Business",
     "CumquatMotivation": "Cumquat Motivation",
     "CumquatVibes": "Cumquat Vibes",
+    "CumquatGaming": "Cumquat Gaming",
+    "CumquatShortform": "Cumquat Shortform",
 }
 
 CHANNEL_NICHE = {
@@ -1027,12 +1029,23 @@ def main():
         filepath = os.path.join(VIDEOS_DIR, video_file)
         size_mb = os.path.getsize(filepath) / (1024 * 1024)
 
-        # Pick the right token
-        token = get_token_for_channel(channel, default_token)
+        # Pick the right token — skip if channel has no dedicated token
         token_key = TOKEN_KEY_MAP.get(channel, channel)
         using_channel_token = token_key in channel_access_tokens
+        token = get_token_for_channel(channel, None)
 
         print(f"[{i}/{len(pending)}] {channel}: {title}")
+        if not token:
+            print(f"  SKIP: No OAuth token for channel '{token_key}' — add to channel_tokens.json")
+            results.append({
+                "file": video_file,
+                "channel": channel,
+                "target_channel_id": channel_id,
+                "video_id": None,
+                "status": "no_token",
+                "uploaded_at": datetime.now(timezone.utc).isoformat(),
+            })
+            continue
         print(f"  Size: {size_mb:.1f} MB | Token: {'channel-specific' if using_channel_token else 'default (main channel)'}")
 
         # Preflight compliance check

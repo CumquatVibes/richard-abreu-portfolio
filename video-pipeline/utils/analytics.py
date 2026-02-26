@@ -36,6 +36,8 @@ _TOKEN_KEY_MAP = {
     "RichBusiness": "Rich Business",
     "CumquatMotivation": "Cumquat Motivation",
     "CumquatVibes": "Cumquat Vibes",
+    "CumquatGaming": "Cumquat Gaming",
+    "CumquatShortform": "Cumquat Shortform",
 }
 
 # Core metrics we track per the report's KPI framework
