@@ -1040,6 +1040,7 @@ QUOTA_PER_UPLOAD = 1600
 QUOTA_PER_THUMBNAIL = 50
 DAILY_QUOTA_LIMIT = 10000
 QUOTA_SAFETY_THRESHOLD = 0.80  # Stop uploads at 80% quota usage
+MAX_UPLOADS_PER_RUN = 5  # Hard cap per run — prevents quota blowouts regardless of tracking
 
 
 def run_preflight(video_file, channel, title, description, tags, script_path):
@@ -1129,6 +1130,7 @@ def main():
 
     results = list(existing_results)
     uploaded_count = len(already_uploaded)
+    uploaded_this_run = 0
     skipped_limit = 0
     failed_count = 0
     preflight_blocked = 0
@@ -1164,6 +1166,13 @@ def main():
             print(f"[{i}/{len(pending)}] {channel}: SKIP (rate limited)")
             skipped_limit += 1
             continue
+
+        # Hard cap: never exceed MAX_UPLOADS_PER_RUN in a single run
+        if uploaded_this_run >= MAX_UPLOADS_PER_RUN:
+            remaining = len(pending) - i
+            print(f"\n  Hit upload cap: {uploaded_this_run}/{MAX_UPLOADS_PER_RUN} uploads this run.")
+            print(f"  {remaining} videos deferred to next run.")
+            break
 
         # Quota budget check: stop early if we'd exceed 80% of daily quota
         projected_quota = quota_used_this_run + QUOTA_PER_UPLOAD + QUOTA_PER_THUMBNAIL
@@ -1287,6 +1296,7 @@ def main():
                 "thumbnail_uploaded": thumb_uploaded,
             })
             uploaded_count += 1
+            uploaded_this_run += 1
 
             # Log to telemetry DB + persist quota usage
             try:
@@ -1312,7 +1322,7 @@ def main():
 
     # Summary
     print(f"\n{'=' * 60}")
-    print(f"Results: {uploaded_count} uploaded | {skipped_limit} rate-limited | {failed_count} failed | {preflight_blocked} blocked by compliance")
+    print(f"Results: {uploaded_this_run} uploaded this run ({uploaded_count} total) | {skipped_limit} rate-limited | {failed_count} failed | {preflight_blocked} blocked by compliance")
     print(f"Quota used this run: ~{quota_used_this_run}/{DAILY_QUOTA_LIMIT} ({quota_used_this_run/DAILY_QUOTA_LIMIT*100:.0f}%)\n")
 
     for r in results:
@@ -1341,7 +1351,9 @@ def main():
     with open(UPLOAD_REPORT_PATH, "w") as f:
         json.dump({
             "uploaded": uploaded_count,
+            "uploaded_this_run": uploaded_this_run,
             "total": len(videos),
+            "quota_used_this_run": quota_used_this_run,
             "rate_limited": list(rate_limited_channels),
             "results": deduped_results,
         }, f, indent=2)
