@@ -183,6 +183,9 @@ def check_quota_status():
     """Check YouTube API quota usage and alert if near exhaustion.
 
     Reads the upload report to estimate quota usage.
+    Uses the report's quota_used_this_run field (preferred) or counts
+    only today's uploads by timestamp to avoid inflating the estimate
+    with results accumulated from previous runs.
 
     Returns:
         dict with quota status
@@ -194,11 +197,25 @@ def check_quota_status():
     with open(report_path) as f:
         report = json.load(f)
 
-    successful = sum(1 for r in report.get("results", []) if r.get("status") == "success")
-    quota_per_upload = 1600
-    quota_per_thumbnail = 50
-    estimated_usage = successful * (quota_per_upload + quota_per_thumbnail)
     daily_limit = 10000
+
+    # Prefer the uploader's own quota tracking if available
+    if "quota_used_this_run" in report:
+        estimated_usage = report["quota_used_this_run"]
+        successful = report.get("uploaded_this_run", 0)
+    else:
+        # Fallback: count only today's uploads by timestamp
+        today = datetime.utcnow().strftime("%Y-%m-%d")
+        successful = 0
+        for r in report.get("results", []):
+            if r.get("status") != "success":
+                continue
+            uploaded_at = r.get("uploaded_at", "")
+            if uploaded_at.startswith(today):
+                successful += 1
+        quota_per_upload = 1600
+        quota_per_thumbnail = 50
+        estimated_usage = successful * (quota_per_upload + quota_per_thumbnail)
 
     pct_used = estimated_usage / daily_limit if daily_limit > 0 else 0
 

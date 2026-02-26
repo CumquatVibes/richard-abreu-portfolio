@@ -17,6 +17,7 @@ import os
 import re
 import time
 import urllib.parse
+from datetime import datetime, timezone
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError
 
@@ -1033,6 +1034,7 @@ def main():
                 "video_id": None,
                 "status": "preflight_blocked",
                 "violations": [v["type"] for v in preflight_result.get("violations", [])],
+                "uploaded_at": datetime.now(timezone.utc).isoformat(),
             })
             continue
 
@@ -1042,14 +1044,8 @@ def main():
         result = upload_video(filepath, title, description, tags, category_id, token)
 
         if result == "quota_exceeded":
-            print(f"\n  YouTube API quota exhausted. Remaining {len(pending) - i} videos will retry after quota reset (midnight PT).")
-            results.append({
-                "file": video_file,
-                "channel": channel,
-                "target_channel_id": channel_id,
-                "video_id": None,
-                "status": "quota_exceeded",
-            })
+            print(f"\n  YouTube API quota exhausted (videos.insert = 1600 units; daily limit = 10,000).")
+            print(f"  Remaining {len(pending) - i} videos will retry after quota reset (midnight PT).")
             failed_count += 1
             break
         elif result == "rate_limited":
@@ -1061,6 +1057,7 @@ def main():
                 "target_channel_id": channel_id,
                 "video_id": None,
                 "status": "rate_limited",
+                "uploaded_at": datetime.now(timezone.utc).isoformat(),
             })
         elif result and "error" in result:
             error_msg = result["error"]
@@ -1073,6 +1070,7 @@ def main():
                 "video_id": None,
                 "status": "failed",
                 "error": error_msg,
+                "uploaded_at": datetime.now(timezone.utc).isoformat(),
             })
         elif result:
             vid_id = result.get("id", "?")
@@ -1098,6 +1096,7 @@ def main():
                 "upload_status": status,
                 "used_channel_token": using_channel_token,
                 "thumbnail_uploaded": thumb_uploaded,
+                "uploaded_at": datetime.now(timezone.utc).isoformat(),
             })
             uploaded_count += 1
 
@@ -1117,6 +1116,7 @@ def main():
                 "video_id": None,
                 "status": "failed",
                 "error": "Unknown error - no response from API",
+                "uploaded_at": datetime.now(timezone.utc).isoformat(),
             })
 
         if i < len(pending):
@@ -1150,9 +1150,13 @@ def main():
 
     # Save report
     os.makedirs(REPORT_DIR, exist_ok=True)
+    uploaded_this_run = uploaded_count - len(already_uploaded)
     with open(UPLOAD_REPORT_PATH, "w") as f:
         json.dump({
             "uploaded": uploaded_count,
+            "uploaded_this_run": uploaded_this_run,
+            "quota_used_this_run": quota_used_this_run,
+            "run_timestamp": datetime.now(timezone.utc).isoformat(),
             "total": len(videos),
             "rate_limited": list(rate_limited_channels),
             "results": deduped_results,
