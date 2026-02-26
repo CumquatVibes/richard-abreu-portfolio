@@ -7,20 +7,36 @@ Queries YouTube Analytics API (reports.query) for per-video KPIs:
 - Subscribers gained/lost (growth efficiency)
 
 Stores results in the SQLite telemetry DB for learning loop and drift detection.
+
+Uses per-channel OAuth tokens from channel_tokens.json so that each video's
+metrics are queried via the token that owns that channel.
 """
 
 import json
 import os
+from collections import defaultdict
 from datetime import datetime, timedelta
+from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-TOKEN_PATH = os.path.join(BASE_DIR, "youtube_token.json")
+CHANNEL_TOKENS_PATH = os.path.join(BASE_DIR, "channel_tokens.json")
 CLIENT_SECRET_PATH = os.path.join(BASE_DIR, "client_secret.json")
 
 # YouTube Analytics API endpoint
 ANALYTICS_API = "https://youtubeanalytics.googleapis.com/v2/reports"
+
+# Mapping from filename channel prefix to channel_tokens.json key
+# (same as upload_to_youtube.TOKEN_KEY_MAP)
+_TOKEN_KEY_MAP = {
+    "HowToUseAI": "How to Use AI",
+    "HowToMeditate": "How to Meditate",
+    "EvaReyes": "Eva Reyes",
+    "RichBusiness": "Rich Business",
+    "CumquatMotivation": "Cumquat Motivation",
+    "CumquatVibes": "Cumquat Vibes",
+}
 
 # Core metrics we track per the report's KPI framework
 CORE_METRICS = [
@@ -42,50 +58,31 @@ REACH_METRICS = [
 ]
 
 
-def _get_access_token():
-    """Get a fresh YouTube API access token."""
-    if not os.path.exists(TOKEN_PATH):
-        print("  Analytics: No youtube_token.json found")
-        return None
+# ---------------------------------------------------------------------------
+# Token management — per-channel tokens
+# ---------------------------------------------------------------------------
 
-    with open(TOKEN_PATH) as f:
-        token_data = json.load(f)
-
-    access_token = token_data.get("access_token")
-    refresh_token = token_data.get("refresh_token")
-    expiry = token_data.get("expiry", "")
-
-    # Check if token needs refresh
-    if expiry:
-        try:
-            expiry_dt = datetime.fromisoformat(expiry.replace("Z", "+00:00"))
-            if datetime.now(expiry_dt.tzinfo) > expiry_dt:
-                access_token = _refresh_token(refresh_token)
-        except (ValueError, TypeError):
-            pass
-
-    return access_token
-
-
-def _refresh_token(refresh_token):
-    """Refresh the OAuth2 token."""
+def _load_client_secret():
+    """Load OAuth client secret (installed or web type)."""
     if not os.path.exists(CLIENT_SECRET_PATH):
         return None
-
-    with open(CLIENT_SECRET_PATH) as f:
-        client = json.load(f).get("installed", json.load(open(CLIENT_SECRET_PATH)).get("web", {}))
-
-    # Re-read since we consumed the file handle
     with open(CLIENT_SECRET_PATH) as f:
         secrets = json.load(f)
-    client = secrets.get("installed", secrets.get("web", {}))
+    return secrets.get("installed", secrets.get("web", {}))
 
-    data = (
-        f"client_id={client['client_id']}"
-        f"&client_secret={client['client_secret']}"
-        f"&refresh_token={refresh_token}"
-        f"&grant_type=refresh_token"
-    ).encode()
+
+def _refresh_channel_token(creds):
+    """Refresh a per-channel OAuth2 token. Returns access_token string."""
+    client = _load_client_secret()
+    if not client:
+        return None
+
+    data = urlencode({
+        "client_id": client["client_id"],
+        "client_secret": client["client_secret"],
+        "refresh_token": creds["refresh_token"],
+        "grant_type": "refresh_token",
+    }).encode()
 
     req = Request(
         "https://oauth2.googleapis.com/token",
@@ -97,20 +94,69 @@ def _refresh_token(refresh_token):
     try:
         resp = urlopen(req, timeout=30)
         result = json.loads(resp.read().decode())
-        new_token = result.get("access_token")
-
-        # Save updated token
-        with open(TOKEN_PATH) as f:
-            token_data = json.load(f)
-        token_data["access_token"] = new_token
-        with open(TOKEN_PATH, "w") as f:
-            json.dump(token_data, f, indent=2)
-
-        return new_token
+        return result.get("access_token")
     except Exception as e:
-        print(f"  Analytics: Token refresh failed: {str(e)[:100]}")
+        print(f"  Analytics: Token refresh failed for {creds.get('channel_title', '?')}: {str(e)[:80]}")
         return None
 
+
+def _load_channel_tokens():
+    """Load all per-channel tokens from channel_tokens.json.
+
+    Returns dict mapping token key (channel name) to its credentials dict.
+    """
+    if not os.path.exists(CHANNEL_TOKENS_PATH):
+        return {}
+    with open(CHANNEL_TOKENS_PATH) as f:
+        return json.load(f)
+
+
+def _get_token_for_channel(channel_prefix, channel_tokens_cache):
+    """Get a fresh access token for a channel by its filename prefix.
+
+    Args:
+        channel_prefix: e.g. "RichMind", "HowToUseAI"
+        channel_tokens_cache: dict of token_key -> {access_token, creds}
+
+    Returns:
+        (access_token, channel_id) tuple, or (None, None) if unavailable
+    """
+    token_key = _TOKEN_KEY_MAP.get(channel_prefix, channel_prefix)
+    cached = channel_tokens_cache.get(token_key)
+    if cached:
+        return cached["access_token"], cached["channel_id"]
+    return None, None
+
+
+def _refresh_all_channel_tokens():
+    """Refresh tokens for all channels. Returns cache dict.
+
+    Cache format: {token_key: {"access_token": str, "channel_id": str, "creds": dict}}
+    """
+    all_creds = _load_channel_tokens()
+    cache = {}
+    refreshed = 0
+    failed = 0
+
+    for token_key, creds in all_creds.items():
+        access_token = _refresh_channel_token(creds)
+        if access_token:
+            cache[token_key] = {
+                "access_token": access_token,
+                "channel_id": creds.get("channel_id"),
+                "creds": creds,
+            }
+            refreshed += 1
+        else:
+            failed += 1
+
+    print(f"  Analytics: Refreshed {refreshed} channel tokens ({failed} failed)")
+    return cache
+
+
+# ---------------------------------------------------------------------------
+# YouTube Analytics API queries
+# ---------------------------------------------------------------------------
 
 def query_video_metrics(video_id, start_date=None, end_date=None, access_token=None):
     """Query YouTube Analytics API for a specific video's KPIs.
@@ -119,13 +165,12 @@ def query_video_metrics(video_id, start_date=None, end_date=None, access_token=N
         video_id: YouTube video ID
         start_date: Start date string (YYYY-MM-DD). Default: 7 days ago
         end_date: End date string (YYYY-MM-DD). Default: today
-        access_token: OAuth token override
+        access_token: OAuth token for the channel that owns this video
 
     Returns:
         dict with metric names as keys and values, or None on failure
     """
-    token = access_token or _get_access_token()
-    if not token:
+    if not access_token:
         return None
 
     if not start_date:
@@ -144,7 +189,7 @@ def query_video_metrics(video_id, start_date=None, end_date=None, access_token=N
     )
 
     url = f"{ANALYTICS_API}?{params}"
-    req = Request(url, headers={"Authorization": f"Bearer {token}"})
+    req = Request(url, headers={"Authorization": f"Bearer {access_token}"})
 
     try:
         resp = urlopen(req, timeout=30)
@@ -167,10 +212,14 @@ def query_video_metrics(video_id, start_date=None, end_date=None, access_token=N
 
     except HTTPError as e:
         body = e.read().decode() if hasattr(e, "read") else str(e)
-        print(f"  Analytics API error {e.code}: {body[:200]}")
+        # Don't spam logs for 403 (quota) — just note it
+        if e.code == 403:
+            print(f"  Analytics: API quota/permission error for {video_id}")
+        else:
+            print(f"  Analytics API error {e.code} for {video_id}: {body[:200]}")
         return None
     except Exception as e:
-        print(f"  Analytics query failed: {str(e)[:150]}")
+        print(f"  Analytics query failed for {video_id}: {str(e)[:150]}")
         return None
 
 
@@ -179,8 +228,7 @@ def query_traffic_sources(video_id, start_date=None, end_date=None, access_token
 
     Returns dict with views by source type (e.g., SHORTS, SEARCH, SUGGESTED).
     """
-    token = access_token or _get_access_token()
-    if not token:
+    if not access_token:
         return None
 
     if not start_date:
@@ -194,7 +242,7 @@ def query_traffic_sources(video_id, start_date=None, end_date=None, access_token
            f"&dimensions=insightTrafficSourceType"
            f"&filters=video=={video_id}")
 
-    headers = {"Authorization": f"Bearer {token}"}
+    headers = {"Authorization": f"Bearer {access_token}"}
     try:
         req = Request(url, headers=headers)
         with urlopen(req, timeout=30) as resp:
@@ -218,7 +266,7 @@ def query_traffic_sources(video_id, start_date=None, end_date=None, access_token
                 "shorts_feed_share": shorts_share,
             }
     except Exception as e:
-        print(f"  [analytics] Traffic source query failed: {e}")
+        print(f"  Analytics: Traffic source query failed for {video_id}: {e}")
         return None
 
 
@@ -228,8 +276,7 @@ def query_audience_retention(video_id, access_token=None):
     Returns list of {elapsed_pct, watch_ratio, relative_perf} dicts.
     Segments where watch_ratio > 1 indicate rewatching.
     """
-    token = access_token or _get_access_token()
-    if not token:
+    if not access_token:
         return None
 
     url = (f"{ANALYTICS_API}?ids=channel==MINE"
@@ -239,7 +286,7 @@ def query_audience_retention(video_id, access_token=None):
            f"&dimensions=elapsedVideoTimeRatio"
            f"&filters=video=={video_id}")
 
-    headers = {"Authorization": f"Bearer {token}"}
+    headers = {"Authorization": f"Bearer {access_token}"}
     try:
         req = Request(url, headers=headers)
         with urlopen(req, timeout=30) as resp:
@@ -254,14 +301,13 @@ def query_audience_retention(video_id, access_token=None):
                 for row in rows
             ]
     except Exception as e:
-        print(f"  [analytics] Retention query failed: {e}")
+        print(f"  Analytics: Retention query failed for {video_id}: {e}")
         return None
 
 
-def query_channel_overview(days=28, access_token=None):
+def query_channel_overview(channel_id=None, days=28, access_token=None):
     """Get channel-level performance overview."""
-    token = access_token or _get_access_token()
-    if not token:
+    if not access_token:
         return None
 
     start_date = (datetime.now() - timedelta(days=days)).strftime("%Y-%m-%d")
@@ -278,7 +324,7 @@ def query_channel_overview(days=28, access_token=None):
         f"&maxResults=50"
     )
 
-    req = Request(url, headers={"Authorization": f"Bearer {token}"})
+    req = Request(url, headers={"Authorization": f"Bearer {access_token}"})
 
     try:
         resp = urlopen(req, timeout=30)
@@ -305,6 +351,10 @@ def query_channel_overview(days=28, access_token=None):
         print(f"  Analytics overview failed: {str(e)[:150]}")
         return None
 
+
+# ---------------------------------------------------------------------------
+# Reward computation
+# ---------------------------------------------------------------------------
 
 def compute_reward(metrics, costs=None, risk_scores=None):
     """Compute multi-objective reward from video metrics.
@@ -464,13 +514,19 @@ def compute_shorts_reward(metrics, costs=None, risk_scores=None):
     }
 
 
-def pull_metrics_and_store(video_name, youtube_video_id, window="7d"):
+# ---------------------------------------------------------------------------
+# Metrics pull + storage
+# ---------------------------------------------------------------------------
+
+def pull_metrics_and_store(video_name, youtube_video_id, window="7d",
+                           access_token=None):
     """Pull metrics from YouTube Analytics and store in telemetry DB.
 
     Args:
         video_name: Pipeline video name (for DB lookup)
         youtube_video_id: YouTube video ID
         window: "6h", "24h", "48h", "7d", "28d" — determines date range
+        access_token: OAuth token for the channel that owns this video
     """
     from utils.telemetry import log_metrics
 
@@ -482,7 +538,8 @@ def pull_metrics_and_store(video_name, youtube_video_id, window="7d"):
     start_date = (datetime.now() - timedelta(days=days)).strftime("%Y-%m-%d")
     end_date = datetime.now().strftime("%Y-%m-%d")
 
-    metrics = query_video_metrics(youtube_video_id, start_date, end_date)
+    metrics = query_video_metrics(youtube_video_id, start_date, end_date,
+                                  access_token=access_token)
 
     if not metrics or not metrics.get("data_available"):
         print(f"  Analytics: No data for {youtube_video_id} ({window} window)")
@@ -542,7 +599,8 @@ def pull_metrics_and_store(video_name, youtube_video_id, window="7d"):
 
     # Store traffic source data
     try:
-        traffic = query_traffic_sources(youtube_video_id)
+        traffic = query_traffic_sources(youtube_video_id,
+                                        access_token=access_token)
         if traffic:
             conn = _get_db()
             conn.execute("""
@@ -586,7 +644,8 @@ def pull_metrics_and_store(video_name, youtube_video_id, window="7d"):
 def pull_all_published_metrics(window="7d"):
     """Pull metrics for all published videos and store in telemetry DB.
 
-    Reads the upload report to find published video IDs.
+    Groups videos by channel and uses the correct per-channel OAuth token
+    for each YouTube Analytics API call.
     """
     report_path = os.path.join(BASE_DIR, "output", "reports", "youtube_upload_report.json")
     if not os.path.exists(report_path):
@@ -601,9 +660,49 @@ def pull_all_published_metrics(window="7d"):
         if r.get("status") == "success" and r.get("video_id")
     ]
 
+    if not published:
+        print("  Analytics: No published videos to pull metrics for")
+        return
+
     print(f"  Analytics: Pulling {window} metrics for {len(published)} published videos")
 
+    # Refresh all channel tokens once
+    token_cache = _refresh_all_channel_tokens()
+
+    # Group videos by channel for efficient token lookup
+    by_channel = defaultdict(list)
     for entry in published:
-        video_name = os.path.splitext(entry["file"])[0]
-        video_id = entry["video_id"]
-        pull_metrics_and_store(video_name, video_id, window)
+        by_channel[entry["channel"]].append(entry)
+
+    fetched = 0
+    no_data = 0
+    no_token = 0
+
+    for channel_prefix, entries in sorted(by_channel.items()):
+        access_token, channel_id = _get_token_for_channel(
+            channel_prefix, token_cache
+        )
+
+        if not access_token:
+            # Try to see if the channel was uploaded via the default token
+            # (e.g. RichArt). Skip these — we can't query analytics without
+            # a channel-specific token.
+            no_token += len(entries)
+            if len(entries) > 0:
+                print(f"  Analytics: No token for {channel_prefix} "
+                      f"({len(entries)} videos) — skipping")
+            continue
+
+        for entry in entries:
+            video_name = os.path.splitext(entry["file"])[0]
+            video_id = entry["video_id"]
+            result = pull_metrics_and_store(
+                video_name, video_id, window, access_token=access_token
+            )
+            if result and result.get("data_available"):
+                fetched += 1
+            else:
+                no_data += 1
+
+    print(f"  Analytics: Done — {fetched} with data, {no_data} no data yet, "
+          f"{no_token} skipped (no token)")
