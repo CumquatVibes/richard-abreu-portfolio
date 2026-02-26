@@ -756,7 +756,8 @@ def upload_thumbnail(video_id, thumb_path, access_token):
     """Upload custom thumbnail to a YouTube video.
 
     Uses YouTube Data API v3 thumbnails.set endpoint.
-    Returns True on success, False on failure.
+    Returns True on success, False on failure, or "quota_exceeded" string
+    when the YouTube API daily quota has been exhausted.
     """
     url = f"https://www.googleapis.com/upload/youtube/v3/thumbnails/set?videoId={video_id}&uploadType=media"
 
@@ -784,9 +785,23 @@ def upload_thumbnail(video_id, thumb_path, access_token):
         return False
     except HTTPError as e:
         body = e.read().decode() if hasattr(e, 'read') else str(e)
-        # 403 = channel not verified for custom thumbnails (needs phone verification)
         if e.code == 403:
-            print(f"    Thumbnail: Channel needs phone verification for custom thumbnails")
+            # Parse the actual reason from the API response
+            reason = ""
+            try:
+                err_data = json.loads(body)
+                errors = err_data.get("error", {}).get("errors", [])
+                if errors:
+                    reason = errors[0].get("reason", "")
+            except (json.JSONDecodeError, KeyError):
+                pass
+            if reason == "quotaExceeded":
+                print(f"    Thumbnail: Quota exceeded")
+                return "quota_exceeded"
+            elif "forbidden" in body.lower() and "thumbnail" in body.lower():
+                print(f"    Thumbnail: Channel needs phone verification for custom thumbnails")
+            else:
+                print(f"    Thumbnail: 403 Forbidden — {reason or body[:200]}")
         else:
             print(f"    Thumbnail: Upload error {e.code}: {body[:200]}")
         return False
@@ -1080,7 +1095,8 @@ def main():
             # Upload custom thumbnail if we generated one
             thumb_uploaded = False
             if thumb_path and vid_id != "?":
-                thumb_uploaded = upload_thumbnail(vid_id, thumb_path, token)
+                thumb_result = upload_thumbnail(vid_id, thumb_path, token)
+                thumb_uploaded = thumb_result is True
 
             quota_used_this_run += QUOTA_PER_UPLOAD
             if thumb_uploaded:

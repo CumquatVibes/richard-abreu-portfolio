@@ -29,9 +29,12 @@ CHANNEL_TOKENS_PATH = os.path.join(BASE_DIR, "channel_tokens.json")
 PROGRESS_PATH = os.path.join(BASE_DIR, "output", "verification_progress.json")
 
 # Channels with uploaded videos get priority
+# Updated 2026-02-26: original list was verified; these are channels
+# that returned "could not determine" via the API check
 PRIORITY_CHANNELS = [
-    "Eva Reyes", "How to Use AI", "RichHorror",
-    "RichMind", "RichPets", "RichTech",
+    "How to Use AI", "RichCrypto", "RichFashion", "RichFinance",
+    "RichFood", "RichGaming", "RichKids", "RichMemes",
+    "RichNature", "RichPets", "RichSports", "RichVlogging",
 ]
 
 

@@ -47,12 +47,23 @@ def main():
     with open(UPLOAD_REPORT_PATH) as f:
         report = json.load(f)
 
-    # Find successfully uploaded videos
-    uploaded = [r for r in report.get("results", []) if r.get("status") == "success" and r.get("video_id")]
-    print(f"Found {len(uploaded)} successfully uploaded videos\n")
+    # Find successfully uploaded videos that still need thumbnails
+    uploaded = [
+        r for r in report.get("results", [])
+        if r.get("status") == "success"
+        and r.get("video_id")
+        and not r.get("thumbnail_uploaded")
+    ]
+    total_success = sum(1 for r in report.get("results", []) if r.get("status") == "success")
+    already_have = total_success - len(uploaded)
+    print(f"Found {total_success} successfully uploaded videos")
+    if already_have:
+        print(f"  {already_have} already have thumbnails, {len(uploaded)} need backfill\n")
+    else:
+        print()
 
     if not uploaded:
-        print("No uploaded videos to process.")
+        print("All uploaded videos already have thumbnails. Nothing to do.")
         return
 
     # Load tokens
@@ -67,6 +78,7 @@ def main():
     generated = 0
     uploaded_count = 0
     skipped = 0
+    quota_exhausted = False
 
     for i, entry in enumerate(uploaded, 1):
         video_file = entry["file"]
@@ -97,8 +109,16 @@ def main():
             from upload_to_youtube import TOKEN_KEY_MAP
             token_key = TOKEN_KEY_MAP.get(channel, channel)
             token = channel_access_tokens.get(token_key, default_token)
-            if upload_thumbnail(video_id, thumb_path, token):
+            result = upload_thumbnail(video_id, thumb_path, token)
+            if result is True:
                 uploaded_count += 1
+                # Update the report entry so we don't retry next run
+                entry["thumbnail_uploaded"] = True
+            elif result == "quota_exceeded":
+                print(f"\n  YouTube API quota exhausted. Stopping thumbnail backfill.")
+                print(f"  Remaining {len(uploaded) - i} thumbnails will retry next run.")
+                quota_exhausted = True
+                break
             else:
                 print(f"  Thumbnail upload failed for {video_id}")
 
@@ -107,6 +127,14 @@ def main():
     if not generate_only:
         print(f"Thumbnails uploaded:  {uploaded_count}")
     print(f"Skipped:              {skipped}")
+    if quota_exhausted:
+        print(f"Stopped early:        quota exhausted")
+
+    # Persist thumbnail_uploaded updates back to the report
+    if uploaded_count > 0:
+        with open(UPLOAD_REPORT_PATH, "w") as f:
+            json.dump(report, f, indent=2)
+        print(f"\nUpdated upload report with {uploaded_count} thumbnail statuses.")
 
 
 if __name__ == "__main__":
