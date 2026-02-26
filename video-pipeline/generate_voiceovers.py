@@ -111,18 +111,21 @@ def clean_script_for_tts(text):
             return match.group(1).lower().strip() in EMOTION_TAGS
         return False
 
+    # Strip YAML frontmatter (```yaml ... ```)
+    text = re.sub(r'^```yaml.*?```', '', text, flags=re.DOTALL)
+    text = re.sub(r'^---.*?---', '', text, flags=re.DOTALL)
     # Strip markdown code fences
     text = re.sub(r'^```\w*\s*\n?', '', text)
     text = re.sub(r'\n?```\s*$', '', text)
+
+    # Remove "Here's the complete script text:" and similar intro lines
+    text = re.sub(r"^Here'?s the complete script.*$", '', text, flags=re.MULTILINE | re.IGNORECASE)
 
     lines = text.split("\n")
     cleaned = []
     for line in lines:
         # Skip metadata header lines
-        if line.startswith("# Channel:") or line.startswith("# Topic:") or \
-           line.startswith("# Format:") or line.startswith("# Words:") or \
-           line.startswith("# Est Duration:") or line.startswith("# Generated:") or \
-           line.startswith("# Voice:"):
+        if re.match(r'^#\s*(Channel|Topic|Format|Words|Est\.?\s*Duration|Generated|Voice):', line):
             continue
         # Skip visual directions [VISUAL: ...]
         if re.match(r'\s*\[VISUAL:.*\]', line):
@@ -130,15 +133,32 @@ def clean_script_for_tts(text):
         # Skip cross-promo markers
         if line.strip() == "[CROSS-PROMO]":
             continue
-        # Skip standalone [CHAPTER: ...] lines
-        if re.match(r'^\s*\[CHAPTER:.*\]\s*$', line):
+        # Skip standalone stage direction lines: [HOOK], [INTRO - HOOK],
+        # [CHAPTER: ...], [PAUSE], [RETENTION HOOK: ...], [SECTION: ...], etc.
+        if re.match(r'^\s*\[(?:HOOK|INTRO|CHAPTER|PAUSE|RETENTION HOOK|SECTION|CTA|OUTRO|TRANSITION)[^\]]*\]\s*$', line, re.IGNORECASE):
+            if not is_emotion_tag(line):
+                continue
+        # Skip HOOK/section header lines: "HOOK & RETENTION ...", "00:00 - HOOK: ..."
+        if re.match(r'^\s*HOOK\s*[&:]', line, re.IGNORECASE):
             continue
-        # Remove inline timestamps [00:00:00] and [CHAPTER: ...] markers
+        if re.match(r'^\s*\d+:\d+\s*[-–]\s*(?:HOOK|INTRO|OUTRO|SECTION|CTA|CHAPTER)', line, re.IGNORECASE):
+            continue
+        # Skip word count markers: (Word count so far: 312)
+        if re.match(r'^\s*\(Word count', line, re.IGNORECASE):
+            continue
+        # Skip section timing headers like (Intro - 0:00 - 0:30) or (0:00-0:15) - HOOK
+        if re.match(r'^\s*\(.*\d+:\d+.*\)\s*(?:[-–]\s*(?:HOOK|INTRO|OUTRO))?\s*$', line, re.IGNORECASE):
+            continue
+        # Remove inline [VISUAL:...] and other stage directions within lines
+        line = re.sub(r'\[VISUAL:[^\]]*\]', '', line)
+        line = re.sub(r'\[(?:RETENTION HOOK|HOOK|CHAPTER|PAUSE|SECTION|CTA|TRANSITION)[^\]]*\]', '', line, flags=re.IGNORECASE)
+        # Remove inline timestamps [00:00:00]
         line = re.sub(r'\[\d{2}:\d{2}:\d{2}\]\s*', '', line)
-        line = re.sub(r'\[CHAPTER:[^\]]*\]\s*', '', line)
-        # Skip section timing headers like (Intro - 0:00 - 0:30)
-        if re.match(r'^\s*\(.*\d+:\d+.*\)\s*$', line):
-            continue
+        # Remove citation markers like [3], [5], [inspired by 3]
+        line = re.sub(r'\[(?:inspired by\s*)?\d+\]', '', line)
+        # Remove markdown headers — strip label but keep spoken text
+        line = re.sub(r'^##\s*\d+:\d+\s*[-–]\s*(?:HOOK|INTRO|OUTRO|SECTION|CTA|CHAPTER)[^:]*:\s*', '', line, flags=re.IGNORECASE)
+        line = re.sub(r'^#{1,3}\s+', '', line)
         # Remove markdown bold
         line = re.sub(r'\*\*(.*?)\*\*', r'\1', line)
         # Remove markdown italic

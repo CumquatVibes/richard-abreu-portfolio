@@ -73,17 +73,60 @@ def get_channel_for_script(filename, channels):
 
 
 def clean_script_for_tts(text):
-    """Clean script text for TTS - remove visual directions, headers, metadata."""
-    # Remove YAML frontmatter
+    """Clean script text for TTS - remove visual directions, headers, metadata.
+
+    Strips all non-spoken content: stage directions, visual cues, section labels,
+    metadata headers, timestamps, word counts, citation markers, and formatting.
+    """
+    # Remove YAML frontmatter (```yaml ... ```)
+    text = re.sub(r'^```yaml.*?```', '', text, flags=re.DOTALL)
     text = re.sub(r'^---.*?---', '', text, flags=re.DOTALL)
-    # Remove [VISUAL: ...] directions
-    text = re.sub(r'\[VISUAL:.*?\]', '', text)
-    # Remove markdown headers but keep text
+
+    # Remove metadata header lines (# Channel:, # Topic:, etc.)
+    text = re.sub(r'^#\s*(Channel|Topic|Format|Words|Est\. Duration|Generated):.*$', '', text, flags=re.MULTILINE)
+    # Remove "Here's the complete script text:" and similar intro lines
+    text = re.sub(r"^Here'?s the complete script.*$", '', text, flags=re.MULTILINE | re.IGNORECASE)
+
+    # Remove all bracketed stage directions: [VISUAL:...], [HOOK], [INTRO - HOOK],
+    # [CHAPTER:...], [PAUSE], [RETENTION HOOK:...], [HOOK - text], etc.
+    text = re.sub(r'\[(?:VISUAL|HOOK|INTRO|CHAPTER|PAUSE|RETENTION HOOK|SECTION|CTA|OUTRO|TRANSITION)[^\]]*\]', '', text, flags=re.IGNORECASE)
+    # Remove any remaining bracketed directions that look like stage cues
+    # (but preserve ElevenLabs emotion tags like [excited], [calm], etc.)
+    EMOTION_TAGS = {'excited', 'calm', 'confident', 'inspired', 'pauses', 'serious',
+                    'friendly', 'soothing', 'energetic', 'warm', 'curious'}
+    def _strip_bracket(m):
+        inner = m.group(1).strip().lower()
+        if inner in EMOTION_TAGS:
+            return m.group(0)  # keep emotion tags
+        return ''
+    text = re.sub(r'\[([^\]]{1,60})\]', _strip_bracket, text)
+
+    # Remove section header patterns: "00:00 - HOOK:", "HOOK & RETENTION (...):", etc.
+    text = re.sub(r'^\d+:\d+\s*[-–]\s*(?:HOOK|INTRO|OUTRO|SECTION|CTA|CHAPTER)[^:\n]*:?\s*', '', text, flags=re.MULTILINE | re.IGNORECASE)
+    text = re.sub(r'^HOOK\s*[&:][^\n]*$', '', text, flags=re.MULTILINE | re.IGNORECASE)
+
+    # Remove markdown headers but keep any spoken text after the label
+    # e.g. "## 00:00 - HOOK: The AI Revolution" -> "The AI Revolution"
+    text = re.sub(r'^##\s*\d+:\d+\s*[-–]\s*(?:HOOK|INTRO|OUTRO|SECTION|CTA|CHAPTER)[^:]*:\s*', '', text, flags=re.MULTILINE | re.IGNORECASE)
     text = re.sub(r'^##\s*', '', text, flags=re.MULTILINE)
+    text = re.sub(r'^#\s+', '', text, flags=re.MULTILINE)
+
+    # Remove remaining timestamp section headers like "00:30 - #10: Title"
+    # These are structural markers, not spoken text — strip the "00:30 - " prefix
+    text = re.sub(r'^\d+:\d+\s*[-–]\s*', '', text, flags=re.MULTILINE)
+
     # Remove markdown bold/italic
     text = re.sub(r'\*{1,2}(.+?)\*{1,2}', r'\1', text)
-    # Remove timestamps like (0:00-0:30)
-    text = re.sub(r'\(\d+:\d+[-–]\d+:\d+\)', '', text)
+
+    # Remove timestamps like (0:00-0:30) or (0:00-0:15) - HOOK
+    text = re.sub(r'\(\d+:\d+[-–]\d+:\d+\)\s*[-–]?\s*(?:HOOK|INTRO|OUTRO)?\s*', '', text, flags=re.IGNORECASE)
+
+    # Remove word count markers like (Word count so far: 312)
+    text = re.sub(r'\(Word count.*?\)', '', text, flags=re.IGNORECASE)
+
+    # Remove citation markers like [3], [5], [inspired by 3]
+    text = re.sub(r'\[(?:inspired by\s*)?\d+\]', '', text)
+
     # Clean up extra whitespace
     text = re.sub(r'\n{3,}', '\n\n', text)
     return text.strip()

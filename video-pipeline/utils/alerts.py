@@ -198,6 +198,8 @@ def check_quota_status():
         report = json.load(f)
 
     daily_limit = 10000
+    quota_per_upload = 1600
+    quota_per_thumbnail = 50
 
     # Prefer the uploader's own quota tracking if available
     if "quota_used_this_run" in report:
@@ -213,8 +215,6 @@ def check_quota_status():
             uploaded_at = r.get("uploaded_at", "")
             if uploaded_at.startswith(today):
                 successful += 1
-        quota_per_upload = 1600
-        quota_per_thumbnail = 50
         estimated_usage = successful * (quota_per_upload + quota_per_thumbnail)
 
     pct_used = estimated_usage / daily_limit if daily_limit > 0 else 0

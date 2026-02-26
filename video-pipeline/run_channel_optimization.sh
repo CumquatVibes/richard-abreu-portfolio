@@ -70,8 +70,8 @@ if [ -f "$PROGRESS_FILE" ]; then
 fi
 
 # Check and execute retraining triggers
-echo ""
-echo "Checking retraining triggers..."
+echo "" >> "$LOG_FILE"
+echo "Checking retraining triggers..." >> "$LOG_FILE"
 python3 -c "
 from utils.alerts import check_retraining_triggers, execute_retraining
 triggers = check_retraining_triggers()
@@ -82,4 +82,4 @@ if triggers:
         print(f'  -> {a}')
 else:
     print('No retraining triggers active')
-"
+" >> "$LOG_FILE" 2>&1
