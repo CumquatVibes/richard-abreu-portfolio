@@ -54,7 +54,13 @@ The system auto-resets low-pull arms when:
    only after 10+ pulls with avg_reward < 0.05
 5. Never manually override arm selection — let Thompson Sampling explore
 
+## Weekly Rotation Calendar
+Production focuses on 4 channels per week. See `knowledge/weekly_rotation_calendar.md`
+for the full schedule. Phase 1 (Weeks 1-5) prioritizes zero-upload channels.
+Phase 2 rotates all 38 channels on a 10-week cycle grouped by niche affinity.
+
 ## Key Files
+- knowledge/weekly_rotation_calendar.md — Weekly channel rotation schedule
 - utils/bandits.py — Thompson Sampling implementation
 - utils/analytics.py — YouTube Analytics pull + reward computation
 - utils/telemetry.py — SQLite DB (output/pipeline.db) with videos, metrics,
