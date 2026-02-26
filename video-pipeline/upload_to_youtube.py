@@ -17,7 +17,6 @@ import os
 import re
 import time
 import urllib.parse
-from datetime import datetime, timezone
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError
 
@@ -27,7 +26,7 @@ from dotenv import load_dotenv
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, BASE_DIR)
 
-from utils.telemetry import log_video_published
+from utils.telemetry import log_video_published, get_daily_quota, record_quota_usage
 
 VIDEOS_DIR = os.path.join(BASE_DIR, "output", "videos")
 SCRIPTS_DIR = os.path.join(BASE_DIR, "output", "scripts")
@@ -91,6 +90,46 @@ CHANNEL_MAP = {
     "CumquatVibes": ("UCThXDUhXqcui2HqBv4MUBBA", "22"),
 }
 
+# YouTube category IDs (reference)
+# 1=Film&Animation, 2=Cars, 10=Music, 15=Pets&Animals, 17=Sports,
+# 19=Travel, 20=Gaming, 22=People&Blogs, 23=Comedy, 24=Entertainment,
+# 26=Howto&Style, 27=Education, 28=Science&Technology
+_TITLE_CATEGORY_RULES = [
+    # Keywords → category_id
+    (["apple", "adobe", "software", "app", "tech review", "gadget", "ai tool",
+      "python", "code", "programming", "gpu", "cpu", "pc build", "android",
+      "iphone", "samsung", "windows", "linux", "cloud", "saas", "api"],          "28"),
+    (["invest", "stock", "crypto", "bitcoin", "ethereum", "finance", "money",
+      "budget", "wealth", "dividend", "forex", "nft", "defi", "web3"],           "27"),
+    (["how to", "tutorial", "guide", "diy", "recipe", "cook", "clean",
+      "organize", "setup", "install", "fix", "repair"],                           "26"),
+    (["history", "ancient", "war", "empire", "civilization", "medieval",
+      "world war", "president", "dynasty"],                                       "27"),
+    (["science", "space", "nasa", "physics", "biology", "quantum",
+      "evolution", "planet", "black hole"],                                       "28"),
+    (["game", "gaming", "gameplay", "playstation", "xbox", "nintendo",
+      "esport", "stream", "twitch"],                                              "20"),
+    (["music", "lofi", "jazz", "ambient", "playlist", "beats", "song"],          "10"),
+    (["travel", "destination", "city tour", "vacation", "country"],              "19"),
+    (["fitness", "workout", "gym", "exercise", "diet", "nutrition"],             "17"),
+    (["art", "painting", "artist", "gallery", "museum", "slideshow"],            "1"),
+    (["comedy", "funny", "laugh", "meme", "prank"],                              "23"),
+]
+
+
+def detect_category_from_title(title, default_category):
+    """Override channel default category based on video title keywords.
+
+    Prevents mismatches like a tech review landing in 'People & Blogs'.
+    Returns original default if no keyword match found.
+    """
+    t = title.lower()
+    for keywords, cat_id in _TITLE_CATEGORY_RULES:
+        if any(kw in t for kw in keywords):
+            return cat_id
+    return default_category
+
+
 # Avatar-based channels (use produce_video.py / HeyGen, NOT faceless B-roll pipeline)
 # These channels use Richard's digital avatar instead of faceless voiceover + stock footage.
 AVATAR_CHANNELS = {"CumquatVibes"}
@@ -103,8 +142,6 @@ TOKEN_KEY_MAP = {
     "RichBusiness": "Rich Business",
     "CumquatMotivation": "Cumquat Motivation",
     "CumquatVibes": "Cumquat Vibes",
-    "CumquatGaming": "Cumquat Gaming",
-    "CumquatShortform": "Cumquat Shortform",
 }
 
 CHANNEL_NICHE = {
@@ -190,32 +227,57 @@ channel_access_tokens = {}
 rate_limited_channels = set()
 
 
+def _refresh_oauth_token(creds_dict, label="default", max_retries=3):
+    """Refresh an OAuth token with retry logic and exponential backoff.
+
+    Args:
+        creds_dict: Dict with client_id, client_secret, refresh_token
+        label: Label for error messages
+        max_retries: Number of retry attempts
+
+    Returns:
+        access_token string
+
+    Raises:
+        RuntimeError if all retries fail
+    """
+    data = urllib.parse.urlencode({
+        "client_id": creds_dict["client_id"],
+        "client_secret": creds_dict["client_secret"],
+        "refresh_token": creds_dict["refresh_token"],
+        "grant_type": "refresh_token",
+    }).encode()
+
+    for attempt in range(max_retries):
+        try:
+            req = Request("https://oauth2.googleapis.com/token", data=data)
+            resp = json.loads(urlopen(req, timeout=30).read())
+            token = resp.get("access_token")
+            if not token:
+                raise KeyError(f"No access_token in response: {list(resp.keys())}")
+            return token
+        except (HTTPError, OSError, KeyError, json.JSONDecodeError) as e:
+            if attempt < max_retries - 1:
+                wait = 2 ** attempt
+                print(f"  Token refresh failed for {label} (attempt {attempt+1}): {e}")
+                print(f"  Retrying in {wait}s...")
+                time.sleep(wait)
+            else:
+                raise RuntimeError(
+                    f"Failed to refresh token for {label} after {max_retries} attempts: {e}"
+                )
+
+
 def refresh_default_token():
     """Get fresh access token from the default google_token.json."""
     with open(TOKEN_PATH) as f:
         creds = json.load(f)
-    data = urllib.parse.urlencode({
-        "client_id": creds["client_id"],
-        "client_secret": creds["client_secret"],
-        "refresh_token": creds["refresh_token"],
-        "grant_type": "refresh_token",
-    }).encode()
-    req = Request("https://oauth2.googleapis.com/token", data=data)
-    resp = json.loads(urlopen(req).read())
-    return resp["access_token"]
+    return _refresh_oauth_token(creds, label="default")
 
 
 def refresh_channel_token(channel_creds):
     """Get fresh access token for a specific channel."""
-    data = urllib.parse.urlencode({
-        "client_id": channel_creds["client_id"],
-        "client_secret": channel_creds["client_secret"],
-        "refresh_token": channel_creds["refresh_token"],
-        "grant_type": "refresh_token",
-    }).encode()
-    req = Request("https://oauth2.googleapis.com/token", data=data)
-    resp = json.loads(urlopen(req).read())
-    return resp["access_token"]
+    return _refresh_oauth_token(channel_creds, label="channel")
 
 
 def load_channel_tokens():
@@ -424,7 +486,11 @@ def extract_chapters_from_script(script_path):
 
 
 def generate_timestamps(chapters, total_duration_sec=480):
-    """Generate evenly-spaced timestamp strings for chapter list."""
+    """Generate evenly-spaced timestamp strings for chapter list.
+
+    Chapter names are cleaned to max 40 chars at a word boundary so they
+    don't appear as truncated mid-sentence lines in the description.
+    """
     if len(chapters) < 2:
         return ""
     interval = total_duration_sec // len(chapters)
@@ -432,7 +498,13 @@ def generate_timestamps(chapters, total_duration_sec=480):
     for i, ch in enumerate(chapters):
         mins = (i * interval) // 60
         secs = (i * interval) % 60
-        lines.append(f"{mins}:{secs:02d} {ch}")
+        # Clean chapter name — truncate at word boundary, strip trailing punctuation
+        clean = ch.strip().rstrip(".,;:*")
+        if len(clean) > 40:
+            truncated = clean[:38]
+            last_space = truncated.rfind(" ")
+            clean = truncated[:last_space] if last_space > 15 else truncated
+        lines.append(f"{mins}:{secs:02d} {clean}")
     return "\n".join(lines)
 
 
@@ -546,8 +618,11 @@ def make_description(channel, title, script_path):
     is_avatar = channel in AVATAR_CHANNELS
     is_affiliate = channel in AFFILIATE_CHANNELS
 
-    # First 2 lines are critical — visible in search results and suggestions
-    parts = [title]
+    # First 2-3 lines are critical — visible in search results and suggestions.
+    # DO NOT repeat the title (YouTube already shows it above the description,
+    # and Google treats it as duplicate content hurting search ranking).
+    # Lead with the VALUE HOOK from the script intro instead.
+    parts = []
     if intro:
         parts.append(intro)
     parts.append("")
@@ -603,10 +678,6 @@ def make_description(channel, title, script_path):
             "Community: https://vibeconnectionlounge.com",
             "Instagram: @cumquatvibes",
             "",
-            "AI DISCLOSURE: This video features my digital avatar created with AI assistance.",
-            "",
-            "\u00a9 2026 Cumquat Vibes Media",
-            "",
         ])
     else:
         parts.extend([
@@ -622,16 +693,54 @@ def make_description(channel, title, script_path):
             "Portfolio: https://richardabreu.studio",
             "Community: https://vibeconnectionlounge.com",
             "",
-            "AI DISCLOSURE: This video was created with the assistance of AI tools",
-            "including AI-generated voiceover and visuals.",
-            "",
-            "\u00a9 2026 Cumquat Vibes Media",
-            "",
         ])
 
-    tag_prefix = channel.lower()
-    niche_tag = CHANNEL_NICHE.get(channel, "").split(",")[0].strip().replace(" ", "")
-    parts.append(f"#{tag_prefix} #{niche_tag} #2026")
+    # Hashtags: topic-first, not brand-first.
+    # Extract topic keywords from title to pick relevant hashtags rather than
+    # using the channel niche's first word (which produced "#art" on tech videos).
+    title_lower = title.lower()
+    TOPIC_HASHTAG_MAP = [
+        (["apple", "mac", "ipad", "ios", "macos"],          ["#apple", "#mac", "#techreview"]),
+        (["adobe", "creative cloud", "photoshop"],           ["#adobe", "#creativecloud", "#design"]),
+        (["affinity", "pixelmator"],                         ["#affinity", "#design", "#techreview"]),
+        (["ai", "chatgpt", "gemini", "claude", "llm"],       ["#AI", "#artificialintelligence", "#tech"]),
+        (["final cut", "premiere", "davinci", "video edit"], ["#videoediting", "#filmmaking", "#tech"]),
+        (["python", "code", "programming", "developer"],     ["#coding", "#programming", "#tech"]),
+        (["crypto", "bitcoin", "ethereum", "web3"],          ["#crypto", "#bitcoin", "#web3"]),
+        (["fitness", "workout", "gym", "exercise"],          ["#fitness", "#workout", "#health"]),
+        (["finance", "invest", "stock", "money"],            ["#finance", "#investing", "#money"]),
+        (["gaming", "game", "gameplay", "streamer"],         ["#gaming", "#gamer", "#games"]),
+        (["art", "painting", "artist", "design"],            ["#art", "#artist", "#creative"]),
+        (["music", "beat", "lofi", "jazz", "playlist"],      ["#music", "#lofi", "#chill"]),
+        (["travel", "destination", "vacation", "tour"],      ["#travel", "#wanderlust", "#explore"]),
+        (["food", "recipe", "cooking", "chef"],              ["#food", "#cooking", "#recipe"]),
+        (["motivation", "mindset", "success", "hustle"],     ["#motivation", "#mindset", "#success"]),
+    ]
+    topic_tags = []
+    for keywords, tags in TOPIC_HASHTAG_MAP:
+        if any(kw in title_lower for kw in keywords):
+            topic_tags.extend(tags)
+        if len(topic_tags) >= 5:
+            break
+
+    if not topic_tags:
+        # Fallback: use channel-specific hashtag if no topic match
+        topic_tags = [f"#{channel.lower()}", "#2026"]
+
+    # Always cap at 5 hashtags — more than 5 hurts reach per YouTube guidelines
+    hashtags_str = " ".join(dict.fromkeys(topic_tags))  # deduplicate, preserve order
+
+    # Copyright + AI disclosure at the very bottom (required by policy but least visible there)
+    if is_avatar:
+        ai_note = "AI DISCLOSURE: This video features my digital avatar created with AI assistance."
+    else:
+        ai_note = "AI DISCLOSURE: This video was created with the assistance of AI tools."
+    parts.extend([
+        "\u00a9 2026 Cumquat Vibes Media",
+        ai_note,
+        "",
+        hashtags_str,
+    ])
 
     return "\n".join(parts)
 
@@ -758,8 +867,7 @@ def upload_thumbnail(video_id, thumb_path, access_token):
     """Upload custom thumbnail to a YouTube video.
 
     Uses YouTube Data API v3 thumbnails.set endpoint.
-    Returns True on success, False on failure, or "quota_exceeded" string
-    when the YouTube API daily quota has been exhausted.
+    Returns True on success, False on failure.
     """
     url = f"https://www.googleapis.com/upload/youtube/v3/thumbnails/set?videoId={video_id}&uploadType=media"
 
@@ -787,23 +895,9 @@ def upload_thumbnail(video_id, thumb_path, access_token):
         return False
     except HTTPError as e:
         body = e.read().decode() if hasattr(e, 'read') else str(e)
+        # 403 = channel not verified for custom thumbnails (needs phone verification)
         if e.code == 403:
-            # Parse the actual reason from the API response
-            reason = ""
-            try:
-                err_data = json.loads(body)
-                errors = err_data.get("error", {}).get("errors", [])
-                if errors:
-                    reason = errors[0].get("reason", "")
-            except (json.JSONDecodeError, KeyError):
-                pass
-            if reason == "quotaExceeded":
-                print(f"    Thumbnail: Quota exceeded")
-                return "quota_exceeded"
-            elif "forbidden" in body.lower() and "thumbnail" in body.lower():
-                print(f"    Thumbnail: Channel needs phone verification for custom thumbnails")
-            else:
-                print(f"    Thumbnail: 403 Forbidden — {reason or body[:200]}")
+            print(f"    Thumbnail: Channel needs phone verification for custom thumbnails")
         else:
             print(f"    Thumbnail: Upload error {e.code}: {body[:200]}")
         return False
@@ -812,8 +906,15 @@ def upload_thumbnail(video_id, thumb_path, access_token):
         return False
 
 
-def upload_video(filepath, title, description, tags, category_id, access_token, privacy="public"):
+def upload_video(filepath, title, description, tags, category_id, access_token,
+                  privacy="public", publish_at=None):
     """Upload video using YouTube Data API v3 resumable upload.
+
+    Args:
+        publish_at: ISO 8601 datetime string for scheduled publishing.
+                    If set, privacy is forced to "private" and the video
+                    will auto-publish at the specified time.
+                    Example: "2026-03-01T14:00:00Z"
 
     Returns:
         dict: Upload result on success
@@ -821,6 +922,16 @@ def upload_video(filepath, title, description, tags, category_id, access_token, 
         None: On other failures
     """
     file_size = os.path.getsize(filepath)
+
+    status = {
+        "privacyStatus": privacy,
+        "selfDeclaredMadeForKids": False,
+        "containsSyntheticMedia": True,
+    }
+
+    if publish_at:
+        status["privacyStatus"] = "private"
+        status["publishAt"] = publish_at
 
     metadata = {
         "snippet": {
@@ -831,11 +942,7 @@ def upload_video(filepath, title, description, tags, category_id, access_token, 
             "defaultLanguage": "en",
             "defaultAudioLanguage": "en",
         },
-        "status": {
-            "privacyStatus": privacy,
-            "selfDeclaredMadeForKids": False,
-            "containsSyntheticMedia": True,
-        },
+        "status": status,
     }
 
     init_url = (
@@ -854,22 +961,40 @@ def upload_video(filepath, title, description, tags, category_id, access_token, 
         method="POST",
     )
 
-    try:
-        init_resp = urlopen(init_req)
-        upload_url = init_resp.headers.get("Location")
-        if not upload_url:
-            print("    No upload URL returned")
-            return None
-    except HTTPError as e:
-        body = e.read().decode()
-        if "uploadLimitExceeded" in body:
-            print("    Daily upload limit reached for this channel")
-            return "rate_limited"
-        if "quota" in body.lower():
-            print("    YouTube API daily quota exceeded")
-            return "quota_exceeded"
-        print(f"    Init error {e.code}: {body[:300]}")
-        return {"error": f"Init error {e.code}: {body[:300]}"}
+    upload_url = None
+    for init_attempt in range(3):
+        try:
+            init_resp = urlopen(init_req, timeout=60)
+            upload_url = init_resp.headers.get("Location")
+            if not upload_url:
+                print("    No upload URL returned")
+                return None
+            break
+        except HTTPError as e:
+            body = e.read().decode()
+            if "uploadLimitExceeded" in body:
+                print("    Daily upload limit reached for this channel")
+                return "rate_limited"
+            if "quota" in body.lower():
+                print("    YouTube API daily quota exceeded")
+                return "quota_exceeded"
+            if e.code in (500, 502, 503) and init_attempt < 2:
+                wait = 2 ** init_attempt
+                print(f"    Server error {e.code}, retrying in {wait}s (attempt {init_attempt+1}/3)")
+                time.sleep(wait)
+                continue
+            print(f"    Init error {e.code}: {body[:300]}")
+            return {"error": f"Init error {e.code}: {body[:300]}"}
+        except OSError as e:
+            if init_attempt < 2:
+                wait = 2 ** init_attempt
+                print(f"    Network error, retrying in {wait}s (attempt {init_attempt+1}/3): {e}")
+                time.sleep(wait)
+                continue
+            return {"error": f"Network error after 3 attempts: {e}"}
+
+    if not upload_url:
+        return {"error": "Failed to get upload URL after retries"}
 
     chunk_size = 10 * 1024 * 1024
 
@@ -981,7 +1106,14 @@ def main():
         print(f"  Previously uploaded: {len(already_uploaded)} videos (will skip)\n")
 
     # Get videos
+    # Scan top-level and one level of subdirectories for MP4 files
     videos = sorted([f for f in os.listdir(VIDEOS_DIR) if f.endswith(".mp4")])
+    for subdir in os.listdir(VIDEOS_DIR):
+        subdir_path = os.path.join(VIDEOS_DIR, subdir)
+        if os.path.isdir(subdir_path) and not subdir.startswith("temp"):
+            for f in sorted(os.listdir(subdir_path)):
+                if f.endswith(".mp4"):
+                    videos.append(os.path.join(subdir, f))
     pending = [v for v in videos if v not in already_uploaded]
     print(f"Videos found: {len(videos)} | Pending upload: {len(pending)}\n")
 
@@ -1000,10 +1132,32 @@ def main():
     skipped_limit = 0
     failed_count = 0
     preflight_blocked = 0
-    quota_used_this_run = 0
+
+    # Load today's quota usage from DB (persists across runs)
+    quota_already_used, uploads_today = get_daily_quota()
+    quota_used_this_run = quota_already_used
+    if quota_already_used > 0:
+        print(f"  Quota already used today: {quota_already_used}/{DAILY_QUOTA_LIMIT} "
+              f"({uploads_today} uploads)\n")
+
+    # Load upload schedule if available
+    schedule_by_file = {}
+    schedule_path = os.path.join(REPORT_DIR, "upload_schedule.json")
+    if os.path.exists(schedule_path):
+        try:
+            with open(schedule_path) as f:
+                sched_data = json.load(f)
+            for entry in sched_data.get("schedule", []):
+                schedule_by_file[entry["file"]] = entry.get("publish_at")
+            if schedule_by_file:
+                print(f"  Loaded upload schedule: {len(schedule_by_file)} scheduled videos\n")
+        except (json.JSONDecodeError, KeyError):
+            pass
 
     for i, video_file in enumerate(pending, 1):
-        channel = video_file.split("_")[0]
+        # Handle subdirectory paths (e.g., "rich_education/RichEducation_Topic.mp4")
+        video_basename = os.path.basename(video_file)
+        channel = video_basename.split("_")[0]
 
         # Skip if this channel already hit rate limit this run
         if channel in rate_limited_channels:
@@ -1026,26 +1180,19 @@ def main():
         description = make_description(channel, title, script_path)
         tags = make_tags(channel, title)
 
+        # Override category based on title keywords (prevents tech reviews
+        # landing in "People & Blogs" when the channel default is generic).
+        category_id = detect_category_from_title(title, category_id)
+
         filepath = os.path.join(VIDEOS_DIR, video_file)
         size_mb = os.path.getsize(filepath) / (1024 * 1024)
 
-        # Pick the right token — skip if channel has no dedicated token
+        # Pick the right token
+        token = get_token_for_channel(channel, default_token)
         token_key = TOKEN_KEY_MAP.get(channel, channel)
         using_channel_token = token_key in channel_access_tokens
-        token = get_token_for_channel(channel, None)
 
         print(f"[{i}/{len(pending)}] {channel}: {title}")
-        if not token:
-            print(f"  SKIP: No OAuth token for channel '{token_key}' — add to channel_tokens.json")
-            results.append({
-                "file": video_file,
-                "channel": channel,
-                "target_channel_id": channel_id,
-                "video_id": None,
-                "status": "no_token",
-                "uploaded_at": datetime.now(timezone.utc).isoformat(),
-            })
-            continue
         print(f"  Size: {size_mb:.1f} MB | Token: {'channel-specific' if using_channel_token else 'default (main channel)'}")
 
         # Preflight compliance check
@@ -1062,18 +1209,33 @@ def main():
                 "video_id": None,
                 "status": "preflight_blocked",
                 "violations": [v["type"] for v in preflight_result.get("violations", [])],
-                "uploaded_at": datetime.now(timezone.utc).isoformat(),
             })
             continue
 
         # Generate thumbnail before upload
         thumb_path = generate_thumbnail(title, channel, video_file)
 
-        result = upload_video(filepath, title, description, tags, category_id, token)
+        # Use scheduled publish time if available, otherwise publish immediately
+        video_publish_at = schedule_by_file.get(video_file) or schedule_by_file.get(video_basename)
+        if video_publish_at:
+            privacy = "private"
+            print(f"  Scheduled: {video_publish_at}")
+        else:
+            privacy = "public"
+            video_publish_at = None
+
+        result = upload_video(filepath, title, description, tags, category_id, token,
+                              privacy=privacy, publish_at=video_publish_at)
 
         if result == "quota_exceeded":
-            print(f"\n  YouTube API quota exhausted (videos.insert = 1600 units; daily limit = 10,000).")
-            print(f"  Remaining {len(pending) - i} videos will retry after quota reset (midnight PT).")
+            print(f"\n  YouTube API quota exhausted. Remaining {len(pending) - i} videos will retry after quota reset (midnight PT).")
+            results.append({
+                "file": video_file,
+                "channel": channel,
+                "target_channel_id": channel_id,
+                "video_id": None,
+                "status": "quota_exceeded",
+            })
             failed_count += 1
             break
         elif result == "rate_limited":
@@ -1085,7 +1247,6 @@ def main():
                 "target_channel_id": channel_id,
                 "video_id": None,
                 "status": "rate_limited",
-                "uploaded_at": datetime.now(timezone.utc).isoformat(),
             })
         elif result and "error" in result:
             error_msg = result["error"]
@@ -1098,7 +1259,6 @@ def main():
                 "video_id": None,
                 "status": "failed",
                 "error": error_msg,
-                "uploaded_at": datetime.now(timezone.utc).isoformat(),
             })
         elif result:
             vid_id = result.get("id", "?")
@@ -1108,12 +1268,12 @@ def main():
             # Upload custom thumbnail if we generated one
             thumb_uploaded = False
             if thumb_path and vid_id != "?":
-                thumb_result = upload_thumbnail(vid_id, thumb_path, token)
-                thumb_uploaded = thumb_result is True
+                thumb_uploaded = upload_thumbnail(vid_id, thumb_path, token)
 
-            quota_used_this_run += QUOTA_PER_UPLOAD
+            upload_quota = QUOTA_PER_UPLOAD
             if thumb_uploaded:
-                quota_used_this_run += QUOTA_PER_THUMBNAIL
+                upload_quota += QUOTA_PER_THUMBNAIL
+            quota_used_this_run += upload_quota
 
             results.append({
                 "file": video_file,
@@ -1125,16 +1285,16 @@ def main():
                 "upload_status": status,
                 "used_channel_token": using_channel_token,
                 "thumbnail_uploaded": thumb_uploaded,
-                "uploaded_at": datetime.now(timezone.utc).isoformat(),
             })
             uploaded_count += 1
 
-            # Log to telemetry DB
+            # Log to telemetry DB + persist quota usage
             try:
                 video_name = os.path.splitext(video_file)[0]
-                log_video_published(video_name, vid_id, quota_used=QUOTA_PER_UPLOAD)
-            except Exception:
-                pass
+                log_video_published(video_name, vid_id, quota_used=upload_quota)
+                record_quota_usage(upload_quota)
+            except Exception as e:
+                print(f"  WARNING: Failed to log telemetry: {str(e)[:80]}")
         else:
             print(f"  FAILED: Unknown error")
             failed_count += 1
@@ -1145,7 +1305,6 @@ def main():
                 "video_id": None,
                 "status": "failed",
                 "error": "Unknown error - no response from API",
-                "uploaded_at": datetime.now(timezone.utc).isoformat(),
             })
 
         if i < len(pending):
@@ -1179,13 +1338,9 @@ def main():
 
     # Save report
     os.makedirs(REPORT_DIR, exist_ok=True)
-    uploaded_this_run = uploaded_count - len(already_uploaded)
     with open(UPLOAD_REPORT_PATH, "w") as f:
         json.dump({
             "uploaded": uploaded_count,
-            "uploaded_this_run": uploaded_this_run,
-            "quota_used_this_run": quota_used_this_run,
-            "run_timestamp": datetime.now(timezone.utc).isoformat(),
             "total": len(videos),
             "rate_limited": list(rate_limited_channels),
             "results": deduped_results,
