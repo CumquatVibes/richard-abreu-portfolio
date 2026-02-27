@@ -27,7 +27,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, BASE_DIR)
 
 from utils.telemetry import log_video_published, get_daily_quota, record_quota_usage
-from utils.facebook import post_to_facebook_group
+from utils.facebook import share_to_facebook
 
 VIDEOS_DIR = os.path.join(BASE_DIR, "output", "videos")
 SCRIPTS_DIR = os.path.join(BASE_DIR, "output", "scripts")
@@ -1307,9 +1307,9 @@ def main():
             except Exception as e:
                 print(f"  WARNING: Failed to log telemetry: {str(e)[:80]}")
 
-            # Share to Facebook group
+            # Share to Facebook page + group
             try:
-                post_to_facebook_group(title, f"https://youtube.com/watch?v={vid_id}", channel)
+                share_to_facebook(title, f"https://youtube.com/watch?v={vid_id}", channel)
             except Exception as e:
                 print(f"  WARNING: Facebook post failed: {str(e)[:80]}")
         else:

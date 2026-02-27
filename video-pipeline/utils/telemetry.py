@@ -177,6 +177,7 @@ def _create_tables(conn):
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             video_name TEXT NOT NULL,
             facebook_post_id TEXT NOT NULL,
+            target TEXT NOT NULL DEFAULT 'group',
             posted_at TEXT DEFAULT (datetime('now'))
         );
         CREATE INDEX IF NOT EXISTS idx_fb_posts_video ON facebook_posts(video_name);
@@ -612,23 +613,29 @@ def detect_performance_drift(n_recent=5, n_baseline=20, threshold=0.15):
 
 # ── Facebook group posting tracking ──
 
-def log_facebook_post(video_name, facebook_post_id):
-    """Record that a video was shared to the Facebook group."""
+def log_facebook_post(video_name, facebook_post_id, target="group"):
+    """Record that a video was shared to Facebook (page or group)."""
     conn = _get_db()
     conn.execute(
-        "INSERT INTO facebook_posts (video_name, facebook_post_id) VALUES (?, ?)",
-        (video_name, facebook_post_id),
+        "INSERT INTO facebook_posts (video_name, facebook_post_id, target) VALUES (?, ?, ?)",
+        (video_name, facebook_post_id, target),
     )
     conn.commit()
     conn.close()
 
 
-def was_posted_to_facebook(video_name):
-    """Check if a video was already shared to the Facebook group."""
+def was_posted_to_facebook(video_name, target=None):
+    """Check if a video was already shared to Facebook. Optionally filter by target."""
     conn = _get_db()
-    row = conn.execute(
-        "SELECT 1 FROM facebook_posts WHERE video_name = ? LIMIT 1",
-        (video_name,),
-    ).fetchone()
+    if target:
+        row = conn.execute(
+            "SELECT 1 FROM facebook_posts WHERE video_name = ? AND target = ? LIMIT 1",
+            (video_name, target),
+        ).fetchone()
+    else:
+        row = conn.execute(
+            "SELECT 1 FROM facebook_posts WHERE video_name = ? LIMIT 1",
+            (video_name,),
+        ).fetchone()
     conn.close()
     return row is not None
