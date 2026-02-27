@@ -38,7 +38,7 @@ https://www.cumquatvibes.com
 
 Browse more of my artwork and projects:
 Portfolio: https://richardabreu.studio
-Community & updates: https://vibeconnectionlounge.com
+Facebook Group: https://facebook.com/groups/cumquatvibes
 
 ▶ How to use this video
 - Set as background art while you relax, read, or host guests

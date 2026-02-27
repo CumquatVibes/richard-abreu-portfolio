@@ -172,6 +172,14 @@ def _create_tables(conn):
             relative_retention REAL
         );
         CREATE INDEX IF NOT EXISTS idx_retention_video ON retention_curves(video_name);
+
+        CREATE TABLE IF NOT EXISTS facebook_posts (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            video_name TEXT NOT NULL,
+            facebook_post_id TEXT NOT NULL,
+            posted_at TEXT DEFAULT (datetime('now'))
+        );
+        CREATE INDEX IF NOT EXISTS idx_fb_posts_video ON facebook_posts(video_name);
     """)
     conn.commit()
 
@@ -600,3 +608,27 @@ def detect_performance_drift(n_recent=5, n_baseline=20, threshold=0.15):
         "recent_count": recent["count"],
         "baseline_count": baseline["count"],
     }
+
+
+# ── Facebook group posting tracking ──
+
+def log_facebook_post(video_name, facebook_post_id):
+    """Record that a video was shared to the Facebook group."""
+    conn = _get_db()
+    conn.execute(
+        "INSERT INTO facebook_posts (video_name, facebook_post_id) VALUES (?, ?)",
+        (video_name, facebook_post_id),
+    )
+    conn.commit()
+    conn.close()
+
+
+def was_posted_to_facebook(video_name):
+    """Check if a video was already shared to the Facebook group."""
+    conn = _get_db()
+    row = conn.execute(
+        "SELECT 1 FROM facebook_posts WHERE video_name = ? LIMIT 1",
+        (video_name,),
+    ).fetchone()
+    conn.close()
+    return row is not None

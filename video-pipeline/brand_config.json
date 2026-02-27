@@ -6,7 +6,7 @@
     "websites": {
       "portfolio": "https://richardabreu.studio",
       "shop": "https://cumquatvibes.com",
-      "community": "https://vibeconnectionlounge.com"
+      "community": "https://facebook.com/groups/cumquatvibes"
     },
     "youtube": {
       "channel_id": "UCThXDUhXqcui2HqBv4MUBBA",
@@ -272,7 +272,7 @@
       "What Nobody Tells You About {topic}",
       "{topic} in Under {number} Minutes (Complete Guide)"
     ],
-    "description_template": "{hook_sentence}\n\nIn this video, I break down {topic_summary}.\n\nTimestamps:\n{chapters}\n\nConnect with me:\nShop: https://cumquatvibes.com\nPortfolio: https://richardabreu.studio\nCommunity: https://vibeconnectionlounge.com\n\n#RichardAbreu #CumquatVibes {hashtags}",
+    "description_template": "{hook_sentence}\n\nIn this video, I break down {topic_summary}.\n\nTimestamps:\n{chapters}\n\nConnect with me:\nShop: https://cumquatvibes.com\nPortfolio: https://richardabreu.studio\nFacebook Group: https://facebook.com/groups/cumquatvibes\n\n#RichardAbreu #CumquatVibes {hashtags}",
     "default_tags": [
       "Richard Abreu",
       "Cumquat Vibes",

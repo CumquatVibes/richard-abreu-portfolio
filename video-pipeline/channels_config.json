@@ -3042,7 +3042,7 @@
       "primary": {
         "name": "Cumquat Vibes Inner Circle",
         "platform": "discord",
-        "url": "https://vibeconnectionlounge.com",
+        "url": "https://facebook.com/groups/cumquatvibes",
         "pricing": {
           "free": "General chat, announcements, network updates",
           "premium": {
@@ -3187,7 +3187,7 @@
         "YouTube video descriptions (lead magnet CTA)",
         "cumquatvibes.com popup",
         "richardabreu.studio newsletter form",
-        "vibeconnectionlounge.com signup",
+        "facebook.com/groups/cumquatvibes signup",
         "Digital product purchase follow-up"
       ],
       "lead_magnets_by_channel": {
@@ -3474,8 +3474,8 @@
     }
   },
   "seo_defaults": {
-    "description_footer": "\n\n---\nMain Channel: https://www.youtube.com/@CumquatVibes\nShop: https://cumquatvibes.com\nPortfolio: https://richardabreu.studio\nCommunity: https://vibeconnectionlounge.com\nSupport/Donate: https://donate.stripe.com/9B68wR8Wb0NLfzz0jjes000\n\nFollow us:\nInstagram: https://instagram.com/cumquatvibes\nFacebook: https://facebook.com/cumquatvibes\nJoin the group: https://facebook.com/groups/cumquatvibes\n\n#CumquatVibes #{channel_hashtag} #Faceless #YouTube",
-    "channel_description_template": "{channel_name} \u2014 {niche}\n\nNew videos every week + daily Shorts!\n\nPart of the Cumquat Vibes network \u2014 41 channels, one ecosystem.\n\n--- Links ---\nShop: https://cumquatvibes.com\nPortfolio: https://richardabreu.studio\nMain Channel: https://www.youtube.com/@CumquatVibes\nCommunity: https://vibeconnectionlounge.com\nSupport/Donate: https://donate.stripe.com/9B68wR8Wb0NLfzz0jjes000\n\n--- Follow ---\nInstagram: https://instagram.com/cumquatvibes\nFacebook: https://facebook.com/cumquatvibes\nFacebook Group: https://facebook.com/groups/cumquatvibes\n\n#CumquatVibes",
+    "description_footer": "\n\n---\nMain Channel: https://www.youtube.com/@CumquatVibes\nShop: https://cumquatvibes.com\nPortfolio: https://richardabreu.studio\nCommunity: https://facebook.com/groups/cumquatvibes\nSupport/Donate: https://donate.stripe.com/9B68wR8Wb0NLfzz0jjes000\n\nFollow us:\nInstagram: https://instagram.com/cumquatvibes\nFacebook: https://facebook.com/cumquatvibes\nJoin the group: https://facebook.com/groups/cumquatvibes\n\n#CumquatVibes #{channel_hashtag} #Faceless #YouTube",
+    "channel_description_template": "{channel_name} \u2014 {niche}\n\nNew videos every week + daily Shorts!\n\nPart of the Cumquat Vibes network \u2014 41 channels, one ecosystem.\n\n--- Links ---\nShop: https://cumquatvibes.com\nPortfolio: https://richardabreu.studio\nMain Channel: https://www.youtube.com/@CumquatVibes\nCommunity: https://facebook.com/groups/cumquatvibes\nSupport/Donate: https://donate.stripe.com/9B68wR8Wb0NLfzz0jjes000\n\n--- Follow ---\nInstagram: https://instagram.com/cumquatvibes\nFacebook: https://facebook.com/cumquatvibes\nFacebook Group: https://facebook.com/groups/cumquatvibes\n\n#CumquatVibes",
     "default_tags": [
       "faceless youtube",
       "AI narration",

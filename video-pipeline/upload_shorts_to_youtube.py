@@ -27,6 +27,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, BASE_DIR)
 
 from utils.telemetry import log_video_published
+from utils.facebook import post_to_facebook_group
 
 VIDEOS_DIR = os.path.join(BASE_DIR, "output", "shorts")
 SCRIPTS_DIR = os.path.join(BASE_DIR, "output", "scripts")
@@ -478,7 +479,7 @@ def make_description(channel, title, script_path):
             "CONNECT WITH ME:",
             "Shop: https://cumquatvibes.com",
             "Portfolio: https://richardabreu.studio",
-            "Community: https://vibeconnectionlounge.com",
+            "Facebook Group: https://facebook.com/groups/cumquatvibes",
             "Instagram: @cumquatvibes",
             "",
             "AI DISCLOSURE: This video features my digital avatar created with AI assistance.",
@@ -498,7 +499,7 @@ def make_description(channel, title, script_path):
             "",
             "Shop: https://cumquatvibes.com",
             "Portfolio: https://richardabreu.studio",
-            "Community: https://vibeconnectionlounge.com",
+            "Facebook Group: https://facebook.com/groups/cumquatvibes",
             "",
             "AI DISCLOSURE: This video was created with the assistance of AI tools",
             "including AI-generated voiceover and visuals.",
@@ -986,6 +987,12 @@ def main():
             try:
                 video_name = os.path.splitext(video_file)[0]
                 log_video_published(video_name, vid_id, quota_used=QUOTA_PER_UPLOAD)
+            except Exception:
+                pass
+
+            # Share to Facebook group
+            try:
+                post_to_facebook_group(title, f"https://youtube.com/shorts/{vid_id}", channel, is_short=True)
             except Exception:
                 pass
         else:
