@@ -155,6 +155,13 @@ def _create_tables(conn):
         CREATE INDEX IF NOT EXISTS idx_decisions_video ON decisions(video_name);
         CREATE INDEX IF NOT EXISTS idx_incidents_type ON incidents(incident_type);
 
+        CREATE TABLE IF NOT EXISTS daily_quota (
+            date TEXT PRIMARY KEY,
+            api_quota_used INTEGER DEFAULT 0,
+            upload_count INTEGER DEFAULT 0,
+            updated_at TEXT DEFAULT (datetime('now'))
+        );
+
         CREATE TABLE IF NOT EXISTS retention_curves (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             video_name TEXT NOT NULL,
@@ -288,6 +295,38 @@ def log_video_published(video_name, youtube_video_id, quota_used=None):
             published_at = datetime('now')
         WHERE video_name = ?
     """, (youtube_video_id, quota_used, video_name))
+    conn.commit()
+    conn.close()
+
+
+def get_daily_quota(date_str=None):
+    """Get today's quota usage. Returns (api_quota_used, upload_count)."""
+    if date_str is None:
+        date_str = datetime.utcnow().strftime("%Y-%m-%d")
+    conn = _get_db()
+    row = conn.execute(
+        "SELECT api_quota_used, upload_count FROM daily_quota WHERE date = ?",
+        (date_str,)
+    ).fetchone()
+    conn.close()
+    if row:
+        return row[0], row[1]
+    return 0, 0
+
+
+def record_quota_usage(api_units, date_str=None):
+    """Record quota usage for today. Adds to existing total."""
+    if date_str is None:
+        date_str = datetime.utcnow().strftime("%Y-%m-%d")
+    conn = _get_db()
+    conn.execute("""
+        INSERT INTO daily_quota (date, api_quota_used, upload_count, updated_at)
+        VALUES (?, ?, 1, datetime('now'))
+        ON CONFLICT(date) DO UPDATE SET
+            api_quota_used = api_quota_used + excluded.api_quota_used,
+            upload_count = upload_count + 1,
+            updated_at = datetime('now')
+    """, (date_str, api_units))
     conn.commit()
     conn.close()
 
