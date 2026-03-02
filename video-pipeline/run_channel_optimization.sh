@@ -16,6 +16,10 @@ PROGRESS_FILE="$SCRIPT_DIR/output/channel_optimization_progress.json"
 echo "=== Nightly Pipeline Run: $(date) ===" >> "$LOG_FILE"
 cd "$SCRIPT_DIR"
 
+# 0. Competitive audit (cached weekly, cheap)
+echo "--- Competitive Audit ---" >> "$LOG_FILE"
+python3 competitive_audit.py >> "$LOG_FILE" 2>&1
+
 # 1. Retry failed video uploads (quota resets at midnight PT)
 echo "--- Retrying video uploads ---" >> "$LOG_FILE"
 python3 upload_to_youtube.py >> "$LOG_FILE" 2>&1

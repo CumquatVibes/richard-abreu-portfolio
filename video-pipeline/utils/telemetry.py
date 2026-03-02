@@ -181,6 +181,21 @@ def _create_tables(conn):
             posted_at TEXT DEFAULT (datetime('now'))
         );
         CREATE INDEX IF NOT EXISTS idx_fb_posts_video ON facebook_posts(video_name);
+
+        CREATE TABLE IF NOT EXISTS competitor_briefs (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            channel_key TEXT NOT NULL,
+            video_id TEXT,
+            video_title TEXT,
+            channel_title TEXT,
+            view_count INTEGER,
+            like_count INTEGER,
+            brief_text TEXT,
+            search_query TEXT,
+            fetched_at TEXT DEFAULT (datetime('now')),
+            UNIQUE(channel_key)
+        );
+        CREATE INDEX IF NOT EXISTS idx_comp_briefs_channel ON competitor_briefs(channel_key);
     """)
     conn.commit()
 

@@ -10,6 +10,12 @@ from datetime import datetime
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError
 
+try:
+    from utils.competitive import get_competitive_brief
+except ImportError:
+    def get_competitive_brief(channel_key):
+        return ""
+
 API_KEY = os.environ.get("GEMINI_API_KEY", "")
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 SCRIPTS_DIR = os.path.join(BASE_DIR, "output", "scripts")
@@ -68,11 +74,22 @@ def generate_topics(channel_key, channel_config, count=3):
     formats = channel_config.get("formats", ["listicle"])
     name = channel_config.get("name", channel_key)
 
+    # Fetch competitive intelligence (cached, free on repeat calls)
+    comp_brief = get_competitive_brief(channel_key)
+    comp_section = ""
+    if comp_brief:
+        comp_section = f"""
+
+COMPETITIVE INTELLIGENCE (from a top-performing video in this niche):
+{comp_brief}
+
+Use these insights to adapt successful title formulas and trending angles. Your titles should be AS STRONG or STRONGER than the competitor's."""
+
     prompt = f"""Generate exactly {count} YouTube video topics for '{name}', a faceless {niche} channel.
 
 Sub-topics: {', '.join(sub_topics[:6])}
 Preferred formats: {', '.join(formats[:3])}
-
+{comp_section}
 Requirements:
 - Specific, clickable video titles optimized for YouTube search
 - Mix evergreen + trending topics for February 2026
@@ -104,6 +121,18 @@ def generate_script(channel_key, channel_config, topic, config):
     word_count = fmt.get("word_count", 1200)
     structure = fmt.get("structure", "hook → numbered items → recap → CTA")
 
+    # Fetch competitive intelligence (cache hit from generate_topics, free)
+    comp_brief = get_competitive_brief(channel_key)
+    comp_section = ""
+    if comp_brief:
+        comp_section = f"""
+
+COMPETITIVE INTELLIGENCE (from a top-performing video in this niche):
+{comp_brief}
+
+Apply the hook technique and actionable takeaways from above. Your hook MUST be as strong or stronger than the competitor's.
+"""
+
     prompt = f"""Write a complete YouTube video script for the channel '{name}' ({niche}).
 
 TITLE: {topic}
@@ -112,7 +141,7 @@ FORMAT: {format_name}
 STRUCTURE: {structure}
 TARGET WORD COUNT: {word_count} words
 TARGET DURATION: {fmt.get('duration_target', '8-12 min')}
-
+{comp_section}
 SCRIPT REQUIREMENTS:
 1. START with a powerful hook in the FIRST 10 seconds — a shocking stat, provocative question, or bold claim that makes viewers stay
 2. Use conversational, engaging narration style (faceless voiceover)
