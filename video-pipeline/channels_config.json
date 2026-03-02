@@ -196,7 +196,8 @@
         "game sponsorships",
         "merch"
       ],
-      "thumbnail_style": "bold text + game art + neon glow"
+      "thumbnail_style": "bold text + game art + neon glow",
+      "broll_strategy": "web_search"
     },
     "cumquat_shortform": {
       "name": "Cumquat ShortForm",
@@ -826,7 +827,8 @@
       ],
       "thumbnail_style": "game screenshots + neon green highlights + versus layouts",
       "channel_id": "UCxa7nahEFd_39_jUl-VB57A",
-      "handle": "@richgaming-t8hrichgaming"
+      "handle": "@richgaming-t8hrichgaming",
+      "broll_strategy": "web_search"
     },
     "rich_reviews": {
       "name": "RichReviews",

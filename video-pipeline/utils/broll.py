@@ -4,6 +4,7 @@ Shared module for channel-aware B-roll generation with rate limiting and retry.
 """
 
 import base64
+import io
 import json
 import os
 import re
@@ -11,6 +12,8 @@ import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError
+
+from PIL import Image
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BROLL_DIR = os.path.join(BASE_DIR, "output", "broll")
@@ -26,6 +29,114 @@ def _get_api_key():
     if not GEMINI_API_KEY:
         GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
     return GEMINI_API_KEY
+
+# --- Channel config & strategy routing ---
+
+_channels_config_cache = None
+
+
+def _load_channels_config():
+    """Load and cache channels_config.json."""
+    global _channels_config_cache
+    if _channels_config_cache is None:
+        config_path = os.path.join(BASE_DIR, "channels_config.json")
+        with open(config_path) as f:
+            _channels_config_cache = json.load(f)
+    return _channels_config_cache
+
+
+def _resolve_strategy(channel):
+    """Resolve B-roll strategy for a channel.
+
+    Args:
+        channel: PascalCase channel name (e.g. "CumquatGaming") as extracted
+                 from script filenames.
+
+    Returns:
+        str: "web_search" or "gemini" (default).
+    """
+    config = _load_channels_config()
+    channels = config.get("channels", {})
+
+    # Build reverse map: name (spaces removed) -> config entry
+    for _key, entry in channels.items():
+        name = entry.get("name", "").replace(" ", "")
+        if name == channel:
+            return entry.get("broll_strategy", "gemini")
+
+    return "gemini"
+
+
+def _search_and_download_image(query, output_path, min_width=1280):
+    """Search Google CSE for an image and download it as PNG.
+
+    Args:
+        query: Search query string.
+        output_path: Where to save the PNG file.
+        min_width: Minimum image width in pixels.
+
+    Returns:
+        float: Image size in KB, or 0 on failure.
+    """
+    api_key = os.environ.get("GOOGLE_CSE_API_KEY", "")
+    cse_id = os.environ.get("GOOGLE_CSE_ID", "")
+    if not api_key or not cse_id:
+        print("      [web_search] GOOGLE_CSE_API_KEY or GOOGLE_CSE_ID not set")
+        return 0
+
+    search_url = (
+        f"https://www.googleapis.com/customsearch/v1"
+        f"?key={api_key}&cx={cse_id}&q={_url_encode(query)}"
+        f"&searchType=image&imgSize=xlarge&num=5&safe=active"
+    )
+
+    try:
+        req = Request(search_url, headers={"User-Agent": "video-pipeline/1.0"})
+        with urlopen(req, timeout=15) as resp:
+            data = json.loads(resp.read().decode())
+    except HTTPError as e:
+        if e.code == 429:
+            print("      [web_search] CSE daily quota exceeded")
+        else:
+            print(f"      [web_search] CSE error {e.code}")
+        return 0
+    except Exception as e:
+        print(f"      [web_search] CSE request failed: {str(e)[:100]}")
+        return 0
+
+    items = data.get("items", [])
+    for item in items:
+        img_url = item.get("link", "")
+        img_meta = item.get("image", {})
+        width = img_meta.get("width", 0)
+        if width < min_width:
+            continue
+
+        try:
+            img_req = Request(img_url, headers={"User-Agent": "Mozilla/5.0"})
+            with urlopen(img_req, timeout=20) as img_resp:
+                img_data = img_resp.read()
+
+            if len(img_data) < 10 * 1024:  # skip tiny/broken images
+                continue
+
+            img = Image.open(io.BytesIO(img_data))
+            img = img.convert("RGB")
+            img.save(output_path, "PNG")
+            size_kb = os.path.getsize(output_path) / 1024
+            print(f"      [web_search] Downloaded {width}px image ({size_kb:.0f} KB)")
+            return size_kb
+        except Exception:
+            continue
+
+    return 0
+
+
+def _url_encode(s):
+    """Minimal URL encoding for search queries."""
+    from urllib.parse import quote_plus
+    return quote_plus(s)
+
 
 # Rate limiting
 _last_api_call = 0
@@ -321,6 +432,21 @@ def generate_broll(script_path, channel=None, model=None, api_key=None,
         print(f"    No visual directions found")
         return broll_out, 0, 0, 0
 
+    strategy = _resolve_strategy(channel)
+    if strategy == "web_search":
+        return _generate_broll_web_search(
+            visuals, broll_out, channel, model=model, api_key=api_key,
+            retries=retries, delay_on_429=delay_on_429, on_progress=on_progress
+        )
+    return _generate_broll_gemini(
+        visuals, broll_out, channel, model=model, api_key=api_key,
+        retries=retries, delay_on_429=delay_on_429, on_progress=on_progress
+    )
+
+
+def _generate_broll_gemini(visuals, broll_out, channel, model=None, api_key=None,
+                           retries=3, delay_on_429=None, on_progress=None):
+    """Generate B-roll images via Gemini (default strategy)."""
     generated = 0
     failed = 0
     api_calls = 0
@@ -346,6 +472,51 @@ def generate_broll(script_path, channel=None, model=None, api_key=None,
         else:
             print(f"      -> FAILED")
             failed += 1
+
+        if on_progress:
+            on_progress(i, len(visuals), visual, bool(size_kb))
+
+    return broll_out, generated, failed, api_calls
+
+
+def _generate_broll_web_search(visuals, broll_out, channel, model=None,
+                               api_key=None, retries=3, delay_on_429=None,
+                               on_progress=None):
+    """Generate B-roll via web image search, falling back to Gemini per image."""
+    generated = 0
+    failed = 0
+    api_calls = 0  # only counts Gemini calls
+
+    for i, visual in enumerate(visuals, 1):
+        filepath = os.path.join(broll_out, f"broll_{i:02d}.png")
+        if os.path.exists(filepath):
+            generated += 1
+            if on_progress:
+                on_progress(i, len(visuals), visual, True)
+            continue
+
+        print(f"    [{i}/{len(visuals)}] {visual[:55]}...")
+
+        # Try web search first
+        size_kb = _search_and_download_image(visual, filepath)
+        if size_kb:
+            print(f"      -> broll_{i:02d}.png ({size_kb:.0f} KB) [web]")
+            generated += 1
+        else:
+            # Fallback to Gemini for this image
+            print(f"      [web_search] No result, falling back to Gemini...")
+            api_calls += 1
+            size_kb = generate_image(
+                visual, filepath,
+                channel=channel, model=model, api_key=api_key,
+                retries=retries, delay_on_429=delay_on_429
+            )
+            if size_kb:
+                print(f"      -> broll_{i:02d}.png ({size_kb:.0f} KB) [gemini fallback]")
+                generated += 1
+            else:
+                print(f"      -> FAILED")
+                failed += 1
 
         if on_progress:
             on_progress(i, len(visuals), visual, bool(size_kb))
@@ -399,13 +570,30 @@ def generate_broll_parallel(script_path, channel=None, model=None, api_key=None,
         print(f"    All {len(visuals)} B-roll images already exist")
         return broll_out, already_generated, 0, 0
 
-    api_calls = len(tasks)  # each task = 1 API call attempt
-    print(f"    Generating {len(tasks)} images in parallel (workers={max_workers})...")
+    strategy = _resolve_strategy(channel)
+    print(f"    Generating {len(tasks)} images in parallel (workers={max_workers}, strategy={strategy})...")
 
     generated = already_generated
     failed = 0
+    api_calls = 0
+    _api_calls_lock = __import__('threading').Lock()
 
     def _gen(idx, visual, filepath):
+        nonlocal api_calls
+        if strategy == "web_search":
+            size_kb = _search_and_download_image(visual, filepath)
+            if size_kb:
+                return idx, visual, size_kb
+            # Fallback to Gemini
+            with _api_calls_lock:
+                api_calls += 1
+            return idx, visual, generate_image(
+                visual, filepath,
+                channel=channel, model=model, api_key=api_key,
+                retries=retries
+            )
+        with _api_calls_lock:
+            api_calls += 1
         return idx, visual, generate_image(
             visual, filepath,
             channel=channel, model=model, api_key=api_key,

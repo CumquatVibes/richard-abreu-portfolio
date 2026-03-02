@@ -998,10 +998,12 @@ def upload_video(filepath, title, description, tags, category_id, access_token,
         return {"error": "Failed to get upload URL after retries"}
 
     chunk_size = 10 * 1024 * 1024
+    max_retries = 5
 
     with open(filepath, "rb") as f:
         uploaded = 0
         while uploaded < file_size:
+            f.seek(uploaded)
             chunk = f.read(chunk_size)
             if not chunk:
                 break
@@ -1015,22 +1017,50 @@ def upload_video(filepath, title, description, tags, category_id, access_token,
             }
 
             req = Request(upload_url, data=chunk, headers=headers, method="PUT")
-            try:
-                resp = urlopen(req, timeout=300)
-                result = json.loads(resp.read().decode())
-                return result
-            except HTTPError as e:
-                if e.code == 308:
-                    uploaded = end
+            retries = 0
+            while retries < max_retries:
+                try:
+                    resp = urlopen(req, timeout=300)
+                    result = json.loads(resp.read().decode())
+                    return result
+                except HTTPError as e:
+                    if e.code == 308:
+                        # Resume Incomplete — YouTube wants more data
+                        uploaded = end
+                        break
+                    elif e.code in (500, 502, 503):
+                        retries += 1
+                        wait = min(2 ** retries, 30)
+                        print(f"    {e.code} -- retrying in {wait}s (attempt {retries}/{max_retries})")
+                        time.sleep(wait)
+                        # Re-seek and re-read the same chunk for retry
+                        f.seek(uploaded)
+                        chunk = f.read(chunk_size)
+                        end = uploaded + len(chunk)
+                        headers["Content-Length"] = str(len(chunk))
+                        headers["Content-Range"] = f"bytes {uploaded}-{end - 1}/{file_size}"
+                        req = Request(upload_url, data=chunk, headers=headers, method="PUT")
+                        continue
+                    else:
+                        body = e.read().decode()
+                        print(f"    Upload error {e.code}: {body[:300]}")
+                        return {"error": f"Upload error {e.code}: {body[:300]}"}
+                except (OSError, TimeoutError) as e:
+                    retries += 1
+                    if retries >= max_retries:
+                        return {"error": f"Network error after {max_retries} retries: {e}"}
+                    wait = min(2 ** retries, 30)
+                    print(f"    Network error, retrying in {wait}s (attempt {retries}/{max_retries}): {e}")
+                    time.sleep(wait)
+                    f.seek(uploaded)
+                    chunk = f.read(chunk_size)
+                    end = uploaded + len(chunk)
+                    headers["Content-Length"] = str(len(chunk))
+                    headers["Content-Range"] = f"bytes {uploaded}-{end - 1}/{file_size}"
+                    req = Request(upload_url, data=chunk, headers=headers, method="PUT")
                     continue
-                elif e.code == 503:
-                    print("    503 -- retrying in 10s...")
-                    time.sleep(10)
-                    continue
-                else:
-                    body = e.read().decode()
-                    print(f"    Upload error {e.code}: {body[:300]}")
-                    return {"error": f"Upload error {e.code}: {body[:300]}"}
+            else:
+                return {"error": f"Upload failed: exhausted {max_retries} retries at byte {uploaded}"}
 
     return {"error": "Upload incomplete: EOF reached before file fully uploaded"}
 
@@ -1082,6 +1112,16 @@ def run_preflight(video_file, channel, title, description, tags, script_path):
 def main():
     global channel_access_tokens
 
+    # Parse --channel filter
+    channel_filter = None
+    for idx, arg in enumerate(sys.argv[1:]):
+        if arg == '--channel' and idx + 1 < len(sys.argv) - 1:
+            channel_filter = sys.argv[idx + 2]
+            break
+        elif arg.startswith('--channel='):
+            channel_filter = arg.split('=', 1)[1]
+            break
+
     print("YouTube Video Uploader")
     print("=" * 60)
     print()
@@ -1117,7 +1157,11 @@ def main():
                 if f.endswith(".mp4"):
                     videos.append(os.path.join(subdir, f))
     pending = [v for v in videos if v not in already_uploaded]
-    print(f"Videos found: {len(videos)} | Pending upload: {len(pending)}\n")
+    if channel_filter:
+        pending = [v for v in pending if os.path.basename(v).startswith(channel_filter)]
+        print("Videos found: " + str(len(videos)) + " | Pending upload: " + str(len(pending)) + " (filtered: " + channel_filter + ")")
+    else:
+        print(f"Videos found: {len(videos)} | Pending upload: {len(pending)}\n")
 
     if not pending:
         print("All videos already uploaded! Nothing to do.")

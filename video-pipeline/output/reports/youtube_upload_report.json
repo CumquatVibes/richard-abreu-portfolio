@@ -1,13 +1,9 @@
 {
-  "uploaded": 94,
-  "total": 119,
-  "rate_limited": [
-    "RichDesign",
-    "RichDance",
-    "RichBeauty",
-    "RichCars",
-    "RichDIY"
-  ],
+  "uploaded": 61,
+  "uploaded_this_run": 4,
+  "total": 131,
+  "quota_used_this_run": 6500,
+  "rate_limited": [],
   "results": [
     {
       "file": "HowToUseAI_10_AI_Tools_That_Will_Save_You_10_Hours_Every_Week.mp4",
@@ -17,7 +13,8 @@
       "url": "https://youtube.com/watch?v=xidYzttToEA",
       "status": "success",
       "upload_status": "uploaded",
-      "used_channel_token": true
+      "used_channel_token": true,
+      "thumbnail_uploaded": true
     },
     {
       "file": "HowToUseAI_ChatGPT_Prompt_Engineering_The_Complete_Beginners_Guide.mp4",
@@ -27,7 +24,8 @@
       "url": "https://youtube.com/watch?v=WA8tB66loos",
       "status": "success",
       "upload_status": "uploaded",
-      "used_channel_token": true
+      "used_channel_token": true,
+      "thumbnail_uploaded": true
     },
     {
       "file": "HowToUseAI_How_to_Build_an_AI_Automation_That_Makes_Money_While_You_Sleep.mp4",
@@ -37,7 +35,8 @@
       "url": "https://youtube.com/watch?v=PMOyyNRzQWA",
       "status": "success",
       "upload_status": "uploaded",
-      "used_channel_token": true
+      "used_channel_token": true,
+      "thumbnail_uploaded": true
     },
     {
       "file": "RichHorror_3_true_horror_stories_that_will_keep_you_up_tonight.mp4",
@@ -47,7 +46,8 @@
       "url": "https://youtube.com/watch?v=Q8Boi3W25Bo",
       "status": "success",
       "upload_status": "uploaded",
-      "used_channel_token": true
+      "used_channel_token": true,
+      "thumbnail_uploaded": true
     },
     {
       "file": "RichHorror_5_unsolved_mysteries_that_still_haunt_investigators.mp4",
@@ -57,7 +57,8 @@
       "url": "https://youtube.com/watch?v=xFeLHsIssx8",
       "status": "success",
       "upload_status": "uploaded",
-      "used_channel_token": true
+      "used_channel_token": true,
+      "thumbnail_uploaded": true
     },
     {
       "file": "RichHorror_the_most_haunted_places_on_earth_you_should_never_visit_alone.mp4",
@@ -174,7 +175,8 @@
       "url": "https://youtube.com/watch?v=8Pv9SGBsGFg",
       "status": "success",
       "upload_status": "uploaded",
-      "used_channel_token": true
+      "used_channel_token": true,
+      "thumbnail_uploaded": true
     },
     {
       "file": "EvaReyes_7_Signs_Youre_a_Stronger_Woman_Than_You_Think.mp4",
@@ -184,7 +186,8 @@
       "url": "https://youtube.com/watch?v=E6aH3IS75iI",
       "status": "success",
       "upload_status": "uploaded",
-      "used_channel_token": true
+      "used_channel_token": true,
+      "thumbnail_uploaded": true
     },
     {
       "file": "EvaReyes_How_to_Build_Unshakeable_Confidence_as_a_Woman_Even_If_You_Feel_Invisible.mp4",
@@ -194,7 +197,8 @@
       "url": "https://youtube.com/watch?v=e5EgCIIEFYg",
       "status": "success",
       "upload_status": "uploaded",
-      "used_channel_token": true
+      "used_channel_token": true,
+      "thumbnail_uploaded": true
     },
     {
       "file": "RichMusic_What_If_Blinding_Lights_by_The_Weeknd_Was_Made_in_the_1970s_Disco_Era.mp4",
@@ -205,7 +209,7 @@
       "status": "success",
       "upload_status": "uploaded",
       "used_channel_token": true,
-      "thumbnail_uploaded": false
+      "thumbnail_uploaded": true
     },
     {
       "file": "RichMusic_What_If_Lose_Yourself_by_Eminem_Was_a_POP_Ballad.mp4",
@@ -216,7 +220,7 @@
       "status": "success",
       "upload_status": "uploaded",
       "used_channel_token": true,
-      "thumbnail_uploaded": false
+      "thumbnail_uploaded": true
     },
     {
       "file": "RichMusic_What_If_Shape_of_You_by_Ed_Sheeran_Was_a_RAP_Song.mp4",
@@ -227,7 +231,7 @@
       "status": "success",
       "upload_status": "uploaded",
       "used_channel_token": true,
-      "thumbnail_uploaded": false
+      "thumbnail_uploaded": true
     },
     {
       "file": "CumquatVibes_Apple_Creator_Studio_vs_Adobe_vs_Affinity_The_REAL_Cost_Breakdown.mp4",
@@ -296,28 +300,6 @@
       "thumbnail_uploaded": true
     },
     {
-      "file": "CumquatGaming_Top_7_Forgotten_PS_Vita_Games_You_NEED_To_Play_in_2026.mp4",
-      "channel": "CumquatGaming",
-      "target_channel_id": null,
-      "video_id": "n2mafDiTa6s",
-      "url": "https://youtube.com/watch?v=n2mafDiTa6s",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": false,
-      "thumbnail_uploaded": true
-    },
-    {
-      "file": "HowToMeditate_5-Minute_Morning_Meditation_for_Instant_Calm_Beginner-Friendly.mp4",
-      "channel": "HowToMeditate",
-      "target_channel_id": "UCbd6kzX3giNYyAeLaMPdgAA",
-      "video_id": "K-uXiZi7RKA",
-      "url": "https://youtube.com/watch?v=K-uXiZi7RKA",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": true,
-      "thumbnail_uploaded": false
-    },
-    {
       "file": "RichArt_Impressionist_Masters_Monet_Renoir_Degas_1Hr_4K.mp4",
       "channel": "RichArt",
       "target_channel_id": null,
@@ -360,171 +342,6 @@
       "upload_status": "uploaded",
       "used_channel_token": false,
       "thumbnail_uploaded": true
-    },
-    {
-      "file": "RichCrypto_DeFi_Lending_Protocol_Wars_2026_New_Strategies_Which_Platforms_Will_Win.mp4",
-      "channel": "RichCrypto",
-      "target_channel_id": "UCc5XhfHIkEp5WwG9CRZm_6w",
-      "video_id": "gR62sBNN1RU",
-      "url": "https://youtube.com/watch?v=gR62sBNN1RU",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": true,
-      "thumbnail_uploaded": false
-    },
-    {
-      "file": "RichCrypto_Top_5_Undervalued_Altcoins_Ready_to_Explode_in_February_2026_Dont_Miss_These.mp4",
-      "channel": "RichCrypto",
-      "target_channel_id": "UCc5XhfHIkEp5WwG9CRZm_6w",
-      "video_id": "hIgMChl3AIc",
-      "url": "https://youtube.com/watch?v=hIgMChl3AIc",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": true,
-      "thumbnail_uploaded": false
-    },
-    {
-      "file": "RichCrypto_Web3_Gamings_Next_Evolution_7_Blockchain_Games_Redefining_Play-to-Earn_2026.mp4",
-      "channel": "RichCrypto",
-      "target_channel_id": "UCc5XhfHIkEp5WwG9CRZm_6w",
-      "video_id": "noBj9QEmKdo",
-      "url": "https://youtube.com/watch?v=noBj9QEmKdo",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": true,
-      "thumbnail_uploaded": false
-    },
-    {
-      "file": "RichFinance_5_Smart_Tax_Moves_You_NEED_to_Make_Before_the_2026_Deadline.mp4",
-      "channel": "RichFinance",
-      "target_channel_id": "UCJwfAudM4c4rWSk3P8iib8g",
-      "video_id": "OY7qWw0O7M8",
-      "url": "https://youtube.com/watch?v=OY7qWw0O7M8",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": true,
-      "thumbnail_uploaded": false
-    },
-    {
-      "file": "RichFinance_Budgeting_for_Beginners_The_Ultimate_Guide_to_Mastering_Your_Money_in_2026.mp4",
-      "channel": "RichFinance",
-      "target_channel_id": "UCJwfAudM4c4rWSk3P8iib8g",
-      "video_id": "1mDs_t_Ud_0",
-      "url": "https://youtube.com/watch?v=1mDs_t_Ud_0",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": true,
-      "thumbnail_uploaded": false
-    },
-    {
-      "file": "RichFinance_Top_7_Stocks_to_Buy_in_February_2026_Expert_Picks.mp4",
-      "channel": "RichFinance",
-      "target_channel_id": "UCJwfAudM4c4rWSk3P8iib8g",
-      "video_id": "MoO48R0AUTI",
-      "url": "https://youtube.com/watch?v=MoO48R0AUTI",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": true,
-      "thumbnail_uploaded": false
-    },
-    {
-      "file": "RichReviews_Amazon_Hidden_Gems_7_Genius_Products_Under_25_You_Wont_Believe_3.mp4",
-      "channel": "RichReviews",
-      "target_channel_id": "UCQZAmWq2Y_1W09mIOSRSrFw",
-      "video_id": "0vm8rEWg9Is",
-      "url": "https://youtube.com/watch?v=0vm8rEWg9Is",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": true,
-      "thumbnail_uploaded": false
-    },
-    {
-      "file": "RichReviews_Budget_vs_Premium_Noise-Canceling_Headphones_Which_Wins_in_2026_HONEST_Review.mp4",
-      "channel": "RichReviews",
-      "target_channel_id": "UCQZAmWq2Y_1W09mIOSRSrFw",
-      "video_id": "zlRCz9SCG0c",
-      "url": "https://youtube.com/watch?v=zlRCz9SCG0c",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": true,
-      "thumbnail_uploaded": false
-    },
-    {
-      "file": "RichReviews_Top_5_Smart_Home_Gadgets_You_NEED_in_February_2026_Future_Tech.mp4",
-      "channel": "RichReviews",
-      "target_channel_id": "UCQZAmWq2Y_1W09mIOSRSrFw",
-      "video_id": "P_peoWQSMbc",
-      "url": "https://youtube.com/watch?v=P_peoWQSMbc",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": true,
-      "thumbnail_uploaded": false
-    },
-    {
-      "file": "RichScience_7_Mind-Blowing_Biology_Facts_That_Will_Make_You_Question_Everything.mp4",
-      "channel": "RichScience",
-      "target_channel_id": "UC0ODvK8Hvrd9Bd3QWIWPecA",
-      "video_id": "jApS6FAWVrA",
-      "url": "https://youtube.com/watch?v=jApS6FAWVrA",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": true,
-      "thumbnail_uploaded": false
-    },
-    {
-      "file": "RichScience_James_Webb_Telescope_SHOCKS_Scientists_Top_5_New_Discoveries_of_2026.mp4",
-      "channel": "RichScience",
-      "target_channel_id": "UC0ODvK8Hvrd9Bd3QWIWPecA",
-      "video_id": "hZaxEohoOks",
-      "url": "https://youtube.com/watch?v=hZaxEohoOks",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": true,
-      "thumbnail_uploaded": false
-    },
-    {
-      "file": "RichScience_Quantum_Entanglement_How_Scientists_Are_Harnessing_This_Weird_Physics_Phenomenon.mp4",
-      "channel": "RichScience",
-      "target_channel_id": "UC0ODvK8Hvrd9Bd3QWIWPecA",
-      "video_id": "q99naxFiFY4",
-      "url": "https://youtube.com/watch?v=q99naxFiFY4",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": true,
-      "thumbnail_uploaded": false
-    },
-    {
-      "file": "RichSports_From_Broke_to_Billionaire_The_Untold_Story_of_Giannis_Antetokounmpos_Rise.mp4",
-      "channel": "RichSports",
-      "target_channel_id": "UCE33LOzIvklXaPbH1920vqQ",
-      "video_id": "Nk7BOnP-TaU",
-      "url": "https://youtube.com/watch?v=Nk7BOnP-TaU",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": true,
-      "thumbnail_uploaded": false
-    },
-    {
-      "file": "RichSports_NFL_Draft_2026_5_Underrated_Prospects_Who_Will_Dominate_The_League.mp4",
-      "channel": "RichSports",
-      "target_channel_id": "UCE33LOzIvklXaPbH1920vqQ",
-      "video_id": "vFJhZE0SP10",
-      "url": "https://youtube.com/watch?v=vFJhZE0SP10",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": true,
-      "thumbnail_uploaded": false
-    },
-    {
-      "file": "RichSports_Patrick_Mahomes_Secret_Weapon_How_Sports_Science_Made_Him_Unstoppable_2026_Super.mp4",
-      "channel": "RichSports",
-      "target_channel_id": "UCE33LOzIvklXaPbH1920vqQ",
-      "video_id": "2YPLLFNGjZM",
-      "url": "https://youtube.com/watch?v=2YPLLFNGjZM",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": true,
-      "thumbnail_uploaded": false
     },
     {
       "file": "RichArt_Impressionist_Masters_1Hr_4K_Slideshow.mp4",
@@ -593,61 +410,6 @@
       "thumbnail_uploaded": true
     },
     {
-      "file": "RichMusic_Ambient_Meditation_Deep_Relaxation_1Hr_Background_Music.mp4",
-      "channel": "RichMusic",
-      "target_channel_id": "UCCI_ynXNuutXGrzWDYzUZiA",
-      "video_id": "DKCA5JxdV6I",
-      "url": "https://youtube.com/watch?v=DKCA5JxdV6I",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": true,
-      "thumbnail_uploaded": false
-    },
-    {
-      "file": "RichMusic_Blues_Soul_Timeless_Classics_1Hr_Background_Music.mp4",
-      "channel": "RichMusic",
-      "target_channel_id": "UCCI_ynXNuutXGrzWDYzUZiA",
-      "video_id": "xFFU5FSIXQY",
-      "url": "https://youtube.com/watch?v=xFFU5FSIXQY",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": true,
-      "thumbnail_uploaded": false
-    },
-    {
-      "file": "RichMusic_Chill_Acoustic_Study_Vibes_1Hr_Background_Music.mp4",
-      "channel": "RichMusic",
-      "target_channel_id": "UCCI_ynXNuutXGrzWDYzUZiA",
-      "video_id": "Jit8Em32AwY",
-      "url": "https://youtube.com/watch?v=Jit8Em32AwY",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": true,
-      "thumbnail_uploaded": false
-    },
-    {
-      "file": "RichMusic_Cinematic_Epic_Instrumental_1Hr_Background_Music.mp4",
-      "channel": "RichMusic",
-      "target_channel_id": "UCCI_ynXNuutXGrzWDYzUZiA",
-      "video_id": "D2LxnY72eeg",
-      "url": "https://youtube.com/watch?v=D2LxnY72eeg",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": true,
-      "thumbnail_uploaded": false
-    },
-    {
-      "file": "RichMusic_Jazz_Cafe_Smooth_Jazz_1Hr_Background_Music.mp4",
-      "channel": "RichMusic",
-      "target_channel_id": "UCCI_ynXNuutXGrzWDYzUZiA",
-      "video_id": "-Raov8sGSnY",
-      "url": "https://youtube.com/watch?v=-Raov8sGSnY",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": true,
-      "thumbnail_uploaded": false
-    },
-    {
       "file": "RichArt_American_Landscape_Paintings_1Hr_4K_Slideshow.mp4",
       "channel": "RichArt",
       "target_channel_id": null,
@@ -692,72 +454,6 @@
       "thumbnail_uploaded": true
     },
     {
-      "file": "RichMusic_Classical_Piano_Orchestral_Masterpieces_1Hr_Background_Music.mp4",
-      "channel": "RichMusic",
-      "target_channel_id": "UCCI_ynXNuutXGrzWDYzUZiA",
-      "video_id": "WEn1SS8ijmo",
-      "url": "https://youtube.com/watch?v=WEn1SS8ijmo",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": true,
-      "thumbnail_uploaded": false
-    },
-    {
-      "file": "RichMusic_Dark_Horror_Ambient_Suspense_1Hr_Background_Music.mp4",
-      "channel": "RichMusic",
-      "target_channel_id": "UCCI_ynXNuutXGrzWDYzUZiA",
-      "video_id": "EA892Ztz9fM",
-      "url": "https://youtube.com/watch?v=EA892Ztz9fM",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": true,
-      "thumbnail_uploaded": false
-    },
-    {
-      "file": "RichMusic_Funky_Grooves_Upbeat_Party_1Hr_Background_Music.mp4",
-      "channel": "RichMusic",
-      "target_channel_id": "UCCI_ynXNuutXGrzWDYzUZiA",
-      "video_id": "Cdj9ZMOssgE",
-      "url": "https://youtube.com/watch?v=Cdj9ZMOssgE",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": true,
-      "thumbnail_uploaded": false
-    },
-    {
-      "file": "RichMusic_LoFi_Electronic_Chill_1Hr_Background_Music.mp4",
-      "channel": "RichMusic",
-      "target_channel_id": "UCCI_ynXNuutXGrzWDYzUZiA",
-      "video_id": "IZbg19gDeDc",
-      "url": "https://youtube.com/watch?v=IZbg19gDeDc",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": true,
-      "thumbnail_uploaded": false
-    },
-    {
-      "file": "HowToMeditate_Deep_Sleep_Meditation_1Hr_Peaceful_Nature_Visuals.mp4",
-      "channel": "HowToMeditate",
-      "target_channel_id": "UCbd6kzX3giNYyAeLaMPdgAA",
-      "video_id": "1lVxwEjVTZc",
-      "url": "https://youtube.com/watch?v=1lVxwEjVTZc",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": true,
-      "thumbnail_uploaded": false
-    },
-    {
-      "file": "HowToMeditate_Morning_Mindfulness_1Hr_Calm_Start_to_Your_Day.mp4",
-      "channel": "HowToMeditate",
-      "target_channel_id": "UCbd6kzX3giNYyAeLaMPdgAA",
-      "video_id": "GhJ51EY1cP8",
-      "url": "https://youtube.com/watch?v=GhJ51EY1cP8",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": true,
-      "thumbnail_uploaded": false
-    },
-    {
       "file": "RichArt_Ancient_Medieval_Sacred_Art_1Hr_4K_Slideshow.mp4",
       "channel": "RichArt",
       "target_channel_id": null,
@@ -789,94 +485,6 @@
       "upload_status": "uploaded",
       "used_channel_token": false,
       "thumbnail_uploaded": true
-    },
-    {
-      "file": "RichMusic_Retro_Synthwave_80s_Vibes_1Hr_Background_Music.mp4",
-      "channel": "RichMusic",
-      "target_channel_id": "UCCI_ynXNuutXGrzWDYzUZiA",
-      "video_id": "_o_1KTehh5U",
-      "url": "https://youtube.com/watch?v=_o_1KTehh5U",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": true,
-      "thumbnail_uploaded": false
-    },
-    {
-      "file": "RichMusic_Spooky_Halloween_Eerie_Sounds_1Hr_Background_Music.mp4",
-      "channel": "RichMusic",
-      "target_channel_id": "UCCI_ynXNuutXGrzWDYzUZiA",
-      "video_id": "DHCIDQJ7EgY",
-      "url": "https://youtube.com/watch?v=DHCIDQJ7EgY",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": true,
-      "thumbnail_uploaded": false
-    },
-    {
-      "file": "RichNature_Forest_Woodland_Paintings_1Hr_4K_Slideshow.mp4",
-      "channel": "RichNature",
-      "target_channel_id": "UCqzGBwIvr3sY1nUc9M2EVsg",
-      "video_id": "YpO3dxr9GvE",
-      "url": "https://youtube.com/watch?v=YpO3dxr9GvE",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": true,
-      "thumbnail_uploaded": false
-    },
-    {
-      "file": "RichNature_Mountain_Wilderness_Landscapes_1Hr_4K_Slideshow.mp4",
-      "channel": "RichNature",
-      "target_channel_id": "UCqzGBwIvr3sY1nUc9M2EVsg",
-      "video_id": "twiv4HslqPs",
-      "url": "https://youtube.com/watch?v=twiv4HslqPs",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": true,
-      "thumbnail_uploaded": false
-    },
-    {
-      "file": "HowToMeditate_Anxiety_Relief_Soothing_1Hr_Nature_Scenes.mp4",
-      "channel": "HowToMeditate",
-      "target_channel_id": "UCbd6kzX3giNYyAeLaMPdgAA",
-      "video_id": "L5mVReEfji4",
-      "url": "https://youtube.com/watch?v=L5mVReEfji4",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": true,
-      "thumbnail_uploaded": false
-    },
-    {
-      "file": "RichMusic_Epic_Adventure_Cinematic_Orchestral_1Hr_Background_Music.mp4",
-      "channel": "RichMusic",
-      "target_channel_id": "UCCI_ynXNuutXGrzWDYzUZiA",
-      "video_id": "YhW54e5Uq18",
-      "url": "https://youtube.com/watch?v=YhW54e5Uq18",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": true,
-      "thumbnail_uploaded": false
-    },
-    {
-      "file": "RichNature_Botanical_Flower_Paintings_1Hr_4K_Slideshow.mp4",
-      "channel": "RichNature",
-      "target_channel_id": "UCqzGBwIvr3sY1nUc9M2EVsg",
-      "video_id": "5Sc5rI8_wGA",
-      "url": "https://youtube.com/watch?v=5Sc5rI8_wGA",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": true,
-      "thumbnail_uploaded": false
-    },
-    {
-      "file": "HowToMeditate_Focus_Concentration_1Hr_Mindful_Visuals.mp4",
-      "channel": "HowToMeditate",
-      "target_channel_id": "UCbd6kzX3giNYyAeLaMPdgAA",
-      "video_id": "C1kSDUflctw",
-      "url": "https://youtube.com/watch?v=C1kSDUflctw",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": true,
-      "thumbnail_uploaded": false
     },
     {
       "file": "RichMusic_Happy_Upbeat_Feel_Good_1Hr_Background_Music.mp4",
@@ -934,17 +542,6 @@
       "thumbnail_uploaded": true
     },
     {
-      "file": "CumquatMotivation_Powerful_Motivational_Speeches_Cinematic.mp4",
-      "channel": "CumquatMotivation",
-      "target_channel_id": "UCtrCefKinhom7LFBV8rnfpQ",
-      "video_id": "QfdtZdLiVSo",
-      "url": "https://youtube.com/watch?v=QfdtZdLiVSo",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": true,
-      "thumbnail_uploaded": false
-    },
-    {
       "file": "EvaReyes_Powerful_Women_Empowerment_Motivational.mp4",
       "channel": "EvaReyes",
       "target_channel_id": "UCsp5NIA6aeQmqdn7omBqkYg",
@@ -967,70 +564,115 @@
       "thumbnail_uploaded": true
     },
     {
-      "file": "RichBusiness_Entrepreneur_Mindset_Cinematic_Motivation.mp4",
-      "channel": "RichBusiness",
-      "target_channel_id": "UCPQ8N53EgcqEKR4SfQ1DcXQ",
-      "video_id": "-wY-D4D-AWA",
-      "url": "https://youtube.com/watch?v=-wY-D4D-AWA",
+      "file": "RichMusic_Ambient_Meditation_Deep_Relaxation_1Hr_Background_Music.mp4",
+      "channel": "RichMusic",
+      "target_channel_id": "UCCI_ynXNuutXGrzWDYzUZiA",
+      "video_id": "Hjbv89IhI78",
+      "url": "https://youtube.com/watch?v=Hjbv89IhI78",
       "status": "success",
       "upload_status": "uploaded",
       "used_channel_token": true,
-      "thumbnail_uploaded": false
+      "thumbnail_uploaded": true
     },
     {
-      "file": "RichCooking_Satisfying_Cooking_ASMR_Compilation.mp4",
-      "channel": "RichCooking",
-      "target_channel_id": "UC8OrR3UMdyzy4DRgmCWOXcA",
-      "video_id": "tUfI6PH69iY",
-      "url": "https://youtube.com/watch?v=tUfI6PH69iY",
+      "file": "RichMusic_Blues_Soul_Timeless_Classics_1Hr_Background_Music.mp4",
+      "channel": "RichMusic",
+      "target_channel_id": "UCCI_ynXNuutXGrzWDYzUZiA",
+      "video_id": "hxHo-FnveG4",
+      "url": "https://youtube.com/watch?v=hxHo-FnveG4",
       "status": "success",
       "upload_status": "uploaded",
       "used_channel_token": true,
-      "thumbnail_uploaded": false
+      "thumbnail_uploaded": true
     },
     {
-      "file": "CumquatMotivation_Military_Mindset_Warrior_Discipline.mp4",
-      "channel": "CumquatMotivation",
-      "target_channel_id": "UCtrCefKinhom7LFBV8rnfpQ",
-      "video_id": "cU5HZulFBw4",
-      "url": "https://youtube.com/watch?v=cU5HZulFBw4",
+      "file": "RichMusic_Chill_Acoustic_Study_Vibes_1Hr_Background_Music.mp4",
+      "channel": "RichMusic",
+      "target_channel_id": "UCCI_ynXNuutXGrzWDYzUZiA",
+      "video_id": "Y1gNr5c7tBA",
+      "url": "https://youtube.com/watch?v=Y1gNr5c7tBA",
       "status": "success",
       "upload_status": "uploaded",
       "used_channel_token": true,
-      "thumbnail_uploaded": false
+      "thumbnail_uploaded": true
     },
     {
-      "file": "CumquatMotivation_Morning_Motivation_Sunrise_Energy.mp4",
-      "channel": "CumquatMotivation",
-      "target_channel_id": "UCtrCefKinhom7LFBV8rnfpQ",
-      "video_id": "M442zqV2j9A",
-      "url": "https://youtube.com/watch?v=M442zqV2j9A",
+      "file": "RichMusic_Cinematic_Epic_Instrumental_1Hr_Background_Music.mp4",
+      "channel": "RichMusic",
+      "target_channel_id": "UCCI_ynXNuutXGrzWDYzUZiA",
+      "video_id": "1A60we-zFF4",
+      "url": "https://youtube.com/watch?v=1A60we-zFF4",
       "status": "success",
       "upload_status": "uploaded",
       "used_channel_token": true,
-      "thumbnail_uploaded": false
+      "thumbnail_uploaded": true
     },
     {
-      "file": "CumquatMotivation_Stoic_Discipline_Ancient_Wisdom_Cinematic.mp4",
-      "channel": "CumquatMotivation",
-      "target_channel_id": "UCtrCefKinhom7LFBV8rnfpQ",
-      "video_id": "HbCYGZCWYFo",
-      "url": "https://youtube.com/watch?v=HbCYGZCWYFo",
+      "file": "CumquatGaming_Fortnite_Season_2_LEAKS_Norse_Gods_Tracer_Battle_Pass_Everything_Changing.mp4",
+      "channel": "CumquatGaming",
+      "target_channel_id": null,
+      "video_id": "iyZ64ZNOTOc",
+      "url": "https://youtube.com/watch?v=iyZ64ZNOTOc",
       "status": "success",
       "upload_status": "uploaded",
-      "used_channel_token": true,
-      "thumbnail_uploaded": false
+      "used_channel_token": false,
+      "thumbnail_uploaded": true
     },
     {
-      "file": "RichAnimation_Breathtaking_Animated_Worlds_Visual_Journey.mp4",
-      "channel": "RichAnimation",
-      "target_channel_id": "UCtsmXjQaCdMTEyDTDWRpVVA",
-      "video_id": "3s99rQaan8w",
-      "url": "https://youtube.com/watch?v=3s99rQaan8w",
+      "file": "CumquatGaming_Gen_10_Is_HERE_Pokemon_Winds_Waves_FULL_Reveal_30th_Anniversary.mp4",
+      "channel": "CumquatGaming",
+      "target_channel_id": null,
+      "video_id": "TZS26bm3VOc",
+      "url": "https://youtube.com/watch?v=TZS26bm3VOc",
       "status": "success",
       "upload_status": "uploaded",
-      "used_channel_token": true,
-      "thumbnail_uploaded": false
+      "used_channel_token": false,
+      "thumbnail_uploaded": true
+    },
+    {
+      "file": "RichArt_Art_Deco_Art_Nouveau_Masters_1Hr_4K_Slideshow.mp4",
+      "channel": "RichArt",
+      "target_channel_id": null,
+      "video_id": "WDEWp9Q-qWQ",
+      "url": "https://youtube.com/watch?v=WDEWp9Q-qWQ",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": false,
+      "thumbnail_uploaded": true
+    },
+    {
+      "file": "RichArt_Chinese_East_Asian_Scroll_Paintings_1Hr_4K_Slideshow.mp4",
+      "channel": "RichArt",
+      "target_channel_id": null,
+      "video_id": "iTBvyXoetco",
+      "url": "https://youtube.com/watch?v=iTBvyXoetco",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": false,
+      "thumbnail_uploaded": true
+    },
+    {
+      "file": "RichArt_Pre_Raphaelite_Brotherhood_1Hr_4K_Slideshow.mp4",
+      "channel": "RichArt",
+      "target_channel_id": null,
+      "video_id": "sVTP17Lp05s",
+      "url": "https://youtube.com/watch?v=sVTP17Lp05s",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": false,
+      "thumbnail_uploaded": true
+    },
+    {
+      "file": "RichArt_Symbolism_Klimt_Moreau_Redon_1Hr_4K_Slideshow.mp4",
+      "channel": "RichArt",
+      "target_channel_id": null,
+      "video_id": "igRC-7wfUnc",
+      "url": "https://youtube.com/watch?v=igRC-7wfUnc",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": false,
+      "thumbnail_uploaded": true
     }
-  ]
+  ],
+  "cleanup_note": "Removed 26 dead videos on 2026-03-02"
 }
