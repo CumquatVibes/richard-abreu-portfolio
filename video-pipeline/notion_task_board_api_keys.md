@@ -159,7 +159,7 @@ After scripts are generated, run them through the full pipeline:
 | 2 | Compilation B-roll | DONE | 215 images generated (99.5% success) |
 | 3 | Tier 2-3 scripts (15 videos) | DONE | 15/15 scripts + SEO metadata generated |
 | 3 | Tier 2-3 B-roll | DONE | 360 images generated (98.6% success) |
-| 4 | Screenshot assets | PENDING | Needs Claude with browser access |
+| 4 | Screenshot assets | DONE | 150 screenshots captured (30 services × 5 pages, 100% success) |
 | 5 | Pipeline (broll, assembly, upload) | BLOCKED | Waiting on Richard's voiceovers |
 
 **Last updated: 2026-03-02**
