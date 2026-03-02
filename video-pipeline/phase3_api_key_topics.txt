@@ -1,0 +1,16 @@
+# Phase 3: Tier 2-3 Individual API Key Tutorials (RichTech)
+How to Get a Spotify API Key: Client ID and Secret Setup in 2026
+How to Get an OpenWeatherMap API Key for Free in 2026
+How to Get a Twilio API Key for SMS and Voice in 2026
+How to Get Shopify API Credentials: Admin and Storefront Keys
+How to Get a GitHub Personal Access Token in 2026
+How to Get a DeepSeek API Key: The Cheapest AI API in 2026
+How to Get Supabase API Keys: Anon and Service Role Explained
+How to Get a Stability AI API Key for Stable Diffusion in 2026
+How to Get a Notion API Key and Create an Integration in 2026
+How to Get a Groq API Key: Free Fast AI Inference in 2026
+How to Get Clerk API Keys for Next.js Authentication in 2026
+How to Get a Mapbox Access Token for Maps in 2026
+How to Get a RapidAPI Key and Access 40000 Plus APIs
+How to Get a TMDB API Key for Movie and TV Data in 2026
+How to Get a Cloudinary API Key for Image Management in 2026
