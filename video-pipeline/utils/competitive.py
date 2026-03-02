@@ -12,6 +12,7 @@ import os
 import re
 import sqlite3
 import subprocess
+import sys
 import tempfile
 import time
 import urllib.parse
@@ -152,7 +153,8 @@ def get_video_transcript(video_id, max_seconds=180):
         try:
             subprocess.run(
                 [
-                    "yt-dlp", "--skip-download",
+                    sys.executable, "-m", "yt_dlp",
+                    "--skip-download",
                     "--write-auto-sub", "--sub-lang", "en",
                     "--sub-format", "vtt",
                     "--output", sub_path,
