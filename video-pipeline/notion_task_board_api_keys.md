@@ -149,6 +149,20 @@ After scripts are generated, run them through the full pipeline:
 
 ---
 
+## Progress Tracker
+
+| Phase | Task | Status | Details |
+|-------|------|--------|---------|
+| 1 | Tier 1 scripts (15 videos) | DONE | 15/15 scripts + SEO metadata generated |
+| 1 | Tier 1 B-roll | DONE | 373 images generated (97.9% success) |
+| 2 | Compilation scripts (8 videos) | DONE | 8/8 scripts + SEO metadata generated |
+| 2 | Compilation B-roll | IN PROGRESS | Running batch_generate_broll.py |
+| 3 | Tier 2-3 scripts (15 videos) | PENDING | Assign to next available Claude |
+| 4 | Screenshot assets | PENDING | Needs Claude with browser access |
+| 5 | Pipeline (broll, assembly, upload) | BLOCKED | Waiting on Richard's voiceovers |
+
+**Last updated: 2026-03-02**
+
 ## Assignment Summary
 
 | Phase | Task | Assignee | Dependencies |
