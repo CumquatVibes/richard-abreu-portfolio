@@ -67,7 +67,7 @@ def post_to_facebook_group(video_title, video_url, channel, is_short=False):
         youtube_link=video_url,
     )
 
-    url = f"https://graph.facebook.com/v19.0/{group_id}/feed"
+    url = f"https://graph.facebook.com/v24.0/{group_id}/feed"
     ok, result = _post_to_facebook(url, message, video_url, token, "group")
     if ok:
         log_facebook_post(video_title, result, target="group")
@@ -98,7 +98,7 @@ def post_to_facebook_page(video_title, video_url, channel, is_short=False):
         hashtags=f"#CumquatVibes #{channel.replace(' ', '')}",
     )
 
-    url = f"https://graph.facebook.com/v19.0/{page_id}/feed"
+    url = f"https://graph.facebook.com/v24.0/{page_id}/feed"
     ok, result = _post_to_facebook(url, message, video_url, token, "page")
     if ok:
         log_facebook_post(video_title, result, target="page")

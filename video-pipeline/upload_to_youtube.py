@@ -1066,12 +1066,13 @@ def upload_video(filepath, title, description, tags, category_id, access_token,
 
 
 # Quota budget: YouTube Data API costs ~1600 units per upload, 50 per thumbnail
-# Default daily quota is 10,000 units. Stop at 80% to leave room for other operations.
+# Default daily quota is 10,000 units. Stop at 90% to maximize throughput while
+# leaving a small buffer for search/list operations.
 QUOTA_PER_UPLOAD = 1600
 QUOTA_PER_THUMBNAIL = 50
 DAILY_QUOTA_LIMIT = 10000
-QUOTA_SAFETY_THRESHOLD = 0.80  # Stop uploads at 80% quota usage
-MAX_UPLOADS_PER_RUN = 5  # Hard cap per run — prevents quota blowouts regardless of tracking
+QUOTA_SAFETY_THRESHOLD = 0.92  # Stop uploads at 92% quota usage (allows ~5-6 uploads/day)
+MAX_UPLOADS_PER_RUN = 6  # Cap per run — allows full daily quota usage across 1-2 runs
 
 
 def run_preflight(video_file, channel, title, description, tags, script_path):

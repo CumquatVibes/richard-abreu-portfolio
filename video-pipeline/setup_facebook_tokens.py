@@ -36,7 +36,7 @@ def exchange_for_long_lived(short_token):
     """Exchange short-lived token for long-lived user token (60 days)."""
     print("\n[1/4] Exchanging for long-lived user token...")
     resp = requests.get(
-        "https://graph.facebook.com/v19.0/oauth/access_token",
+        "https://graph.facebook.com/v24.0/oauth/access_token",
         params={
             "grant_type": "fb_exchange_token",
             "client_id": APP_ID,
@@ -61,7 +61,7 @@ def get_pages(user_token):
     """List Pages the user manages and get permanent Page tokens."""
     print("\n[2/4] Fetching your Pages...")
     resp = requests.get(
-        "https://graph.facebook.com/v19.0/me/accounts",
+        "https://graph.facebook.com/v24.0/me/accounts",
         params={"access_token": user_token},
         timeout=15,
     )
@@ -81,7 +81,7 @@ def get_groups(user_token):
     """List Groups the user is admin of."""
     print("\n[3/4] Fetching your Groups...")
     resp = requests.get(
-        "https://graph.facebook.com/v19.0/me/groups",
+        "https://graph.facebook.com/v24.0/me/groups",
         params={"access_token": user_token, "admin_only": "true"},
         timeout=15,
     )

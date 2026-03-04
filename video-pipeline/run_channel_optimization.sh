@@ -24,6 +24,31 @@ python3 competitive_audit.py >> "$LOG_FILE" 2>&1
 echo "--- Retrying video uploads ---" >> "$LOG_FILE"
 python3 upload_to_youtube.py >> "$LOG_FILE" 2>&1
 
+# 1b. Cross-post newly uploaded videos to Facebook Page
+echo "--- Facebook Cross-Posts ---" >> "$LOG_FILE"
+python3 -c "
+import sys, json, os; sys.path.insert(0, '.')
+from dotenv import load_dotenv
+load_dotenv(os.path.join('..', 'shopify-theme', '.env'))
+from utils.facebook import post_to_facebook_page
+from utils.telemetry import get_facebook_posts
+
+# Get videos uploaded today that haven't been posted to FB yet
+report_path = 'output/reports/youtube_upload_report.json'
+if os.path.exists(report_path):
+    report = json.load(open(report_path))
+    posted = {p['video_title'] for p in get_facebook_posts()}
+    new_uploads = [v for v in report.get('videos', [])
+                   if v.get('status') == 'uploaded' and v.get('title') not in posted]
+    print(f'Found {len(new_uploads)} videos to cross-post to Facebook')
+    for v in new_uploads[:5]:  # Cap at 5 per run to avoid spam
+        url = f\"https://youtube.com/watch?v={v['video_id']}\"
+        ok, result = post_to_facebook_page(v['title'], url, v.get('channel', 'CumquatVibes'))
+        print(f'  {\"OK\" if ok else \"FAIL\"}: {v[\"title\"][:60]}')
+else:
+    print('No upload report found')
+" >> "$LOG_FILE" 2>&1
+
 # 2. Backfill thumbnails for any uploaded videos missing custom thumbnails
 echo "--- Backfilling thumbnails ---" >> "$LOG_FILE"
 python3 backfill_thumbnails.py >> "$LOG_FILE" 2>&1
@@ -61,6 +86,41 @@ quota = check_quota_status()
 print(f'Quota status: {quota}')
 " >> "$LOG_FILE" 2>&1
 
+# Summary report
+echo "" >> "$LOG_FILE"
+echo "=== NIGHTLY RUN SUMMARY ===" >> "$LOG_FILE"
+python3 -c "
+import json, os, glob
+from datetime import date
+
+# Count today's uploads
+report = 'output/reports/youtube_upload_report.json'
+if os.path.exists(report):
+    data = json.load(open(report))
+    total = data.get('uploaded', 0)
+    pending = len(glob.glob('output/videos/*.mp4')) - total
+    print(f'YouTube: {total} uploaded, ~{max(0,pending)} pending')
+
+# Count scripts and broll
+scripts = len(glob.glob('output/scripts/*.txt'))
+broll = len(glob.glob('output/broll/*/'))
+print(f'Content: {scripts} scripts, {broll} B-roll sets')
+
+# Pipeline DB stats
+db_path = 'output/pipeline.db'
+if os.path.exists(db_path):
+    import sqlite3
+    conn = sqlite3.connect(db_path)
+    try:
+        fb = conn.execute('SELECT COUNT(*) FROM facebook_posts').fetchone()[0]
+        print(f'Facebook: {fb} total posts')
+    except: pass
+    try:
+        cb = conn.execute('SELECT COUNT(*) FROM competitor_briefs WHERE fetched_at > date(\"now\", \"-7 days\")').fetchone()[0]
+        print(f'Competitive: {cb} fresh briefs (last 7d)')
+    except: pass
+    conn.close()
+" >> "$LOG_FILE" 2>&1
 echo "=== Nightly Pipeline Done: $(date) ===" >> "$LOG_FILE"
 
 # Check if all channels are optimized
