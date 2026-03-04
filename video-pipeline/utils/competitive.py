@@ -87,16 +87,20 @@ def _gemini_call(prompt, retries=2):
 # ── Search & Transcript ──
 
 def _build_search_query(channel_config):
-    """Build a YouTube search query from channel niche + first sub_topic + year."""
+    """Build a concise YouTube search query from channel niche + first sub_topic.
+
+    Keeps queries short and broad for better hit rates. The publishedAfter
+    filter in fetch_top_video() already ensures recency.
+    """
     niche = channel_config.get("niche", "general")
     sub_topics = channel_config.get("sub_topics", [])
-    first_topic = sub_topics[0] if sub_topics else ""
-    year = datetime.now().year
-    parts = [niche]
-    if first_topic:
-        parts.append(first_topic)
-    parts.append(str(year))
-    return " ".join(parts)
+    # Use just the niche — it's usually descriptive enough
+    # Only add first sub_topic if niche is very generic
+    query = niche
+    if len(niche.split()) <= 2 and sub_topics:
+        query = f"{niche} {sub_topics[0]}"
+    # Cap at 50 chars to avoid overly narrow searches
+    return query[:50].strip()
 
 
 def fetch_top_video(niche_query):

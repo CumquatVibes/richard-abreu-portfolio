@@ -827,10 +827,9 @@ RULES:
                 "contents": [{"parts": [{"text": prompt}]}],
                 "generationConfig": {"temperature": 0.5, "maxOutputTokens": 1024},
             }
-            req = urllib.request.Request(url, data=json.dumps(payload).encode(), method="POST")
-            req.add_header("Content-Type", "application/json")
-            with urllib.request.urlopen(req, timeout=20) as resp:
-                data = json.loads(resp.read().decode())
+            resp = requests.post(url, json=payload, timeout=20)
+            resp.raise_for_status()
+            data = resp.json()
             text = data["candidates"][0]["content"]["parts"][0]["text"]
             # Strip markdown fences if present
             text = text.strip()
@@ -856,6 +855,8 @@ RULES:
         ]
 
         footer = CHANNELS.get("seo_defaults", {}).get("description_footer", "")
+        channel_hashtag = self.channel.get("name", "").replace(" ", "")
+        footer = footer.replace("#{channel_hashtag}", f"#{channel_hashtag}")
         description = (
             f"{self.topic}\n\n"
             f"Step-by-step guide covering everything you need to get started.\n\n"
@@ -889,6 +890,9 @@ RULES:
         if result and "titles" in result and "description" in result and "tags" in result:
             # Add footer to Gemini description
             footer = CHANNELS.get("seo_defaults", {}).get("description_footer", "")
+            # Resolve template variables in footer
+            channel_hashtag = self.channel.get("name", "").replace(" ", "")
+            footer = footer.replace("#{channel_hashtag}", f"#{channel_hashtag}")
             if footer and footer not in result["description"]:
                 result["description"] += f"\n{footer}"
             result["category_id"] = self.channel.get("youtube_category", "22")

@@ -1074,6 +1074,25 @@ DAILY_QUOTA_LIMIT = 10000
 QUOTA_SAFETY_THRESHOLD = 0.92  # Stop uploads at 92% quota usage (allows ~5-6 uploads/day)
 MAX_UPLOADS_PER_RUN = 6  # Cap per run — allows full daily quota usage across 1-2 runs
 
+# Unverified channels can only upload videos up to 15 minutes.
+# Set of channel prefixes that have been phone-verified on YouTube.
+VERIFIED_CHANNELS = set()  # Add channel prefixes here after phone verification
+MAX_DURATION_UNVERIFIED = 14.5 * 60  # 14m30s — safe buffer under YouTube's 15min limit
+
+
+def get_video_duration(filepath):
+    """Get video duration in seconds using ffprobe. Returns None on failure."""
+    try:
+        import subprocess
+        result = subprocess.run(
+            ["ffprobe", "-v", "quiet", "-print_format", "json", "-show_format", filepath],
+            capture_output=True, text=True, timeout=10,
+        )
+        data = json.loads(result.stdout)
+        return float(data["format"]["duration"])
+    except Exception:
+        return None
+
 
 def run_preflight(video_file, channel, title, description, tags, script_path):
     """Run compliance preflight check before uploading.
@@ -1133,6 +1152,25 @@ def main():
 
     if channel_access_tokens:
         print(f"\n  {len(channel_access_tokens)} channel token(s) loaded.")
+        # Verify channel tokens route to correct channels (spot-check first 3)
+        misrouted = []
+        checked = 0
+        for prefix, (expected_id, _cat) in list(CHANNEL_MAP.items())[:40]:
+            token_key = TOKEN_KEY_MAP.get(prefix, prefix)
+            if token_key not in channel_access_tokens:
+                continue
+            actual_id, actual_title = verify_channel(channel_access_tokens[token_key])
+            checked += 1
+            if actual_id and actual_id != expected_id:
+                misrouted.append(f"  WARNING: {prefix} token routes to {actual_title} ({actual_id}), expected {expected_id}")
+            if checked >= 3:
+                break  # Spot-check only — full verification uses too much quota
+        if misrouted:
+            print("\n  CHANNEL ROUTING WARNINGS:")
+            for m in misrouted:
+                print(m)
+        elif checked > 0:
+            print(f"  Routing spot-check: {checked} channel(s) verified OK")
     else:
         print("\n  No channel tokens found.")
         print("  Run setup_channel_auth.py first to authorize each brand channel.")
@@ -1180,6 +1218,7 @@ def main():
     skipped_limit = 0
     failed_count = 0
     preflight_blocked = 0
+    skipped_too_long = 0
 
     # Load today's quota usage from DB (persists across runs)
     quota_already_used, uploads_today = get_daily_quota()
@@ -1206,6 +1245,16 @@ def main():
         # Handle subdirectory paths (e.g., "rich_education/RichEducation_Topic.mp4")
         video_basename = os.path.basename(video_file)
         channel = video_basename.split("_")[0]
+
+        # Validate channel exists in CHANNEL_MAP
+        if channel not in CHANNEL_MAP:
+            print(f"[{i}/{len(pending)}] SKIP: Unknown channel prefix '{channel}' in {video_basename}")
+            results.append({
+                "file": video_file, "channel": channel, "target_channel_id": None,
+                "video_id": None, "status": "skipped_unknown_channel",
+                "error": f"Channel prefix '{channel}' not found in CHANNEL_MAP",
+            })
+            continue
 
         # Skip if this channel already hit rate limit this run
         if channel in rate_limited_channels:
@@ -1241,6 +1290,24 @@ def main():
 
         filepath = os.path.join(VIDEOS_DIR, video_file)
         size_mb = os.path.getsize(filepath) / (1024 * 1024)
+
+        # Duration check: unverified channels can't upload >15 min videos
+        if channel not in VERIFIED_CHANNELS:
+            duration = get_video_duration(filepath)
+            if duration and duration > MAX_DURATION_UNVERIFIED:
+                dur_min = int(duration // 60)
+                print(f"[{i}/{len(pending)}] {channel}: SKIP — {dur_min}min video exceeds 15min limit (channel not phone-verified)")
+                results.append({
+                    "file": video_file,
+                    "channel": channel,
+                    "target_channel_id": channel_id,
+                    "video_id": None,
+                    "status": "skipped_too_long",
+                    "duration_minutes": dur_min,
+                    "error": f"Video is {dur_min}min but unverified channels have 15min limit",
+                })
+                skipped_too_long += 1
+                continue
 
         # Pick the right token
         token = get_token_for_channel(channel, default_token)
@@ -1374,7 +1441,8 @@ def main():
 
     # Summary
     print(f"\n{'=' * 60}")
-    print(f"Results: {uploaded_this_run} uploaded this run ({uploaded_count} total) | {skipped_limit} rate-limited | {failed_count} failed | {preflight_blocked} blocked by compliance")
+    too_long_msg = f" | {skipped_too_long} too long (need verification)" if skipped_too_long else ""
+    print(f"Results: {uploaded_this_run} uploaded this run ({uploaded_count} total) | {skipped_limit} rate-limited | {failed_count} failed | {preflight_blocked} blocked by compliance{too_long_msg}")
     print(f"Quota used this run: ~{quota_used_this_run}/{DAILY_QUOTA_LIMIT} ({quota_used_this_run/DAILY_QUOTA_LIMIT*100:.0f}%)\n")
 
     for r in results:
