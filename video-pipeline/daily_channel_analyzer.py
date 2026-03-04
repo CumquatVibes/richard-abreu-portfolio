@@ -60,7 +60,7 @@ BENCHMARKS = {
 # Priority tiers for channels
 PRIORITY_CHANNELS = [
     "Cumquat Motivation", "How to Use AI", "RichMind", "RichTech",
-    "Eva Reyes", "RichHorror", "Rich Business", "RichFinance"
+    "Eva Reyes", "RichHorror", "Rich Business", "RichFinance", "RichTraining"
 ]
 
 

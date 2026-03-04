@@ -89,6 +89,7 @@ CHANNEL_MAP = {
     "RichBusiness": ("UCPQ8N53EgcqEKR4SfQ1DcXQ", "28"),
     "CumquatMotivation": ("UCtrCefKinhom7LFBV8rnfpQ", "22"),
     "CumquatVibes": ("UCThXDUhXqcui2HqBv4MUBBA", "22"),
+    "RichTraining": ("UCcY9CwSBVjpMqCjB7oPjfRA", "27"),
 }
 
 # YouTube category IDs (reference)
@@ -158,6 +159,7 @@ CHANNEL_NICHE = {
     "RichFitness": "fitness, workouts, and healthy living",
     "RichCooking": "cooking, recipes, and kitchen hacks",
     "CumquatVibes": "art, design, tech, entrepreneurship, and creator lifestyle",
+    "RichTraining": "professional development, career training, leadership, and workplace skills",
     "RichArt": "4K art slideshows, art for your TV, ambient art, art essays",
     "RichMusic": "curated music playlists, lo-fi beats, jazz, blues, ambient music",
 }
@@ -200,6 +202,12 @@ CHANNEL_TAGS = {
         "Richard Abreu", "Cumquat Vibes", "digital art", "design tutorial",
         "AI tools", "creator economy", "entrepreneur", "veteran creator",
         "art process", "tech review", "side hustle", "Affinity Designer",
+    ],
+    "RichTraining": [
+        "professional development", "career training", "leadership skills",
+        "workplace productivity", "career growth", "interview tips",
+        "business communication", "professional skills", "career advice 2026",
+        "job training",
     ],
     "RichArt": [
         "art for tv", "tv wall art", "4k art", "4k slideshow", "art background",
@@ -789,6 +797,7 @@ CHANNEL_THUMBNAIL_STYLE = {
     "RichBusiness": "professional corporate aesthetic, success imagery, confident, modern office",
     "CumquatMotivation": "epic sunrise/sunset, inspirational landscape, powerful atmosphere",
     "CumquatVibes": "dark matte studio aesthetic #101922 background, orange #e8941f accent, Richard Abreu digital avatar, bold creator energy, premium personal brand feel",
+    "RichTraining": "clean professional aesthetic, corporate blue tones, career growth imagery, confident professional setting",
 }
 DEFAULT_THUMBNAIL_STYLE = "cinematic lighting, professional YouTube thumbnail, bold dramatic atmosphere"
 

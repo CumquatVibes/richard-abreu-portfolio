@@ -548,6 +548,46 @@
       "channel_id": "UCp3WkXsFFzdRLZX_UYp43cw",
       "handle": "@richeducation8"
     },
+    "rich_training": {
+      "name": "RichTraining",
+      "handle": "@RichTraining",
+      "type": "rich_brand",
+      "faceless": true,
+      "niche": "Professional development, career training, workplace skills",
+      "sub_topics": [
+        "leadership skills",
+        "career advancement",
+        "workplace productivity",
+        "professional certifications",
+        "interview preparation",
+        "business communication"
+      ],
+      "formats": [
+        "explainer",
+        "listicle",
+        "tutorial",
+        "shorts_facts"
+      ],
+      "voice_profile": "calm_narrator",
+      "youtube_category": "27",
+      "visual_theme": {
+        "primary": "#1565C0",
+        "accent": "#00BFA5",
+        "bg": "#0D1B2A"
+      },
+      "posting": {
+        "long_form": "2x/week",
+        "shorts": "3x/week"
+      },
+      "monetization": [
+        "online course affiliates",
+        "training platform sponsors",
+        "professional development tools"
+      ],
+      "thumbnail_style": "clean professional aesthetic + career growth icons + corporate blue tones",
+      "channel_id": "UCcY9CwSBVjpMqCjB7oPjfRA",
+      "handle": "@richtraining"
+    },
     "rich_history": {
       "name": "RichHistory",
       "handle": "@RichHistory",
