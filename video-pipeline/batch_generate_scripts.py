@@ -143,15 +143,19 @@ TARGET WORD COUNT: {word_count} words
 TARGET DURATION: {fmt.get('duration_target', '8-12 min')}
 {comp_section}
 SCRIPT REQUIREMENTS:
-1. START with a powerful hook in the FIRST 10 seconds — a shocking stat, provocative question, or bold claim that makes viewers stay
-2. Use conversational, engaging narration style (faceless voiceover)
-3. Include [VISUAL: description] directions for B-roll throughout
-4. End with a clear CTA (subscribe, like, comment prompt)
-5. Include chapter markers as ## headers
-6. Do NOT use filler phrases like "without further ado" or "in today's video"
-7. Be factual and well-researched — include specific data points
-8. The first 30 seconds must be the most compelling part of the entire script
-9. Each section should have 2-3 [VISUAL:] directions
+1. HOOK: Use the "Result First" pattern — SHOW the end result in the first 5 seconds (e.g., a working API response, a completed setup screen), THEN explain how to get there. Never open with generic statements like "AI is changing everything."
+2. For tutorials: deliver EXACTLY what the title promises. If the title says "How to Get X API Key", the script MUST walk through the actual steps (sign up, navigate to dashboard, create key, copy it).
+3. Use conversational, engaging narration style (faceless voiceover)
+4. Include [VISUAL: description] directions for B-roll throughout — vary the visual types (screenshots, code editors, terminal output, diagrams). Do NOT repeat the same visual pattern.
+5. End with a clear CTA (subscribe, like, comment prompt)
+6. Include chapter markers as ## headers
+7. Do NOT use filler phrases like "without further ado", "in today's video", or "prices may vary"
+8. Do NOT fabricate stories or companies. Only reference real, verifiable incidents with correct dates and company names.
+9. Do NOT include speculative "by 2026" predictions. Use present tense — "In 2026, the process is..."
+10. Be factual and well-researched — include specific data points
+11. The first 30 seconds must be the most compelling part of the entire script
+12. Each section should have 2-3 [VISUAL:] directions
+13. For API tutorials: include a working code example (Python preferred) showing the first API call
 
 OUTPUT FORMAT:
 ---

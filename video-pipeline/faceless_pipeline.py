@@ -771,49 +771,129 @@ class FacelessAudioProducer:
 # ---------------------------------------------------------------------------
 
 class FacelessSEO:
-    """Generates SEO metadata tailored for faceless channels."""
+    """Generates SEO metadata tailored for faceless channels.
 
-    def __init__(self, channel, topic):
+    Uses Gemini to produce search-optimized titles, descriptions with timestamps,
+    and multi-word keyword tags. Falls back to static generation on API failure.
+    """
+
+    def __init__(self, channel, topic, script_text=""):
         self.channel = channel
         self.topic = topic
+        self.script_text = script_text
         self.niche = channel.get("niche", "general").split(",")[0].strip()
 
-    def generate(self):
-        """Generate title options, description, and tags."""
+    def _gemini_seo(self):
+        """Use Gemini to generate high-quality SEO metadata."""
+        api_key = os.getenv("GEMINI_API_KEY", "")
+        if not api_key:
+            return None
+
         name = self.channel.get("name", "Channel")
         handle = self.channel.get("handle", "")
         niche = self.niche
 
+        # Extract chapter titles from script for timestamps
+        chapters = []
+        if self.script_text:
+            import re
+            for m in re.finditer(r'\[CHAPTER:\s*(.+?)\]', self.script_text):
+                chapters.append(m.group(1).strip())
+
+        prompt = f"""Generate YouTube SEO metadata for this video. Return valid JSON only.
+
+VIDEO TOPIC: {self.topic}
+CHANNEL: {name} (@{handle})
+NICHE: {niche}
+CHAPTERS: {', '.join(chapters) if chapters else 'N/A'}
+
+Return this exact JSON structure:
+{{
+  "titles": ["<primary title under 60 chars>", "<alternative title with channel name>", "<curiosity-driven title variant>"],
+  "description": "<3-4 sentence summary of what viewer will learn>\\n\\nTimestamps:\\n0:00 Intro\\n<chapter timestamps>\\n\\n<2 lines of relevant keywords naturally embedded>",
+  "tags": ["<15-20 multi-word search phrases like 'openai api key tutorial', 'how to get api key 2026'>"]
+}}
+
+RULES:
+- Titles: Include the year 2026, keep primary under 60 chars, make one curiosity-driven
+- Description: Start with a specific summary (NOT 'In this video we break down...'). Include what the viewer will learn. Add chapter timestamps.
+- Tags: ONLY multi-word phrases (2-4 words each). No single words. Include the service name, 'api key', 'tutorial', '2026', and related search terms.
+- Do NOT include generic tags like 'faceless youtube', 'AI narration', 'top 10', 'facts'
+- Return ONLY the JSON, no markdown fences"""
+
+        try:
+            url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={api_key}"
+            payload = {
+                "contents": [{"parts": [{"text": prompt}]}],
+                "generationConfig": {"temperature": 0.5, "maxOutputTokens": 1024},
+            }
+            req = urllib.request.Request(url, data=json.dumps(payload).encode(), method="POST")
+            req.add_header("Content-Type", "application/json")
+            with urllib.request.urlopen(req, timeout=20) as resp:
+                data = json.loads(resp.read().decode())
+            text = data["candidates"][0]["content"]["parts"][0]["text"]
+            # Strip markdown fences if present
+            text = text.strip()
+            if text.startswith("```"):
+                text = text.split("\n", 1)[1] if "\n" in text else text[3:]
+            if text.endswith("```"):
+                text = text[:-3]
+            result = json.loads(text.strip())
+            return result
+        except Exception as e:
+            print(f"  [SEO] Gemini SEO generation failed: {e}")
+            return None
+
+    def _static_seo(self):
+        """Fallback static SEO generation."""
+        name = self.channel.get("name", "Channel")
+        niche = self.niche
+
         titles = [
-            self.topic,  # Use the original topic as primary title
+            self.topic,
             f"{self.topic} | {name}",
-            f"{self.topic} ({datetime.now().year})",
+            f"{self.topic} - Complete Guide ({datetime.now().year})",
         ]
 
         footer = CHANNELS.get("seo_defaults", {}).get("description_footer", "")
         description = (
             f"{self.topic}\n\n"
-            f"In this video, we break down everything you need to know about this topic.\n\n"
+            f"Step-by-step guide covering everything you need to get started.\n\n"
             f"Don't forget to like, subscribe, and hit the notification bell!\n"
             f"{footer}"
         )
 
-        # Combine channel-specific tags with defaults
-        channel_niche_words = [w.strip().lower() for w in niche.split(",")]
+        # Build multi-word tag phrases instead of single words
+        topic_lower = self.topic.lower()
+        tags = [
+            topic_lower,
+            f"{niche} tutorial",
+            f"{niche} guide 2026",
+            f"{self.topic.split(':')[0].lower().strip()} tutorial",
+        ]
+        # Add channel-specific sub-topics
         sub_topics = [s.lower() for s in self.channel.get("sub_topics", [])]
-        default_tags = CHANNELS.get("seo_defaults", {}).get("default_tags", [])
-        topic_words = [w.lower() for w in self.topic.split() if len(w) > 3]
-
-        tags = list(dict.fromkeys(  # deduplicate while preserving order
-            channel_niche_words + sub_topics[:5] + topic_words[:5] + default_tags + [name.lower()]
-        ))
+        tags.extend(sub_topics[:5])
+        tags.append(name.lower())
 
         return {
             "titles": titles,
             "description": description,
-            "tags": tags[:30],  # YouTube max ~500 chars total, keep reasonable
+            "tags": list(dict.fromkeys(tags))[:20],
             "category_id": self.channel.get("youtube_category", "22"),
         }
+
+    def generate(self):
+        """Generate SEO metadata. Uses Gemini if available, falls back to static."""
+        result = self._gemini_seo()
+        if result and "titles" in result and "description" in result and "tags" in result:
+            # Add footer to Gemini description
+            footer = CHANNELS.get("seo_defaults", {}).get("description_footer", "")
+            if footer and footer not in result["description"]:
+                result["description"] += f"\n{footer}"
+            result["category_id"] = self.channel.get("youtube_category", "22")
+            return result
+        return self._static_seo()
 
 
 # ---------------------------------------------------------------------------
@@ -891,7 +971,7 @@ class BatchProducer:
 
         # Step 4: SEO metadata
         print("[4/4] Generating SEO metadata...")
-        seo = FacelessSEO(channel, topic)
+        seo = FacelessSEO(channel, topic, script_text=script_data.get("annotated_text", ""))
         seo_data = seo.generate()
 
         seo_path = SCRIPTS_DIR / f"{channel_name}_{safe_topic}_{timestamp}_seo.json"
