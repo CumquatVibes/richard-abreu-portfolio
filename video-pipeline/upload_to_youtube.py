@@ -1076,8 +1076,8 @@ MAX_UPLOADS_PER_RUN = 6  # Cap per run — allows full daily quota usage across 
 
 # Unverified channels can only upload videos up to 15 minutes.
 # Set of channel prefixes that have been phone-verified on YouTube.
-VERIFIED_CHANNELS = set()  # Add channel prefixes here after phone verification
-MAX_DURATION_UNVERIFIED = 14.5 * 60  # 14m30s — safe buffer under YouTube's 15min limit
+VERIFIED_CHANNELS = {"RichMusic"}  # Add channel prefixes here after phone verification
+MAX_DURATION_UNVERIFIED = 15 * 60  # YouTube's 15min limit for unverified channels
 
 
 def get_video_duration(filepath):
