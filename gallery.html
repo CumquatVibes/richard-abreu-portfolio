@@ -55,7 +55,10 @@
         },
       }
     </script>
-<script defer src="https://cdn.vercel-analytics.com/v1/script.js"></script>
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body class="font-display bg-background-light dark:bg-background-dark">
 <div class="relative flex h-auto min-h-screen w-full flex-col">
