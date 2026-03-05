@@ -633,6 +633,88 @@ Write the complete script now. Return ONLY the script text."""
 
 
 # ---------------------------------------------------------------------------
+# TTS Text Cleaning (shared across all audio producers)
+# ---------------------------------------------------------------------------
+
+# ElevenLabs emotion tags to PRESERVE in TTS text (everything else in brackets is stripped)
+_TTS_EMOTION_TAGS = {
+    'excited', 'calm', 'confident', 'inspired', 'pauses', 'serious',
+    'friendly', 'soothing', 'energetic', 'warm', 'curious',
+    'whispers', 'whispering', 'laughs', 'laughing', 'sighs', 'sighing',
+    'sad', 'angry', 'surprised', 'thoughtful', 'hopeful', 'nostalgic',
+    'dramatic', 'playful', 'empathetic', 'concerned', 'proud', 'grateful',
+    'relieved', 'nervous', 'confused', 'determined', 'passionate',
+    'gentle', 'stern', 'cheerful', 'somber', 'intense', 'reassuring',
+}
+
+
+def _clean_script_for_tts(text):
+    """Strip all non-spoken content from a script for TTS generation.
+
+    Removes: YAML frontmatter, VIDEO_METADATA blocks, metadata headers,
+    [VISUAL:] tags, stage directions, markdown formatting, timestamps,
+    code blocks. Preserves ElevenLabs emotion tags like [excited], [whispers].
+    """
+    # YAML frontmatter
+    text = re.sub(r'^```yaml.*?```', '', text, flags=re.DOTALL)
+    text = re.sub(r'^---\n.*?\n---\n', '', text, flags=re.DOTALL)
+
+    # VIDEO_METADATA block
+    text = re.sub(r'^VIDEO_METADATA:\s*\n(?:\s+\w.*\n)*', '', text, flags=re.MULTILINE)
+
+    # Metadata header lines (# Channel:, # Topic:, # Voice:, # Speed:, etc.)
+    text = re.sub(r'^#\s*\w[^:\n]*:.*$', '', text, flags=re.MULTILINE)
+    text = re.sub(r"^Here'?s the complete script.*$", '', text, flags=re.MULTILINE | re.IGNORECASE)
+
+    # Stage directions: [VISUAL:...], [HOOK], [PAUSE], [CHAPTER:...], etc.
+    text = re.sub(
+        r'\[(?:VISUAL|HOOK|INTRO|CHAPTER|PAUSE|RETENTION HOOK|SECTION|CTA|OUTRO|TRANSITION)[^\]]*\]',
+        '', text, flags=re.IGNORECASE
+    )
+
+    # Remaining brackets — keep emotion tags, strip everything else
+    def _strip_bracket(m):
+        inner = m.group(1).strip().lower()
+        return m.group(0) if inner in _TTS_EMOTION_TAGS else ''
+    text = re.sub(r'\[([^\]]{1,60})\]', _strip_bracket, text)
+
+    # Section headers with timestamps
+    text = re.sub(r'^\d+:\d+\s*[-–]\s*(?:HOOK|INTRO|OUTRO|SECTION|CTA|CHAPTER)[^:\n]*:?\s*', '', text, flags=re.MULTILINE | re.IGNORECASE)
+    text = re.sub(r'^HOOK\s*[&:][^\n]*$', '', text, flags=re.MULTILINE | re.IGNORECASE)
+
+    # Markdown headers — remove entire ## lines (section labels, not spoken text)
+    # NOTE: [^:\n]* prevents matching across newlines which would eat body text
+    text = re.sub(r'^##\s*\d+:\d+\s*[-–]\s*(?:HOOK|INTRO|OUTRO|SECTION|CTA|CHAPTER)[^:\n]*:\s*', '', text, flags=re.MULTILINE | re.IGNORECASE)
+    text = re.sub(r'^##\s+.*$', '', text, flags=re.MULTILINE)
+    text = re.sub(r'^#\s+', '', text, flags=re.MULTILINE)
+
+    # Remaining timestamp prefixes
+    text = re.sub(r'^\d+:\d+\s*[-–]\s*', '', text, flags=re.MULTILINE)
+
+    # Markdown formatting
+    text = re.sub(r'\*{1,2}(.+?)\*{1,2}', r'\1', text)
+
+    # Timestamp ranges like (0:00-0:30) - HOOK
+    text = re.sub(r'\(\d+:\d+[-–]\d+:\d+\)\s*[-–]?\s*(?:HOOK|INTRO|OUTRO)?\s*', '', text, flags=re.IGNORECASE)
+
+    # Word count markers
+    text = re.sub(r'\(Word count.*?\)', '', text, flags=re.IGNORECASE)
+
+    # Code blocks
+    text = re.sub(r'```[\s\S]*?```', '', text)
+
+    # Markdown list markers
+    text = re.sub(r'^\s*[\*\-]\s+', '', text, flags=re.MULTILINE)
+
+    # Citation markers
+    text = re.sub(r'\[(?:inspired by\s*)?\d+\]', '', text)
+
+    # Clean up whitespace
+    text = re.sub(r'\n{3,}', '\n\n', text)
+    return text.strip()
+
+
+# ---------------------------------------------------------------------------
 # ElevenLabs Audio (Faceless Voice)
 # ---------------------------------------------------------------------------
 
@@ -649,10 +731,8 @@ class FacelessAudioProducer:
         """Generate voiceover audio using channel-specific voice settings."""
         profile = get_voice_profile(channel)
 
-        # Strip visual cues from script for TTS
-        clean_text = re.sub(r'\[VISUAL:.*?\]', '', text)
-        clean_text = re.sub(r'\[PAUSE\]', '...', clean_text)
-        clean_text = re.sub(r'\n{3,}', '\n\n', clean_text).strip()
+        # Strip non-spoken content from script for TTS
+        clean_text = _clean_script_for_tts(text)
 
         model = profile.get("model", "eleven_multilingual_v2")
         voice_id = profile.get("voice_id", self.voice_id)

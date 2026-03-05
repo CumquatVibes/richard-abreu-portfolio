@@ -82,8 +82,11 @@ def clean_script_for_tts(text):
     text = re.sub(r'^```yaml.*?```', '', text, flags=re.DOTALL)
     text = re.sub(r'^---.*?---', '', text, flags=re.DOTALL)
 
-    # Remove metadata header lines (# Channel:, # Topic:, etc.)
-    text = re.sub(r'^#\s*(Channel|Topic|Format|Words|Est\. Duration|Generated):.*$', '', text, flags=re.MULTILINE)
+    # Remove VIDEO_METADATA block (key: "value" lines after VIDEO_METADATA:)
+    text = re.sub(r'^VIDEO_METADATA:\s*\n(?:\s+\w.*\n)*', '', text, flags=re.MULTILINE)
+
+    # Remove metadata header lines (# Channel:, # Topic:, # Voice:, # Speed:, etc.)
+    text = re.sub(r'^#\s*\w[^:\n]*:.*$', '', text, flags=re.MULTILINE)
     # Remove "Here's the complete script text:" and similar intro lines
     text = re.sub(r"^Here'?s the complete script.*$", '', text, flags=re.MULTILINE | re.IGNORECASE)
 
@@ -92,8 +95,15 @@ def clean_script_for_tts(text):
     text = re.sub(r'\[(?:VISUAL|HOOK|INTRO|CHAPTER|PAUSE|RETENTION HOOK|SECTION|CTA|OUTRO|TRANSITION)[^\]]*\]', '', text, flags=re.IGNORECASE)
     # Remove any remaining bracketed directions that look like stage cues
     # (but preserve ElevenLabs emotion tags like [excited], [calm], etc.)
-    EMOTION_TAGS = {'excited', 'calm', 'confident', 'inspired', 'pauses', 'serious',
-                    'friendly', 'soothing', 'energetic', 'warm', 'curious'}
+    EMOTION_TAGS = {
+        'excited', 'calm', 'confident', 'inspired', 'pauses', 'serious',
+        'friendly', 'soothing', 'energetic', 'warm', 'curious',
+        'whispers', 'whispering', 'laughs', 'laughing', 'sighs', 'sighing',
+        'sad', 'angry', 'surprised', 'thoughtful', 'hopeful', 'nostalgic',
+        'dramatic', 'playful', 'empathetic', 'concerned', 'proud', 'grateful',
+        'relieved', 'nervous', 'confused', 'determined', 'passionate',
+        'gentle', 'stern', 'cheerful', 'somber', 'intense', 'reassuring',
+    }
     def _strip_bracket(m):
         inner = m.group(1).strip().lower()
         if inner in EMOTION_TAGS:
@@ -107,7 +117,8 @@ def clean_script_for_tts(text):
 
     # Remove markdown headers but keep any spoken text after the label
     # e.g. "## 00:00 - HOOK: The AI Revolution" -> "The AI Revolution"
-    text = re.sub(r'^##\s*\d+:\d+\s*[-–]\s*(?:HOOK|INTRO|OUTRO|SECTION|CTA|CHAPTER)[^:]*:\s*', '', text, flags=re.MULTILINE | re.IGNORECASE)
+    # NOTE: [^:\n]* prevents matching across newlines which would eat body text
+    text = re.sub(r'^##\s*\d+:\d+\s*[-–]\s*(?:HOOK|INTRO|OUTRO|SECTION|CTA|CHAPTER)[^:\n]*:\s*', '', text, flags=re.MULTILINE | re.IGNORECASE)
     text = re.sub(r'^##\s*', '', text, flags=re.MULTILINE)
     text = re.sub(r'^#\s+', '', text, flags=re.MULTILINE)
 

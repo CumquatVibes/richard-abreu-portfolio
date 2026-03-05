@@ -2114,48 +2114,76 @@ class VideoCompositor:
         return video
 
     def _mix_background_music(self, video, AudioFileClip, CompositeAudioClip):
-        """Mix background music at low volume under the video's existing audio."""
+        """Mix background music under the video's voiceover audio.
+
+        The music plays as a short intro (INTRO_DURATION seconds at full volume
+        with a fade-out), then continues at a low bed volume under the voice.
+        This prevents the intro music from looping throughout the entire video
+        and keeps the narration clearly audible.
+        """
+        INTRO_DURATION = 10.0    # seconds of full-volume music at start
+        INTRO_FADE_OUT = 3.0     # fade-out duration at end of intro
+        BED_VOLUME = 0.08        # very low background bed (8%) under voice
+        INTRO_VOLUME = 0.60      # intro plays at 60% (below voice but audible)
+
         try:
             music = AudioFileClip(str(self._music_path))
+            vid_dur = video.duration
 
-            # Loop or trim music to match video duration
-            if music.duration < video.duration:
-                # Loop the music
-                loops_needed = int(video.duration / music.duration) + 1
+            # Trim or loop music to match video duration
+            if music.duration < vid_dur:
                 from moviepy import concatenate_audioclips
+                loops_needed = int(vid_dur / music.duration) + 1
                 music = concatenate_audioclips([music] * loops_needed)
-            music = music.subclipped(0, video.duration)
+            music = music.subclipped(0, vid_dur)
 
-            # Apply volume reduction
-            music = music.with_volume_scaled(self._music_volume)
+            # Build a volume envelope: intro at INTRO_VOLUME, then drop to BED_VOLUME
+            intro_end = min(INTRO_DURATION, vid_dur)
+            fade_end = min(intro_end + INTRO_FADE_OUT, vid_dur)
+
+            def volume_envelope(get_frame, t):
+                """Dynamic volume: intro -> fade -> bed."""
+                frame = get_frame(t)
+                if t < intro_end:
+                    return frame * INTRO_VOLUME
+                elif t < fade_end:
+                    # Linear fade from INTRO_VOLUME down to BED_VOLUME
+                    progress = (t - intro_end) / INTRO_FADE_OUT
+                    vol = INTRO_VOLUME - (INTRO_VOLUME - BED_VOLUME) * progress
+                    return frame * vol
+                else:
+                    return frame * BED_VOLUME
+
+            music = music.transform(volume_envelope, keep_duration=True)
 
             if video.audio:
                 mixed = CompositeAudioClip([video.audio, music])
                 video = video.with_audio(mixed)
-                print(f"[Compositor] Background music mixed at {self._music_volume:.0%} volume")
+                print(f"[Compositor] Music: {intro_end:.0f}s intro at {INTRO_VOLUME:.0%}, "
+                      f"then {BED_VOLUME:.0%} bed under voice")
             else:
                 video = video.with_audio(music)
-                print(f"[Compositor] Background music added (no voice track to mix with)")
+                print(f"[Compositor] Music added (no voice track)")
 
-        except ImportError:
-            # Fallback for older moviepy
+        except Exception as exc:
+            print(f"[Compositor] Music mixing failed: {exc}")
+            # Try simpler approach as fallback
             try:
-                from moviepy.editor import concatenate_audioclips
                 music = AudioFileClip(str(self._music_path))
                 if music.duration < video.duration:
+                    from moviepy import concatenate_audioclips
                     loops_needed = int(video.duration / music.duration) + 1
                     music = concatenate_audioclips([music] * loops_needed)
                 music = music.subclipped(0, video.duration)
-                music = music.volumex(self._music_volume)
+                music = music.with_volume_scaled(BED_VOLUME)
                 if video.audio:
                     mixed = CompositeAudioClip([video.audio, music])
                     video = video.with_audio(mixed)
                 else:
                     video = video.with_audio(music)
-            except Exception as exc:
-                print(f"[Compositor] Music mixing failed: {exc}")
-        except Exception as exc:
-            print(f"[Compositor] Music mixing failed: {exc}")
+                print(f"[Compositor] Music fallback: flat {BED_VOLUME:.0%} volume")
+            except Exception as exc2:
+                print(f"[Compositor] Music mixing fallback also failed: {exc2}")
 
         return video
 

@@ -67,6 +67,7 @@ CHANNELS = {
     "RichMind": "UCvrGunMx9dVfAeGYLQYoaLw",
     "How to Meditate": "UCbd6kzX3giNYyAeLaMPdgAA",
     "How to Use AI": "UCkrCbfr9qQkfCYw1WkCILKQ",
+    "RichTraining": "UCcY9CwSBVjpMqCjB7oPjfRA",
 }
 
 SCOPES = "https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/youtube.upload"

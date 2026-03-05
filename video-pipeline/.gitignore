@@ -4,3 +4,6 @@ __pycache__/
 .pytest_cache/
 output/
 .venv*/
+client_secret.json
+channel_tokens.json
+*.credentials
