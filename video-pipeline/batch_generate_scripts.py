@@ -4,9 +4,10 @@
 import json
 import os
 import re
+import subprocess
 import sys
 import time
-from datetime import datetime
+from datetime import datetime, timedelta
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError
 
@@ -26,7 +27,7 @@ DONE_CHANNELS = {
     "how_to_use_ai", "rich_music", "eva_reyes", "cumquat_vibes"
 }
 
-SCRIPTS_PER_CHANNEL = 6
+SCRIPTS_PER_CHANNEL = 1
 
 
 def load_config():
@@ -85,17 +86,23 @@ COMPETITIVE INTELLIGENCE (from a top-performing video in this niche):
 
 Use these insights to adapt successful title formulas and trending angles. Your titles should be AS STRONG or STRONGER than the competitor's."""
 
+    today = datetime.now().strftime("%B %d, %Y")
+
     prompt = f"""Generate exactly {count} YouTube video topics for '{name}', a faceless {niche} channel.
+
+TODAY'S DATE: {today}
 
 Sub-topics: {', '.join(sub_topics[:6])}
 Preferred formats: {', '.join(formats[:3])}
 {comp_section}
 Requirements:
+- Topics MUST be relevant to what's trending THIS WEEK in {niche}
+- Tie into current events, new releases, recent news, or seasonal moments happening right now
 - Specific, clickable video titles optimized for YouTube search
-- Mix evergreen + trending topics for February 2026
 - Use numbers when relevant (Top 7, 5 Best, etc.)
 - Curiosity-driven but not misleading clickbait
 - Each title should stand alone as a compelling video
+- Do NOT generate generic evergreen filler — every topic should feel timely and urgent
 
 Return ONLY the titles, one per line, no numbering, no bullets, no quotes."""
 
@@ -147,7 +154,7 @@ SCRIPT REQUIREMENTS:
 2. For tutorials: deliver EXACTLY what the title promises. If the title says "How to Get X API Key", the script MUST walk through the actual steps (sign up, navigate to dashboard, create key, copy it).
 3. Use conversational, engaging narration style (faceless voiceover)
 4. Include [VISUAL: description] directions for B-roll throughout — vary the visual types (screenshots, code editors, terminal output, diagrams). Do NOT repeat the same visual pattern.
-5. End with a clear CTA (subscribe, like, comment prompt)
+5. End with a strong CTA: ask viewers to SUBSCRIBE, hit the BELL icon to get notified of new videos, and leave a COMMENT with their thoughts or questions. Make the CTA conversational, not robotic — give them a specific comment prompt related to the video topic.
 6. Include chapter markers as ## headers
 7. Do NOT use filler phrases like "without further ado", "in today's video", or "prices may vary"
 8. Do NOT fabricate stories or companies. Only reference real, verifiable incidents with correct dates and company names.
@@ -220,6 +227,7 @@ def main():
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     total_scripts = 0
     failed_channels = []
+    channels_with_new_scripts = []
 
     print("=" * 64)
     print(f"  BATCH SCRIPT GENERATION — {len(ordered)} channels x {SCRIPTS_PER_CHANNEL} scripts")
@@ -248,11 +256,19 @@ def main():
         print(f"\n[{idx}/{len(ordered)}] {ch_name} ({ch_key})")
         print("-" * 50)
 
-        # Check if scripts already exist
-        existing = [f for f in os.listdir(SCRIPTS_DIR)
-                    if f.startswith(prefix) and f.endswith(".txt")]
+        # Check if scripts already exist, filtering out stale ones (>14 days)
+        cutoff = datetime.now() - timedelta(days=14)
+        existing = []
+        for f in os.listdir(SCRIPTS_DIR):
+            if f.startswith(prefix) and f.endswith(".txt"):
+                fpath = os.path.join(SCRIPTS_DIR, f)
+                file_mtime = datetime.fromtimestamp(os.path.getmtime(fpath))
+                if file_mtime < cutoff:
+                    print(f"  EXPIRED: {f} (older than 14 days)")
+                else:
+                    existing.append(f)
         if len(existing) >= SCRIPTS_PER_CHANNEL:
-            print(f"  SKIP: Already has {len(existing)} scripts")
+            print(f"  SKIP: Already has {len(existing)} fresh scripts")
             total_scripts += len(existing)
             continue
 
@@ -290,6 +306,8 @@ def main():
                 word_count = len(script.split())
                 print(f"    -> {filename[:70]}... ({word_count} words)")
                 total_scripts += 1
+                if prefix not in channels_with_new_scripts:
+                    channels_with_new_scripts.append(prefix)
             else:
                 print(f"    -> FAILED")
                 failed_channels.append(f"{ch_key}:{topic[:30]}")
@@ -306,6 +324,32 @@ def main():
         for f in failed_channels:
             print(f"    x {f}")
     print(f"{'=' * 64}")
+
+    # Auto-trigger shorts production for channels that got new scripts
+    if channels_with_new_scripts:
+        shorts_script = os.path.join(BASE_DIR, "batch_produce_shorts.py")
+        print(f"\n{'=' * 64}")
+        print(f"  SHORTS PRODUCTION — {len(channels_with_new_scripts)} channels")
+        print(f"{'=' * 64}")
+        for ch_prefix in channels_with_new_scripts:
+            print(f"\n  Producing short for {ch_prefix}...")
+            cmd = [sys.executable, shorts_script, "--path-a",
+                   "--channel", ch_prefix, "--max-clips", "1"]
+            try:
+                result = subprocess.run(cmd, capture_output=True, text=True, timeout=300)
+                if result.returncode == 0:
+                    print(f"    -> Short produced for {ch_prefix}")
+                else:
+                    print(f"    -> Short production failed for {ch_prefix}")
+                    if result.stderr:
+                        print(f"       {result.stderr[:200]}")
+            except subprocess.TimeoutExpired:
+                print(f"    -> Timed out producing short for {ch_prefix}")
+            except Exception as e:
+                print(f"    -> Error: {e}")
+        print(f"\n{'=' * 64}")
+        print(f"  SHORTS PRODUCTION COMPLETE")
+        print(f"{'=' * 64}")
 
 
 if __name__ == "__main__":
