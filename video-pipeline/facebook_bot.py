@@ -33,6 +33,7 @@ except ImportError:
 
 from utils.telemetry import (
     log_comment_action,
+    log_decision,
     log_fb_engagement,
     log_incident,
     was_comment_acted_on,
@@ -41,6 +42,18 @@ from utils.telemetry import (
     record_fb_crosspost,
 )
 from utils.facebook import post_to_facebook_page
+
+# ── Run stats (accumulated across subcommands for learning) ──
+_run_stats = {
+    "comments_replied": 0,
+    "comments_liked": 0,
+    "spam_deleted": 0,
+    "spam_scanned": 0,
+    "posts_monitored": 0,
+    "videos_crossposted": 0,
+    "api_errors": 0,
+    "gemini_failures": 0,
+}
 
 # ── Config ──
 
@@ -93,11 +106,17 @@ def gemini_call(prompt, model="gemini-2.0-flash", retries=3, temperature=0.7,
                 err = e.read().decode() if hasattr(e, "read") else str(e)
                 print(f"    Gemini API error {e.code}: {err[:200]}")
                 if attempt == retries - 1:
+                    _run_stats["gemini_failures"] += 1
+                    log_incident(None, "fb_bot_gemini_error", "medium",
+                                 f"Gemini {e.code} after {retries} retries: {err[:150]}")
                     return None
                 time.sleep(5)
         except Exception as e:
             print(f"    Gemini error: {str(e)[:200]}")
             if attempt == retries - 1:
+                _run_stats["gemini_failures"] += 1
+                log_incident(None, "fb_bot_gemini_error", "medium",
+                             f"Gemini exception after {retries} retries: {str(e)[:150]}")
                 return None
             time.sleep(5)
     return None
@@ -139,9 +158,15 @@ def _safe_api_call(method, endpoint, data=None, label="api_call"):
         except Exception:
             msg = body[:200]
         print(f"  [{label}] HTTP {e.code}: {msg}")
+        _run_stats["api_errors"] += 1
+        log_incident(None, "fb_bot_api_error", "low",
+                     f"Graph API {label} HTTP {e.code}: {msg[:150]}")
         return False, msg
     except Exception as e:
         print(f"  [{label}] Error: {str(e)[:200]}")
+        _run_stats["api_errors"] += 1
+        log_incident(None, "fb_bot_api_error", "low",
+                     f"Graph API {label} exception: {str(e)[:150]}")
         return False, str(e)
 
 
@@ -271,8 +296,17 @@ def cmd_comments(posts, dry_run=False):
                 log_comment_action(cid, post_id, "replied",
                                    commenter_name=from_name,
                                    comment_text=text, reply_text=reply)
+                log_decision(
+                    video_name=None,
+                    decision_type="fb_bot_auto_reply",
+                    objective="community_engagement",
+                    chosen_action=f"Replied to {from_name}: {reply[:80]}",
+                    expected_impact="increase_comment_engagement",
+                    risk_rating="low",
+                )
                 print(f"  Replied to {from_name}: {reply[:80]}")
                 replied += 1
+                _run_stats["comments_replied"] += 1
             time.sleep(2)
     print(f"  Comments: {replied} replies {'(dry-run)' if dry_run else 'sent'}")
 
@@ -304,6 +338,7 @@ def cmd_engage(posts, dry_run=False):
                                    commenter_name=from_name,
                                    comment_text=c.get("message", ""))
                 liked += 1
+                _run_stats["comments_liked"] += 1
             time.sleep(1)
     print(f"  Engage: {liked} likes {'(dry-run)' if dry_run else 'sent'}")
 
@@ -325,6 +360,7 @@ def cmd_spam(posts, dry_run=False):
             if was_comment_acted_on(cid, action="deleted_spam"):
                 continue
 
+            _run_stats["spam_scanned"] += 1
             score, reasons = _spam_score(text)
             if score < 5:
                 continue
@@ -347,9 +383,19 @@ def cmd_spam(posts, dry_run=False):
                     description=(f"Deleted spam from {from_name} (score={score}): "
                                  f"{text[:100]}. Reasons: {', '.join(reasons)}"),
                 )
+                log_decision(
+                    video_name=None,
+                    decision_type="fb_bot_spam_delete",
+                    objective="page_quality",
+                    chosen_action=f"Deleted comment from {from_name} (score={score})",
+                    alternatives=json.dumps(reasons),
+                    expected_impact="reduce_spam_visibility",
+                    risk_rating="low",
+                )
                 print(f"  Deleted spam from {from_name} ({score}pts): "
                       f"{', '.join(reasons)}")
                 deleted += 1
+                _run_stats["spam_deleted"] += 1
             time.sleep(1)
     print(f"  Spam: {deleted} deleted {'(dry-run)' if dry_run else ''}")
 
@@ -396,6 +442,7 @@ def cmd_monitor(posts, dry_run=False):
     avg_posts = len(rows) or 1
     print(f"  {'AVERAGE':<30} {'':<42} {total_likes/avg_posts:>6.1f} "
           f"{total_comments/avg_posts:>6.1f} {total_shares/avg_posts:>6.1f}")
+    _run_stats["posts_monitored"] = len(rows)
     print(f"\n  Monitor: {len(rows)} posts scanned"
           f"{' (dry-run, not logged)' if dry_run else ', snapshots logged'}")
 
@@ -442,7 +489,16 @@ def cmd_crosspost(dry_run=False):
         ok, result = post_to_facebook_page(video_title, video_url, channel)
         if ok:
             record_fb_crosspost(today)
+            log_decision(
+                video_name=video_title,
+                decision_type="fb_bot_crosspost",
+                objective="cross_platform_reach",
+                chosen_action=f"Crossposted {channel}: {video_url}",
+                expected_impact="increase_facebook_page_reach",
+                risk_rating="low",
+            )
             posted += 1
+            _run_stats["videos_crossposted"] += 1
             print(f"  Crossposted: {video_title[:60]}")
         time.sleep(5)
 
@@ -518,6 +574,24 @@ def main():
     if run_all or args.crosspost:
         print("\n── YouTube Crosspost ──")
         cmd_crosspost(args.dry_run)
+
+    # ── Log run summary for learning loop ──
+    if not args.dry_run and any(_run_stats.values()):
+        summary = (f"replied={_run_stats['comments_replied']} "
+                   f"liked={_run_stats['comments_liked']} "
+                   f"spam_deleted={_run_stats['spam_deleted']}/{_run_stats['spam_scanned']} "
+                   f"monitored={_run_stats['posts_monitored']} "
+                   f"crossposted={_run_stats['videos_crossposted']} "
+                   f"api_errors={_run_stats['api_errors']} "
+                   f"gemini_failures={_run_stats['gemini_failures']}")
+        log_decision(
+            video_name=None,
+            decision_type="fb_bot_run_summary",
+            objective="page_automation",
+            chosen_action=summary,
+            expected_impact="track_bot_effectiveness_over_time",
+            risk_rating="info",
+        )
 
     print("\nDone.")
 
