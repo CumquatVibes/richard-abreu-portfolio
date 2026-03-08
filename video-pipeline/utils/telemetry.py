@@ -753,3 +753,18 @@ def log_fb_engagement(facebook_post_id, likes_count=0, comments_count=0, shares_
     """, (facebook_post_id, likes_count, comments_count, shares_count))
     conn.commit()
     conn.close()
+
+
+def get_facebook_posts():
+    """Return all Facebook posts as list of dicts."""
+    conn = _get_db()
+    try:
+        rows = conn.execute(
+            'SELECT video_name, facebook_post_id, target, posted_at FROM facebook_posts'
+        ).fetchall()
+        return [
+            {'video_title': r[0], 'facebook_post_id': r[1], 'target': r[2], 'posted_at': r[3]}
+            for r in rows
+        ]
+    except Exception:
+        return []
