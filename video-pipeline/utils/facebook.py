@@ -10,6 +10,14 @@ from utils.telemetry import log_facebook_post
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONFIG_PATH = os.path.join(BASE_DIR, "channels_config.json")
 
+# Load env vars from both .env files (tokens may be split across them)
+try:
+    from dotenv import load_dotenv
+    load_dotenv(os.path.join(BASE_DIR, ".env"))
+    load_dotenv(os.path.join(os.path.dirname(BASE_DIR), "shopify-theme", ".env"))
+except ImportError:
+    pass
+
 
 def _load_caption_template(key):
     """Load a caption template from channels_config.json content_repurposing_rules."""

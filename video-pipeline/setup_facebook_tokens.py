@@ -22,11 +22,14 @@ import sys
 import requests
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-ENV_PATH = os.path.join(BASE_DIR, "..", "shopify-theme", ".env")
+PIPELINE_ENV = os.path.join(BASE_DIR, ".env")
+SHOPIFY_ENV = os.path.join(BASE_DIR, "..", "shopify-theme", ".env")
+ENV_PATH = PIPELINE_ENV  # Write tokens to pipeline .env
 
 # Load from .env or environment
 from dotenv import load_dotenv
-load_dotenv(ENV_PATH)
+load_dotenv(PIPELINE_ENV)
+load_dotenv(SHOPIFY_ENV)
 
 APP_ID = os.getenv("FACEBOOK_APP_ID", "")
 APP_SECRET = os.getenv("FACEBOOK_APP_SECRET", "")
