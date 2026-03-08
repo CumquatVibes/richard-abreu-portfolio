@@ -196,6 +196,36 @@ def _create_tables(conn):
             UNIQUE(channel_key)
         );
         CREATE INDEX IF NOT EXISTS idx_comp_briefs_channel ON competitor_briefs(channel_key);
+
+        -- Facebook bot: track comment interactions (replied/liked/deleted)
+        CREATE TABLE IF NOT EXISTS fb_comment_actions (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            comment_id TEXT UNIQUE NOT NULL,
+            post_id TEXT NOT NULL,
+            commenter_name TEXT,
+            comment_text TEXT,
+            action TEXT NOT NULL,
+            reply_text TEXT,
+            acted_at TEXT DEFAULT (datetime('now'))
+        );
+        CREATE INDEX IF NOT EXISTS idx_fb_comment_actions_post ON fb_comment_actions(post_id);
+
+        -- Facebook bot: engagement snapshots per post
+        CREATE TABLE IF NOT EXISTS fb_post_engagement (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            facebook_post_id TEXT NOT NULL,
+            pulled_at TEXT DEFAULT (datetime('now')),
+            likes_count INTEGER DEFAULT 0,
+            comments_count INTEGER DEFAULT 0,
+            shares_count INTEGER DEFAULT 0
+        );
+        CREATE INDEX IF NOT EXISTS idx_fb_post_engagement_post ON fb_post_engagement(facebook_post_id);
+
+        -- Facebook bot: daily crosspost quota (max 5/day)
+        CREATE TABLE IF NOT EXISTS fb_crosspost_quota (
+            date TEXT PRIMARY KEY,
+            posts_count INTEGER DEFAULT 0
+        );
     """)
     conn.commit()
 
@@ -654,3 +684,72 @@ def was_posted_to_facebook(video_name, target=None):
         ).fetchone()
     conn.close()
     return row is not None
+
+
+# ── Facebook bot helpers ──
+
+def log_comment_action(comment_id, post_id, action, commenter_name=None,
+                       comment_text=None, reply_text=None):
+    """Record a comment action (replied, liked, deleted_spam)."""
+    conn = _get_db()
+    conn.execute("""
+        INSERT OR IGNORE INTO fb_comment_actions
+            (comment_id, post_id, commenter_name, comment_text, action, reply_text)
+        VALUES (?, ?, ?, ?, ?, ?)
+    """, (comment_id, post_id, commenter_name, comment_text, action, reply_text))
+    conn.commit()
+    conn.close()
+
+
+def was_comment_acted_on(comment_id, action=None):
+    """Check if a comment was already processed. Optionally filter by action type."""
+    conn = _get_db()
+    if action:
+        row = conn.execute(
+            "SELECT 1 FROM fb_comment_actions WHERE comment_id = ? AND action = ? LIMIT 1",
+            (comment_id, action),
+        ).fetchone()
+    else:
+        row = conn.execute(
+            "SELECT 1 FROM fb_comment_actions WHERE comment_id = ? LIMIT 1",
+            (comment_id,),
+        ).fetchone()
+    conn.close()
+    return row is not None
+
+
+def get_fb_crosspost_count(date_str=None):
+    """Get how many crossposts were made today. Returns int."""
+    if date_str is None:
+        date_str = datetime.utcnow().strftime("%Y-%m-%d")
+    conn = _get_db()
+    row = conn.execute(
+        "SELECT posts_count FROM fb_crosspost_quota WHERE date = ?",
+        (date_str,),
+    ).fetchone()
+    conn.close()
+    return row[0] if row else 0
+
+
+def record_fb_crosspost(date_str=None):
+    """Increment today's crosspost counter."""
+    if date_str is None:
+        date_str = datetime.utcnow().strftime("%Y-%m-%d")
+    conn = _get_db()
+    conn.execute("""
+        INSERT INTO fb_crosspost_quota (date, posts_count) VALUES (?, 1)
+        ON CONFLICT(date) DO UPDATE SET posts_count = posts_count + 1
+    """, (date_str,))
+    conn.commit()
+    conn.close()
+
+
+def log_fb_engagement(facebook_post_id, likes_count=0, comments_count=0, shares_count=0):
+    """Log an engagement snapshot for a Facebook post."""
+    conn = _get_db()
+    conn.execute("""
+        INSERT INTO fb_post_engagement (facebook_post_id, likes_count, comments_count, shares_count)
+        VALUES (?, ?, ?, ?)
+    """, (facebook_post_id, likes_count, comments_count, shares_count))
+    conn.commit()
+    conn.close()
