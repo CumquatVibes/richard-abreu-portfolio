@@ -164,6 +164,20 @@ SCRIPT REQUIREMENTS:
 12. Each section should have 2-3 [VISUAL:] directions
 13. For API tutorials: include a working code example (Python preferred) showing the first API call
 
+HUMANIZER RULES — the script MUST sound like a real person wrote it:
+- NEVER use these AI words: additionally, crucial, delve, enhance, foster, garner, landscape, pivotal, showcase, tapestry, testament, underscore, vibrant, nestled, groundbreaking, breathtaking
+- NEVER use significance inflation ("stands as", "serves as a testament", "marking a pivotal moment")
+- NEVER use superficial -ing analysis ("highlighting", "underscoring", "emphasizing", "reflecting")
+- NEVER use the rule of three pattern (listing exactly 3 things to sound comprehensive)
+- NEVER use negative parallelisms ("It's not just X; it's Y")
+- NEVER use em dash overuse — keep to 1-2 per script max
+- NEVER use promotional language ("boasts", "stunning", "must-see")
+- Vary sentence length naturally — short punchy lines mixed with longer ones
+- Have opinions. React to facts, don't just report them
+- Use "is/are/has" instead of "serves as/stands as/features"
+- Be specific over vague — cite real numbers, real tools, real examples
+- Write like you're explaining to a friend, not presenting to a board
+
 OUTPUT FORMAT:
 ---
 title: {topic}
