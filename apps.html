@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Web Tools | Richard Abreu — Free Browser-Based Apps</title>
+    <meta name="description" content="Free browser-based tools by Richard Abreu. Calculators, image editors, timezone utilities, and developer tools. No accounts, no tracking."/>
+    <meta name="keywords" content="web tools, calculator, image editor, timezone, developer tools, Richard Abreu, free tools"/>
+    <meta name="author" content="Richard Abreu"/>
+    <meta property="og:title" content="Web Tools | Richard Abreu"/>
+    <meta property="og:description" content="Free browser-based tools. Calculators, image editors, timezone utilities, and developer tools."/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https://richardabreu.studio/apps"/>
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="Web Tools | Richard Abreu"/>
+    <meta name="twitter:description" content="Free browser-based tools. No accounts, no tracking — just useful software."/>
+    <link rel="canonical" href="https://richardabreu.studio/apps"/>
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5B7PB7KM');</script>
+    <!-- End Google Tag Manager -->
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "accent": "#c8ff00",
+                        "surface": "#111111",
+                        "surface-light": "#1a1a1a",
+                        "surface-lighter": "#222222",
+                    },
+                    fontFamily: {
+                        "sans": ["Inter", "system-ui", "sans-serif"],
+                        "display": ["Playfair Display", "Georgia", "serif"],
+                    },
+                    boxShadow: {
+                        'glass': '0 8px 32px rgba(0, 0, 0, 0.4)',
+                        'glass-glow': '0 8px 32px rgba(0, 0, 0, 0.4), 0 0 60px rgba(200, 255, 0, 0.03)',
+                        'accent-glow': '0 0 30px rgba(200, 255, 0, 0.3)',
+                    },
+                },
+            },
+        }
+    </script>
+
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+
+    <style>
+        * { scroll-behavior: smooth; }
+
+        ::selection {
+            background: #c8ff00;
+            color: #000;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-up {
+            animation: fadeUp 0.8s ease-out forwards;
+        }
+
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #c8ff00;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px) saturate(1.3);
+            -webkit-backdrop-filter: blur(20px) saturate(1.3);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08) 20%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0.08) 80%, transparent);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .glass-hover {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-hover:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 8px 40px rgba(0,0,0,0.4), 0 0 60px rgba(200,255,0,0.03);
+            transform: translateY(-2px);
+        }
+
+        .glow-accent {
+            transition: box-shadow 0.3s ease;
+        }
+
+        .glow-accent:hover {
+            box-shadow: 0 0 30px rgba(200,255,0,0.3), 0 0 60px rgba(200,255,0,0.1);
+        }
+
+        .glass-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06) 20%, rgba(200,255,0,0.08) 50%, rgba(255,255,255,0.06) 80%, transparent);
+            margin: 0 5%;
+        }
+    </style>
+</head>
+<body class="bg-black text-white font-sans antialiased">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5B7PB7KM"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/[0.03] backdrop-blur-2xl backdrop-saturate-150 border-b border-white/[0.08]">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="flex justify-between items-center h-20">
+                <a href="/" class="text-2xl font-display font-bold tracking-tight">
+                    R<span class="text-accent">.</span>Abreu
+                </a>
+
+                <!-- Desktop Nav -->
+                <div class="hidden md:flex items-center gap-10">
+                    <a href="/#work" class="nav-link text-sm font-medium text-gray-400 hover:text-white transition-colors tracking-wide uppercase">Work</a>
+                    <a href="/#services" class="nav-link text-sm font-medium text-gray-400 hover:text-white transition-colors tracking-wide uppercase">Services</a>
+                    <a href="/apps" class="nav-link text-sm font-medium text-white transition-colors tracking-wide uppercase">Apps</a>
+                    <a href="/#youtube" class="nav-link text-sm font-medium text-gray-400 hover:text-white transition-colors tracking-wide uppercase">YouTube</a>
+                    <a href="/#newsletter" class="nav-link text-sm font-medium text-gray-400 hover:text-white transition-colors tracking-wide uppercase">Newsletter</a>
+                    <a href="/#about" class="nav-link text-sm font-medium text-gray-400 hover:text-white transition-colors tracking-wide uppercase">About</a>
+                    <a href="https://www.cumquatvibes.com" target="_blank" rel="noopener noreferrer" class="bg-accent text-black px-6 py-2.5 text-sm font-bold tracking-wide uppercase hover:bg-accent/90 transition-all">
+                        Shop
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="menuBtn" class="md:hidden flex flex-col gap-1.5 p-2" aria-label="Toggle menu">
+                    <span class="block w-6 h-0.5 bg-white transition-all" id="bar1"></span>
+                    <span class="block w-6 h-0.5 bg-white transition-all" id="bar2"></span>
+                    <span class="block w-4 h-0.5 bg-white transition-all" id="bar3"></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="mobile-menu fixed inset-0 z-40 bg-black flex flex-col justify-center items-center gap-8">
+        <a href="/#work" class="text-3xl font-display font-bold text-white hover:text-accent transition-colors" onclick="closeMenu()">Work</a>
+        <a href="/#services" class="text-3xl font-display font-bold text-white hover:text-accent transition-colors" onclick="closeMenu()">Services</a>
+        <a href="/apps" class="text-3xl font-display font-bold text-accent transition-colors" onclick="closeMenu()">Apps</a>
+        <a href="/#youtube" class="text-3xl font-display font-bold text-white hover:text-accent transition-colors" onclick="closeMenu()">YouTube</a>
+        <a href="/#newsletter" class="text-3xl font-display font-bold text-white hover:text-accent transition-colors" onclick="closeMenu()">Newsletter</a>
+        <a href="/#about" class="text-3xl font-display font-bold text-white hover:text-accent transition-colors" onclick="closeMenu()">About</a>
+        <a href="https://www.cumquatvibes.com" target="_blank" rel="noopener noreferrer" class="mt-4 bg-accent text-black px-10 py-4 text-lg font-bold tracking-wide uppercase">Shop</a>
+    </div>
+
+    <!-- Hero -->
+    <section class="pt-40 pb-20">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 text-center">
+            <p class="text-accent text-sm font-bold tracking-[0.3em] uppercase mb-6 animate-fade-up">Free Browser-Based Tools</p>
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-display font-black leading-[0.9] tracking-tight animate-fade-up stagger-1">
+                Web Tools
+            </h1>
+            <p class="text-gray-400 text-lg md:text-xl mt-8 max-w-2xl mx-auto leading-relaxed animate-fade-up stagger-2">
+                No accounts, no tracking — just useful software.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4 mt-10 animate-fade-up stagger-3">
+                <span class="text-xs font-bold tracking-widest uppercase bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] px-5 py-2.5 text-gray-300 rounded-full">48 Tools</span>
+                <span class="text-xs font-bold tracking-widest uppercase bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] px-5 py-2.5 text-gray-300 rounded-full">4 Apps</span>
+                <span class="text-xs font-bold tracking-widest uppercase bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] px-5 py-2.5 text-gray-300 rounded-full">100% Client-Side</span>
+            </div>
+        </div>
+    </section>
+
+    <div class="glass-divider"></div>
+
+    <!-- App Cards -->
+    <section class="py-32">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                <!-- CalcVert -->
+                <div class="glass glass-hover p-8 reveal" style="border-top: 3px solid #14b8a6;">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl" style="background: rgba(20, 184, 166, 0.15);">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#14b8a6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="14" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="14" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="16" y2="18"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-white text-xl font-bold">CalcVert</h3>
+                            <span class="text-xs font-bold tracking-widest uppercase px-2.5 py-0.5 rounded-full" style="background: rgba(20, 184, 166, 0.12); color: #14b8a6;">18 Tools</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Calculators and unit converters for everyday math. Percentages, tips, BMI, temperature, length, weight, currency, and more.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-8">
+                        <span class="text-xs font-bold tracking-widest uppercase bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] px-4 py-2 text-gray-300 rounded-full">Unit Conversion</span>
+                        <span class="text-xs font-bold tracking-widest uppercase bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] px-4 py-2 text-gray-300 rounded-full">Tip Calculator</span>
+                        <span class="text-xs font-bold tracking-widest uppercase bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] px-4 py-2 text-gray-300 rounded-full">BMI</span>
+                        <span class="text-xs font-bold tracking-widest uppercase bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] px-4 py-2 text-gray-300 rounded-full">Currency</span>
+                    </div>
+                    <a href="https://calcvert.vercel.app" target="_blank" rel="noopener noreferrer" class="inline-block bg-white/[0.05] border border-white/[0.12] text-white px-8 py-3 font-bold text-sm tracking-wide uppercase hover:bg-white/[0.1] hover:border-white/[0.2] transition-all">
+                        Visit App
+                    </a>
+                </div>
+
+                <!-- ImageForge -->
+                <div class="glass glass-hover p-8 reveal" style="border-top: 3px solid #e879f9;">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl" style="background: rgba(232, 121, 249, 0.15);">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e879f9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-white text-xl font-bold">ImageForge</h3>
+                            <span class="text-xs font-bold tracking-widest uppercase px-2.5 py-0.5 rounded-full" style="background: rgba(232, 121, 249, 0.12); color: #e879f9;">10 Tools</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Browser-based image editing tools. Resize, crop, compress, convert formats, adjust colors, add watermarks, and generate favicons.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-8">
+                        <span class="text-xs font-bold tracking-widest uppercase bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] px-4 py-2 text-gray-300 rounded-full">Resize & Crop</span>
+                        <span class="text-xs font-bold tracking-widest uppercase bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] px-4 py-2 text-gray-300 rounded-full">Compress</span>
+                        <span class="text-xs font-bold tracking-widest uppercase bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] px-4 py-2 text-gray-300 rounded-full">Format Convert</span>
+                        <span class="text-xs font-bold tracking-widest uppercase bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] px-4 py-2 text-gray-300 rounded-full">Watermark</span>
+                    </div>
+                    <a href="https://imageforge-gules.vercel.app" target="_blank" rel="noopener noreferrer" class="inline-block bg-white/[0.05] border border-white/[0.12] text-white px-8 py-3 font-bold text-sm tracking-wide uppercase hover:bg-white/[0.1] hover:border-white/[0.2] transition-all">
+                        Visit App
+                    </a>
+                </div>
+
+                <!-- TimeZone+ -->
+                <div class="glass glass-hover p-8 reveal" style="border-top: 3px solid #f59e0b;">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl" style="background: rgba(245, 158, 11, 0.15);">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-white text-xl font-bold">TimeZone+</h3>
+                            <span class="text-xs font-bold tracking-widest uppercase px-2.5 py-0.5 rounded-full" style="background: rgba(245, 158, 11, 0.12); color: #f59e0b;">8 Tools</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Timezone conversion and productivity tools. World clock, meeting planner, Pomodoro timer, stopwatch, and date calculators.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-8">
+                        <span class="text-xs font-bold tracking-widest uppercase bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] px-4 py-2 text-gray-300 rounded-full">World Clock</span>
+                        <span class="text-xs font-bold tracking-widest uppercase bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] px-4 py-2 text-gray-300 rounded-full">Meeting Planner</span>
+                        <span class="text-xs font-bold tracking-widest uppercase bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] px-4 py-2 text-gray-300 rounded-full">Pomodoro</span>
+                        <span class="text-xs font-bold tracking-widest uppercase bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] px-4 py-2 text-gray-300 rounded-full">Stopwatch</span>
+                    </div>
+                    <a href="https://timezoneplus.vercel.app" target="_blank" rel="noopener noreferrer" class="inline-block bg-white/[0.05] border border-white/[0.12] text-white px-8 py-3 font-bold text-sm tracking-wide uppercase hover:bg-white/[0.1] hover:border-white/[0.2] transition-all">
+                        Visit App
+                    </a>
+                </div>
+
+                <!-- DevKit -->
+                <div class="glass glass-hover p-8 reveal" style="border-top: 3px solid #22d3ee;">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl" style="background: rgba(34, 211, 238, 0.15);">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-white text-xl font-bold">DevKit</h3>
+                            <span class="text-xs font-bold tracking-widest uppercase px-2.5 py-0.5 rounded-full" style="background: rgba(34, 211, 238, 0.12); color: #22d3ee;">12 Tools</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Developer and text utilities. JSON formatter, Base64 encoder, regex tester, lorem ipsum generator, markdown preview, and more.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-8">
+                        <span class="text-xs font-bold tracking-widest uppercase bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] px-4 py-2 text-gray-300 rounded-full">JSON Formatter</span>
+                        <span class="text-xs font-bold tracking-widest uppercase bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] px-4 py-2 text-gray-300 rounded-full">Base64</span>
+                        <span class="text-xs font-bold tracking-widest uppercase bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] px-4 py-2 text-gray-300 rounded-full">Regex Tester</span>
+                        <span class="text-xs font-bold tracking-widest uppercase bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] px-4 py-2 text-gray-300 rounded-full">Markdown</span>
+                    </div>
+                    <a href="https://devkit-beta.vercel.app" target="_blank" rel="noopener noreferrer" class="inline-block bg-white/[0.05] border border-white/[0.12] text-white px-8 py-3 font-bold text-sm tracking-wide uppercase hover:bg-white/[0.1] hover:border-white/[0.2] transition-all">
+                        Visit App
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/5 py-16">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center gap-6">
+                    <a href="/" class="text-2xl font-display font-bold tracking-tight">
+                        R<span class="text-accent">.</span>Abreu
+                    </a>
+                    <span class="text-gray-600 text-sm">Product Designer, Illustrator & Creative Director</span>
+                </div>
+                <div class="flex items-center gap-6 text-sm">
+                    <a href="/" class="text-gray-500 hover:text-accent transition-colors">Home</a>
+                    <a href="/#work" class="text-gray-500 hover:text-accent transition-colors">Work</a>
+                    <a href="https://www.cumquatvibes.com" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-accent transition-colors">Shop</a>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-white/5 text-center">
+                <p class="text-gray-600 text-xs">&copy; 2026 Richard Abreu. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        let menuOpen = false;
+
+        menuBtn.addEventListener('click', () => {
+            menuOpen = !menuOpen;
+            mobileMenu.classList.toggle('open', menuOpen);
+            document.body.style.overflow = menuOpen ? 'hidden' : '';
+        });
+
+        function closeMenu() {
+            menuOpen = false;
+            mobileMenu.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        // Scroll Reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+    </script>
+</body>
+</html>
