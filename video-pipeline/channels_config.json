@@ -2901,7 +2901,7 @@
     "content_repurposing_rules": {
       "youtube_to_facebook_page": {
         "format": "Share video link with custom caption. Include thumbnail image. Add 2-3 relevant hashtags + #CumquatVibes.",
-        "caption_template": "{hook_line}\n\nWatch the full video: {youtube_link}\n\n{hashtags}\n\nShop: cumquatvibes.com"
+        "caption_template": "{hook_line}\n\nWatch the full video: {youtube_link}\n\n{hashtags}\n\nMore at richardabreu.studio"
       },
       "youtube_to_facebook_group": {
         "format": "Share video with discussion prompt. Encourage comments and debate.",

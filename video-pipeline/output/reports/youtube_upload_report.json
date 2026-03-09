@@ -1,8 +1,8 @@
 {
-  "uploaded": 61,
-  "uploaded_this_run": 4,
-  "total": 131,
-  "quota_used_this_run": 6500,
+  "uploaded": 58,
+  "uploaded_this_run": 5,
+  "total": 325,
+  "quota_used_this_run": 8050,
   "rate_limited": [],
   "results": [
     {
@@ -143,7 +143,8 @@
       "url": "https://youtube.com/watch?v=giBE7Y_YJDI",
       "status": "success",
       "upload_status": "uploaded",
-      "used_channel_token": true
+      "used_channel_token": true,
+      "thumbnail_uploaded": true
     },
     {
       "file": "RichTech_7_AI_Tools_That_Will_Replace_Your_Entire_Workflow_in_2026.mp4",
@@ -154,7 +155,7 @@
       "status": "success",
       "upload_status": "uploaded",
       "used_channel_token": true,
-      "thumbnail_uploaded": false
+      "thumbnail_uploaded": true
     },
     {
       "file": "RichTech_Why_Everyone_Is_Wrong_About_the_New_iPhone.mp4",
@@ -165,7 +166,7 @@
       "status": "success",
       "upload_status": "uploaded",
       "used_channel_token": true,
-      "thumbnail_uploaded": false
+      "thumbnail_uploaded": true
     },
     {
       "file": "EvaReyes_5_Toxic_Habits_Women_Need_to_Stop_Normalizing_in_2026.mp4",
@@ -234,17 +235,6 @@
       "thumbnail_uploaded": true
     },
     {
-      "file": "CumquatVibes_Apple_Creator_Studio_vs_Adobe_vs_Affinity_The_REAL_Cost_Breakdown.mp4",
-      "channel": "CumquatVibes",
-      "target_channel_id": "UCThXDUhXqcui2HqBv4MUBBA",
-      "video_id": "yhUakdqzwao",
-      "url": "https://youtube.com/watch?v=yhUakdqzwao",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": false,
-      "thumbnail_uploaded": true
-    },
-    {
       "file": "Google_API_Key_Tutorial.mp4",
       "channel": "Google",
       "target_channel_id": null,
@@ -300,17 +290,6 @@
       "thumbnail_uploaded": true
     },
     {
-      "file": "RichArt_Impressionist_Masters_Monet_Renoir_Degas_1Hr_4K.mp4",
-      "channel": "RichArt",
-      "target_channel_id": null,
-      "video_id": "T9BgTPUSnFo",
-      "url": "https://youtube.com/watch?v=T9BgTPUSnFo",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": false,
-      "thumbnail_uploaded": true
-    },
-    {
       "file": "RichArt_Impressionist_Masters_Monet_Renoir_Degas_6min_1080p.mp4",
       "channel": "RichArt",
       "target_channel_id": null,
@@ -344,270 +323,6 @@
       "thumbnail_uploaded": true
     },
     {
-      "file": "RichArt_Impressionist_Masters_1Hr_4K_Slideshow.mp4",
-      "channel": "RichArt",
-      "target_channel_id": null,
-      "video_id": "qiztD7i9Gw0",
-      "url": "https://youtube.com/watch?v=qiztD7i9Gw0",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": false,
-      "thumbnail_uploaded": true
-    },
-    {
-      "file": "RichArt_Japanese_Woodblock_Prints_1Hr_4K_Slideshow.mp4",
-      "channel": "RichArt",
-      "target_channel_id": null,
-      "video_id": "BYl9eaSCEJI",
-      "url": "https://youtube.com/watch?v=BYl9eaSCEJI",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": false,
-      "thumbnail_uploaded": true
-    },
-    {
-      "file": "RichArt_Monet_Water_Lilies_Gardens_1Hr_4K_Slideshow.mp4",
-      "channel": "RichArt",
-      "target_channel_id": null,
-      "video_id": "OMlWMp2EoEw",
-      "url": "https://youtube.com/watch?v=OMlWMp2EoEw",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": false,
-      "thumbnail_uploaded": true
-    },
-    {
-      "file": "RichArt_Ocean_Seascapes_Maritime_Masters_1Hr_4K_Slideshow.mp4",
-      "channel": "RichArt",
-      "target_channel_id": null,
-      "video_id": "BTmfsX4GW_U",
-      "url": "https://youtube.com/watch?v=BTmfsX4GW_U",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": false,
-      "thumbnail_uploaded": true
-    },
-    {
-      "file": "RichArt_Van_Gogh_Complete_Collection_1Hr_4K_Slideshow.mp4",
-      "channel": "RichArt",
-      "target_channel_id": null,
-      "video_id": "W5roqmVPkuY",
-      "url": "https://youtube.com/watch?v=W5roqmVPkuY",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": false,
-      "thumbnail_uploaded": true
-    },
-    {
-      "file": "RichArt_Vintage_Garden_Paintings_1hr_4K_Slideshow.mp4",
-      "channel": "RichArt",
-      "target_channel_id": null,
-      "video_id": "jgQet53UTb4",
-      "url": "https://youtube.com/watch?v=jgQet53UTb4",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": false,
-      "thumbnail_uploaded": true
-    },
-    {
-      "file": "RichArt_American_Landscape_Paintings_1Hr_4K_Slideshow.mp4",
-      "channel": "RichArt",
-      "target_channel_id": null,
-      "video_id": "o0p0uzloJu8",
-      "url": "https://youtube.com/watch?v=o0p0uzloJu8",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": false,
-      "thumbnail_uploaded": true
-    },
-    {
-      "file": "RichArt_Post_Impressionist_Visions_1Hr_4K_Slideshow.mp4",
-      "channel": "RichArt",
-      "target_channel_id": null,
-      "video_id": "FEZqKaDpVCs",
-      "url": "https://youtube.com/watch?v=FEZqKaDpVCs",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": false,
-      "thumbnail_uploaded": true
-    },
-    {
-      "file": "RichArt_Renaissance_Baroque_Masters_1Hr_4K_Slideshow.mp4",
-      "channel": "RichArt",
-      "target_channel_id": null,
-      "video_id": "sivjrVbaH6A",
-      "url": "https://youtube.com/watch?v=sivjrVbaH6A",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": false,
-      "thumbnail_uploaded": true
-    },
-    {
-      "file": "RichArt_Romantic_Era_Landscapes_1Hr_4K_Slideshow.mp4",
-      "channel": "RichArt",
-      "target_channel_id": null,
-      "video_id": "E-R1YgwsshY",
-      "url": "https://youtube.com/watch?v=E-R1YgwsshY",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": false,
-      "thumbnail_uploaded": true
-    },
-    {
-      "file": "RichArt_Ancient_Medieval_Sacred_Art_1Hr_4K_Slideshow.mp4",
-      "channel": "RichArt",
-      "target_channel_id": null,
-      "video_id": "pXhdNo4-WHs",
-      "url": "https://youtube.com/watch?v=pXhdNo4-WHs",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": false,
-      "thumbnail_uploaded": true
-    },
-    {
-      "file": "RichArt_Dutch_Golden_Age_Still_Life_1Hr_4K_Slideshow.mp4",
-      "channel": "RichArt",
-      "target_channel_id": null,
-      "video_id": "bh6MlYoMMUM",
-      "url": "https://youtube.com/watch?v=bh6MlYoMMUM",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": false,
-      "thumbnail_uploaded": true
-    },
-    {
-      "file": "RichArt_Surrealism_Fantastical_Visions_1Hr_4K_Slideshow.mp4",
-      "channel": "RichArt",
-      "target_channel_id": null,
-      "video_id": "Htn1RztV1d0",
-      "url": "https://youtube.com/watch?v=Htn1RztV1d0",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": false,
-      "thumbnail_uploaded": true
-    },
-    {
-      "file": "RichMusic_Happy_Upbeat_Feel_Good_1Hr_Background_Music.mp4",
-      "channel": "RichMusic",
-      "target_channel_id": "UCCI_ynXNuutXGrzWDYzUZiA",
-      "video_id": "BJnc8E74WRA",
-      "url": "https://youtube.com/watch?v=BJnc8E74WRA",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": true,
-      "thumbnail_uploaded": true
-    },
-    {
-      "file": "RichMusic_Study_Focus_Classical_Concentration_1Hr_Background_Music.mp4",
-      "channel": "RichMusic",
-      "target_channel_id": "UCCI_ynXNuutXGrzWDYzUZiA",
-      "video_id": "PTDSnyIPybc",
-      "url": "https://youtube.com/watch?v=PTDSnyIPybc",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": true,
-      "thumbnail_uploaded": true
-    },
-    {
-      "file": "RichArt_Abstract_Expressionism_1Hr_4K_Slideshow.mp4",
-      "channel": "RichArt",
-      "target_channel_id": null,
-      "video_id": "Ry3507079N8",
-      "url": "https://youtube.com/watch?v=Ry3507079N8",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": false,
-      "thumbnail_uploaded": true
-    },
-    {
-      "file": "RichArt_Italian_Renaissance_Portraits_1Hr_4K_Slideshow.mp4",
-      "channel": "RichArt",
-      "target_channel_id": null,
-      "video_id": "5g37CQSTZuQ",
-      "url": "https://youtube.com/watch?v=5g37CQSTZuQ",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": false,
-      "thumbnail_uploaded": true
-    },
-    {
-      "file": "RichArt_Watercolor_Landscapes_1Hr_4K_Slideshow.mp4",
-      "channel": "RichArt",
-      "target_channel_id": null,
-      "video_id": "HMD9xkpsMs0",
-      "url": "https://youtube.com/watch?v=HMD9xkpsMs0",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": false,
-      "thumbnail_uploaded": true
-    },
-    {
-      "file": "EvaReyes_Powerful_Women_Empowerment_Motivational.mp4",
-      "channel": "EvaReyes",
-      "target_channel_id": "UCsp5NIA6aeQmqdn7omBqkYg",
-      "video_id": "rv9VbRFUv6E",
-      "url": "https://youtube.com/watch?v=rv9VbRFUv6E",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": true,
-      "thumbnail_uploaded": true
-    },
-    {
-      "file": "HowToUseAI_Mind_Blowing_AI_Tools_Visual_Showcase.mp4",
-      "channel": "HowToUseAI",
-      "target_channel_id": "UCkrCbfr9qQkfCYw1WkCILKQ",
-      "video_id": "T3LWvIExqrs",
-      "url": "https://youtube.com/watch?v=T3LWvIExqrs",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": true,
-      "thumbnail_uploaded": true
-    },
-    {
-      "file": "RichMusic_Ambient_Meditation_Deep_Relaxation_1Hr_Background_Music.mp4",
-      "channel": "RichMusic",
-      "target_channel_id": "UCCI_ynXNuutXGrzWDYzUZiA",
-      "video_id": "Hjbv89IhI78",
-      "url": "https://youtube.com/watch?v=Hjbv89IhI78",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": true,
-      "thumbnail_uploaded": true
-    },
-    {
-      "file": "RichMusic_Blues_Soul_Timeless_Classics_1Hr_Background_Music.mp4",
-      "channel": "RichMusic",
-      "target_channel_id": "UCCI_ynXNuutXGrzWDYzUZiA",
-      "video_id": "hxHo-FnveG4",
-      "url": "https://youtube.com/watch?v=hxHo-FnveG4",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": true,
-      "thumbnail_uploaded": true
-    },
-    {
-      "file": "RichMusic_Chill_Acoustic_Study_Vibes_1Hr_Background_Music.mp4",
-      "channel": "RichMusic",
-      "target_channel_id": "UCCI_ynXNuutXGrzWDYzUZiA",
-      "video_id": "Y1gNr5c7tBA",
-      "url": "https://youtube.com/watch?v=Y1gNr5c7tBA",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": true,
-      "thumbnail_uploaded": true
-    },
-    {
-      "file": "RichMusic_Cinematic_Epic_Instrumental_1Hr_Background_Music.mp4",
-      "channel": "RichMusic",
-      "target_channel_id": "UCCI_ynXNuutXGrzWDYzUZiA",
-      "video_id": "1A60we-zFF4",
-      "url": "https://youtube.com/watch?v=1A60we-zFF4",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": true,
-      "thumbnail_uploaded": true
-    },
-    {
       "file": "CumquatGaming_Fortnite_Season_2_LEAKS_Norse_Gods_Tracer_Battle_Pass_Everything_Changing.mp4",
       "channel": "CumquatGaming",
       "target_channel_id": null,
@@ -630,49 +345,533 @@
       "thumbnail_uploaded": true
     },
     {
-      "file": "RichArt_Art_Deco_Art_Nouveau_Masters_1Hr_4K_Slideshow.mp4",
-      "channel": "RichArt",
+      "file": "CumquatGaming_Top_7_Forgotten_PS_Vita_Games_You_NEED_To_Play_in_2026.mp4",
+      "channel": "CumquatGaming",
       "target_channel_id": null,
-      "video_id": "WDEWp9Q-qWQ",
-      "url": "https://youtube.com/watch?v=WDEWp9Q-qWQ",
+      "video_id": "CQGty2hb4eU",
+      "url": "https://youtube.com/watch?v=CQGty2hb4eU",
       "status": "success",
       "upload_status": "uploaded",
       "used_channel_token": false,
       "thumbnail_uploaded": true
+    },
+    {
+      "file": "HowToMeditate_5-Minute_Morning_Meditation_for_Instant_Calm_Beginner-Friendly.mp4",
+      "channel": "HowToMeditate",
+      "target_channel_id": "UCbd6kzX3giNYyAeLaMPdgAA",
+      "video_id": "LuF2WlznAKw",
+      "url": "https://youtube.com/watch?v=LuF2WlznAKw",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
+    },
+    {
+      "file": "CumquatMotivation_Military_Mindset_Warrior_Discipline.mp4",
+      "channel": "CumquatMotivation",
+      "target_channel_id": "UCtrCefKinhom7LFBV8rnfpQ",
+      "video_id": "juYVhDKODko",
+      "url": "https://youtube.com/watch?v=juYVhDKODko",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
+    },
+    {
+      "file": "CumquatMotivation_Morning_Motivation_Sunrise_Energy.mp4",
+      "channel": "CumquatMotivation",
+      "target_channel_id": "UCtrCefKinhom7LFBV8rnfpQ",
+      "video_id": "Yo2mZbgdfVQ",
+      "url": "https://youtube.com/watch?v=Yo2mZbgdfVQ",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
+    },
+    {
+      "file": "CumquatMotivation_Powerful_Motivational_Speeches_Cinematic.mp4",
+      "channel": "CumquatMotivation",
+      "target_channel_id": "UCtrCefKinhom7LFBV8rnfpQ",
+      "video_id": "uaQg9RdMXV4",
+      "url": "https://youtube.com/watch?v=uaQg9RdMXV4",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
+    },
+    {
+      "file": "CumquatMotivation_Stoic_Discipline_Ancient_Wisdom_Cinematic.mp4",
+      "channel": "CumquatMotivation",
+      "target_channel_id": "UCtrCefKinhom7LFBV8rnfpQ",
+      "video_id": "tTtO6Z2sQDA",
+      "url": "https://youtube.com/watch?v=tTtO6Z2sQDA",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
+    },
+    {
+      "file": "CumquatVibes_Apple_Creator_Studio_vs_Adobe_vs_Affinity_The_REAL_Cost_Breakdown.mp4",
+      "channel": "CumquatVibes",
+      "target_channel_id": "UCThXDUhXqcui2HqBv4MUBBA",
+      "video_id": "ihsontImFao",
+      "url": "https://youtube.com/watch?v=ihsontImFao",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": false,
+      "thumbnail_uploaded": true
+    },
+    {
+      "file": "EvaReyes_Powerful_Women_Empowerment_Motivational.mp4",
+      "channel": "EvaReyes",
+      "target_channel_id": "UCsp5NIA6aeQmqdn7omBqkYg",
+      "video_id": "mI-412Mf3nw",
+      "url": "https://youtube.com/watch?v=mI-412Mf3nw",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": true
+    },
+    {
+      "file": "HowToMeditate_Anxiety_Relief_Soothing_1Hr_Nature_Scenes.mp4",
+      "channel": "HowToMeditate",
+      "target_channel_id": "UCbd6kzX3giNYyAeLaMPdgAA",
+      "video_id": "fD95kwrqISA",
+      "url": "https://youtube.com/watch?v=fD95kwrqISA",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
+    },
+    {
+      "file": "HowToMeditate_Deep_Sleep_Meditation_1Hr_Peaceful_Nature_Visuals.mp4",
+      "channel": "HowToMeditate",
+      "target_channel_id": "UCbd6kzX3giNYyAeLaMPdgAA",
+      "video_id": "KmE2sSaLYNo",
+      "url": "https://youtube.com/watch?v=KmE2sSaLYNo",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
+    },
+    {
+      "file": "HowToMeditate_Focus_Concentration_1Hr_Mindful_Visuals.mp4",
+      "channel": "HowToMeditate",
+      "target_channel_id": "UCbd6kzX3giNYyAeLaMPdgAA",
+      "video_id": "EklYbDr0is4",
+      "url": "https://youtube.com/watch?v=EklYbDr0is4",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
+    },
+    {
+      "file": "HowToMeditate_Morning_Mindfulness_1Hr_Calm_Start_to_Your_Day.mp4",
+      "channel": "HowToMeditate",
+      "target_channel_id": "UCbd6kzX3giNYyAeLaMPdgAA",
+      "video_id": "WdE4XkmRq3o",
+      "url": "https://youtube.com/watch?v=WdE4XkmRq3o",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
+    },
+    {
+      "file": "CumquatMotivation_5_Stoic_Military_Habits_That_Forge_Unbreakable_Discipline_Compilation.mp4",
+      "channel": "CumquatMotivation",
+      "target_channel_id": "UCtrCefKinhom7LFBV8rnfpQ",
+      "video_id": "rr8dalCNQRo",
+      "url": "https://youtube.com/watch?v=rr8dalCNQRo",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
+    },
+    {
+      "file": "CumquatMotivation_7_Stoic_Morning_Rituals_That_Will_Make_You_Unstoppable_February_2026.mp4",
+      "channel": "CumquatMotivation",
+      "target_channel_id": "UCtrCefKinhom7LFBV8rnfpQ",
+      "video_id": "anfsjfdqJRQ",
+      "url": "https://youtube.com/watch?v=anfsjfdqJRQ",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
+    },
+    {
+      "file": "CumquatMotivation_From_Rock_Bottom_to_1_Million_This_Discipline_Habit_Changed_Everything_Short_Sto.mp4",
+      "channel": "CumquatMotivation",
+      "target_channel_id": "UCtrCefKinhom7LFBV8rnfpQ",
+      "video_id": "Ska5ChNMevc",
+      "url": "https://youtube.com/watch?v=Ska5ChNMevc",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
+    },
+    {
+      "file": "CumquatMotivation_The_Military_Secret_to_Waking_Up_at_5_AM_Even_When_You_Dont_Want_To.mp4",
+      "channel": "CumquatMotivation",
+      "target_channel_id": "UCtrCefKinhom7LFBV8rnfpQ",
+      "video_id": "iBIUiXTuMJw",
+      "url": "https://youtube.com/watch?v=iBIUiXTuMJw",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
+    },
+    {
+      "file": "CumquatShortform_7_Mind-Blowing_Ocean_Facts_That_Will_Make_You_Question_Everything_shorts_facts.mp4",
+      "channel": "CumquatShortform",
+      "target_channel_id": null,
+      "video_id": null,
+      "status": "skipped_unknown_channel",
+      "error": "Channel prefix 'CumquatShortform' not found in CHANNEL_MAP"
+    },
+    {
+      "file": "CumquatShortform_The_Unexpected_Reason_Bubble_Wrap_is_SO_Satisfying_shorts_story.mp4",
+      "channel": "CumquatShortform",
+      "target_channel_id": null,
+      "video_id": null,
+      "status": "skipped_unknown_channel",
+      "error": "Channel prefix 'CumquatShortform' not found in CHANNEL_MAP"
+    },
+    {
+      "file": "CumquatShortform_Top_5_AI_Breakthroughs_You_Wont_Believe_February_2026_shorts_facts.mp4",
+      "channel": "CumquatShortform",
+      "target_channel_id": null,
+      "video_id": null,
+      "status": "skipped_unknown_channel",
+      "error": "Channel prefix 'CumquatShortform' not found in CHANNEL_MAP"
+    },
+    {
+      "file": "CumquatVibes_5_AI_Art_Tools_Every_Creator_Should_Try_in_2026_Honest_Review.mp4",
+      "channel": "CumquatVibes",
+      "target_channel_id": "UCThXDUhXqcui2HqBv4MUBBA",
+      "video_id": "0AkSn4apWL4",
+      "url": "https://youtube.com/watch?v=0AkSn4apWL4",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": false,
+      "thumbnail_uploaded": true
+    },
+    {
+      "file": "CumquatVibes_How_I_Built_a_41-Channel_YouTube_Empire_as_a_Solo_Creator_The_Truth.mp4",
+      "channel": "CumquatVibes",
+      "target_channel_id": "UCThXDUhXqcui2HqBv4MUBBA",
+      "video_id": "sSNrsvx_zsI",
+      "url": "https://youtube.com/watch?v=sSNrsvx_zsI",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": false,
+      "thumbnail_uploaded": true
+    },
+    {
+      "file": "EvaReyes_5_Shocking_Mindset_Shifts_That_Skyrocketed_Womens_Careers_in_2026_Explainer.mp4",
+      "channel": "EvaReyes",
+      "target_channel_id": "UCsp5NIA6aeQmqdn7omBqkYg",
+      "video_id": "yPkfQdneHBA",
+      "url": "https://youtube.com/watch?v=yPkfQdneHBA",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": true
+    },
+    {
+      "file": "HowToMeditate_Fall_Asleep_INSTANTLY_Guided_Sleep_Meditation_for_Deep_Rest_February_2026.mp4",
+      "channel": "HowToMeditate",
+      "target_channel_id": "UCbd6kzX3giNYyAeLaMPdgAA",
+      "video_id": "D8eRy9mmEeU",
+      "url": "https://youtube.com/watch?v=D8eRy9mmEeU",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
+    },
+    {
+      "file": "HowToMeditate_Top_7_Stress-Relief_Breathing_Exercises_for_a_Chaotic_Day_2026.mp4",
+      "channel": "HowToMeditate",
+      "target_channel_id": "UCbd6kzX3giNYyAeLaMPdgAA",
+      "video_id": "kRrC2wskHFM",
+      "url": "https://youtube.com/watch?v=kRrC2wskHFM",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
+    },
+    {
+      "file": "HowToUseAI_5_ChatGPT_Prompt_Engineering_Secrets_to_Master_AI_Workflows_in_2026_Tutorial.mp4",
+      "channel": "HowToUseAI",
+      "target_channel_id": "UCkrCbfr9qQkfCYw1WkCILKQ",
+      "video_id": "JuZzFAu35RM",
+      "url": "https://youtube.com/watch?v=JuZzFAu35RM",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": true
+    },
+    {
+      "file": "HowToUseAI_Mind_Blowing_AI_Tools_Visual_Showcase.mp4",
+      "channel": "HowToUseAI",
+      "target_channel_id": "UCkrCbfr9qQkfCYw1WkCILKQ",
+      "video_id": "P7Mp2q6_RxQ",
+      "url": "https://youtube.com/watch?v=P7Mp2q6_RxQ",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": true
+    },
+    {
+      "file": "RichAnimation_Breathtaking_Animated_Worlds_Visual_Journey.mp4",
+      "channel": "RichAnimation",
+      "target_channel_id": "UCtsmXjQaCdMTEyDTDWRpVVA",
+      "video_id": "eAsqxexWMSc",
+      "url": "https://youtube.com/watch?v=eAsqxexWMSc",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
+    },
+    {
+      "file": "RichAnimation_From_Flipbooks_to_AI_The_Evolution_of_2D_Animation_And_Where_Its_Going.mp4",
+      "channel": "RichAnimation",
+      "target_channel_id": "UCtsmXjQaCdMTEyDTDWRpVVA",
+      "video_id": "aTO9wvPgYfk",
+      "url": "https://youtube.com/watch?v=aTO9wvPgYfk",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
+    },
+    {
+      "file": "RichAnimation_Studio_Ghiblis_Hidden_Symbolism_Top_3_Animated_Motifs_Explained.mp4",
+      "channel": "RichAnimation",
+      "target_channel_id": "UCtsmXjQaCdMTEyDTDWRpVVA",
+      "video_id": "kYsZC4NKYFM",
+      "url": "https://youtube.com/watch?v=kYsZC4NKYFM",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
+    },
+    {
+      "file": "RichAnimation_The_Simpsons_Predicted_THIS_5_Shocking_Animation_Details_You_Missed.mp4",
+      "channel": "RichAnimation",
+      "target_channel_id": "UCtsmXjQaCdMTEyDTDWRpVVA",
+      "video_id": "UGxUB-M7pnE",
+      "url": "https://youtube.com/watch?v=UGxUB-M7pnE",
+      "status": "success",
+      "upload_status": "uploaded",
+      "used_channel_token": true,
+      "thumbnail_uploaded": false
+    },
+    {
+      "file": "RichArt_Abstract_Expressionism_1Hr_4K_Slideshow.mp4",
+      "channel": "RichArt",
+      "target_channel_id": null,
+      "video_id": null,
+      "status": "skipped_unknown_channel",
+      "error": "Channel prefix 'RichArt' not found in CHANNEL_MAP"
+    },
+    {
+      "file": "RichArt_Abstract_Modern_Kandinsky_Mondrian_1Hr_4K_Slideshow.mp4",
+      "channel": "RichArt",
+      "target_channel_id": null,
+      "video_id": null,
+      "status": "skipped_unknown_channel",
+      "error": "Channel prefix 'RichArt' not found in CHANNEL_MAP"
+    },
+    {
+      "file": "RichArt_American_Landscape_Paintings_1Hr_4K_Slideshow.mp4",
+      "channel": "RichArt",
+      "target_channel_id": null,
+      "video_id": null,
+      "status": "skipped_unknown_channel",
+      "error": "Channel prefix 'RichArt' not found in CHANNEL_MAP"
+    },
+    {
+      "file": "RichArt_Ancient_Medieval_Sacred_Art_1Hr_4K_Slideshow.mp4",
+      "channel": "RichArt",
+      "target_channel_id": null,
+      "video_id": null,
+      "status": "skipped_unknown_channel",
+      "error": "Channel prefix 'RichArt' not found in CHANNEL_MAP"
+    },
+    {
+      "file": "RichArt_Art_Deco_Art_Nouveau_Masters_1Hr_4K_Slideshow.mp4",
+      "channel": "RichArt",
+      "target_channel_id": null,
+      "video_id": null,
+      "status": "skipped_unknown_channel",
+      "error": "Channel prefix 'RichArt' not found in CHANNEL_MAP"
+    },
+    {
+      "file": "RichArt_Baroque_Portraits_Rembrandt_Vermeer_1Hr_4K_Slideshow.mp4",
+      "channel": "RichArt",
+      "target_channel_id": null,
+      "video_id": null,
+      "status": "skipped_unknown_channel",
+      "error": "Channel prefix 'RichArt' not found in CHANNEL_MAP"
+    },
+    {
+      "file": "RichArt_Botanical_Scientific_Illustrations_1Hr_4K_Slideshow.mp4",
+      "channel": "RichArt",
+      "target_channel_id": null,
+      "video_id": null,
+      "status": "skipped_unknown_channel",
+      "error": "Channel prefix 'RichArt' not found in CHANNEL_MAP"
     },
     {
       "file": "RichArt_Chinese_East_Asian_Scroll_Paintings_1Hr_4K_Slideshow.mp4",
       "channel": "RichArt",
       "target_channel_id": null,
-      "video_id": "iTBvyXoetco",
-      "url": "https://youtube.com/watch?v=iTBvyXoetco",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": false,
-      "thumbnail_uploaded": true
+      "video_id": null,
+      "status": "skipped_unknown_channel",
+      "error": "Channel prefix 'RichArt' not found in CHANNEL_MAP"
+    },
+    {
+      "file": "RichArt_Dutch_Golden_Age_Still_Life_1Hr_4K_Slideshow.mp4",
+      "channel": "RichArt",
+      "target_channel_id": null,
+      "video_id": null,
+      "status": "skipped_unknown_channel",
+      "error": "Channel prefix 'RichArt' not found in CHANNEL_MAP"
+    },
+    {
+      "file": "RichArt_Impressionist_Masters_1Hr_4K_Slideshow.mp4",
+      "channel": "RichArt",
+      "target_channel_id": null,
+      "video_id": null,
+      "status": "skipped_unknown_channel",
+      "error": "Channel prefix 'RichArt' not found in CHANNEL_MAP"
+    },
+    {
+      "file": "RichArt_Impressionist_Masters_Monet_Renoir_Degas_1Hr_4K.mp4",
+      "channel": "RichArt",
+      "target_channel_id": null,
+      "video_id": null,
+      "status": "skipped_unknown_channel",
+      "error": "Channel prefix 'RichArt' not found in CHANNEL_MAP"
+    },
+    {
+      "file": "RichArt_Italian_Renaissance_Portraits_1Hr_4K_Slideshow.mp4",
+      "channel": "RichArt",
+      "target_channel_id": null,
+      "video_id": null,
+      "status": "skipped_unknown_channel",
+      "error": "Channel prefix 'RichArt' not found in CHANNEL_MAP"
+    },
+    {
+      "file": "RichArt_Japanese_Woodblock_Prints_1Hr_4K_Slideshow.mp4",
+      "channel": "RichArt",
+      "target_channel_id": null,
+      "video_id": null,
+      "status": "skipped_unknown_channel",
+      "error": "Channel prefix 'RichArt' not found in CHANNEL_MAP"
+    },
+    {
+      "file": "RichArt_Monet_Water_Lilies_Gardens_1Hr_4K_Slideshow.mp4",
+      "channel": "RichArt",
+      "target_channel_id": null,
+      "video_id": null,
+      "status": "skipped_unknown_channel",
+      "error": "Channel prefix 'RichArt' not found in CHANNEL_MAP"
+    },
+    {
+      "file": "RichArt_Ocean_Seascapes_Maritime_Masters_1Hr_4K_Slideshow.mp4",
+      "channel": "RichArt",
+      "target_channel_id": null,
+      "video_id": null,
+      "status": "skipped_unknown_channel",
+      "error": "Channel prefix 'RichArt' not found in CHANNEL_MAP"
+    },
+    {
+      "file": "RichArt_Post_Impressionist_Visions_1Hr_4K_Slideshow.mp4",
+      "channel": "RichArt",
+      "target_channel_id": null,
+      "video_id": null,
+      "status": "skipped_unknown_channel",
+      "error": "Channel prefix 'RichArt' not found in CHANNEL_MAP"
     },
     {
       "file": "RichArt_Pre_Raphaelite_Brotherhood_1Hr_4K_Slideshow.mp4",
       "channel": "RichArt",
       "target_channel_id": null,
-      "video_id": "sVTP17Lp05s",
-      "url": "https://youtube.com/watch?v=sVTP17Lp05s",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": false,
-      "thumbnail_uploaded": true
+      "video_id": null,
+      "status": "skipped_unknown_channel",
+      "error": "Channel prefix 'RichArt' not found in CHANNEL_MAP"
+    },
+    {
+      "file": "RichArt_Renaissance_Baroque_Masters_1Hr_4K_Slideshow.mp4",
+      "channel": "RichArt",
+      "target_channel_id": null,
+      "video_id": null,
+      "status": "skipped_unknown_channel",
+      "error": "Channel prefix 'RichArt' not found in CHANNEL_MAP"
+    },
+    {
+      "file": "RichArt_Romantic_Era_Landscapes_1Hr_4K_Slideshow.mp4",
+      "channel": "RichArt",
+      "target_channel_id": null,
+      "video_id": null,
+      "status": "skipped_unknown_channel",
+      "error": "Channel prefix 'RichArt' not found in CHANNEL_MAP"
+    },
+    {
+      "file": "RichArt_Surrealism_Fantastical_Visions_1Hr_4K_Slideshow.mp4",
+      "channel": "RichArt",
+      "target_channel_id": null,
+      "video_id": null,
+      "status": "skipped_unknown_channel",
+      "error": "Channel prefix 'RichArt' not found in CHANNEL_MAP"
     },
     {
       "file": "RichArt_Symbolism_Klimt_Moreau_Redon_1Hr_4K_Slideshow.mp4",
       "channel": "RichArt",
       "target_channel_id": null,
-      "video_id": "igRC-7wfUnc",
-      "url": "https://youtube.com/watch?v=igRC-7wfUnc",
-      "status": "success",
-      "upload_status": "uploaded",
-      "used_channel_token": false,
-      "thumbnail_uploaded": true
+      "video_id": null,
+      "status": "skipped_unknown_channel",
+      "error": "Channel prefix 'RichArt' not found in CHANNEL_MAP"
+    },
+    {
+      "file": "RichArt_Turner_Romantic_Seascapes_1Hr_4K_Slideshow.mp4",
+      "channel": "RichArt",
+      "target_channel_id": null,
+      "video_id": null,
+      "status": "skipped_unknown_channel",
+      "error": "Channel prefix 'RichArt' not found in CHANNEL_MAP"
+    },
+    {
+      "file": "RichArt_Van_Gogh_Complete_Collection_1Hr_4K_Slideshow.mp4",
+      "channel": "RichArt",
+      "target_channel_id": null,
+      "video_id": null,
+      "status": "skipped_unknown_channel",
+      "error": "Channel prefix 'RichArt' not found in CHANNEL_MAP"
+    },
+    {
+      "file": "RichArt_Vintage_Garden_Paintings_1hr_4K_Slideshow.mp4",
+      "channel": "RichArt",
+      "target_channel_id": null,
+      "video_id": null,
+      "status": "skipped_unknown_channel",
+      "error": "Channel prefix 'RichArt' not found in CHANNEL_MAP"
+    },
+    {
+      "file": "RichArt_Watercolor_Landscape_Masters_1Hr_4K_Slideshow.mp4",
+      "channel": "RichArt",
+      "target_channel_id": null,
+      "video_id": null,
+      "status": "skipped_unknown_channel",
+      "error": "Channel prefix 'RichArt' not found in CHANNEL_MAP"
+    },
+    {
+      "file": "RichArt_Watercolor_Landscapes_1Hr_4K_Slideshow.mp4",
+      "channel": "RichArt",
+      "target_channel_id": null,
+      "video_id": null,
+      "status": "skipped_unknown_channel",
+      "error": "Channel prefix 'RichArt' not found in CHANNEL_MAP"
     }
-  ],
-  "cleanup_note": "Removed 26 dead videos on 2026-03-02"
+  ]
 }
