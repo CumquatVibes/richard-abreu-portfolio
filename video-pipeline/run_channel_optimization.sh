@@ -147,3 +147,8 @@ if triggers:
 else:
     print('No retraining triggers active')
 " >> "$LOG_FILE" 2>&1
+
+
+# 7. Facebook token health check
+echo "--- Facebook Token Health ---" >> "$LOG_FILE"
+cd "$SCRIPT_DIR" && python3 check_fb_tokens.py >> "$LOG_FILE" 2>&1

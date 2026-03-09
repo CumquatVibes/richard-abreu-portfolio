@@ -118,3 +118,57 @@ def share_to_facebook(video_title, video_url, channel, is_short=False):
     page_result = post_to_facebook_page(video_title, video_url, channel, is_short)
     group_result = post_to_facebook_group(video_title, video_url, channel, is_short)
     return page_result, group_result
+
+
+def check_token_expiry(warn_days=14):
+    """Check Facebook token expiry dates. Returns dict with status info.
+
+    Queries the Graph API debug_token endpoint to get expiry timestamps.
+    Prints warnings if tokens expire within warn_days.
+    """
+    import time
+
+    results = {}
+    tokens = {
+        "page": os.getenv("FACEBOOK_PAGE_ACCESS_TOKEN", ""),
+        "user": os.getenv("FACEBOOK_ACCESS_TOKEN", ""),
+    }
+    app_token = os.getenv("FACEBOOK_APP_TOKEN", "")
+
+    for label, token in tokens.items():
+        if not token or len(token) < 40:
+            results[label] = {"status": "missing"}
+            continue
+
+        try:
+            # Use the token itself to debug (works for long-lived tokens)
+            resp = requests.get(
+                "https://graph.facebook.com/v24.0/debug_token",
+                params={"input_token": token, "access_token": token},
+                timeout=10,
+            )
+            data = resp.json().get("data", {})
+            expires_at = data.get("expires_at", 0)
+            is_valid = data.get("is_valid", False)
+
+            if expires_at == 0:
+                results[label] = {"status": "never_expires" if is_valid else "invalid"}
+            else:
+                days_left = (expires_at - time.time()) / 86400
+                results[label] = {
+                    "status": "valid" if is_valid else "invalid",
+                    "expires_at": expires_at,
+                    "days_left": round(days_left, 1),
+                }
+                if is_valid and days_left < warn_days:
+                    print(
+                        "  WARNING: Facebook %s token expires in %.0f days! "
+                        "Regenerate at https://developers.facebook.com/tools/explorer/"
+                        % (label, days_left)
+                    )
+                elif is_valid:
+                    print("  Facebook %s token: valid, %.0f days remaining" % (label, days_left))
+        except Exception as e:
+            results[label] = {"status": "error", "error": str(e)[:100]}
+
+    return results
