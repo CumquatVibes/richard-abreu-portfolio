@@ -27,8 +27,11 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 TOKEN_PATH = os.path.join(BASE_DIR, "google_token.json")
 CHANNEL_TOKENS_PATH = os.path.join(BASE_DIR, "channel_tokens.json")
 
-# All 38 faceless channels: display_name -> expected channel_id
+# All faceless channels: display_name -> expected channel_id
 CHANNELS = {
+    "CumquatVibes": "UCThXDUhXqcui2HqBv4MUBBA",
+    "CumquatGaming": "UCJzYsB6MJgQnakQF_S35SRw",
+    "CumquatShortform": "UCcmzxbB2cfClq_nN3P5c6ow",
     "Cumquat Motivation": "UCtrCefKinhom7LFBV8rnfpQ",
     "RichTech": "UCH7Om9fi1IA3SrRXmx2vApQ",
     "RichAnimation": "UCtsmXjQaCdMTEyDTDWRpVVA",
