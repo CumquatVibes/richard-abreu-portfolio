@@ -27,7 +27,6 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, BASE_DIR)
 
 from utils.telemetry import log_video_published, get_daily_quota, record_quota_usage
-from utils.facebook import share_to_facebook
 
 VIDEOS_DIR = os.path.join(BASE_DIR, "output", "videos")
 SCRIPTS_DIR = os.path.join(BASE_DIR, "output", "scripts")
@@ -89,7 +88,6 @@ CHANNEL_MAP = {
     "RichBusiness": ("UCPQ8N53EgcqEKR4SfQ1DcXQ", "28"),
     "CumquatMotivation": ("UCtrCefKinhom7LFBV8rnfpQ", "22"),
     "CumquatVibes": ("UCThXDUhXqcui2HqBv4MUBBA", "22"),
-    "RichTraining": ("UCcY9CwSBVjpMqCjB7oPjfRA", "27"),
 }
 
 # YouTube category IDs (reference)
@@ -147,78 +145,264 @@ TOKEN_KEY_MAP = {
 }
 
 CHANNEL_NICHE = {
+    "CumquatVibes": "4K art slideshows, creator tools, design tutorials, and tech reviews",
+    "CumquatGaming": "gaming news, indie game reviews, retro gaming, and hidden gems",
+    "CumquatShortForm": "viral facts, mind-blowing moments, and quick entertainment",
+    "CumquatMotivation": "motivation, discipline, stoic philosophy, and success mindset",
     "RichTech": "tech, gadgets, and AI tools",
     "RichPets": "pet care, animal behavior, and fun pet facts",
     "RichHorror": "true horror stories, unsolved mysteries, and haunted places",
     "RichMind": "psychology, dark psychology, and the human mind",
     "HowToUseAI": "AI tutorials, productivity tools, and making money with AI",
     "RichReviews": "product reviews, comparisons, and honest tech analysis",
+    "RichGaming": "gameplay, game reviews, and gaming news",
+    "RichHistory": "ancient history, world events, and forgotten civilizations",
+    "RichNature": "nature, wildlife, and amazing animal facts",
+    "RichScience": "space, physics, biology, and science explained",
     "RichFinance": "personal finance, investing, and building wealth",
     "RichCrypto": "cryptocurrency, blockchain, and Web3",
-    "EvaReyes": "women's empowerment, inspiration, and self-improvement",
-    "RichFitness": "fitness, workouts, and healthy living",
-    "RichCooking": "cooking, recipes, and kitchen hacks",
-    "CumquatVibes": "art, design, tech, entrepreneurship, and creator lifestyle",
-    "RichTraining": "professional development, career training, leadership, and workplace skills",
-    "RichArt": "4K art slideshows, art for your TV, ambient art, art essays",
+    "RichMovie": "movie reviews, film analysis, and cinema breakdowns",
+    "RichComedy": "comedy, humor, and funny moments",
+    "RichSports": "sports news, highlights, and athletic stories",
     "RichMusic": "curated music playlists, lo-fi beats, jazz, blues, ambient music",
+    "RichTravel": "travel guides, hidden destinations, and world exploration",
+    "RichFood": "food reviews, street food, and culinary adventures",
+    "RichFitness": "fitness, workouts, and healthy living",
+    "RichEducation": "learning, study tips, and educational deep dives",
+    "RichLifestyle": "lifestyle tips, productivity, and daily routines",
+    "RichFashion": "fashion trends, style tips, and outfit ideas",
+    "RichBeauty": "skincare, beauty tips, and dermatologist-approved routines",
+    "RichCooking": "cooking, recipes, and kitchen hacks",
+    "RichFamily": "parenting tips, family activities, and family life",
+    "RichCars": "car reviews, comparisons, and automotive news",
+    "RichDIY": "DIY projects, home improvement, and life hacks",
+    "RichDesign": "graphic design, web design, UI/UX, and creative tools",
+    "RichPhotography": "photography tips, camera reviews, and editing tutorials",
+    "RichMemes": "meme compilations, viral memes, and internet humor",
+    "RichAnimation": "animation reviews, anime, and animation breakdowns",
+    "RichVlogging": "vlogging tips, creator lifestyle, and YouTube growth",
+    "RichKids": "educational kids content, family-friendly fun, and learning",
+    "RichDance": "dance tutorials, choreography, and dance fitness",
+    "EvaReyes": "women's empowerment, inspiration, and self-improvement",
+    "HowToMeditate": "meditation, mindfulness, and stress relief",
+    "RichBusiness": "entrepreneurship, side hustles, and business strategy",
+    "RichArt": "4K art slideshows, art for your TV, ambient art, art essays",
 }
 
 # Channels that use the "Turn Your TV Into Art" template
 ART_SLIDESHOW_CHANNELS = {"RichArt"}
 
 CHANNEL_TAGS = {
+    # --- CumquatVibes (personal brand) ---
+    "CumquatVibes": [
+        "Cumquat Vibes", "Richard Abreu", "4k art", "art for tv",
+        "digital art", "design tutorial", "creator tools", "tech review",
+        "AI tools", "creator economy", "art slideshow", "Affinity Designer",
+        "creative business", "art screensaver", "tv wall art",
+    ],
+    # --- Cumquat brand channels ---
+    "CumquatGaming": [
+        "gaming", "indie games", "game review", "retro gaming", "PS Vita",
+        "hidden gems", "top games", "gaming news", "Nintendo", "PlayStation",
+        "gaming 2026", "best games", "game recommendations",
+    ],
+    "CumquatShortForm": [
+        "shorts", "viral facts", "mind blowing", "did you know",
+        "satisfying", "amazing facts", "quick facts", "fun facts",
+    ],
+    "CumquatMotivation": [
+        "motivation", "discipline", "stoic philosophy", "morning routine",
+        "success mindset", "self improvement", "military mindset", "hustle",
+        "motivational speech", "stoicism", "mental toughness", "daily motivation",
+    ],
+    # --- Rich brand channels ---
     "RichTech": [
         "tech", "technology", "gadgets", "AI tools", "software review",
         "tech 2026", "best apps", "future tech", "productivity", "tech tips",
+        "tech news", "best gadgets", "app review",
     ],
     "RichPets": [
         "pets", "pet care", "dog care", "cat breeds", "pet health",
         "animal behavior", "pet tips", "pet owner tips", "dog training", "cat care",
+        "cute animals", "pet advice",
     ],
     "RichHorror": [
         "horror", "true horror stories", "unsolved mysteries", "haunted places",
         "scary stories", "creepy", "paranormal", "true crime", "horror 2026", "scary",
+        "ghost stories", "dark stories",
     ],
     "RichMind": [
         "psychology", "dark psychology", "body language", "manipulation tactics",
         "mindset", "overthinking", "mental health", "human behavior",
-        "cognitive biases", "self improvement",
+        "cognitive biases", "self improvement", "stoicism", "emotional intelligence",
     ],
     "HowToUseAI": [
         "AI", "artificial intelligence", "ChatGPT", "AI tools", "automation",
         "AI tutorial", "prompt engineering", "make money with AI",
-        "how to use AI", "productivity tools",
+        "how to use AI", "productivity tools", "AI 2026", "Claude AI", "Gemini AI",
     ],
     "RichReviews": [
         "product review", "tech review", "best products", "amazon finds",
         "honest review", "comparison", "worth it", "budget picks", "top 10",
+        "product comparison", "buying guide",
+    ],
+    "RichGaming": [
+        "gaming", "gameplay", "game review", "best games", "gaming news",
+        "PlayStation", "Xbox", "Nintendo", "PC gaming", "esports",
+        "gaming 2026", "game tips",
+    ],
+    "RichHistory": [
+        "history", "ancient history", "world history", "historical events",
+        "war history", "civilization", "medieval history", "history documentary",
+        "forgotten history", "history explained", "history facts",
+    ],
+    "RichNature": [
+        "nature", "wildlife", "animals", "nature documentary", "ocean life",
+        "endangered species", "national parks", "planet earth", "nature facts",
+        "amazing animals", "biodiversity",
+    ],
+    "RichScience": [
+        "science", "space", "physics", "NASA", "biology", "quantum physics",
+        "science explained", "universe", "black holes", "science facts",
+        "science 2026", "technology",
+    ],
+    "RichFinance": [
+        "personal finance", "investing", "stock market", "passive income",
+        "money management", "financial freedom", "wealth building", "budget tips",
+        "finance 2026", "save money", "investment strategy",
+    ],
+    "RichCrypto": [
+        "crypto", "cryptocurrency", "Bitcoin", "Ethereum", "blockchain",
+        "Web3", "DeFi", "crypto news", "crypto 2026", "altcoins",
+        "crypto investing", "digital currency",
+    ],
+    "RichMovie": [
+        "movies", "movie review", "film analysis", "best movies", "movie recap",
+        "cinema", "film review", "movie recommendations", "movie 2026",
+        "top movies", "movie breakdown",
+    ],
+    "RichComedy": [
+        "comedy", "funny", "humor", "stand up", "funny moments",
+        "comedy 2026", "laugh", "jokes", "hilarious",
+    ],
+    "RichSports": [
+        "sports", "sports news", "football", "basketball", "soccer",
+        "sports highlights", "sports 2026", "NFL", "NBA", "athlete",
+        "sports analysis", "game highlights",
+    ],
+    "RichMusic": [
+        "music playlist", "lo-fi beats", "study music", "chill music",
+        "jazz playlist", "blues music", "ambient music", "relaxing music",
+        "background music", "focus music", "cafe music", "work music",
+    ],
+    "RichTravel": [
+        "travel", "travel guide", "best destinations", "travel tips",
+        "budget travel", "travel vlog", "hidden gems", "world travel",
+        "travel 2026", "vacation ideas", "city guide",
+    ],
+    "RichFood": [
+        "food", "food review", "best restaurants", "street food", "food tour",
+        "food 2026", "taste test", "cooking", "foodie", "recipe",
+        "food challenge",
+    ],
+    "RichFitness": [
+        "fitness", "workout", "gym", "exercise", "weight loss",
+        "home workout", "muscle building", "fitness tips", "healthy lifestyle",
+        "fitness 2026", "nutrition", "personal training",
+    ],
+    "RichEducation": [
+        "education", "learning", "study tips", "online courses", "knowledge",
+        "self education", "study motivation", "educational", "how to learn",
+        "education 2026", "skills",
+    ],
+    "RichLifestyle": [
+        "lifestyle", "daily routine", "life hacks", "productivity",
+        "minimalism", "self improvement", "lifestyle tips", "morning routine",
+        "life advice", "lifestyle 2026",
+    ],
+    "RichFashion": [
+        "fashion", "style tips", "outfit ideas", "fashion trends",
+        "mens fashion", "fashion 2026", "streetwear", "wardrobe essentials",
+        "fashion advice", "style guide",
+    ],
+    "RichBeauty": [
+        "beauty", "skincare", "makeup", "beauty tips", "skincare routine",
+        "beauty 2026", "beauty products", "self care", "dermatologist approved",
+        "beauty hacks", "glow up",
+    ],
+    "RichCooking": [
+        "cooking", "recipes", "easy recipes", "kitchen hacks", "meal prep",
+        "cooking tips", "chef", "homemade", "cooking 2026", "healthy recipes",
+        "quick meals", "dinner ideas",
+    ],
+    "RichFamily": [
+        "family", "parenting", "family tips", "kids activities",
+        "family life", "parenting advice", "family fun", "parenthood",
+        "family 2026", "mom life", "dad life",
+    ],
+    "RichCars": [
+        "cars", "car review", "best cars", "car comparison", "electric cars",
+        "car 2026", "automotive", "sports cars", "car buying guide",
+        "new cars", "car news", "EV",
+    ],
+    "RichDIY": [
+        "DIY", "do it yourself", "home improvement", "DIY projects",
+        "life hacks", "crafts", "home repair", "DIY 2026", "how to",
+        "maker", "woodworking",
+    ],
+    "RichDesign": [
+        "design", "graphic design", "web design", "UI UX", "design tips",
+        "creative design", "design 2026", "typography", "branding",
+        "design tutorial", "Figma",
+    ],
+    "RichPhotography": [
+        "photography", "photo tips", "camera review", "photography tutorial",
+        "portrait photography", "landscape photography", "photography 2026",
+        "photo editing", "Lightroom", "best camera",
+    ],
+    "RichMemes": [
+        "memes", "funny memes", "meme compilation", "internet memes",
+        "viral memes", "trending memes", "meme review",
+    ],
+    "RichAnimation": [
+        "animation", "animated", "cartoon", "anime", "animation review",
+        "animation breakdown", "Studio Ghibli", "Pixar", "animation 2026",
+        "animation explained", "best animated",
+    ],
+    "RichVlogging": [
+        "vlog", "vlogging", "daily vlog", "vlog tips", "how to vlog",
+        "vlog setup", "vlogging 2026", "content creator", "YouTube tips",
+        "vlog camera", "creator lifestyle",
+    ],
+    "RichKids": [
+        "kids", "children", "kids educational", "kids fun", "family friendly",
+        "kids 2026", "learn for kids", "kids activities", "cartoon",
+        "kids entertainment",
+    ],
+    "RichDance": [
+        "dance", "dance tutorial", "choreography", "dance moves",
+        "dance 2026", "hip hop dance", "dance workout", "learn to dance",
     ],
     "EvaReyes": [
         "women empowerment", "self improvement", "confidence", "inspiration",
         "mindset", "self care", "career growth", "motivational", "affirmations",
+        "women in business", "self love", "girl boss",
     ],
-    "CumquatVibes": [
-        "Richard Abreu", "Cumquat Vibes", "digital art", "design tutorial",
-        "AI tools", "creator economy", "entrepreneur", "veteran creator",
-        "art process", "tech review", "side hustle", "Affinity Designer",
+    "HowToMeditate": [
+        "meditation", "how to meditate", "mindfulness", "guided meditation",
+        "calm", "stress relief", "relaxation", "meditation for beginners",
+        "breathing exercises", "zen", "inner peace",
     ],
-    "RichTraining": [
-        "professional development", "career training", "leadership skills",
-        "workplace productivity", "career growth", "interview tips",
-        "business communication", "professional skills", "career advice 2026",
-        "job training",
+    "RichBusiness": [
+        "business", "entrepreneurship", "side hustle", "startup",
+        "business tips", "make money online", "business 2026", "passive income",
+        "business strategy", "small business", "online business",
     ],
     "RichArt": [
         "art for tv", "tv wall art", "4k art", "4k slideshow", "art background",
         "living room tv art", "frame tv art", "ambient video", "relaxing art",
         "art slideshow", "wall art video", "background art", "turn your tv into art",
         "samsung frame tv art", "art screensaver",
-    ],
-    "RichMusic": [
-        "music playlist", "lo-fi beats", "study music", "chill music",
-        "jazz playlist", "blues music", "ambient music", "relaxing music",
-        "background music", "focus music", "cafe music", "work music",
     ],
 }
 
@@ -342,18 +526,91 @@ def load_previous_uploads():
     return uploaded_files
 
 
-def make_title(filename):
-    """Convert video filename to a CTR-optimized YouTube title.
+def read_script_frontmatter(script_path):
+    """Extract YAML-like frontmatter from script file.
 
-    Applies title case, preserves numbers, adds power words, and ensures
-    the title hits the 40-70 character sweet spot for search display.
+    Returns dict with keys like 'title', 'channel', 'format'.
+    """
+    if not script_path or not os.path.exists(script_path):
+        return {}
+    try:
+        with open(script_path, encoding="utf-8", errors="replace") as f:
+            content = f.read(2000)  # frontmatter is always at the top
+    except Exception:
+        return {}
+    m = re.match(r'^---\s*\n(.*?)\n---', content, re.DOTALL)
+    if not m:
+        return {}
+    fm = {}
+    for line in m.group(1).split("\n"):
+        if ":" in line:
+            key, _, val = line.partition(":")
+            fm[key.strip().lower()] = val.strip()
+    return fm
 
-    Title optimization rules (from post_upload_assessment benchmarks):
+
+def load_seo_sidecar(video_filename):
+    """Load SEO JSON sidecar for a video if it exists.
+
+    Searches for <base>_seo.json in the scripts directory.
+    Returns dict with keys: titles, description, tags, category_id.
+    """
+    base = os.path.splitext(os.path.basename(video_filename))[0]
+    # Try exact match first, then prefix match (filenames may be truncated)
+    for f in os.listdir(SCRIPTS_DIR):
+        if not f.endswith("_seo.json"):
+            continue
+        seo_base = f[:-len("_seo.json")]
+        if seo_base == base or base.startswith(seo_base) or seo_base.startswith(base):
+            path = os.path.join(SCRIPTS_DIR, f)
+            try:
+                with open(path) as fh:
+                    data = json.load(fh)
+                return data
+            except Exception:
+                pass
+    return {}
+
+
+def make_title(filename, script_path=None, seo_data=None):
+    """Generate a CTR-optimized YouTube title.
+
+    Priority order:
+    1. Script frontmatter ---title: field (best quality, has punctuation)
+    2. SEO sidecar first title (if available)
+    3. Filename-derived title (fallback)
+
+    Title optimization rules:
     - 40-70 chars (full display width in search)
     - Include numbers (+36% CTR boost)
     - Front-load keywords (most important words first)
     - Use power words that drive curiosity
     """
+    # Try frontmatter title first (highest quality — has punctuation, hooks)
+    if script_path:
+        fm = read_script_frontmatter(script_path)
+        fm_title = fm.get("title", "").strip()
+        if fm_title and len(fm_title) > 10:
+            # Truncate at word boundary if over 100 chars (YouTube max)
+            if len(fm_title) > 100:
+                truncated = fm_title[:97]
+                last_space = truncated.rfind(" ")
+                if last_space > 40:
+                    fm_title = truncated[:last_space] + "..."
+            return fm_title
+
+    # Try SEO sidecar title
+    if seo_data and seo_data.get("titles"):
+        seo_title = seo_data["titles"][0].strip()
+        if seo_title and len(seo_title) > 10:
+            if len(seo_title) > 100:
+                truncated = seo_title[:97]
+                last_space = truncated.rfind(" ")
+                if last_space > 40:
+                    seo_title = truncated[:last_space] + "..."
+            return seo_title
+
+    # Fallback: derive from filename
     name = os.path.splitext(filename)[0]
     parts = name.split("_", 1)
     channel_prefix = parts[0] if len(parts) > 1 else ""
@@ -584,7 +841,8 @@ def _make_art_description(title, script_path):
         "",
         "Browse more of my artwork and projects:",
         "Portfolio: https://richardabreu.studio",
-        "Facebook Group: https://facebook.com/groups/cumquatvibes",
+        "Community & updates: https://vibeconnectionlounge.com",
+        "Business inquiries: CEO@cumquat-vibes.com",
         "",
         "\u25b6 How to use this video",
         "- Set as background art while you relax, read, or host guests",
@@ -607,14 +865,39 @@ def _make_art_description(title, script_path):
     return "\n".join(parts)
 
 
-def make_description(channel, title, script_path):
-    """Generate SEO-optimized YouTube description with timestamps and affiliate links.
+def _extract_primary_keyword(title):
+    """Extract the best primary keyword phrase from a title for triple-keyword SEO.
 
-    Structure optimized for CTR and search:
-    1. First 2 lines = searchable hook (visible in search results)
-    2. Timestamps/chapters
+    Returns a 2-4 word phrase that should appear in title, description, and tags.
+    """
+    # Remove common filler words to find the core topic
+    clean = re.sub(r'\b(the|a|an|and|or|but|in|on|at|to|for|of|is|it|you|your|my|'
+                   r'this|that|how|why|what|when|best|top|new|most|really|just|'
+                   r'need|will|can|don\'t|do|has|have|are|was|were|'
+                   r'\d+)\b', '', title.lower())
+    clean = re.sub(r'[^\w\s]', '', clean)
+    words = [w for w in clean.split() if len(w) > 2]
+    if len(words) >= 2:
+        return " ".join(words[:3])
+    return title.lower()[:40]
+
+
+def make_description(channel, title, script_path):
+    """Generate SEO-optimized YouTube description for maximum vidIQ score.
+
+    vidIQ Optimize Score checklist targets:
+    - Primary keyword in first 200 characters of description
+    - Description > 300 characters total
+    - Chapters starting at 0:00
+    - Relevant hashtags (3-5)
+
+    Structure:
+    1. First 2 lines = keyword-rich hook (visible in search results)
+    2. Timestamps/chapters (starting at 0:00)
     3. Affiliate links (if product channel)
-    4. CTA + links
+    4. Niche context paragraph (keyword density boost)
+    5. CTA + social links
+    6. Hashtags + AI disclosure
     """
     # RichArt uses the "Turn Your TV Into Art" template
     if channel in ART_SLIDESHOW_CHANNELS:
@@ -622,21 +905,35 @@ def make_description(channel, title, script_path):
 
     intro = extract_intro(script_path)
     chapters = extract_chapters_from_script(script_path)
+    niche = CHANNEL_NICHE.get(channel, "")
+    primary_kw = _extract_primary_keyword(title)
 
     # CumquatVibes gets a personal brand description (first-person, avatar channel)
     is_avatar = channel in AVATAR_CHANNELS
     is_affiliate = channel in AFFILIATE_CHANNELS
 
-    # First 2-3 lines are critical — visible in search results and suggestions.
-    # DO NOT repeat the title (YouTube already shows it above the description,
-    # and Google treats it as duplicate content hurting search ranking).
-    # Lead with the VALUE HOOK from the script intro instead.
+    # First 200 chars are critical for vidIQ — must contain primary keyword.
+    # DO NOT repeat the title verbatim (YouTube penalizes duplicate content).
+    # Lead with VALUE HOOK from script intro, ensuring keyword appears naturally.
     parts = []
     if intro:
         parts.append(intro)
+    elif niche:
+        # If no script intro available, generate a keyword-rich opener
+        parts.append(f"Everything you need to know about {primary_kw}. "
+                     f"In this video, we cover the latest in {niche}.")
     parts.append("")
 
+    # Niche context paragraph — boosts keyword density for SEO Score
+    if niche:
+        parts.extend([
+            f"This video covers {niche}. Whether you're a beginner or an expert, "
+            f"you'll find valuable insights on {primary_kw} and related topics.",
+            "",
+        ])
+
     # Timestamps / Chapters (boosts watch time + gets "Key Moments" in Google)
+    # vidIQ requires first chapter at 0:00 for the Optimize Score checkbox
     if len(chapters) > 2:
         timestamps = generate_timestamps(chapters)
         parts.extend([
@@ -684,29 +981,29 @@ def make_description(channel, title, script_path):
             "CONNECT WITH ME:",
             "Shop: https://cumquatvibes.com",
             "Portfolio: https://richardabreu.studio",
-            "Facebook Group: https://facebook.com/groups/cumquatvibes",
+            "Community: https://vibeconnectionlounge.com",
             "Instagram: @cumquatvibes",
+            "Business: CEO@cumquat-vibes.com",
             "",
         ])
     else:
         parts.extend([
             "---",
             "",
-            "Subscribe and hit the bell for new videos!",
-            "Like this video if you found it helpful.",
-            "Drop a comment and let us know what you think!",
+            "Subscribe and hit the bell for new videos every week!",
+            "Like this video if you found it valuable.",
+            "Drop a comment — we read every single one!",
             "",
             "---",
             "",
             "Shop: https://cumquatvibes.com",
             "Portfolio: https://richardabreu.studio",
-            "Facebook Group: https://facebook.com/groups/cumquatvibes",
+            "Community: https://vibeconnectionlounge.com",
+            "Business inquiries: CEO@cumquat-vibes.com",
             "",
         ])
 
     # Hashtags: topic-first, not brand-first.
-    # Extract topic keywords from title to pick relevant hashtags rather than
-    # using the channel niche's first word (which produced "#art" on tech videos).
     title_lower = title.lower()
     TOPIC_HASHTAG_MAP = [
         (["apple", "mac", "ipad", "ios", "macos"],          ["#apple", "#mac", "#techreview"]),
@@ -724,6 +1021,15 @@ def make_description(channel, title, script_path):
         (["travel", "destination", "vacation", "tour"],      ["#travel", "#wanderlust", "#explore"]),
         (["food", "recipe", "cooking", "chef"],              ["#food", "#cooking", "#recipe"]),
         (["motivation", "mindset", "success", "hustle"],     ["#motivation", "#mindset", "#success"]),
+        (["horror", "scary", "haunted", "paranormal"],       ["#horror", "#scary", "#truestories"]),
+        (["history", "ancient", "medieval", "civilization"], ["#history", "#historyfacts", "#education"]),
+        (["psychology", "mind", "behavior", "mental"],       ["#psychology", "#mindset", "#mentalhealth"]),
+        (["pet", "dog", "cat", "animal"],                    ["#pets", "#animals", "#petcare"]),
+        (["movie", "film", "cinema", "review"],              ["#movies", "#filmreview", "#cinema"]),
+        (["car", "auto", "vehicle", "electric"],             ["#cars", "#automotive", "#carreview"]),
+        (["meditation", "mindful", "calm", "zen"],           ["#meditation", "#mindfulness", "#calm"]),
+        (["business", "entrepreneur", "startup", "hustle"],  ["#business", "#entrepreneur", "#startup"]),
+        (["education", "learn", "study", "knowledge"],       ["#education", "#learning", "#knowledge"]),
     ]
     topic_tags = []
     for keywords, tags in TOPIC_HASHTAG_MAP:
@@ -733,13 +1039,11 @@ def make_description(channel, title, script_path):
             break
 
     if not topic_tags:
-        # Fallback: use channel-specific hashtag if no topic match
         topic_tags = [f"#{channel.lower()}", "#2026"]
 
-    # Always cap at 5 hashtags — more than 5 hurts reach per YouTube guidelines
-    hashtags_str = " ".join(dict.fromkeys(topic_tags))  # deduplicate, preserve order
+    # Cap at 5 hashtags
+    hashtags_str = " ".join(dict.fromkeys(topic_tags))
 
-    # Copyright + AI disclosure at the very bottom (required by policy but least visible there)
     if is_avatar:
         ai_note = "AI DISCLOSURE: This video features my digital avatar created with AI assistance."
     else:
@@ -754,16 +1058,55 @@ def make_description(channel, title, script_path):
     return "\n".join(parts)
 
 
-def make_tags(channel, title):
-    """Generate tags combining channel tags with title keywords."""
-    base_tags = list(CHANNEL_TAGS.get(channel, []))
+def make_tags(channel, title, seo_data=None):
+    """Generate tags combining channel base tags, SEO sidecar tags, and title keywords.
+
+    Merges from multiple sources for maximum coverage:
+    1. Channel base tags (niche-specific, high-volume)
+    2. SEO sidecar tags (topic-specific from script generation)
+    3. Title keywords (catch-all for remaining relevant terms)
+
+    Targets 15-20 tags with >200 chars total for vidIQ Optimize Score.
+    """
+    seen_lower = set()
+    merged = []
+
+    def _add_tag(tag):
+        t = tag.strip()
+        if not t or t.lower() in seen_lower:
+            return
+        seen_lower.add(t.lower())
+        merged.append(t)
+
+    # 1. Channel base tags (highest priority — curated high-volume terms)
+    for tag in CHANNEL_TAGS.get(channel, []):
+        _add_tag(tag)
+
+    # 2. SEO sidecar tags (topic-specific)
+    if seo_data and seo_data.get("tags"):
+        for tag in seo_data["tags"]:
+            # Skip generic filler tags from the sidecar
+            if tag.lower() in ("faceless youtube", "ai narration", "top 10", "facts"):
+                continue
+            _add_tag(tag)
+
+    # 3. Title keywords (fill remaining slots)
     title_words = [w for w in title.lower().split() if len(w) > 3]
-    for w in title_words[:5]:
-        if w not in " ".join(base_tags).lower():
-            base_tags.append(w)
+    small_words = {"this", "that", "with", "from", "your", "about", "them",
+                   "will", "what", "when", "were", "been", "have", "here",
+                   "they", "need", "just", "more", "than", "most", "also"}
+    for w in title_words:
+        if w not in small_words:
+            _add_tag(w)
+
+    # 4. Always include "2026" and channel brand
+    _add_tag("2026")
+    _add_tag("Cumquat Vibes")
+
+    # Cap at 490 chars (YouTube limit is 500)
     result = []
     total_len = 0
-    for tag in base_tags:
+    for tag in merged:
         if total_len + len(tag) + 1 > 490:
             break
         result.append(tag)
@@ -797,7 +1140,6 @@ CHANNEL_THUMBNAIL_STYLE = {
     "RichBusiness": "professional corporate aesthetic, success imagery, confident, modern office",
     "CumquatMotivation": "epic sunrise/sunset, inspirational landscape, powerful atmosphere",
     "CumquatVibes": "dark matte studio aesthetic #101922 background, orange #e8941f accent, Richard Abreu digital avatar, bold creator energy, premium personal brand feel",
-    "RichTraining": "clean professional aesthetic, corporate blue tones, career growth imagery, confident professional setting",
 }
 DEFAULT_THUMBNAIL_STYLE = "cinematic lighting, professional YouTube thumbnail, bold dramatic atmosphere"
 
@@ -916,6 +1258,57 @@ def upload_thumbnail(video_id, thumb_path, access_token):
         return False
 
 
+def add_to_playlist(video_id, playlist_id, access_token):
+    """Add an uploaded video to a YouTube playlist.
+
+    Uses YouTube Data API v3 playlistItems.insert endpoint.
+    Returns True on success, False on failure.
+    """
+    url = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet"
+    payload = json.dumps({
+        "snippet": {
+            "playlistId": playlist_id,
+            "resourceId": {
+                "kind": "youtube#video",
+                "videoId": video_id,
+            },
+        },
+    }).encode()
+    req = Request(
+        url,
+        data=payload,
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "application/json",
+        },
+        method="POST",
+    )
+    try:
+        resp = urlopen(req, timeout=30)
+        json.loads(resp.read().decode())
+        print(f"    Playlist: Added to {playlist_id}")
+        return True
+    except HTTPError as e:
+        body = e.read().decode() if hasattr(e, "read") else str(e)
+        if "playlistNotFound" in body:
+            print(f"    Playlist: {playlist_id} not found (create it first)")
+        elif "duplicate" in body.lower():
+            print(f"    Playlist: Already in playlist")
+            return True
+        else:
+            print(f"    Playlist: Error {e.code}: {body[:150]}")
+        return False
+    except Exception as e:
+        print(f"    Playlist: Error: {str(e)[:100]}")
+        return False
+
+
+# Per-channel playlist IDs (populate as playlists are created on YouTube)
+# Format: channel_prefix -> playlist_id
+# These need to be created once per channel via YouTube Studio or API
+CHANNEL_PLAYLISTS = {}
+
+
 def upload_video(filepath, title, description, tags, category_id, access_token,
                   privacy="public", publish_at=None):
     """Upload video using YouTube Data API v3 resumable upload.
@@ -1007,12 +1400,10 @@ def upload_video(filepath, title, description, tags, category_id, access_token,
         return {"error": "Failed to get upload URL after retries"}
 
     chunk_size = 10 * 1024 * 1024
-    max_retries = 5
 
     with open(filepath, "rb") as f:
         uploaded = 0
         while uploaded < file_size:
-            f.seek(uploaded)
             chunk = f.read(chunk_size)
             if not chunk:
                 break
@@ -1026,81 +1417,32 @@ def upload_video(filepath, title, description, tags, category_id, access_token,
             }
 
             req = Request(upload_url, data=chunk, headers=headers, method="PUT")
-            retries = 0
-            while retries < max_retries:
-                try:
-                    resp = urlopen(req, timeout=300)
-                    result = json.loads(resp.read().decode())
-                    return result
-                except HTTPError as e:
-                    if e.code == 308:
-                        # Resume Incomplete — YouTube wants more data
-                        uploaded = end
-                        break
-                    elif e.code in (500, 502, 503):
-                        retries += 1
-                        wait = min(2 ** retries, 30)
-                        print(f"    {e.code} -- retrying in {wait}s (attempt {retries}/{max_retries})")
-                        time.sleep(wait)
-                        # Re-seek and re-read the same chunk for retry
-                        f.seek(uploaded)
-                        chunk = f.read(chunk_size)
-                        end = uploaded + len(chunk)
-                        headers["Content-Length"] = str(len(chunk))
-                        headers["Content-Range"] = f"bytes {uploaded}-{end - 1}/{file_size}"
-                        req = Request(upload_url, data=chunk, headers=headers, method="PUT")
-                        continue
-                    else:
-                        body = e.read().decode()
-                        print(f"    Upload error {e.code}: {body[:300]}")
-                        return {"error": f"Upload error {e.code}: {body[:300]}"}
-                except (OSError, TimeoutError) as e:
-                    retries += 1
-                    if retries >= max_retries:
-                        return {"error": f"Network error after {max_retries} retries: {e}"}
-                    wait = min(2 ** retries, 30)
-                    print(f"    Network error, retrying in {wait}s (attempt {retries}/{max_retries}): {e}")
-                    time.sleep(wait)
-                    f.seek(uploaded)
-                    chunk = f.read(chunk_size)
-                    end = uploaded + len(chunk)
-                    headers["Content-Length"] = str(len(chunk))
-                    headers["Content-Range"] = f"bytes {uploaded}-{end - 1}/{file_size}"
-                    req = Request(upload_url, data=chunk, headers=headers, method="PUT")
+            try:
+                resp = urlopen(req, timeout=300)
+                result = json.loads(resp.read().decode())
+                return result
+            except HTTPError as e:
+                if e.code == 308:
+                    uploaded = end
                     continue
-            else:
-                return {"error": f"Upload failed: exhausted {max_retries} retries at byte {uploaded}"}
+                elif e.code == 503:
+                    print("    503 -- retrying in 10s...")
+                    time.sleep(10)
+                    continue
+                else:
+                    body = e.read().decode()
+                    print(f"    Upload error {e.code}: {body[:300]}")
+                    return {"error": f"Upload error {e.code}: {body[:300]}"}
 
     return {"error": "Upload incomplete: EOF reached before file fully uploaded"}
 
 
 # Quota budget: YouTube Data API costs ~1600 units per upload, 50 per thumbnail
-# Default daily quota is 10,000 units. Stop at 90% to maximize throughput while
-# leaving a small buffer for search/list operations.
+# Default daily quota is 10,000 units. Stop at 80% to leave room for other operations.
 QUOTA_PER_UPLOAD = 1600
 QUOTA_PER_THUMBNAIL = 50
 DAILY_QUOTA_LIMIT = 10000
-QUOTA_SAFETY_THRESHOLD = 0.92  # Stop uploads at 92% quota usage (allows ~5-6 uploads/day)
-MAX_UPLOADS_PER_RUN = 6  # Cap per run — allows full daily quota usage across 1-2 runs
-
-# Unverified channels can only upload videos up to 15 minutes.
-# Set of channel prefixes that have been phone-verified on YouTube.
-VERIFIED_CHANNELS = {"RichMusic", "RichFinance"}  # Add channel prefixes here after phone verification
-MAX_DURATION_UNVERIFIED = 15 * 60  # YouTube's 15min limit for unverified channels
-
-
-def get_video_duration(filepath):
-    """Get video duration in seconds using ffprobe. Returns None on failure."""
-    try:
-        import subprocess
-        result = subprocess.run(
-            ["ffprobe", "-v", "quiet", "-print_format", "json", "-show_format", filepath],
-            capture_output=True, text=True, timeout=10,
-        )
-        data = json.loads(result.stdout)
-        return float(data["format"]["duration"])
-    except Exception:
-        return None
+QUOTA_SAFETY_THRESHOLD = 0.80  # Stop uploads at 80% quota usage
 
 
 def run_preflight(video_file, channel, title, description, tags, script_path):
@@ -1141,18 +1483,18 @@ def run_preflight(video_file, channel, title, description, tags, script_path):
 def main():
     global channel_access_tokens
 
-    # Parse --channel filter
+    # Parse --channel filter from argv
     channel_filter = None
-    for idx, arg in enumerate(sys.argv[1:]):
-        if arg == '--channel' and idx + 1 < len(sys.argv) - 1:
-            channel_filter = sys.argv[idx + 2]
-            break
+    for idx, arg in enumerate(sys.argv[1:], 1):
+        if arg == '--channel' and idx < len(sys.argv) - 1:
+            channel_filter = sys.argv[idx + 1]
         elif arg.startswith('--channel='):
             channel_filter = arg.split('=', 1)[1]
-            break
 
     print("YouTube Video Uploader")
     print("=" * 60)
+    if channel_filter:
+        print(f"  Channel filter: {channel_filter}")
     print()
 
     # Load per-channel tokens
@@ -1161,25 +1503,6 @@ def main():
 
     if channel_access_tokens:
         print(f"\n  {len(channel_access_tokens)} channel token(s) loaded.")
-        # Verify channel tokens route to correct channels (spot-check first 3)
-        misrouted = []
-        checked = 0
-        for prefix, (expected_id, _cat) in list(CHANNEL_MAP.items())[:40]:
-            token_key = TOKEN_KEY_MAP.get(prefix, prefix)
-            if token_key not in channel_access_tokens:
-                continue
-            actual_id, actual_title = verify_channel(channel_access_tokens[token_key])
-            checked += 1
-            if actual_id and actual_id != expected_id:
-                misrouted.append(f"  WARNING: {prefix} token routes to {actual_title} ({actual_id}), expected {expected_id}")
-            if checked >= 3:
-                break  # Spot-check only — full verification uses too much quota
-        if misrouted:
-            print("\n  CHANNEL ROUTING WARNINGS:")
-            for m in misrouted:
-                print(m)
-        elif checked > 0:
-            print(f"  Routing spot-check: {checked} channel(s) verified OK")
     else:
         print("\n  No channel tokens found.")
         print("  Run setup_channel_auth.py first to authorize each brand channel.")
@@ -1206,10 +1529,8 @@ def main():
                     videos.append(os.path.join(subdir, f))
     pending = [v for v in videos if v not in already_uploaded]
     if channel_filter:
-        pending = [v for v in pending if os.path.basename(v).startswith(channel_filter)]
-        print("Videos found: " + str(len(videos)) + " | Pending upload: " + str(len(pending)) + " (filtered: " + channel_filter + ")")
-    else:
-        print(f"Videos found: {len(videos)} | Pending upload: {len(pending)}\n")
+        pending = [v for v in pending if os.path.basename(v).split("_")[0] == channel_filter]
+    print(f"Videos found: {len(videos)} | Pending upload: {len(pending)}\n")
 
     if not pending:
         print("All videos already uploaded! Nothing to do.")
@@ -1223,11 +1544,9 @@ def main():
 
     results = list(existing_results)
     uploaded_count = len(already_uploaded)
-    uploaded_this_run = 0
     skipped_limit = 0
     failed_count = 0
     preflight_blocked = 0
-    skipped_too_long = 0
 
     # Load today's quota usage from DB (persists across runs)
     quota_already_used, uploads_today = get_daily_quota()
@@ -1255,28 +1574,11 @@ def main():
         video_basename = os.path.basename(video_file)
         channel = video_basename.split("_")[0]
 
-        # Validate channel exists in CHANNEL_MAP
-        if channel not in CHANNEL_MAP:
-            print(f"[{i}/{len(pending)}] SKIP: Unknown channel prefix '{channel}' in {video_basename}")
-            results.append({
-                "file": video_file, "channel": channel, "target_channel_id": None,
-                "video_id": None, "status": "skipped_unknown_channel",
-                "error": f"Channel prefix '{channel}' not found in CHANNEL_MAP",
-            })
-            continue
-
         # Skip if this channel already hit rate limit this run
         if channel in rate_limited_channels:
             print(f"[{i}/{len(pending)}] {channel}: SKIP (rate limited)")
             skipped_limit += 1
             continue
-
-        # Hard cap: never exceed MAX_UPLOADS_PER_RUN in a single run
-        if uploaded_this_run >= MAX_UPLOADS_PER_RUN:
-            remaining = len(pending) - i
-            print(f"\n  Hit upload cap: {uploaded_this_run}/{MAX_UPLOADS_PER_RUN} uploads this run.")
-            print(f"  {remaining} videos deferred to next run.")
-            break
 
         # Quota budget check: stop early if we'd exceed 80% of daily quota
         projected_quota = quota_used_this_run + QUOTA_PER_UPLOAD + QUOTA_PER_THUMBNAIL
@@ -1288,10 +1590,11 @@ def main():
 
         channel_id, category_id = CHANNEL_MAP.get(channel, (None, "22"))
 
-        title = make_title(video_file)
         script_path = find_script(video_file)
+        seo_data = load_seo_sidecar(video_file)
+        title = make_title(video_file, script_path=script_path, seo_data=seo_data)
         description = make_description(channel, title, script_path)
-        tags = make_tags(channel, title)
+        tags = make_tags(channel, title, seo_data=seo_data)
 
         # Override category based on title keywords (prevents tech reviews
         # landing in "People & Blogs" when the channel default is generic).
@@ -1299,24 +1602,6 @@ def main():
 
         filepath = os.path.join(VIDEOS_DIR, video_file)
         size_mb = os.path.getsize(filepath) / (1024 * 1024)
-
-        # Duration check: unverified channels can't upload >15 min videos
-        if channel not in VERIFIED_CHANNELS:
-            duration = get_video_duration(filepath)
-            if duration and duration > MAX_DURATION_UNVERIFIED:
-                dur_min = int(duration // 60)
-                print(f"[{i}/{len(pending)}] {channel}: SKIP — {dur_min}min video exceeds 15min limit (channel not phone-verified)")
-                results.append({
-                    "file": video_file,
-                    "channel": channel,
-                    "target_channel_id": channel_id,
-                    "video_id": None,
-                    "status": "skipped_too_long",
-                    "duration_minutes": dur_min,
-                    "error": f"Video is {dur_min}min but unverified channels have 15min limit",
-                })
-                skipped_too_long += 1
-                continue
 
         # Pick the right token
         token = get_token_for_channel(channel, default_token)
@@ -1401,9 +1686,17 @@ def main():
             if thumb_path and vid_id != "?":
                 thumb_uploaded = upload_thumbnail(vid_id, thumb_path, token)
 
+            # Add to channel playlist if configured
+            playlist_added = False
+            playlist_id = CHANNEL_PLAYLISTS.get(channel)
+            if playlist_id and vid_id != "?":
+                playlist_added = add_to_playlist(vid_id, playlist_id, token)
+
             upload_quota = QUOTA_PER_UPLOAD
             if thumb_uploaded:
                 upload_quota += QUOTA_PER_THUMBNAIL
+            if playlist_added:
+                upload_quota += 50  # playlistItems.insert costs ~50 units
             quota_used_this_run += upload_quota
 
             results.append({
@@ -1418,7 +1711,6 @@ def main():
                 "thumbnail_uploaded": thumb_uploaded,
             })
             uploaded_count += 1
-            uploaded_this_run += 1
 
             # Log to telemetry DB + persist quota usage
             try:
@@ -1427,12 +1719,6 @@ def main():
                 record_quota_usage(upload_quota)
             except Exception as e:
                 print(f"  WARNING: Failed to log telemetry: {str(e)[:80]}")
-
-            # Share to Facebook page + group
-            try:
-                share_to_facebook(title, f"https://youtube.com/watch?v={vid_id}", channel)
-            except Exception as e:
-                print(f"  WARNING: Facebook post failed: {str(e)[:80]}")
         else:
             print(f"  FAILED: Unknown error")
             failed_count += 1
@@ -1450,8 +1736,7 @@ def main():
 
     # Summary
     print(f"\n{'=' * 60}")
-    too_long_msg = f" | {skipped_too_long} too long (need verification)" if skipped_too_long else ""
-    print(f"Results: {uploaded_this_run} uploaded this run ({uploaded_count} total) | {skipped_limit} rate-limited | {failed_count} failed | {preflight_blocked} blocked by compliance{too_long_msg}")
+    print(f"Results: {uploaded_count} uploaded | {skipped_limit} rate-limited | {failed_count} failed | {preflight_blocked} blocked by compliance")
     print(f"Quota used this run: ~{quota_used_this_run}/{DAILY_QUOTA_LIMIT} ({quota_used_this_run/DAILY_QUOTA_LIMIT*100:.0f}%)\n")
 
     for r in results:
@@ -1480,9 +1765,7 @@ def main():
     with open(UPLOAD_REPORT_PATH, "w") as f:
         json.dump({
             "uploaded": uploaded_count,
-            "uploaded_this_run": uploaded_this_run,
             "total": len(videos),
-            "quota_used_this_run": quota_used_this_run,
             "rate_limited": list(rate_limited_channels),
             "results": deduped_results,
         }, f, indent=2)
