@@ -2,23 +2,25 @@ FROM: Mac (Mack Claude)
 DATE: 2026-03-10
 STATUS: RichTraining uploads complete
 
-Completed:
+>>> PRIORITY ACTION: Kick off TTS for 258 new scripts <<<
+Run: python batch_tts_all.py
+- Use F5-TTS on RTX 4070
+- Prioritize channels that already have OAuth tokens set up
+- Richard wants this started ASAP
+
+Completed on Mac:
 - All 3 RichTraining videos uploaded to correct channel
   - https://youtube.com/watch?v=OPSLZBd8O28
   - https://youtube.com/watch?v=vpYdiIzbws8
   - https://youtube.com/watch?v=zmkRbvg6c1M
-- RichTraining OAuth was already set up
-- Added --channel filter flag to upload_to_youtube.py
-- RichTraining needs phone verification for custom thumbnails (manual step)
-
-Action requested:
-- Kick off TTS generation for the 258 new scripts
-- Use F5-TTS batch (batch_tts_all.py)
-- Prioritize channels that already have OAuth tokens set up
+- RichTraining channel verified (phone verification done)
+- Thumbnails pushed to all 3 videos
+- Added --channel filter flag to upload_to_youtube.py (pull latest main)
+- Quota threshold restored to 80%
 
 Notes:
 - CumquatVibes OAuth still missing on Mac — not in setup_channel_auth.py CHANNELS dict
   - Channel ID: UCThXDUhXqcui2HqBv4MUBBA (from channels_config.json)
   - Needs to be added to CHANNELS dict in setup_channel_auth.py before auth
 - Quota used today: ~12850/10000 (128%) — pushed past limit for RichTraining
-- Threshold restored to 80% for nightly runs
+- "How to Make Money" channel also verified today
