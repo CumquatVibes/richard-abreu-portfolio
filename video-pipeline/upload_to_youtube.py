@@ -88,6 +88,10 @@ CHANNEL_MAP = {
     "RichBusiness": ("UCPQ8N53EgcqEKR4SfQ1DcXQ", "28"),
     "CumquatMotivation": ("UCtrCefKinhom7LFBV8rnfpQ", "22"),
     "CumquatVibes": ("UCThXDUhXqcui2HqBv4MUBBA", "22"),
+    "CumquatGaming": ("UCJzYsB6MJgQnakQF_S35SRw", "20"),
+    "CumquatShortform": ("UCcmzxbB2cfClq_nN3P5c6ow", "22"),
+    "RichArt": ("UCGOmSWqmp5LNaKNlLGTE-Nw", "22"),
+    "RichTraining": ("UCcY9CwSBVjpMqCjB7oPjfRA", "27"),
 }
 
 # YouTube category IDs (reference)
@@ -191,6 +195,9 @@ CHANNEL_NICHE = {
 
 # Channels that use the "Turn Your TV Into Art" template
 ART_SLIDESHOW_CHANNELS = {"RichArt"}
+
+# Channels that use the ambient/background music description template
+MUSIC_CHANNELS = {"RichMusic"}
 
 CHANNEL_TAGS = {
     # --- CumquatVibes (personal brand) ---
@@ -865,6 +872,80 @@ def _make_art_description(title, script_path):
     return "\n".join(parts)
 
 
+def _make_music_description(title, script_path):
+    """Generate description for RichMusic ambient/background music videos."""
+    # Extract genre/mood from title
+    genre = title
+    for strip in ["1Hr", "1hr", "1 Hour", "2Hr", "2hr", "3Hr", "3hr",
+                   "Background Music", "No Copyright", "|", "RichMusic"]:
+        genre = genre.replace(strip, "")
+    genre = re.sub(r'\s+', ' ', genre).strip(" -–—")
+    if not genre:
+        genre = "background music"
+
+    # Detect duration
+    duration = "1 hour"
+    if "2Hr" in title or "2 Hour" in title:
+        duration = "2 hours"
+    elif "3Hr" in title or "3 Hour" in title:
+        duration = "3 hours"
+
+    # Extract visual scene descriptions from script if available
+    scenes = []
+    if script_path and os.path.exists(script_path):
+        with open(script_path) as f:
+            content = f.read()
+        for match in re.finditer(r'\[VISUAL:\s*(.+?)\]', content):
+            scene = match.group(1).strip()
+            # Take just the first phrase of each visual description
+            short = scene.split(",")[0].strip()
+            if short and short not in scenes:
+                scenes.append(short)
+
+    parts = [
+        f"{duration.title()} of {genre.lower()} for studying, relaxing, sleeping, meditation, or deep focus.",
+        f"Let these sounds fill your space and help you unwind.",
+        "",
+    ]
+
+    # Add timestamps for scenes if we have them
+    if scenes and len(scenes) >= 3:
+        parts.append("SCENES:")
+        segment_mins = 60 // len(scenes) if len(scenes) <= 10 else 6
+        for i, scene in enumerate(scenes[:10]):
+            ts_min = i * segment_mins
+            parts.append(f"{ts_min // 60}:{ts_min % 60:02d}:00 {scene}")
+        parts.append("")
+
+    parts.extend([
+        "HOW TO USE THIS VIDEO:",
+        "- Background music while studying, working, or reading",
+        "- Ambient sound for meditation, yoga, or mindfulness",
+        "- Relaxation and sleep aid — set a timer and drift off",
+        "- Cafe, office, or lobby atmosphere",
+        "",
+        "---",
+        "",
+        "Subscribe for new playlists every week!",
+        "Like this video if it helped you focus or relax.",
+        "",
+        "---",
+        "",
+        "More from RichMusic:",
+        "Shop: https://cumquatvibes.com",
+        "Portfolio: https://richardabreu.studio",
+        "Community: https://vibeconnectionlounge.com",
+        "Business inquiries: CEO@cumquat-vibes.com",
+        "",
+        "\u00a9 2026 Cumquat Vibes Media",
+        "AI DISCLOSURE: This video was created with the assistance of AI tools.",
+        "",
+        f"#{genre.lower().replace(' ', '')} #backgroundmusic #studymusic #relaxingmusic "
+        f"#ambientmusic #chillmusic #focusmusic #sleepmusic",
+    ])
+    return "\n".join(parts)
+
+
 def _extract_primary_keyword(title):
     """Extract the best primary keyword phrase from a title for triple-keyword SEO.
 
@@ -902,6 +983,10 @@ def make_description(channel, title, script_path):
     # RichArt uses the "Turn Your TV Into Art" template
     if channel in ART_SLIDESHOW_CHANNELS:
         return _make_art_description(title, script_path)
+
+    # RichMusic uses the ambient/background music template
+    if channel in MUSIC_CHANNELS:
+        return _make_music_description(title, script_path)
 
     intro = extract_intro(script_path)
     chapters = extract_chapters_from_script(script_path)
@@ -972,6 +1057,8 @@ def make_description(channel, title, script_path):
         parts.extend([
             "---",
             "",
+            "Thank you for watching and being part of this journey. Your support means the world to me.",
+            "",
             "Subscribe and hit the bell — I drop new videos every week!",
             "Like this video if it helped you out.",
             "Drop a comment and let me know what you think!",
@@ -989,6 +1076,8 @@ def make_description(channel, title, script_path):
     else:
         parts.extend([
             "---",
+            "",
+            "A huge thank you to everyone who subscribes, likes, and shares. None of this would be possible without your support.",
             "",
             "Subscribe and hit the bell for new videos every week!",
             "Like this video if you found it valuable.",
@@ -1445,6 +1534,73 @@ DAILY_QUOTA_LIMIT = 10000
 QUOTA_SAFETY_THRESHOLD = 0.80  # Stop uploads at 80% quota usage
 
 
+def run_video_quality_gate(filepath, channel):
+    """Check video file quality metrics before uploading.
+
+    Validates bitrate, duration, and file size to prevent uploading
+    low-quality or broken videos.
+
+    Returns (passed: bool, issues: list[str])
+    """
+    import subprocess as _sp
+
+    issues = []
+
+    try:
+        probe = _sp.run(
+            ["ffprobe", "-v", "quiet", "-show_entries",
+             "format=duration,bit_rate,size:stream=width,height,codec_name,r_frame_rate",
+             "-of", "json", filepath],
+            capture_output=True, text=True, timeout=15,
+        )
+        data = __import__("json").loads(probe.stdout)
+        fmt = data.get("format", {})
+        streams = data.get("streams", [])
+
+        duration = float(fmt.get("duration", 0))
+        bitrate = int(fmt.get("bit_rate", 0))
+        size_mb = int(fmt.get("size", 0)) / (1024 * 1024)
+
+        # Find video stream
+        video_stream = next((s for s in streams if s.get("codec_name") in ("h264", "hevc", "vp9")), None)
+
+        # Check 1: Duration sanity
+        if duration < 30:
+            issues.append(f"Video too short ({duration:.0f}s) — likely broken or incomplete")
+        elif duration > 7200:
+            # Only warn for non-music (music can be 1hr+)
+            if "Music" not in channel and "Ambient" not in channel:
+                issues.append(f"Video unusually long ({duration/60:.0f}min) for non-music channel")
+
+        # Check 2: Bitrate floor (below 800kbps looks terrible on YouTube)
+        bitrate_kbps = bitrate / 1000
+        if bitrate_kbps < 800:
+            issues.append(f"Bitrate too low ({bitrate_kbps:.0f}kbps) — will look blocky on YouTube")
+        elif bitrate_kbps < 1500:
+            print(f"  WARNING: Low bitrate ({bitrate_kbps:.0f}kbps) — quality may be marginal")
+
+        # Check 3: Resolution
+        if video_stream:
+            width = int(video_stream.get("width", 0))
+            height = int(video_stream.get("height", 0))
+            if width < 1080 and height < 1080:
+                issues.append(f"Resolution too low ({width}x{height}) — minimum 1080p expected")
+
+        # Check 4: File size vs duration ratio (detect empty/corrupt files)
+        if duration > 0 and size_mb / (duration / 60) < 5:
+            issues.append(f"File suspiciously small ({size_mb:.1f}MB for {duration/60:.1f}min) — may be corrupt")
+
+    except Exception as e:
+        print(f"  Quality gate: probe failed ({str(e)[:60]}), proceeding with caution")
+        return True, []
+
+    if issues:
+        for issue in issues:
+            print(f"  QUALITY ISSUE: {issue}")
+
+    return len(issues) == 0, issues
+
+
 def run_preflight(video_file, channel, title, description, tags, script_path):
     """Run compliance preflight check before uploading.
 
@@ -1483,18 +1639,24 @@ def run_preflight(video_file, channel, title, description, tags, script_path):
 def main():
     global channel_access_tokens
 
-    # Parse --channel filter from argv
+    # Parse --channel filter and --max-uploads from argv
     channel_filter = None
+    max_uploads_this_run = None
     for idx, arg in enumerate(sys.argv[1:], 1):
         if arg == '--channel' and idx < len(sys.argv) - 1:
             channel_filter = sys.argv[idx + 1]
         elif arg.startswith('--channel='):
             channel_filter = arg.split('=', 1)[1]
-
+        elif arg == '--max-uploads' and idx < len(sys.argv) - 1:
+            max_uploads_this_run = int(sys.argv[idx + 1])
+        elif arg.startswith('--max-uploads='):
+            max_uploads_this_run = int(arg.split('=', 1)[1])
     print("YouTube Video Uploader")
     print("=" * 60)
     if channel_filter:
         print(f"  Channel filter: {channel_filter}")
+    if max_uploads_this_run:
+        print(f"  Max uploads this run: {max_uploads_this_run}")
     print()
 
     # Load per-channel tokens
@@ -1544,6 +1706,7 @@ def main():
 
     results = list(existing_results)
     uploaded_count = len(already_uploaded)
+    uploads_this_run = 0
     skipped_limit = 0
     failed_count = 0
     preflight_blocked = 0
@@ -1625,6 +1788,20 @@ def main():
                 "video_id": None,
                 "status": "preflight_blocked",
                 "violations": [v["type"] for v in preflight_result.get("violations", [])],
+            })
+            continue
+
+        # Video quality gate — check bitrate, resolution, duration
+        quality_passed, quality_issues = run_video_quality_gate(filepath, channel)
+        if not quality_passed:
+            print(f"  BLOCKED by video quality gate — skipping upload")
+            results.append({
+                "file": video_file,
+                "channel": channel,
+                "target_channel_id": channel_id,
+                "video_id": None,
+                "status": "quality_blocked",
+                "issues": quality_issues,
             })
             continue
 
@@ -1711,6 +1888,7 @@ def main():
                 "thumbnail_uploaded": thumb_uploaded,
             })
             uploaded_count += 1
+            uploads_this_run += 1
 
             # Log to telemetry DB + persist quota usage
             try:
@@ -1719,6 +1897,11 @@ def main():
                 record_quota_usage(upload_quota)
             except Exception as e:
                 print(f"  WARNING: Failed to log telemetry: {str(e)[:80]}")
+
+            # Check --max-uploads limit (after telemetry is saved)
+            if max_uploads_this_run and uploads_this_run >= max_uploads_this_run:
+                print("\n  Reached --max-uploads limit (%d). Stopping." % max_uploads_this_run)
+                break
         else:
             print(f"  FAILED: Unknown error")
             failed_count += 1

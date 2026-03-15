@@ -1,4 +1,4 @@
-"""Post YouTube videos to the CumquatVibes Facebook page and group."""
+"""Post YouTube videos to channel-specific Facebook pages and the shared group."""
 
 import json
 import os
@@ -9,6 +9,7 @@ from utils.telemetry import log_facebook_post
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONFIG_PATH = os.path.join(BASE_DIR, "channels_config.json")
+FB_TOKENS_PATH = os.path.join(BASE_DIR, "facebook_page_tokens.json")
 
 # Load env vars from both .env files (tokens may be split across them)
 try:
@@ -17,6 +18,29 @@ try:
     load_dotenv(os.path.join(os.path.dirname(BASE_DIR), "shopify-theme", ".env"))
 except ImportError:
     pass
+
+
+def _load_channel_page_tokens():
+    """Load per-channel Facebook page tokens from facebook_page_tokens.json."""
+    if os.path.exists(FB_TOKENS_PATH):
+        try:
+            with open(FB_TOKENS_PATH) as f:
+                return json.load(f)
+        except (json.JSONDecodeError, IOError):
+            pass
+    return {}
+
+
+def _get_page_token_for_channel(channel):
+    """Get the Facebook page ID and access token for a specific channel.
+    Falls back to the default FACEBOOK_PAGE_* env vars if no channel-specific token exists.
+    """
+    tokens = _load_channel_page_tokens()
+    if channel in tokens:
+        entry = tokens[channel]
+        return entry.get("page_id", ""), entry.get("access_token", "")
+    # Fallback to default page from env
+    return os.getenv("FACEBOOK_PAGE_ID", ""), os.getenv("FACEBOOK_PAGE_ACCESS_TOKEN", "")
 
 
 def _load_caption_template(key):
@@ -83,19 +107,21 @@ def post_to_facebook_group(video_title, video_url, channel, is_short=False):
 
 
 def post_to_facebook_page(video_title, video_url, channel, is_short=False):
-    """Post a YouTube video link to the Facebook page.
+    """Post a YouTube video link to the channel's Facebook page.
+
+    Routes to the channel-specific Facebook page if configured in
+    facebook_page_tokens.json, otherwise falls back to the default page.
 
     Never raises — logs and returns on failure so the upload pipeline isn't blocked.
     Returns (success, post_id_or_error).
     """
-    token = os.getenv("FACEBOOK_PAGE_ACCESS_TOKEN", "")
-    page_id = os.getenv("FACEBOOK_PAGE_ID", "")
+    page_id, token = _get_page_token_for_channel(channel)
 
     if not token or len(token) < 40:
-        print("  SKIP facebook page: FACEBOOK_PAGE_ACCESS_TOKEN missing or invalid")
+        print(f"  SKIP facebook page: no token for {channel}")
         return False, "missing_token"
     if not page_id:
-        print("  SKIP facebook page: FACEBOOK_PAGE_ID not set")
+        print(f"  SKIP facebook page: no page_id for {channel}")
         return False, "missing_page_id"
 
     template = _load_caption_template("youtube_to_facebook_page")
@@ -103,13 +129,13 @@ def post_to_facebook_page(video_title, video_url, channel, is_short=False):
     message = template.format(
         hook_line=f"New {video_type} from {channel}: {video_title}",
         youtube_link=video_url,
-        hashtags=f"#CumquatVibes #{channel.replace(' ', '')}",
+        hashtags=f"#{channel.replace(' ', '')}",
     )
 
     url = f"https://graph.facebook.com/v24.0/{page_id}/feed"
-    ok, result = _post_to_facebook(url, message, video_url, token, "page")
+    ok, result = _post_to_facebook(url, message, video_url, token, f"page:{channel}")
     if ok:
-        log_facebook_post(video_title, result, target="page")
+        log_facebook_post(video_title, result, target=f"page:{channel}")
     return ok, result
 
 

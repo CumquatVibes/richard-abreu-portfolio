@@ -5,17 +5,40 @@ Shared module used by batch_produce.py, overnight_produce.py, and assemble_video
 
 import math
 import os
+import random
 import shutil
 import subprocess
 
-# Ken Burns effect presets — 6 effects cycled through segments
+# Ken Burns effect presets — 14 effects, randomized per video to reduce repetition
 KEN_BURNS_EFFECTS = {
-    0: "zoompan=z='min(zoom+0.0008,1.15)':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)'",
-    1: "zoompan=z='if(eq(on,1),1.15,max(zoom-0.0008,1.0))':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)'",
+    # Slow zoom in (center)
+    0: "zoompan=z='min(zoom+0.0006,1.12)':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)'",
+    # Slow zoom out (center)
+    1: "zoompan=z='if(eq(on,1),1.15,max(zoom-0.0006,1.0))':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)'",
+    # Pan left to right
     2: "zoompan=z='1.08':x='(iw/zoom-ow)/(FRAMES)*on':y='(ih-oh)/2'",
+    # Pan right to left
     3: "zoompan=z='1.08':x='(iw/zoom-ow)-((iw/zoom-ow)/(FRAMES))*on':y='(ih-oh)/2'",
-    4: "zoompan=z='min(zoom+0.001,1.2)':x='0':y='0'",
-    5: "zoompan=z='min(zoom+0.001,1.2)':x='iw/zoom-ow':y='ih/zoom-oh'",
+    # Zoom in from top-left
+    4: "zoompan=z='min(zoom+0.0008,1.18)':x='0':y='0'",
+    # Zoom in from bottom-right
+    5: "zoompan=z='min(zoom+0.0008,1.18)':x='iw/zoom-ow':y='ih/zoom-oh'",
+    # Zoom in from top-right
+    6: "zoompan=z='min(zoom+0.0008,1.18)':x='iw/zoom-ow':y='0'",
+    # Zoom in from bottom-left
+    7: "zoompan=z='min(zoom+0.0008,1.18)':x='0':y='ih/zoom-oh'",
+    # Gentle zoom out from top-left
+    8: "zoompan=z='if(eq(on,1),1.18,max(zoom-0.0007,1.0))':x='0':y='0'",
+    # Gentle zoom out from bottom-right
+    9: "zoompan=z='if(eq(on,1),1.18,max(zoom-0.0007,1.0))':x='iw/zoom-ow':y='ih/zoom-oh'",
+    # Diagonal pan: top-left to bottom-right
+    10: "zoompan=z='1.06':x='(iw/zoom-ow)/(FRAMES)*on':y='(ih/zoom-oh)/(FRAMES)*on'",
+    # Diagonal pan: bottom-right to top-left
+    11: "zoompan=z='1.06':x='(iw/zoom-ow)-((iw/zoom-ow)/(FRAMES))*on':y='(ih/zoom-oh)-((ih/zoom-oh)/(FRAMES))*on'",
+    # Pan top to bottom (vertical)
+    12: "zoompan=z='1.08':x='(iw-ow)/2':y='(ih/zoom-oh)/(FRAMES)*on'",
+    # Pan bottom to top (vertical)
+    13: "zoompan=z='1.08':x='(iw-ow)/2':y='(ih/zoom-oh)-((ih/zoom-oh)/(FRAMES))*on'",
 }
 
 
@@ -33,12 +56,13 @@ def _build_segment(img_path, seg_duration, effect_idx, output_path, fps=30):
     """Build a single Ken Burns segment MP4 from an image."""
     total_frames = int(seg_duration * fps)
     effect_str = KEN_BURNS_EFFECTS[effect_idx].replace("FRAMES", str(total_frames))
-    filter_str = f"scale=2560:-1,{effect_str}:d={total_frames}:s=1920x1080:fps={fps},format=yuv420p"
+    # Scale with lanczos for sharper resampling; encode at CRF 18 for better quality
+    filter_str = f"scale=2560:-1:flags=lanczos,{effect_str}:d={total_frames}:s=1920x1080:fps={fps},format=yuv420p"
 
     cmd = [
         "ffmpeg", "-y", "-loop", "1", "-i", img_path,
         "-vf", filter_str, "-t", str(seg_duration),
-        "-c:v", "libx264", "-preset", "fast", "-crf", "23",
+        "-c:v", "libx264", "-preset", "medium", "-crf", "18",
         "-pix_fmt", "yuv420p", output_path
     ]
     result = subprocess.run(cmd, capture_output=True, text=True)
@@ -85,6 +109,11 @@ def assemble_video(audio_path, broll_dir, output_path, segment_duration=8,
     segment_files = []
     fps = 30
 
+    # Shuffle effects per video so no two videos have the same pattern
+    num_effects = len(KEN_BURNS_EFFECTS)
+    effect_order = list(range(num_effects))
+    random.shuffle(effect_order)
+
     for i in range(num_segments):
         start = i * segment_duration
         seg_dur = min(segment_duration, duration - start)
@@ -100,7 +129,7 @@ def assemble_video(audio_path, broll_dir, output_path, segment_duration=8,
             continue
 
         img_idx = i % len(images)
-        effect_idx = i % 6
+        effect_idx = effect_order[i % num_effects]
 
         if verbose:
             print(f"    [{i+1}/{num_segments}] {os.path.basename(images[img_idx])} "
@@ -167,7 +196,7 @@ def _concat_simple(segment_files, temp_dir):
     concat_output = os.path.join(temp_dir, "video_only.mp4")
     cmd = [
         "ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", concat_file,
-        "-c:v", "libx264", "-preset", "fast", "-crf", "22",
+        "-c:v", "libx264", "-preset", "medium", "-crf", "18",
         "-pix_fmt", "yuv420p", concat_output
     ]
     result = subprocess.run(cmd, capture_output=True, text=True)
@@ -234,7 +263,7 @@ def _concat_with_crossfade(segment_files, temp_dir, crossfade_dur, verbose=True)
         *inputs,
         "-filter_complex", filter_complex,
         "-map", "[outv]",
-        "-c:v", "libx264", "-preset", "fast", "-crf", "22",
+        "-c:v", "libx264", "-preset", "medium", "-crf", "18",
         "-pix_fmt", "yuv420p",
         concat_output
     ]

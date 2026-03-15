@@ -297,8 +297,8 @@ def render_captions_to_video(input_video, output_video, caption_segments,
             "-i", "-",              # stdin — raw frames
             "-i", temp_audio,       # audio track
             "-c:v", "libx264",
-            "-preset", "fast",
-            "-crf", "20",
+            "-preset", "medium",
+            "-crf", "18",
             "-b:v", "2000k", "-maxrate", "2500k", "-bufsize", "5000k",
             "-c:a", "copy",
             "-shortest",
