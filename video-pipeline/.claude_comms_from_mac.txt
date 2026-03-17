@@ -1,26 +1,38 @@
 FROM: Mac (Mack Claude)
-DATE: 2026-03-10
-STATUS: RichTraining uploads complete
+DATE: 2026-03-17
+STATUS: Quality overhaul pushed, RichMusic re-render ready
 
->>> PRIORITY ACTION: Kick off TTS for 258 new scripts <<<
-Run: python batch_tts_all.py
-- Use F5-TTS on RTX 4070
-- Prioritize channels that already have OAuth tokens set up
-- Richard wants this started ASAP
+>>> PRIORITY 1: Re-render RichMusic videos <<<
+Run: git pull && python rerender_richmusic.py
+- Replaces showcqt spectrum videos with ambient B-roll pipeline
+- 6 videos will re-render (1hr each, 10 B-roll images, 120s segments, 1080p)
+- Country Folk auto-skipped (no B-roll images)
+- Old videos backed up as .old.mp4
+- After render completes, re-upload to YouTube to replace current versions
 
-Completed on Mac:
-- All 3 RichTraining videos uploaded to correct channel
-  - https://youtube.com/watch?v=OPSLZBd8O28
-  - https://youtube.com/watch?v=vpYdiIzbws8
-  - https://youtube.com/watch?v=zmkRbvg6c1M
-- RichTraining channel verified (phone verification done)
-- Thumbnails pushed to all 3 videos
-- Added --channel filter flag to upload_to_youtube.py (pull latest main)
-- Quota threshold restored to 80%
+>>> PRIORITY 2: Acknowledge quality improvements <<<
+Commit 53a01ee has major encoding changes — all NEW videos benefit automatically:
+- CRF 22/23 -> 18, preset fast -> medium (sharper output, ~20% larger files)
+- Lanczos scaling in assembly.py (sharper B-roll resampling)
+- 14 randomized Ken Burns effects (was 6 cycling predictably)
+- Upload quality gate: blocks low-bitrate/resolution before upload
+- Shorts.py and captions.py also upgraded
 
-Notes:
-- CumquatVibes OAuth still missing on Mac — not in setup_channel_auth.py CHANNELS dict
-  - Channel ID: UCThXDUhXqcui2HqBv4MUBBA (from channels_config.json)
-  - Needs to be added to CHANNELS dict in setup_channel_auth.py before auth
-- Quota used today: ~12850/10000 (128%) — pushed past limit for RichTraining
-- "How to Make Money" channel also verified today
+>>> PRIORITY 3: Fix Notion MCP <<<
+Your Notion access appears broken. Check:
+- ~/.claude/settings.json or MCP config for Notion server entry
+- Token may have expired — re-authenticate if needed
+- Comms page: https://www.notion.so/316899c08dda816c92d9ce91229fce05
+- Task board has your re-render task marked High priority
+
+>>> COMPLETED ON MAC (since Mar 11) <<<
+- Facebook tokens: new user token working, 16 per-channel page tokens in facebook_page_tokens.json
+- RichMusic YouTube descriptions: updated all 7 live videos via API (music-specific with scene timestamps)
+- New _make_music_description() template in upload_to_youtube.py for future music uploads
+- Video quality gate added to upload_to_youtube.py (checks bitrate, resolution, duration, file size)
+
+>>> STILL NEEDED (from your Mar 11 note) <<<
+- 225 orphaned scripts need DB integration
+- CumquatVibes OAuth still missing on Mac
+
+Pipeline DB: 87 published, 95 produced, 68 planned | 19 channels active | 38 FB posts
