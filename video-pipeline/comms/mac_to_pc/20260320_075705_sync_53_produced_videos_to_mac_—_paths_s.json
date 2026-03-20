@@ -1,0 +1,11 @@
+{
+  "from": "mac",
+  "to": "pc",
+  "created": "2026-03-20T07:57:05.863223",
+  "priority": "high",
+  "status": "pending",
+  "type": "sync_videos",
+  "subject": "Sync 53 produced videos to Mac \u2014 paths still point to D:\\",
+  "details": "Sync 53 produced videos to Mac \u2014 paths still point to D:\\",
+  "completed_at": null
+}

@@ -4,18 +4,11 @@
 import json
 import os
 import re
-import subprocess
 import sys
 import time
-from datetime import datetime, timedelta
+from datetime import datetime
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError
-
-try:
-    from utils.competitive import get_competitive_brief
-except ImportError:
-    def get_competitive_brief(channel_key):
-        return ""
 
 API_KEY = os.environ.get("GEMINI_API_KEY", "")
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -27,7 +20,7 @@ DONE_CHANNELS = {
     "how_to_use_ai", "rich_music", "eva_reyes", "cumquat_vibes"
 }
 
-SCRIPTS_PER_CHANNEL = 1
+SCRIPTS_PER_CHANNEL = 3
 
 
 def load_config():
@@ -68,41 +61,52 @@ def gemini_call(prompt, model="gemini-2.0-flash", retries=3):
     return None
 
 
+def _load_brand_config():
+    """Load brand_config.json for CumquatVibes-specific prompts."""
+    path = os.path.join(BASE_DIR, "brand_config.json")
+    if os.path.exists(path):
+        with open(path) as f:
+            return json.load(f)
+    return {}
+
+
 def generate_topics(channel_key, channel_config, count=3):
     """Generate video topic ideas for a channel."""
     niche = channel_config.get("niche", "general")
     sub_topics = channel_config.get("sub_topics", [])
     formats = channel_config.get("formats", ["listicle"])
     name = channel_config.get("name", channel_key)
+    is_faceless = channel_config.get("faceless", True)
 
-    # Fetch competitive intelligence (cached, free on repeat calls)
-    comp_brief = get_competitive_brief(channel_key)
-    comp_section = ""
-    if comp_brief:
-        comp_section = f"""
+    # Load title formulas from brand_config for CumquatVibes
+    title_formula_hint = ""
+    if channel_key == "cumquat_vibes":
+        brand = _load_brand_config()
+        formulas = brand.get("seo_templates", {}).get("title_formulas", [])
+        if formulas:
+            examples = "\n".join(f"  - {f}" for f in formulas[:6])
+            title_formula_hint = f"""
+Title formula examples to follow (adapt to each topic):
+{examples}
+"""
 
-COMPETITIVE INTELLIGENCE (from a top-performing video in this niche):
-{comp_brief}
+    channel_type = "personal creator" if not is_faceless else "faceless"
 
-Use these insights to adapt successful title formulas and trending angles. Your titles should be AS STRONG or STRONGER than the competitor's."""
-
-    today = datetime.now().strftime("%B %d, %Y")
-
-    prompt = f"""Generate exactly {count} YouTube video topics for '{name}', a faceless {niche} channel.
-
-TODAY'S DATE: {today}
+    prompt = f"""Generate exactly {count} YouTube video topics for '{name}', a {channel_type} {niche} channel.
 
 Sub-topics: {', '.join(sub_topics[:6])}
 Preferred formats: {', '.join(formats[:3])}
-{comp_section}
+{title_formula_hint}
 Requirements:
-- Topics MUST be relevant to what's trending THIS WEEK in {niche}
-- Tie into current events, new releases, recent news, or seasonal moments happening right now
-- Specific, clickable video titles optimized for YouTube search
-- Use numbers when relevant (Top 7, 5 Best, etc.)
+- Specific, clickable video titles optimized for YouTube search in 2026
+- Mix evergreen + trending topics
+- EVERY title MUST include at least one number (Top 7, 5 Best, 3 Secrets, etc.) — numbers boost CTR by ~36%
+- EVERY title MUST include at least one power word from this list: SECRET, TRUTH, PROVEN, SHOCKING, ULTIMATE, INSANE, BRUTAL, HIDDEN, DEADLY, GENIUS, EPIC, UNBELIEVABLE, GUARANTEED, DEVASTATING, LEGENDARY
 - Curiosity-driven but not misleading clickbait
 - Each title should stand alone as a compelling video
-- Do NOT generate generic evergreen filler — every topic should feel timely and urgent
+- Titles should be 40-70 characters for optimal search display
+- Include the primary keyword near the front of the title
+- Front-load the most important/searchable words before any em dash or colon
 
 Return ONLY the titles, one per line, no numbering, no bullets, no quotes."""
 
@@ -122,22 +126,32 @@ def generate_script(channel_key, channel_config, topic, config):
     sub_topics = channel_config.get("sub_topics", [])
     formats = channel_config.get("formats", ["listicle"])
     format_name = formats[0] if formats else "listicle"
+    is_faceless = channel_config.get("faceless", True)
 
     # Get format config
     fmt = config.get("content_formats", {}).get(format_name, {})
     word_count = fmt.get("word_count", 1200)
     structure = fmt.get("structure", "hook → numbered items → recap → CTA")
 
-    # Fetch competitive intelligence (cache hit from generate_topics, free)
-    comp_brief = get_competitive_brief(channel_key)
-    comp_section = ""
-    if comp_brief:
-        comp_section = f"""
+    # Voice/persona rules differ for faceless vs personal channels
+    if is_faceless:
+        voice_rules = """2. Use conversational, engaging narration style (faceless voiceover)
+3. Use "we", "let's", or address the viewer directly with "you"
+4. NO references to "me", "my face", or any visual self-references"""
+    else:
+        voice_rules = """2. Use first-person narration — this is a personal creator channel hosted by Rich (Richard Abreu)
+3. Speak directly to the viewer: "I", "my", "let me show you"
+4. Be authentic and conversational — like talking to a friend who wants to learn"""
 
-COMPETITIVE INTELLIGENCE (from a top-performing video in this niche):
-{comp_brief}
-
-Apply the hook technique and actionable takeaways from above. Your hook MUST be as strong or stronger than the competitor's.
+    # CumquatVibes gets design-specific SEO guidance
+    seo_hint = ""
+    if channel_key == "cumquat_vibes":
+        seo_hint = """
+SEO OPTIMIZATION (CRITICAL for this channel):
+- Include the primary tool name (e.g., "Adobe Fresco", "Affinity Designer") in the first sentence
+- Mention specific techniques or features by name
+- Reference the year (2026) if it's a comparison, review, or "best of" video
+- End with a CTA that mentions the Cumquat Vibes shop: cumquatvibes.com
 """
 
     prompt = f"""Write a complete YouTube video script for the channel '{name}' ({niche}).
@@ -148,36 +162,29 @@ FORMAT: {format_name}
 STRUCTURE: {structure}
 TARGET WORD COUNT: {word_count} words
 TARGET DURATION: {fmt.get('duration_target', '8-12 min')}
-{comp_section}
+
 SCRIPT REQUIREMENTS:
-1. HOOK: Use the "Result First" pattern — SHOW the end result in the first 5 seconds (e.g., a working API response, a completed setup screen), THEN explain how to get there. Never open with generic statements like "AI is changing everything."
-2. For tutorials: deliver EXACTLY what the title promises. If the title says "How to Get X API Key", the script MUST walk through the actual steps (sign up, navigate to dashboard, create key, copy it).
-3. Use conversational, engaging narration style (faceless voiceover)
-4. Include [VISUAL: description] directions for B-roll throughout — vary the visual types (screenshots, code editors, terminal output, diagrams). Do NOT repeat the same visual pattern.
-5. End with a strong CTA: ask viewers to SUBSCRIBE, hit the BELL icon to get notified of new videos, and leave a COMMENT with their thoughts or questions. Make the CTA conversational, not robotic — give them a specific comment prompt related to the video topic.
-6. Include chapter markers as ## headers
-7. Do NOT use filler phrases like "without further ado", "in today's video", or "prices may vary"
-8. Do NOT fabricate stories or companies. Only reference real, verifiable incidents with correct dates and company names.
-9. Do NOT include speculative "by 2026" predictions. Use present tense — "In 2026, the process is..."
-10. Be factual and well-researched — include specific data points
-11. The first 30 seconds must be the most compelling part of the entire script
-12. Each section should have 2-3 [VISUAL:] directions
-13. For API tutorials: include a working code example (Python preferred) showing the first API call
-
-HUMANIZER RULES — the script MUST sound like a real person wrote it:
-- NEVER use these AI words: additionally, crucial, delve, enhance, foster, garner, landscape, pivotal, showcase, tapestry, testament, underscore, vibrant, nestled, groundbreaking, breathtaking
-- NEVER use significance inflation ("stands as", "serves as a testament", "marking a pivotal moment")
-- NEVER use superficial -ing analysis ("highlighting", "underscoring", "emphasizing", "reflecting")
-- NEVER use the rule of three pattern (listing exactly 3 things to sound comprehensive)
-- NEVER use negative parallelisms ("It's not just X; it's Y")
-- NEVER use em dash overuse — keep to 1-2 per script max
-- NEVER use promotional language ("boasts", "stunning", "must-see")
-- Vary sentence length naturally — short punchy lines mixed with longer ones
-- Have opinions. React to facts, don't just report them
-- Use "is/are/has" instead of "serves as/stands as/features"
-- Be specific over vague — cite real numbers, real tools, real examples
-- Write like you're explaining to a friend, not presenting to a board
-
+1. START with a powerful hook in the FIRST 10 seconds — a shocking stat, provocative question, or bold claim that makes viewers stay
+{voice_rules}
+5. Include [VISUAL: description] directions for B-roll throughout
+6. End with a clear CTA (subscribe, like, comment prompt)
+7. Include chapter markers as ## headers with TIMESTAMPS (e.g., ## Hook (0:00-0:30), ## Chapter 1: Title (0:30-2:15))
+8. Do NOT use filler phrases like "without further ado" or "in today's video"
+9. Be factual and well-researched — include specific data points
+10. The first 30 seconds must be the most compelling part of the entire script
+11. Each section should have 2-3 [VISUAL:] directions
+12. Include a DESCRIPTION BLOCK at the end of the script between markers like this:
+    [DESCRIPTION_START]
+    Write a 200-400 character YouTube description with:
+    - A compelling first line (shows in search results)
+    - 3-5 relevant hashtags
+    - Primary keyword in the first sentence
+    [DESCRIPTION_END]
+13. Include a TAGS BLOCK at the end:
+    [TAGS_START]
+    Provide 12-15 comma-separated tags relevant to this video topic, including long-tail keywords
+    [TAGS_END]
+{seo_hint}
 OUTPUT FORMAT:
 ---
 title: {topic}
@@ -241,7 +248,6 @@ def main():
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     total_scripts = 0
     failed_channels = []
-    channels_with_new_scripts = []
 
     print("=" * 64)
     print(f"  BATCH SCRIPT GENERATION — {len(ordered)} channels x {SCRIPTS_PER_CHANNEL} scripts")
@@ -270,19 +276,11 @@ def main():
         print(f"\n[{idx}/{len(ordered)}] {ch_name} ({ch_key})")
         print("-" * 50)
 
-        # Check if scripts already exist, filtering out stale ones (>14 days)
-        cutoff = datetime.now() - timedelta(days=14)
-        existing = []
-        for f in os.listdir(SCRIPTS_DIR):
-            if f.startswith(prefix) and f.endswith(".txt"):
-                fpath = os.path.join(SCRIPTS_DIR, f)
-                file_mtime = datetime.fromtimestamp(os.path.getmtime(fpath))
-                if file_mtime < cutoff:
-                    print(f"  EXPIRED: {f} (older than 14 days)")
-                else:
-                    existing.append(f)
+        # Check if scripts already exist
+        existing = [f for f in os.listdir(SCRIPTS_DIR)
+                    if f.startswith(prefix) and f.endswith(".txt")]
         if len(existing) >= SCRIPTS_PER_CHANNEL:
-            print(f"  SKIP: Already has {len(existing)} fresh scripts")
+            print(f"  SKIP: Already has {len(existing)} scripts")
             total_scripts += len(existing)
             continue
 
@@ -320,8 +318,6 @@ def main():
                 word_count = len(script.split())
                 print(f"    -> {filename[:70]}... ({word_count} words)")
                 total_scripts += 1
-                if prefix not in channels_with_new_scripts:
-                    channels_with_new_scripts.append(prefix)
             else:
                 print(f"    -> FAILED")
                 failed_channels.append(f"{ch_key}:{topic[:30]}")
@@ -338,32 +334,6 @@ def main():
         for f in failed_channels:
             print(f"    x {f}")
     print(f"{'=' * 64}")
-
-    # Auto-trigger shorts production for channels that got new scripts
-    if channels_with_new_scripts:
-        shorts_script = os.path.join(BASE_DIR, "batch_produce_shorts.py")
-        print(f"\n{'=' * 64}")
-        print(f"  SHORTS PRODUCTION — {len(channels_with_new_scripts)} channels")
-        print(f"{'=' * 64}")
-        for ch_prefix in channels_with_new_scripts:
-            print(f"\n  Producing short for {ch_prefix}...")
-            cmd = [sys.executable, shorts_script, "--path-a",
-                   "--channel", ch_prefix, "--max-clips", "1"]
-            try:
-                result = subprocess.run(cmd, capture_output=True, text=True, timeout=300)
-                if result.returncode == 0:
-                    print(f"    -> Short produced for {ch_prefix}")
-                else:
-                    print(f"    -> Short production failed for {ch_prefix}")
-                    if result.stderr:
-                        print(f"       {result.stderr[:200]}")
-            except subprocess.TimeoutExpired:
-                print(f"    -> Timed out producing short for {ch_prefix}")
-            except Exception as e:
-                print(f"    -> Error: {e}")
-        print(f"\n{'=' * 64}")
-        print(f"  SHORTS PRODUCTION COMPLETE")
-        print(f"{'=' * 64}")
 
 
 if __name__ == "__main__":

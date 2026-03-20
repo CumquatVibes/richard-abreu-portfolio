@@ -145,7 +145,9 @@ TOKEN_KEY_MAP = {
     "EvaReyes": "Eva Reyes",
     "RichBusiness": "Rich Business",
     "CumquatMotivation": "Cumquat Motivation",
-    "CumquatVibes": "Cumquat Vibes",
+    "CumquatVibes": "CumquatVibes",
+    "CumquatGaming": "CumquatGaming",
+    "CumquatShortform": "CumquatShortform",
 }
 
 CHANNEL_NICHE = {
@@ -1601,6 +1603,57 @@ def run_video_quality_gate(filepath, channel):
     return len(issues) == 0, issues
 
 
+POWER_WORDS = {
+    "secret", "truth", "proven", "shocking", "ultimate", "insane", "brutal",
+    "hidden", "deadly", "genius", "epic", "unbelievable", "guaranteed",
+    "devastating", "legendary", "incredible", "powerful", "essential",
+    "critical", "explosive", "terrifying", "mysterious", "stunning",
+    "mind-blowing", "game-changing", "life-changing", "unstoppable",
+}
+
+
+def validate_seo(title, description, tags, channel):
+    """Validate SEO quality of video metadata before upload.
+
+    Returns list of warning strings. Empty list = all good.
+    Does NOT block upload — just logs warnings for monitoring.
+    """
+    warnings = []
+
+    # 1. Power words in title
+    title_lower = title.lower()
+    if not any(pw in title_lower for pw in POWER_WORDS):
+        warnings.append("SEO: Title missing power words (SECRET, PROVEN, HIDDEN, etc.)")
+
+    # 2. Numbers in title
+    if not re.search(r'\d', title):
+        warnings.append("SEO: Title has no numbers (numbers boost CTR ~36%)")
+
+    # 3. Title length
+    if len(title) < 30:
+        warnings.append(f"SEO: Title too short ({len(title)} chars, aim for 40-70)")
+    elif len(title) > 80:
+        warnings.append(f"SEO: Title too long ({len(title)} chars, aim for 40-70)")
+
+    # 4. Tag count
+    if len(tags) < 8:
+        warnings.append(f"SEO: Only {len(tags)} tags (minimum 8 recommended)")
+
+    # 5. Description length
+    if len(description) < 200:
+        warnings.append(f"SEO: Description too short ({len(description)} chars, min 200)")
+
+    # 6. Hashtags in description
+    if "#" not in description:
+        warnings.append("SEO: No hashtags in description")
+
+    if warnings:
+        for w in warnings:
+            print(f"  {w}")
+
+    return warnings
+
+
 def run_preflight(video_file, channel, title, description, tags, script_path):
     """Run compliance preflight check before uploading.
 
@@ -1762,6 +1815,9 @@ def main():
         # Override category based on title keywords (prevents tech reviews
         # landing in "People & Blogs" when the channel default is generic).
         category_id = detect_category_from_title(title, category_id)
+
+        # SEO quality check (logs warnings, does not block)
+        seo_warnings = validate_seo(title, description, tags, channel)
 
         filepath = os.path.join(VIDEOS_DIR, video_file)
         size_mb = os.path.getsize(filepath) / (1024 * 1024)

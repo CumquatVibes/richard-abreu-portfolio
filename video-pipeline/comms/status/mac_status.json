@@ -1,0 +1,117 @@
+{
+  "machine": "mac",
+  "generated_at": "2026-03-20T07:57:08.997146",
+  "hostname": "Richards-Mac-mini.local",
+  "pipeline_db": {
+    "totals": {
+      "planned": 314,
+      "produced": 176,
+      "published": 93
+    },
+    "produced_by_channel": {
+      "RichEducation": 21,
+      "RichHistory": 9,
+      "RichCars": 8,
+      "RichArt": 7,
+      "RichBusiness": 6,
+      "RichBeauty": 6,
+      "RichVlogging": 5,
+      "RichTravel": 5,
+      "RichPhotography": 5,
+      "RichMovie": 5,
+      "RichMemes": 5,
+      "RichLifestyle": 5,
+      "RichKids": 5,
+      "RichGaming": 5,
+      "RichFood": 5,
+      "RichFitness": 5,
+      "RichFashion": 5,
+      "RichFamily": 5,
+      "RichDesign": 5,
+      "RichDance": 5,
+      "CumquatMotivation": 5,
+      "RichNature": 4,
+      "RichCooking": 4,
+      "HowToMeditate": 4,
+      "RichTraining": 3,
+      "RichScience": 3,
+      "RichFinance": 3,
+      "RichDiy": 3,
+      "RichComedy": 3,
+      "RichTech": 2,
+      "RichMind": 2,
+      "RichCrypto": 2,
+      "RichAnimation": 2,
+      "HowToUseAI": 2,
+      "RichPets": 1,
+      "RichMusic": 1,
+      "RichHorror": 1,
+      "RichDIY": 1,
+      "EvaReyes": 1,
+      "CumquatVibes": 1,
+      "CumquatShortform": 1
+    },
+    "pc_only_videos": 53,
+    "need_tts": 314,
+    "recent_uploads": [
+      {
+        "channel": "RichDIY",
+        "topic": "Satisfying DIY Crafts Compilation",
+        "published_at": "2026-03-20 08:01:45"
+      },
+      {
+        "channel": "RichCooking",
+        "topic": "RichCooking_7_Genius_Kitchen_Gadgets_Under_20_That_Will_Save_You_Time_and_Money",
+        "published_at": "2026-03-20 08:01:23"
+      },
+      {
+        "channel": "RichComedy",
+        "topic": "RichComedy_Funniest_AI_Fails_of_February_2026_Robots_Gone_Wild",
+        "published_at": "2026-03-20 08:00:58"
+      },
+      {
+        "channel": "RichCars",
+        "topic": "RichCars_7_Forgotten_Supercar_Styling_Trends_That_NEED_to_Make_a_Comeback",
+        "published_at": "2026-03-20 08:00:29"
+      },
+      {
+        "channel": "RichArt",
+        "topic": null,
+        "published_at": "2026-03-19 07:34:02"
+      }
+    ]
+  },
+  "disk": {
+    "videos": {
+      "count": 249
+    },
+    "audio": {
+      "count": 59
+    },
+    "scripts": {
+      "count": 530
+    }
+  },
+  "cron": {
+    "daily_upload": {
+      "last_modified": "2026-03-20T04:02:03.530541",
+      "age_hours": 3.9,
+      "healthy": true
+    },
+    "daily_analysis": {
+      "last_modified": "2026-03-20T06:01:48.224257",
+      "age_hours": 1.9,
+      "healthy": true
+    },
+    "seo_audit": {
+      "last_modified": "2026-03-20T05:06:52.210381",
+      "age_hours": 2.8,
+      "healthy": true
+    },
+    "facebook_bot": {
+      "last_modified": "2026-03-20T07:08:20.639115",
+      "age_hours": 0.8,
+      "healthy": true
+    }
+  }
+}
