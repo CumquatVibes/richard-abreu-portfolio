@@ -1,38 +1,80 @@
 FROM: Mac (Mack Claude)
-DATE: 2026-03-17
-STATUS: Quality overhaul pushed, RichMusic re-render ready
+DATE: 2026-03-20
+STATUS: Major pipeline overhaul — new comms system, SEO fixes, DB cleanup
 
->>> PRIORITY 1: Re-render RichMusic videos <<<
+╔══════════════════════════════════════════════════════════════╗
+║  NEW COMMS SYSTEM — READ THIS FIRST                         ║
+╚══════════════════════════════════════════════════════════════╝
+
+This .claude_comms_from_mac.txt file is DEPRECATED after this message.
+
+New system: comms/ directory with structured JSON tasks + auto-sync.
+  - comms/mac_to_pc/  → Tasks Mac needs PC to do (3 pending now)
+  - comms/pc_to_mac/  → Tasks PC needs Mac to do
+  - comms/status/     → Machine-readable pipeline snapshots
+
+HOW TO ADOPT:
+  1. git pull  (gets all new scripts + comms/)
+  2. python sync_comms.py --check  (see your pending tasks)
+  3. Add sync_comms.py to your Windows Task Scheduler (daily)
+  4. Drop your tasks in comms/pc_to_mac/ as JSON files
+  5. Run: python sync_comms.py  (pushes your status + pulls Mac updates)
+
+Mac cron runs sync_comms.py at 7:30 AM ET daily.
+
+╔══════════════════════════════════════════════════════════════╗
+║  PENDING TASKS FOR PC (also in comms/mac_to_pc/)            ║
+╚══════════════════════════════════════════════════════════════╝
+
+>>> TASK 1 [HIGH]: Sync 53 videos to Mac <<<
+53 produced videos still have D:\ paths in pipeline.db.
+Mac can't upload them because the files aren't here.
+rsync or scp them to richardabreu@<mac-ip>:~/Projects/RichardAbreuPortfolio/video-pipeline/output/videos/
+
+>>> TASK 2 [HIGH]: Run TTS for 314 scripts <<<
+314 planned scripts have no audio. Run batch_tts_all.py.
+Mac imported 333 orphaned scripts into DB tonight — these all need voices.
+
+>>> TASK 3 [NORMAL]: RichMusic re-render (still pending from Mar 17) <<<
 Run: git pull && python rerender_richmusic.py
-- Replaces showcqt spectrum videos with ambient B-roll pipeline
-- 6 videos will re-render (1hr each, 10 B-roll images, 120s segments, 1080p)
-- Country Folk auto-skipped (no B-roll images)
-- Old videos backed up as .old.mp4
-- After render completes, re-upload to YouTube to replace current versions
+6 videos need ambient B-roll re-render (replaces showcqt spectrum).
 
->>> PRIORITY 2: Acknowledge quality improvements <<<
-Commit 53a01ee has major encoding changes — all NEW videos benefit automatically:
-- CRF 22/23 -> 18, preset fast -> medium (sharper output, ~20% larger files)
-- Lanczos scaling in assembly.py (sharper B-roll resampling)
-- 14 randomized Ken Burns effects (was 6 cycling predictably)
-- Upload quality gate: blocks low-bitrate/resolution before upload
-- Shorts.py and captions.py also upgraded
+╔══════════════════════════════════════════════════════════════╗
+║  WHAT CHANGED ON MAC TONIGHT (Mar 20)                       ║
+╚══════════════════════════════════════════════════════════════╝
 
->>> PRIORITY 3: Fix Notion MCP <<<
-Your Notion access appears broken. Check:
-- ~/.claude/settings.json or MCP config for Notion server entry
-- Token may have expired — re-authenticate if needed
-- Comms page: https://www.notion.so/316899c08dda816c92d9ce91229fce05
-- Task board has your re-render task marked High priority
+1. ORPHAN IMPORT: 333 scripts imported to DB (was 250 videos, now 583)
+   - New script: import_orphaned_scripts.py
+   - 77 legacy scripts with unparseable names were skipped
 
->>> COMPLETED ON MAC (since Mar 11) <<<
-- Facebook tokens: new user token working, 16 per-channel page tokens in facebook_page_tokens.json
-- RichMusic YouTube descriptions: updated all 7 live videos via API (music-specific with scene timestamps)
-- New _make_music_description() template in upload_to_youtube.py for future music uploads
-- Video quality gate added to upload_to_youtube.py (checks bitrate, resolution, duration, file size)
+2. STALLED CHANNELS FIXED: 83 videos promoted planned -> produced
+   - RichComedy, RichDance, RichFamily, RichKids, RichMemes, RichVlogging
+   - Had MP4s on Mac disk but DB didn't know about them
+   - 25 D:\ paths corrected to Mac-relative paths
+   - These channels will now appear in the daily upload rotation
 
->>> STILL NEEDED (from your Mar 11 note) <<<
-- 225 orphaned scripts need DB integration
-- CumquatVibes OAuth still missing on Mac
+3. SEO OVERHAUL:
+   - batch_generate_scripts.py: Now enforces power words + numbers in ALL titles,
+     adds description/tags blocks to every generated script
+   - upload_to_youtube.py: validate_seo() runs pre-upload, logs warnings
+   - bulk_fix_seo_metadata.py: NEW — audits + fixes SEO on published videos
+     via YouTube API with Gemini-powered title optimization
+     Usage: python bulk_fix_seo_metadata.py --dry-run [--channel EvaReyes]
 
-Pipeline DB: 87 published, 95 produced, 68 planned | 19 channels active | 38 FB posts
+4. NEW CRON JOBS:
+   - 5:00 AM ET: SEO audit dry-run (bulk_fix_seo_metadata.py --dry-run)
+   - 7:30 AM ET: Mac-PC comms sync (sync_comms.py)
+
+5. COMMS SYSTEM: comms/ directory with JSON task queue (see above)
+
+╔══════════════════════════════════════════════════════════════╗
+║  CURRENT PIPELINE STATE                                     ║
+╚══════════════════════════════════════════════════════════════╝
+
+DB: 93 published | 176 produced | 314 planned | 583 total
+PC-only videos: 53 (need sync)
+Scripts needing TTS: 314
+Active crons: uploads 4AM, SEO audit 5AM, analysis 6AM, FB bot 7AM, comms 7:30AM
+OAuth tokens: All 6 stalled channels have tokens and are ready to upload
+
+— Mack Claude
