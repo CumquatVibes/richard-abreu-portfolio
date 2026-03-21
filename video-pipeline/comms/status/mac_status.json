@@ -1,15 +1,15 @@
 {
   "machine": "mac",
-  "generated_at": "2026-03-20T07:57:08.997146",
+  "generated_at": "2026-03-21T07:30:00.683588",
   "hostname": "Richards-Mac-mini.local",
   "pipeline_db": {
     "totals": {
       "planned": 314,
-      "produced": 176,
-      "published": 93
+      "produced": 172,
+      "published": 97
     },
     "produced_by_channel": {
-      "RichEducation": 21,
+      "RichEducation": 20,
       "RichHistory": 9,
       "RichCars": 8,
       "RichArt": 7,
@@ -27,19 +27,19 @@
       "RichFitness": 5,
       "RichFashion": 5,
       "RichFamily": 5,
-      "RichDesign": 5,
-      "RichDance": 5,
       "CumquatMotivation": 5,
       "RichNature": 4,
+      "RichDesign": 4,
+      "RichDance": 4,
       "RichCooking": 4,
       "HowToMeditate": 4,
       "RichTraining": 3,
       "RichScience": 3,
       "RichFinance": 3,
-      "RichDiy": 3,
       "RichComedy": 3,
       "RichTech": 2,
       "RichMind": 2,
+      "RichDiy": 2,
       "RichCrypto": 2,
       "RichAnimation": 2,
       "HowToUseAI": 2,
@@ -55,35 +55,35 @@
     "need_tts": 314,
     "recent_uploads": [
       {
+        "channel": "RichEducation",
+        "topic": "10 Free Online Courses That Will Get You Hired in",
+        "published_at": "2026-03-21 08:02:24"
+      },
+      {
+        "channel": "RichDiy",
+        "topic": "RichDiy_5_Genius_Home_Upgrades_You_Can_3D_Print_This_Weekend_February_2026",
+        "published_at": "2026-03-21 08:01:45"
+      },
+      {
+        "channel": "RichDesign",
+        "topic": "RichDesign_7_Typography_Mistakes_KILLING_Your_Designs_and_How_to_Fix_Them",
+        "published_at": "2026-03-21 08:01:16"
+      },
+      {
+        "channel": "RichDance",
+        "topic": "5 Easy TikTok Dance Moves Anyone Can Learn in 10 M",
+        "published_at": "2026-03-21 08:00:50"
+      },
+      {
         "channel": "RichDIY",
         "topic": "Satisfying DIY Crafts Compilation",
         "published_at": "2026-03-20 08:01:45"
-      },
-      {
-        "channel": "RichCooking",
-        "topic": "RichCooking_7_Genius_Kitchen_Gadgets_Under_20_That_Will_Save_You_Time_and_Money",
-        "published_at": "2026-03-20 08:01:23"
-      },
-      {
-        "channel": "RichComedy",
-        "topic": "RichComedy_Funniest_AI_Fails_of_February_2026_Robots_Gone_Wild",
-        "published_at": "2026-03-20 08:00:58"
-      },
-      {
-        "channel": "RichCars",
-        "topic": "RichCars_7_Forgotten_Supercar_Styling_Trends_That_NEED_to_Make_a_Comeback",
-        "published_at": "2026-03-20 08:00:29"
-      },
-      {
-        "channel": "RichArt",
-        "topic": null,
-        "published_at": "2026-03-19 07:34:02"
       }
     ]
   },
   "disk": {
     "videos": {
-      "count": 249
+      "count": 302
     },
     "audio": {
       "count": 59
@@ -94,23 +94,23 @@
   },
   "cron": {
     "daily_upload": {
-      "last_modified": "2026-03-20T04:02:03.530541",
-      "age_hours": 3.9,
+      "last_modified": "2026-03-21T04:02:42.522358",
+      "age_hours": 3.5,
       "healthy": true
     },
     "daily_analysis": {
-      "last_modified": "2026-03-20T06:01:48.224257",
-      "age_hours": 1.9,
+      "last_modified": "2026-03-21T06:01:46.197814",
+      "age_hours": 1.5,
       "healthy": true
     },
     "seo_audit": {
-      "last_modified": "2026-03-20T05:06:52.210381",
-      "age_hours": 2.8,
+      "last_modified": "2026-03-21T05:06:59.153155",
+      "age_hours": 2.4,
       "healthy": true
     },
     "facebook_bot": {
-      "last_modified": "2026-03-20T07:08:20.639115",
-      "age_hours": 0.8,
+      "last_modified": "2026-03-21T07:08:40.306462",
+      "age_hours": 0.4,
       "healthy": true
     }
   }
