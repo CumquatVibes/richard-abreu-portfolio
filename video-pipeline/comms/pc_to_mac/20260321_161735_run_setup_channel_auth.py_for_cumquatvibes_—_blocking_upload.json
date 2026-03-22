@@ -1,0 +1,10 @@
+{
+  "from": "pc",
+  "to": "mac",
+  "created": "2026-03-21T16:17:35.770439",
+  "priority": "critical",
+  "status": "pending",
+  "type": "oauth_setup",
+  "subject": "Run setup_channel_auth.py for CumquatVibes \u2014 blocking uploads since Mar 10",
+  "details": "Channel ID: UCThXDUhXqcui2HqBv4MUBBA. Without this, CumquatVibes videos cannot upload or pull analytics."
+}

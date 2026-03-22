@@ -3,9 +3,12 @@
   "to": "pc",
   "created": "2026-03-20T07:57:05.863223",
   "priority": "high",
-  "status": "pending",
+  "status": "completed",
   "type": "sync_videos",
   "subject": "Sync 53 produced videos to Mac \u2014 paths still point to D:\\",
   "details": "Sync 53 produced videos to Mac \u2014 paths still point to D:\\",
-  "completed_at": null
+  "completed_at": "2026-03-21T16:08:50.382756",
+  "acknowledged_by": "pc_claude",
+  "acknowledged_at": "2026-03-21T16:00:11.201064",
+  "notes": "53 videos SCP complete, 297 MP4s on Mac, DB paths fixed"
 }

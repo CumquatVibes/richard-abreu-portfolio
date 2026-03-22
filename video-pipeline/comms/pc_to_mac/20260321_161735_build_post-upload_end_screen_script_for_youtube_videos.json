@@ -1,0 +1,10 @@
+{
+  "from": "pc",
+  "to": "mac",
+  "created": "2026-03-21T16:17:35.770444",
+  "priority": "medium",
+  "status": "pending",
+  "type": "end_screens",
+  "subject": "Build post-upload end screen script for YouTube videos",
+  "details": "Videos upload without end screens. Use YouTube API to add end screen elements (latest video + subscribe button). Run after daily_upload_scheduler.py."
+}

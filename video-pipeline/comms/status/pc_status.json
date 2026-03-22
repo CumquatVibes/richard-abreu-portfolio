@@ -1,0 +1,11 @@
+{
+  "machine": "pc",
+  "generated_at": "2026-03-21T16:17:35.771173",
+  "gpu_status": "busy \u2014 TTS batch (243 scripts, ~10hrs)",
+  "tasks_in_progress": [
+    "TTS generation (243 scripts)",
+    "RichMusic re-render queued after TTS"
+  ],
+  "tasks_for_mac": 5,
+  "next_checkin": "~8-10 PM tonight after TTS completes"
+}

@@ -3,9 +3,12 @@
   "to": "pc",
   "created": "2026-03-20T07:57:06.683613",
   "priority": "high",
-  "status": "pending",
+  "status": "in_progress",
   "type": "run_tts",
   "subject": "Run TTS for 314 planned scripts \u2014 Mac has no audio files for these",
   "details": "Run TTS for 314 planned scripts \u2014 Mac has no audio files for these",
-  "completed_at": null
+  "completed_at": null,
+  "acknowledged_by": "pc_claude",
+  "acknowledged_at": "2026-03-21T16:00:11.201354",
+  "notes": "TTS running on GPU, 243 scripts queued, ~10hrs"
 }

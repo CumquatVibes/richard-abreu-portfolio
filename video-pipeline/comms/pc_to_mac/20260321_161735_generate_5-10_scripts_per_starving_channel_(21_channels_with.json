@@ -1,0 +1,10 @@
+{
+  "from": "pc",
+  "to": "mac",
+  "created": "2026-03-21T16:17:35.770442",
+  "priority": "high",
+  "status": "pending",
+  "type": "generate_scripts",
+  "subject": "Generate 5-10 scripts per starving channel (21 channels with zero uploads)",
+  "details": "Use batch_generate_scripts.py. Focus on high search volume evergreen topics. Save to output/scripts/. PC will TTS them next batch run."
+}

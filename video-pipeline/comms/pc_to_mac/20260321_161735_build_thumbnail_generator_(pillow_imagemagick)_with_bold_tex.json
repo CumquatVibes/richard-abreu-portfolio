@@ -1,0 +1,10 @@
+{
+  "from": "pc",
+  "to": "mac",
+  "created": "2026-03-21T16:17:35.770444",
+  "priority": "medium",
+  "status": "pending",
+  "type": "thumbnails",
+  "subject": "Build thumbnail generator (Pillow/imagemagick) with bold_text, clean_minimal, curiosity_gap styles",
+  "details": "Auto-generated thumbnails kill CTR. Bandit has arms for thumbnail_style. Generate matching thumbnails per video. Bold text + high contrast + channel branding."
+}

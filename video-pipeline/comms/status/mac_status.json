@@ -1,12 +1,12 @@
 {
   "machine": "mac",
-  "generated_at": "2026-03-21T07:30:00.683588",
+  "generated_at": "2026-03-22T07:30:00.918216",
   "hostname": "Richards-Mac-mini.local",
   "pipeline_db": {
     "totals": {
       "planned": 314,
-      "produced": 172,
-      "published": 97
+      "produced": 168,
+      "published": 101
     },
     "produced_by_channel": {
       "RichEducation": 20,
@@ -23,12 +23,12 @@
       "RichLifestyle": 5,
       "RichKids": 5,
       "RichGaming": 5,
-      "RichFood": 5,
-      "RichFitness": 5,
-      "RichFashion": 5,
-      "RichFamily": 5,
       "CumquatMotivation": 5,
       "RichNature": 4,
+      "RichFood": 4,
+      "RichFitness": 4,
+      "RichFashion": 4,
+      "RichFamily": 4,
       "RichDesign": 4,
       "RichDance": 4,
       "RichCooking": 4,
@@ -51,33 +51,33 @@
       "CumquatVibes": 1,
       "CumquatShortform": 1
     },
-    "pc_only_videos": 53,
+    "pc_only_videos": 0,
     "need_tts": 314,
     "recent_uploads": [
+      {
+        "channel": "RichFood",
+        "topic": "RichFood_7_Forgotten_Fast_Food_Restaurants_We_NEED_to_Bring_Back_Food_History_Deep_Dive",
+        "published_at": "2026-03-22 08:01:52"
+      },
+      {
+        "channel": "RichFitness",
+        "topic": "RichFitness_5_Best_Protein_Powders_for_FAST_Muscle_Growth_2026_Lab_Tested_Ranked",
+        "published_at": "2026-03-22 08:01:27"
+      },
+      {
+        "channel": "RichFashion",
+        "topic": "RichFashion_5_Streetwear_Trends_That_Will_Dominate_Spring_2026",
+        "published_at": "2026-03-22 08:00:54"
+      },
+      {
+        "channel": "RichFamily",
+        "topic": "RichFamily_5_Budget-Friendly_Family_Activities_to_Beat_the_February_Blues",
+        "published_at": "2026-03-22 08:00:26"
+      },
       {
         "channel": "RichEducation",
         "topic": "10 Free Online Courses That Will Get You Hired in",
         "published_at": "2026-03-21 08:02:24"
-      },
-      {
-        "channel": "RichDiy",
-        "topic": "RichDiy_5_Genius_Home_Upgrades_You_Can_3D_Print_This_Weekend_February_2026",
-        "published_at": "2026-03-21 08:01:45"
-      },
-      {
-        "channel": "RichDesign",
-        "topic": "RichDesign_7_Typography_Mistakes_KILLING_Your_Designs_and_How_to_Fix_Them",
-        "published_at": "2026-03-21 08:01:16"
-      },
-      {
-        "channel": "RichDance",
-        "topic": "5 Easy TikTok Dance Moves Anyone Can Learn in 10 M",
-        "published_at": "2026-03-21 08:00:50"
-      },
-      {
-        "channel": "RichDIY",
-        "topic": "Satisfying DIY Crafts Compilation",
-        "published_at": "2026-03-20 08:01:45"
       }
     ]
   },
@@ -94,23 +94,23 @@
   },
   "cron": {
     "daily_upload": {
-      "last_modified": "2026-03-21T04:02:42.522358",
+      "last_modified": "2026-03-22T04:02:10.863458",
       "age_hours": 3.5,
       "healthy": true
     },
     "daily_analysis": {
-      "last_modified": "2026-03-21T06:01:46.197814",
+      "last_modified": "2026-03-22T06:01:48.957998",
       "age_hours": 1.5,
       "healthy": true
     },
     "seo_audit": {
-      "last_modified": "2026-03-21T05:06:59.153155",
+      "last_modified": "2026-03-22T05:07:02.892907",
       "age_hours": 2.4,
       "healthy": true
     },
     "facebook_bot": {
-      "last_modified": "2026-03-21T07:08:40.306462",
-      "age_hours": 0.4,
+      "last_modified": "2026-03-22T07:09:01.299891",
+      "age_hours": 0.3,
       "healthy": true
     }
   }

@@ -1,0 +1,10 @@
+{
+  "from": "pc",
+  "to": "mac",
+  "created": "2026-03-21T16:17:35.770443",
+  "priority": "high",
+  "status": "pending",
+  "type": "create_playlists",
+  "subject": "Create YouTube playlists for active channels and populate CHANNEL_PLAYLISTS dict",
+  "details": "Playlists are a major SEO signal. Create 1-2 playlists per active channel via YouTube API. Update CHANNEL_PLAYLISTS in upload_to_youtube.py."
+}
