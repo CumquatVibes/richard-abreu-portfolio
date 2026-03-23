@@ -1,10 +1,10 @@
 {
   "machine": "mac",
-  "generated_at": "2026-03-22T07:30:00.918216",
+  "generated_at": "2026-03-23T07:30:00.430718",
   "hostname": "Richards-Mac-mini.local",
   "pipeline_db": {
     "totals": {
-      "planned": 314,
+      "planned": 374,
       "produced": 168,
       "published": 101
     },
@@ -52,7 +52,7 @@
       "CumquatShortform": 1
     },
     "pc_only_videos": 0,
-    "need_tts": 314,
+    "need_tts": 374,
     "recent_uploads": [
       {
         "channel": "RichFood",
@@ -89,27 +89,27 @@
       "count": 59
     },
     "scripts": {
-      "count": 530
+      "count": 590
     }
   },
   "cron": {
     "daily_upload": {
-      "last_modified": "2026-03-22T04:02:10.863458",
+      "last_modified": "2026-03-23T04:01:16.075093",
       "age_hours": 3.5,
       "healthy": true
     },
     "daily_analysis": {
-      "last_modified": "2026-03-22T06:01:48.957998",
+      "last_modified": "2026-03-23T06:00:40.888947",
       "age_hours": 1.5,
       "healthy": true
     },
     "seo_audit": {
-      "last_modified": "2026-03-22T05:07:02.892907",
-      "age_hours": 2.4,
+      "last_modified": "2026-03-23T05:13:11.433355",
+      "age_hours": 2.3,
       "healthy": true
     },
     "facebook_bot": {
-      "last_modified": "2026-03-22T07:09:01.299891",
+      "last_modified": "2026-03-23T07:09:02.166518",
       "age_hours": 0.3,
       "healthy": true
     }
