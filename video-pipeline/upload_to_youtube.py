@@ -1397,7 +1397,11 @@ def add_to_playlist(video_id, playlist_id, access_token):
 # Per-channel playlist IDs (populate as playlists are created on YouTube)
 # Format: channel_prefix -> playlist_id
 # These need to be created once per channel via YouTube Studio or API
-CHANNEL_PLAYLISTS = {}
+CHANNEL_PLAYLISTS = {
+    "RichHorror": "PLTtfPTCKAqHxIItFMFALSq_roLnmahcro",
+    "RichPets": "PLGsDBl1aD4lqieIe7kTNGoOA9OsukigLJ",
+    "RichTech": "PLANE8nppRhL5MoWvwKP6ShAVC5AQMLMpX",
+}
 
 
 def upload_video(filepath, title, description, tags, category_id, access_token,

@@ -20,7 +20,7 @@ DONE_CHANNELS = {
     "how_to_use_ai", "rich_music", "eva_reyes", "cumquat_vibes"
 }
 
-SCRIPTS_PER_CHANNEL = 3
+SCRIPTS_PER_CHANNEL = 10
 
 
 def load_config():
