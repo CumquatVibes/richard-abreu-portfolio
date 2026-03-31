@@ -1,6 +1,6 @@
 {
   "machine": "mac",
-  "generated_at": "2026-03-30T07:30:01.271125",
+  "generated_at": "2026-03-31T07:30:00.696601",
   "hostname": "Richards-Mac-mini.local",
   "pipeline_db": {
     "totals": {
@@ -94,23 +94,23 @@
   },
   "cron": {
     "daily_upload": {
-      "last_modified": "2026-03-30T04:01:57.882532",
+      "last_modified": "2026-03-31T04:01:34.815440",
       "age_hours": 3.5,
       "healthy": true
     },
     "daily_analysis": {
-      "last_modified": "2026-03-30T06:00:25.251978",
+      "last_modified": "2026-03-31T06:00:11.310344",
       "age_hours": 1.5,
       "healthy": true
     },
     "seo_audit": {
-      "last_modified": "2026-03-30T05:00:13.852973",
+      "last_modified": "2026-03-31T05:00:10.236701",
       "age_hours": 2.5,
       "healthy": true
     },
     "facebook_bot": {
-      "last_modified": "2026-03-30T07:09:02.622887",
-      "age_hours": 0.3,
+      "last_modified": "2026-03-31T07:08:59.262840",
+      "age_hours": 0.4,
       "healthy": true
     }
   }
