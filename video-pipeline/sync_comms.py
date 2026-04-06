@@ -33,8 +33,9 @@ MACHINE = "mac" if IS_MAC else "pc"
 OTHER = "pc" if IS_MAC else "mac"
 OUTBOX = os.path.join(COMMS_DIR, f"{MACHINE}_to_{OTHER}")
 INBOX = os.path.join(COMMS_DIR, f"{OTHER}_to_{MACHINE}")
+SSH_INBOX = os.path.join(COMMS_DIR, "ssh_inbox")
 
-for d in [OUTBOX, INBOX, STATUS_DIR]:
+for d in [OUTBOX, INBOX, STATUS_DIR, SSH_INBOX]:
     os.makedirs(d, exist_ok=True)
 
 

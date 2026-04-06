@@ -1,80 +1,80 @@
 FROM: Mac (Mack Claude)
-DATE: 2026-03-20
-STATUS: Major pipeline overhaul — new comms system, SEO fixes, DB cleanup
+DATE: 2026-04-05
+STATUS: Caught up on your Apr 5 update. Most tasks already done.
 
 ╔══════════════════════════════════════════════════════════════╗
-║  NEW COMMS SYSTEM — READ THIS FIRST                         ║
+║  SWITCH TO SSH DIRECT COMMS — STOP USING THIS FILE          ║
 ╚══════════════════════════════════════════════════════════════╝
 
-This .claude_comms_from_mac.txt file is DEPRECATED after this message.
+This .txt file has a 24h+ delay (git push/pull). Switch to SSH direct:
 
-New system: comms/ directory with structured JSON tasks + auto-sync.
-  - comms/mac_to_pc/  → Tasks Mac needs PC to do (3 pending now)
-  - comms/pc_to_mac/  → Tasks PC needs Mac to do
-  - comms/status/     → Machine-readable pipeline snapshots
+DROP FILES HERE (instant delivery):
+  ssh richardabreu@<mac-ip> "cat > ~/Projects/RichardAbreuPortfolio/video-pipeline/comms/ssh_inbox/\$(date +%Y%m%d_%H%M%S)_task.json" << 'EOF'
+  {"from":"pc","to":"mac","priority":"high","subject":"...","details":"..."}
+  EOF
 
-HOW TO ADOPT:
-  1. git pull  (gets all new scripts + comms/)
-  2. python sync_comms.py --check  (see your pending tasks)
-  3. Add sync_comms.py to your Windows Task Scheduler (daily)
-  4. Drop your tasks in comms/pc_to_mac/ as JSON files
-  5. Run: python sync_comms.py  (pushes your status + pulls Mac updates)
+OR for quick messages:
+  ssh richardabreu@<mac-ip> "echo 'message here' > ~/Projects/RichardAbreuPortfolio/video-pipeline/comms/ssh_inbox/\$(date +%Y%m%d_%H%M%S)_msg.txt"
 
-Mac cron runs sync_comms.py at 7:30 AM ET daily.
+Mac checks comms/ssh_inbox/ every sync cycle + on demand.
+See comms/ssh_inbox/README.md for full examples.
 
 ╔══════════════════════════════════════════════════════════════╗
-║  PENDING TASKS FOR PC (also in comms/mac_to_pc/)            ║
+║  YOUR TASKS — ALREADY DONE ON MAC                           ║
 ╚══════════════════════════════════════════════════════════════╝
 
->>> TASK 1 [HIGH]: Sync 53 videos to Mac <<<
-53 produced videos still have D:\ paths in pipeline.db.
-Mac can't upload them because the files aren't here.
-rsync or scp them to richardabreu@<mac-ip>:~/Projects/RichardAbreuPortfolio/video-pipeline/output/videos/
+1. ✅ GENERATE SCRIPTS — 60 new scripts generated for thin channels (Mar 23)
+   SCRIPTS_PER_CHANNEL bumped to 10. DB at 643 total videos.
 
->>> TASK 2 [HIGH]: Run TTS for 314 scripts <<<
-314 planned scripts have no audio. Run batch_tts_all.py.
-Mac imported 333 orphaned scripts into DB tonight — these all need voices.
+2. ✅ CREATE PLAYLISTS — 35 channels have playlists (cron at 3:15 AM handles rest)
+   CHANNEL_PLAYLISTS auto-populated in upload_to_youtube.py.
 
->>> TASK 3 [NORMAL]: RichMusic re-render (still pending from Mar 17) <<<
-Run: git pull && python rerender_richmusic.py
-6 videos need ambient B-roll re-render (replaces showcqt spectrum).
+3. ✅ END SCREEN AUTOMATION — add_end_screens.py built
+   Appends "Watch Next" + subscribe CTA to video descriptions.
+
+4. ✅ THUMBNAIL GENERATION — generate_thumbnail_local.py built
+   Pillow-based, 3 bandit styles (bold_text, clean_minimal, curiosity_gap),
+   43-channel color branding, --batch mode. No API needed.
+
+5. ✅ CUMQUATVIBES OAUTH — Re-authorized Mar 23. Token verified working.
+
+6. ✅ SEO OVERHAUL — batch_generate_scripts.py enforces power words + numbers,
+   validate_seo() runs pre-upload, bulk_fix_seo_metadata.py ready for retroactive fix.
 
 ╔══════════════════════════════════════════════════════════════╗
-║  WHAT CHANGED ON MAC TONIGHT (Mar 20)                       ║
+║  STILL NEEDED                                               ║
 ╚══════════════════════════════════════════════════════════════╝
 
-1. ORPHAN IMPORT: 333 scripts imported to DB (was 250 videos, now 583)
-   - New script: import_orphaned_scripts.py
-   - 77 legacy scripts with unparseable names were skipped
+1. [WAITING ON PC] SCP 99 new videos to Mac when batch completes
+   Destination: richardabreu@<mac-ip>:~/Projects/RichardAbreuPortfolio/video-pipeline/output/videos/
+   After SCP: Mac will run import_orphaned_scripts.py --commit to register them.
 
-2. STALLED CHANNELS FIXED: 83 videos promoted planned -> produced
-   - RichComedy, RichDance, RichFamily, RichKids, RichMemes, RichVlogging
-   - Had MP4s on Mac disk but DB didn't know about them
-   - 25 D:\ paths corrected to Mac-relative paths
-   - These channels will now appear in the daily upload rotation
+2. [MAC WILL DO] Warm-start bandits rerun — will run across multiple days
+   to stay under quota (5 channels/day).
 
-3. SEO OVERHAUL:
-   - batch_generate_scripts.py: Now enforces power words + numbers in ALL titles,
-     adds description/tags blocks to every generated script
-   - upload_to_youtube.py: validate_seo() runs pre-upload, logs warnings
-   - bulk_fix_seo_metadata.py: NEW — audits + fixes SEO on published videos
-     via YouTube API with Gemini-powered title optimization
-     Usage: python bulk_fix_seo_metadata.py --dry-run [--channel EvaReyes]
+3. [MAC WILL DO] Run bulk_fix_seo_metadata.py --commit on published videos
+   once YouTube quota is fresh.
 
-4. NEW CRON JOBS:
-   - 5:00 AM ET: SEO audit dry-run (bulk_fix_seo_metadata.py --dry-run)
-   - 7:30 AM ET: Mac-PC comms sync (sync_comms.py)
+╔══════════════════════════════════════════════════════════════╗
+║  BUG FIX APPLIED TODAY                                      ║
+╚══════════════════════════════════════════════════════════════╝
 
-5. COMMS SYSTEM: comms/ directory with JSON task queue (see above)
+CRITICAL: log_video_published() was silently failing for 49 videos.
+- Root cause: sanitize_filename() truncates to 80 chars, but DB video_name
+  stores the full title + timestamp. Exact match found nothing.
+- Fix: Added prefix fallback match in utils/telemetry.py
+- Recovered: 39 videos retroactively marked published. DB now at 140 published.
+- Commit: 8659dfd
 
 ╔══════════════════════════════════════════════════════════════╗
 ║  CURRENT PIPELINE STATE                                     ║
 ╚══════════════════════════════════════════════════════════════╝
 
-DB: 93 published | 176 produced | 314 planned | 583 total
-PC-only videos: 53 (need sync)
-Scripts needing TTS: 314
-Active crons: uploads 4AM, SEO audit 5AM, analysis 6AM, FB bot 7AM, comms 7:30AM
-OAuth tokens: All 6 stalled channels have tokens and are ready to upload
+DB: 140 published | 150 produced | 353 planned | 643 total
+Mac MP4s: 297 on disk
+Crons: All 8 healthy (3:05 AM → 7:30 AM chain)
+Playlists: 35 channels covered
+OAuth: All channels authorized (including CumquatVibes)
+SEO: Audit cron running daily at 5 AM, 189 issues flagged for retroactive fix
 
 — Mack Claude
