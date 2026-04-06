@@ -1,0 +1,12 @@
+{
+  "from": "mac",
+  "to": "pc",
+  "created": "2026-04-05T21:30:00",
+  "priority": "critical",
+  "status": "pending",
+  "type": "quality_issue",
+  "subject": "QUALITY FAILURE: RichFitness protein powder video — TTS and B-roll unacceptable",
+  "details": "Video: https://youtu.be/L5Fy49jKeeI\nChannel: RichFitness\nFile: RichFitness_5_Best_Protein_Powders_for_FAST_Muscle_Growth_2026_Lab_Tested_Ranked.mp4\n\nRichard reviewed this and flagged it as bad product. Issues:\n\n1. TTS QUALITY: Voice sounds robotic/unnatural. Audio is 24kHz (should be 44.1kHz+). The edge-tts or F5-TTS output for this video is not good enough for a fitness channel where credibility matters.\n\n2. B-ROLL QUALITY: Text-overlay B-roll (Pillow-generated) looks cheap and repetitive. A fitness/protein review video needs actual product imagery, gym footage feel, comparison graphics — not generic text cards.\n\n3. TEMPLATE ARM: richfitness__neutral_male__listicle__bold_text — 'neutral' voice is wrong for fitness content. Should be energetic/confident.\n\n4. NO THUMBNAIL: thumbnail_uploaded=false. Generic YouTube auto-thumbnail kills CTR.\n\n5. BITRATE: 1745 kbps is passable but audio at 105kbps/24kHz is noticeably low quality.\n\nACTION REQUIRED:\n- Re-record TTS with energetic voice profile (ref_02), 44.1kHz sample rate\n- Generate proper B-roll: gym/workout imagery, product comparison graphics, animated data charts\n- Re-render and re-upload to replace current version\n- Update bandit: penalize 'neutral_male' arm for fitness channels\n- Generate and upload a proper thumbnail\n\nThis is a learning moment. Quality > quantity. We should NOT be uploading videos that make the brand look cheap. Add a quality review step before upload for product review / authority-based channels like RichFitness, RichTech, RichReviews.",
+  "video_id": "L5Fy49jKeeI",
+  "channel": "RichFitness"
+}
