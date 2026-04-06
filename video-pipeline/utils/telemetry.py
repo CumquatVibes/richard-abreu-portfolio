@@ -341,7 +341,9 @@ def log_video_preflight(video_name, preflight_result):
 def log_video_published(video_name, youtube_video_id, quota_used=None):
     """Log successful YouTube upload."""
     conn = _get_db()
-    conn.execute("""
+    # Try exact match first, then prefix match (filenames are truncated to 80 chars
+    # but DB video_name may include the full title + timestamp suffix)
+    cursor = conn.execute("""
         UPDATE videos SET
             youtube_video_id = ?,
             youtube_quota_used = ?,
@@ -349,6 +351,17 @@ def log_video_published(video_name, youtube_video_id, quota_used=None):
             published_at = datetime('now')
         WHERE video_name = ?
     """, (youtube_video_id, quota_used, video_name))
+    if cursor.rowcount == 0 and len(video_name) >= 40:
+        # Prefix match: truncated filename didn't match full DB name
+        conn.execute("""
+            UPDATE videos SET
+                youtube_video_id = ?,
+                youtube_quota_used = ?,
+                status = 'published',
+                published_at = datetime('now')
+            WHERE video_name LIKE ? AND status != 'published'
+            LIMIT 1
+        """, (youtube_video_id, quota_used, video_name[:40] + '%'))
     conn.commit()
     conn.close()
 
